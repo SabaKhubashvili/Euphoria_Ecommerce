@@ -1,9 +1,11 @@
-import Image from 'next/image'
+import { HomeBanner } from './components/Banners/HomeBanner'
+
 
 export default function Home() {
+
   return (
     <main>
-      
+        <HomeBanner/>
     </main>
   )
 }

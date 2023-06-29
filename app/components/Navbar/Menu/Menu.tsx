@@ -10,7 +10,7 @@ export const Menu = () => {
   const isAboveLargeScreens = useMediaQuery('(min-width:1024px)')
 
   return (
-    <div className='flex gap-[31px]'>
+    <div className='flex gap-[31px] basis-auto justify-end'>
       { isAboveLargeScreens &&
 
         <AuthButtons/>
@@ -25,7 +25,8 @@ export const Menu = () => {
             <div className='flex gap-[11px] items-center'>
               <div className='relative'>
                 <CartIcon/>
-                <div className='absolute text-[11px] text-center -top-3 lg:-left-3 lg:right-auto -right-3 text-white bg-secondary py-[1px] px-[5px] font-medium leading-[18px] tracking-[0.2px] '>
+                <div className='absolute text-[11px] text-center -top-3 lg:-left-3 lg:right-auto -right-3 rounded-md
+                 text-white bg-secondary py-[1px] px-[5px] font-medium leading-[14px] tracking-[0.2px] '>
                   3
                 </div>
               </div>

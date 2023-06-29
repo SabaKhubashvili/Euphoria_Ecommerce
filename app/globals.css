@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.transparent-text{
+    color: transparent;
+    -webkit-text-stroke: 2px black;
+    text-stroke: 2px black;
+    text-shadow: none;
+}
+
+
+.mySwiper .swiper-pagination {
+    position: absolute;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    margin: 10px;
+    gap:10px;
+    height: 40px;
+    width: 100%;
+}
+
+
+.mySwiper .swiper-pagination-bullet {
+    border: 2px solid #828282;
+    width: 20px;
+    height: 20px;
+    display: block;
+    cursor: pointer;
+  }
+.mySwiper .swiper-pagination-bullet-active{
+    border: none;
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    transition: 0.4s ease ;
+}
+
+@media screen and (max-width:1024px) {
+    .mySwiper .swiper-pagination {
+        left:0;
+        justify-content: center !important;
+      }
+}

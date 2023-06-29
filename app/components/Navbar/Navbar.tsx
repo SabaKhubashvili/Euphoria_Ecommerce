@@ -8,9 +8,11 @@ import { Menu } from "./Menu/Menu";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { HamburgerIcon } from "@/public/Svg/Icons";
 import { SmallScreenMenu } from "./Menu/SmallScreenMenu";
+import Link from "next/link";
+import { largeScreens } from "@/app/Screens/Screens";
 
 export const Navbar = () => {
-  const isAboveLargeScreens = useMediaQuery('(min-width:1024px)')
+  const isAboveLargeScreens = useMediaQuery(largeScreens)
   const [menuToggle,setMenuToggle] = useState<boolean>(false)
   const genericHamburgerLine = `h-1 w-8 my-1 rounded-full bg-white transition ease transform duration-300`;
   return (
@@ -23,9 +25,9 @@ export const Navbar = () => {
                 !isAboveLargeScreens && 
                 <HamburgerIcon menuToggle={menuToggle} setMenuToggle={setMenuToggle}/>
               }
-              <div className="md:w-[90px] w-[65px]  md:h-[40px] h-[27px]">
+              <Link href={'/'} className="md:w-[90px] w-[65px]  md:h-[40px] h-[27px]">
                     <Logo/>
-              </div>
+              </Link>
               {
                 isAboveLargeScreens &&
                 

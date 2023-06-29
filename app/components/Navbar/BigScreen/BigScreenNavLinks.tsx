@@ -5,7 +5,7 @@ import { BigScreenNavLink } from './BigScreenNavLink'
 
 export const BigScreenNavLinks = () => {
   return (
-    <div className='flex gap-[29px] items-center xl:ml-[90px]'>
+    <div className='flex gap-[29px] items-center xl:ml-[260px]'>
         <BigScreenNavLink
             label='Home'
             to='/'
