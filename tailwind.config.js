@@ -23,6 +23,9 @@ module.exports = {
       },
       content:{
         'border-line':'url("../public/Svg/Vectors/border-line.svg")'
+      },
+      screens:{
+        'xs':'425px'
       }
     },
   },
