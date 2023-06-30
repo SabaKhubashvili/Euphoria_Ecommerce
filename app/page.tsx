@@ -6,6 +6,7 @@ import { ProductComponent } from './components/Product/ProductComponent'
 import { ProductsByTag } from './components/Product/ProductsByTag'
 import { SmallBanner } from './components/Banners/SmallBanner'
 import { ProductsByTagSlider } from './components/Product/ProductsByTagSlider'
+import { SecondarySmallBanner } from './components/Banners/SecondarySmallBanner'
 
 export default function Home() {
 
@@ -20,6 +21,7 @@ export default function Home() {
           <SmallBanner/>
           <ProductsByTagSlider title='Featured Items' sliderName='featured'/>
           <ProductsByTagSlider title='Most Popular' sliderName='trending'/>
+          <SecondarySmallBanner/>
         </Container>
     </main>
   )
