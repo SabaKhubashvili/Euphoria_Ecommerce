@@ -17,7 +17,7 @@ export const Brand = ({image}:Props) => {
             alt='Brand'
             width={400}
             height={400}
-            className='w-full  xs:max-w-none max-w-[120px]  mx-auto '
+            className='w-full  xs:max-w-none max-w-[90px]  mx-auto '
         />
 </div>
   )

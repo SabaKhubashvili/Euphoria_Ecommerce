@@ -9,7 +9,7 @@ interface Props{
 
 export const SecondaryButton = ({label,onClick}:Props) => {
   return (
-    <button className='py-[8px] px-[40px] w-fit border-[2px] border-black text-[18px] font-medium
+    <button className='lg:py-[8px] py-[4px]  lg:px-[40px] px-[20px] w-fit border-[2px] border-black text-[18px] font-medium
     tracking-[0.5px] uppercase
     lg:hover:bg-black lg:hover:text-white transition-colors duration-200
     '>
