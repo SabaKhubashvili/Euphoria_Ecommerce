@@ -12,7 +12,7 @@ export const ProductsByTag = ({title}:Props) => {
   return (
     <section className='flex flex-col gap-[34px] pt-[30px]'>
         {title && <h1 className='text-[24px] leading-[68px]'>{title}</h1>}
-        <div className='flex justify-center lg:justify-start flex-wrap lg:gap-[26px] gap-[6px]'>
+        <div className='grid lg:grid-cols-6 sm:grid-cols-4 xs:grid-cols-2 lg:gap-[26px] gap-[6px]'>
             <ProductComponent/>
             <ProductComponent/>
             <ProductComponent/>

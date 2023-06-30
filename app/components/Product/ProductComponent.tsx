@@ -7,7 +7,7 @@ import { GrayButton } from '../buttons/GrayButton'
 
 export const ProductComponent = () => {
   return (
-    <div className='flex flex-col gap-[14px] xl:w-[18%] md:w-[22%] sm:w-[26%] xs:w-[49%] w-full '>
+    <div className='flex flex-col gap-[14px] col-span-1'>
       <div className='relative w-full'>
         <Image
           width={400}

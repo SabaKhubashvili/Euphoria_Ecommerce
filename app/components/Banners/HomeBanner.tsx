@@ -26,7 +26,7 @@ export const HomeBanner = () => {
            <SliderController NextEl={'HomeBanner_Next'} PrevEl={'HomeBanner_Prev'} />
         </div>
 
-           <Swiper navigation={{
+        <Swiper navigation={{
             nextEl:'.HomeBanner_Next',
             prevEl:'.HomeBanner_Prev'
         }}
