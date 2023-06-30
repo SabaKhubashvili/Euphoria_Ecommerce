@@ -17,7 +17,7 @@ export const BannersGroup = () => {
                 alt='Smallbanner'
                 width={300}
                 height={300}
-                className='h-fit self-end  xl:max-w-none lg:max-w-[263px] lg:max-h-none max-w-[137px] xs:w-fit w-[50%]  '
+                className='lg:h-fit h-full   self-end  xl:max-w-none lg:max-w-[263px] lg:max-h-none max-w-[197px] xs:w-fit w-[50%]  '
             />
             
             <div className='flex flex-col  xl:gap-[51px] md:gap-[20px] gap-[10px] flex-grow'>

@@ -20,7 +20,8 @@ export const SecondarySmallBanner = () => {
         <div className='ml-auto lg:basis-1/3 lg:static absolute left-0 right-0 mx-auto lg:w-auto w-[80%] top-0 bottom-0
         lg:my-0 mt-auto h-fit  bg-white lg:p-[0] p-[20px] mb-[10px]
         '>
-            <div className='flex releative z-[20] flex-col mg:gap-[24px] pb-[10px] lg:justify-normal justify-center lg:text-start text-center
+            <div className='flex releative z-[20] flex-col md:gap-[24px] pb-[10px] lg:justify-normal
+             justify-center lg:text-start text-center
             '>
                 <h1 className='font-semibold xl:leading-[72px] lg:leading-[62px]  xl:text-[56px] 
                 lg:text-[46px] sm:text-[27px] text-[16px] lg:max-w-none max-w-[292px] uppercase 
