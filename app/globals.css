@@ -14,14 +14,14 @@
 
 .mySwiper .swiper-pagination {
     position: absolute;
-    z-index: 10;
+    z-index: 5;
+    width: fit-content;
     display: flex;
     align-items: center;
     bottom: 0;
     margin: 10px;
     gap:10px;
     height: 40px;
-    width: 100%;
 }
 
 
@@ -44,5 +44,6 @@
     .mySwiper .swiper-pagination {
         left:0;
         justify-content: center !important;
+        width: 100% !important;
       }
 }
