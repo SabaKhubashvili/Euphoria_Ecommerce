@@ -18,7 +18,9 @@ export const Navbar = () => {
   return (
     <React.Fragment>
 
-      <nav className="fixed w-full py-[36px] bg-black z-[99] ">
+      <nav className="relative  w-full">
+        <div className="fixed top-0 w-full bg-black py-[36px] z-[99] ">
+
           <Container>
             <div className="flex justify-between items-center">
               {
@@ -36,13 +38,14 @@ export const Navbar = () => {
               <Menu/>
             </div>
          </Container>
+        </div>
 
-      </nav>
       {
         !isAboveLargeScreens  &&(
          <SmallScreenMenu isOpen={menuToggle}/>
         )
       }
+      </nav>
   </React.Fragment>
   );
 };

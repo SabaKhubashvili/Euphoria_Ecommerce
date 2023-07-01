@@ -11,9 +11,10 @@ interface Props {
 }
 
 export const SmallScreenMenu = ({ isOpen }: Props) => {
+
   return (
     <div
-      className={`absolute pt-[130px] w-full bg-black transition-transform duration-300 z-[98] text-white pb-[20px]
+      className={`fixed pt-[130px] w-full bg-black transition-transform duration-300 z-[78] text-white pb-[20px]
           ${isOpen ? "translate-y-0" : "-translate-y-[150%] "}`}
     >
         <Container>

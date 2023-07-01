@@ -1,3 +1,4 @@
+import { Footer } from './components/Footer/Footer';
 import { Navbar } from './components/Navbar/Navbar'
 import { OnlyClient } from './components/OnlyClient';
 import { Oswald } from './components/assets/Fonts';
@@ -22,6 +23,7 @@ export default function RootLayout({
         <OnlyClient>
           <Navbar/>
           {children}
+          <Footer/>
         </OnlyClient>
       </body>
     </html>

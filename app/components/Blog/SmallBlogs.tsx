@@ -4,7 +4,7 @@ import { SmallBlog } from './SmallBlog'
 
 export const SmallBlogs = () => {
   return (
-    <section className='w-full bg-[#F8F9FB] mt-[82px] py-[46px]'>
+    <section className='w-full bg-[#F8F9FB] mt-[82px] mb-[46px] py-[46px]'>
         <Container>
             <h1 className='text-[24px] '>Blog</h1>
 
