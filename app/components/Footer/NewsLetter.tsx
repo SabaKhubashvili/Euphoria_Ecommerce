@@ -5,9 +5,9 @@ import { GrayButton } from '../buttons/GrayButton'
 
 export const NewsLetter = () => {
   return (
-    <div className='xl:w-[280px] w-[200px]'>
+    <div className='xl:w-[280px] lg:w-[200px] w-full'>
           <h1 className='uppercase text-white font-semibold text-[18px]'>Join us</h1>
-          <p className={`${Roboto.className} text-[13px uppercase] pt-[30px]`}>Subscribe to our newsletters</p>
+          <p className={`${Roboto.className} text-[13px] uppercase lg:pt-[30px] mt-[10px] text-white`}>Subscribe to our newsletters</p>
 
           <div className='mt-[10px] flex flex-col gap-[7px]'>
                 <SecondaryInput placeholder='Email Address'/>
