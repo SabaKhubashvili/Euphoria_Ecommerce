@@ -18,7 +18,6 @@ export const SmallScreenFooter = () => {
             <SmallScreenFooterComponent content={FooterMenu} title='Menu'/>
             <SmallScreenFooterComponent content={FooterContact} title='contact us'/>
             <SmallScreenFooterComponent content={FooterSocial} title='Social'/>
-            
             <NewsLetter/>
       </div>
     </div>
