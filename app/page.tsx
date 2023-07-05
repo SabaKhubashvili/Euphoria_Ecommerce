@@ -18,7 +18,12 @@ export default function Home() {
           <Brands/>
           <BannersGroup/>
           <ProductsByTag title='Shop some Wear:'/>
-          <SmallBanner/>
+          <SmallBanner
+            title='shoping without limits.'
+            subTitle='You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco. We will deliver your purchase anywhere!'
+            button
+            image='SmallBannerSlider'
+          />
           <ProductsByTagSlider title='Featured Items' sliderName='featured'/>
           <ProductsByTagSlider title='Most Popular' sliderName='trending'/>
           <SecondarySmallBanner/>

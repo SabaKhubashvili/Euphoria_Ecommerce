@@ -5,33 +5,44 @@ import { Roboto } from '../assets/Fonts'
 import { SecondaryButton } from '../buttons/SecondaryButton'
 import Image from 'next/image'
 
-export const SmallBanner = () => {
+
+interface Props{
+  image:string,
+  title:string,
+  subTitle:string,
+  button?:boolean
+}
+
+export const SmallBanner = ({image,title,subTitle,button}:Props) => {
   return (
     <section className=' relative flex w-full
-    md:h-[407px] sm:h-[330px] h-[126px] my-[62px]'>
+    h-fit my-[62px]'>
      <div className='z-[20] bg-gradient-to-r from-[#DDEBF1] from-20% via-[#D3E5EE] via-60% to-transparent absolute w-[80%] 
         h-full top-0 left-0' />
          
         <div className='flex releative z-[20] flex-col pl-[10%] max-w-[839px]
-         sm:pt-[96px] sm:gap-[24px] pb-[10px]
+         sm:pt-[96px] pt-[40px] sm:gap-[24px] pb-[78px]
         '>
-            <h1 className='font-semibold xl:leading-[72px] lg:leading-[62px] leading-[40px] xl:text-[70px] 
+            <h1 className='font-semibold xl:leading-[72px] lg:leading-[62px] leading-[40px] xl:text-[56px] 
             lg:text-[56px] sm:text-[40px] text-[14px] lg:max-w-none max-w-[292px] uppercase
             relative before:absolute md:before:content-border-line before:right-0 before:w-[80%] 
             '>
-              shoping without limits.
+              {title}
             </h1>
-            <p className={`${Roboto.className} lg:text-[22px] text-[10px] leading-[37px] tracking-[0.22px] font-light`}>
-                     See our clothing collections
+            <p className={`${Roboto.className} lg:text-[22px] md:text-[16px] text-[12px]
+             lg:leading-[37px] tracking-[0.22px] font-light `}>
+                     {subTitle}
                     </p>
             <div>
-            <SecondaryButton small label='Shop Now' onClick={()=>{}} />
+              { button &&
+                <SecondaryButton small label='Shop Now' onClick={()=>{}} />
+              }
             </div>
         </div>
         
         
         <Image
-          src={'/Images/Banners/SmallBannerSlider.webp'}
+          src={`/Images/Banners/${image}.webp`}
           alt='SmallBanner'
           width={1200}
           height={500}
