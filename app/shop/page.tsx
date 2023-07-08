@@ -11,13 +11,13 @@ export const metadata = {
 const Page = () => {
   return (
     <main>
-        <div className='lg:mt-[120px] mt-[108px] '>
-            <SmallBanner
-                image='ShopBanner'
-                title='shoping without limits.'
-                subTitle='You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco. We will deliver your purchase anywhere!'
-                button
-                />
+        <div className='lg:mt-[100px] mt-[108px] '>
+        <SmallBanner
+            image='ShopBanner'
+            title='shoping without limits.'
+            subTitle='You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco. We will deliver your purchase anywhere!'
+            button
+            />
         </div>
         <Container>
           <ShopProducts/>

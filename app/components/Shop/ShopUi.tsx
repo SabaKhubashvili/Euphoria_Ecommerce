@@ -13,7 +13,7 @@ export const BrandFilter = () => {
         <h1 className="text-[24px] font-medium">Brand</h1>
         {isOpen ? (
           <div
-            className="w-5"
+            className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(false);
             }}
@@ -22,6 +22,7 @@ export const BrandFilter = () => {
           </div>
         ) : (
           <div
+           className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(true);
             }}
@@ -95,7 +96,7 @@ export const SizeFilter = () => {
         <h1 className="text-[24px] font-medium">Size (Inches)</h1>
         {isOpen ? (
           <div
-            className="w-5"
+          className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(false);
             }}
@@ -104,6 +105,7 @@ export const SizeFilter = () => {
           </div>
         ) : (
           <div
+          className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(true);
             }}
@@ -161,7 +163,7 @@ export const LengthFilter = () => {
         <h1 className="text-[24px] font-medium">Dress length</h1>
         {isOpen ? (
           <div
-            className="w-5"
+          className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(false);
             }}
@@ -170,6 +172,7 @@ export const LengthFilter = () => {
           </div>
         ) : (
           <div
+          className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(true);
             }}
@@ -234,7 +237,7 @@ export const ColorFilter = () => {
         <h1 className="text-[24px] font-medium">Color</h1>
         {isOpen ? (
           <div
-            className="w-5"
+            className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(false);
             }}
@@ -246,6 +249,7 @@ export const ColorFilter = () => {
             onClick={() => {
               setIsOpen(true);
             }}
+            className="w-5 cursor-pointer"
           >
             <PlusIcon />
           </div>
@@ -300,7 +304,10 @@ export const PriceSlider = () => {
   };
 
   return (
-    <Slider
+    <div className="flex flex-col gap-[31px]">
+      
+    <h1 className="text-[24px] font-medium">Price</h1>
+      <Slider
       getAriaLabel={() => "Temperature range"}
       value={value}
       onChange={handleChange}
@@ -313,7 +320,8 @@ export const PriceSlider = () => {
           width: "5px",
         },
       }}
-    />
+      />
+    </div>
   );
 };
 
@@ -326,7 +334,7 @@ export const AboutDresses = () => {
         <h1 className="text-[24px] font-medium">About Dresses</h1>
         {isOpen ? (
           <div
-            className="w-5"
+          className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(false);
             }}
@@ -335,6 +343,7 @@ export const AboutDresses = () => {
           </div>
         ) : (
           <div
+          className="w-5 cursor-pointer"
             onClick={() => {
               setIsOpen(true);
             }}
