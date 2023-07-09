@@ -22,7 +22,8 @@ module.exports = {
         Roboto:['var(--font-Roboto)']
       },
       content:{
-        'border-line':'url("../public/Svg/Vectors/border-line.svg")'
+        'border-line':'url("../public/Svg/Vectors/border-line.svg")',
+        'border-line-white':'url("../public/Svg/Vectors/border-line-white.svg")',
       },
       screens:{
         'xs':'425px'
