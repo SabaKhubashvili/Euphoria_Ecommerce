@@ -21,6 +21,7 @@ export const Shop = () => {
                     button
                     gradient='black'
                     textColor='white'
+                    small
                     />
           <div className="lg:basis-3/4 w-full grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1  gap-[26px]">
             <ProductComponent/>

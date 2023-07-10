@@ -12,10 +12,11 @@ interface Props{
   subTitle:string,
   button?:boolean,
   gradient:string,
-  textColor?:string
+  textColor?:string,
+  small?:boolean
 }
 
-export const SmallBanner = ({image,title,subTitle,button,gradient,textColor}:Props) => {
+export const SmallBanner = ({image,title,subTitle,button,gradient,textColor,small}:Props) => {
   return (
     <section className=' relative flex w-full max-w-[1920px]  mx-auto
     h-fit '>
@@ -26,6 +27,7 @@ export const SmallBanner = ({image,title,subTitle,button,gradient,textColor}:Pro
          
         <div className={`flex releative z-[21] flex-col pl-[10%] max-w-[839px]
          sm:pt-[78px] pt-[40px] sm:gap-[24px] pb-[59px] ${textColor === 'white' ? 'text-white' : 'text-black'}
+         ${small && ' !max-w-[600px] !xl:max-w-[839px]'}
         `}>
             <h1 className={`font-semibold xl:leading-[72px] lg:leading-[62px] leading-[40px] xl:text-[56px] 
             lg:text-[56px] sm:text-[40px] text-[14px] lg:max-w-none max-w-[292px] uppercase

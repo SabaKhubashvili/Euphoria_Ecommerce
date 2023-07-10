@@ -103,3 +103,44 @@ export const FooterSocial: SingleFooterComponentRowType[] = [
       to:'https://www.instagram.com/xubashvili.saba12/'
     },
   ];
+
+export const FilterConstant = {
+    brand:[
+        'State',
+        'Cooper',
+        'Bardot',
+        'Alfani',
+        'Cece',
+        'Donna Ricco'
+    ],
+    size:[
+        'osfa',
+        'W26',
+        'W27',
+        'W28',
+        'W29',
+        'W30',
+        'W31',
+        'W32',
+        'W33',
+        'W34',
+        'W35',
+        'W36',
+        'W37',
+        'W38',
+        'W39',
+        'W40',
+    ],
+    length:[
+        'Short',
+        'knee length',
+        'hight low',
+        'long',
+        'midi'
+    ],
+    color:[
+        'bg-green-800',
+        'bg-red-800',
+        'bg-black'
+    ]
+}

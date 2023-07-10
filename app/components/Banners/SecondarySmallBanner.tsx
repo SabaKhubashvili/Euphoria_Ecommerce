@@ -33,7 +33,7 @@ export const SecondarySmallBanner = () => {
                   You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco.
                 </p>
                 <div className='lg:pt-0 pt-[10px]'>
-                <SecondaryButton small label='Shop Now' onClick={()=>{}} />
+                 <SecondaryButton small label='Shop Now' onClick={()=>{}} />
                 </div>
             </div>
         </div>
