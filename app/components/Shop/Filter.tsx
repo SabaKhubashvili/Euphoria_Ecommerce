@@ -33,7 +33,6 @@ export const Filter = () => {
   };
 
   const handlePriceChange = (e:number[]) =>{
-    
     setFilters(prev => {
       const updatedFilters = { ...prev }
       updatedFilters.price = [e.toString()]
