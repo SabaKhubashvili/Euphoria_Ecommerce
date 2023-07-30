@@ -8,7 +8,8 @@ interface FilterStore {
   filter: FilterInterface;
   addFilter: (key: keyof  FilterInterface, value: string) => void;
   deleteFilter: (key: keyof  FilterInterface, value: string) => void;
-  handlePriceChange: (e:number[]) => void
+  handlePriceChange: (e:number[]) => void,
+  resetFilter:()=>void
 }
 
 export const useFilter = create<FilterStore>((set) => ({
@@ -43,4 +44,15 @@ export const useFilter = create<FilterStore>((set) => ({
         }
     }))
   },
+  resetFilter: () =>{
+    set((state)=>({
+      filter:{
+        brand: [],
+        size: [],
+        length: [],
+        color: [],
+        price:[]
+      }
+    }))
+  }
 }));

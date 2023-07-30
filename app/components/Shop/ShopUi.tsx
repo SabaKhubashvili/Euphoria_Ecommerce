@@ -39,7 +39,7 @@ export const BrandFilter = ({ onChange, values }: Props) => {
       {isOpen && (
         <div className="flex flex-col gap-[15px]">
           {FilterConstant["brand"].map((filter) => (
-            <div className="flex items-center gap-[9px]" key={filter}>
+            <div className="flex items-center gap-[9px] cursor-pointer" key={filter} onClick={()=>onChange(filter)}>
               <input
                 type="checkbox"
                 name=""
@@ -89,7 +89,7 @@ export const SizeFilter = ({ onChange, values }: Props) => {
           {FilterConstant["size"].map((size) => (
             <div
               key={size}
-              className={`uppercase text-gray text-center border-[1px] border-solid border-divider py-[10px] px-[6px]
+              className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider py-[10px] px-[6px]
                  ${values.includes(size) && "!text-black !border-black"}
                  `}
               onClick={() => onChange(size)}
@@ -127,7 +127,7 @@ export const LengthFilter = ({ values, onChange }: Props) => {
       {isOpen && (
         <div className="flex flex-col gap-[15px]">
           {FilterConstant["length"].map((length) => (
-            <div className="flex items-center gap-[9px]" key={length}>
+            <div className="flex items-center gap-[9px] cursor-pointer" key={length} onClick={()=>onChange(length)}>
               <input
                 type="checkbox"
                 checked={values.includes(length)}
@@ -173,7 +173,7 @@ export const ColorFilter = ({values,onChange}:Props) => {
         <div className="flex gap-[10px] flex-wrap xl:w-4/6">
         {
         FilterConstant['color'].map((color) => (
-          <div className={`p-[2px] ${values.includes(color) && 'border-[1px] border-black'}`} key={color} onClick={()=>onChange(color)}>
+          <div className={`p-[2px]  cursor-pointer ${values.includes(color) && 'border-[1px] border-black'}`} key={color} onClick={()=>onChange(color)}>
             <div className={`w-[15px] h-[15px] ${color}`} />
           </div>
         ))

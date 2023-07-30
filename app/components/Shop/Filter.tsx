@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { AboutDresses, BrandFilter, ColorFilter, LengthFilter, PriceSlider, SizeFilter } from './ShopUi'
 import { FilterInterface } from '@/app/types'
 import { useFilter } from '@/app/hooks/UseFilter'
+import { FilteredBy } from './FilteredBy'
 
 export const Filter = () => {
   const {filter,addFilter,deleteFilter,handlePriceChange} = useFilter()
@@ -16,10 +17,11 @@ export const Filter = () => {
       addFilter(category, e);
     }
   };
-
+  
   
   return (
     <div className='basis-1/4 flex flex-col gap-[30px] sticky top-[150px]'>
+      <FilteredBy />
         <BrandFilter 
           values={filter.brand}        
           onChange={(e)=>handleFilterChange(e,'brand')}/>

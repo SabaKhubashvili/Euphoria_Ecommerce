@@ -6,6 +6,7 @@ import { Shop } from './Shop'
 import { Roboto } from '../assets/Fonts'
 import useMediaQuery from '@/app/hooks/UseMediaQuery'
 import { largeScreens } from '@/app/Screens/Screens'
+import { FilteredBy } from './FilteredBy'
 
 export const ShopProducts = () => {
   const IsAboveLargeScreens = useMediaQuery(largeScreens)
@@ -16,7 +17,9 @@ export const ShopProducts = () => {
         <div className='flex items-start gap-[30px] mt-[18px]'>
           {
           IsAboveLargeScreens &&  
-            <Filter/>
+            <>
+              <Filter/>
+            </>
           }
             <Shop/>
         </div>
