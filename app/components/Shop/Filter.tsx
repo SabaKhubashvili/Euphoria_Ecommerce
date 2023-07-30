@@ -3,63 +3,40 @@
 import React, { useState } from 'react'
 import { AboutDresses, BrandFilter, ColorFilter, LengthFilter, PriceSlider, SizeFilter } from './ShopUi'
 import { FilterInterface } from '@/app/types'
+import { useFilter } from '@/app/hooks/UseFilter'
 
 export const Filter = () => {
-  const [Filters,setFilters] = useState<FilterInterface>({
-    brand:[],
-    size:[],
-    length:[],
-    color:[],
-    price:[]
-  })
-  console.log(Filters);
+  const {filter,addFilter,deleteFilter,handlePriceChange} = useFilter()
+
   
   const handleFilterChange = (e: string, category: keyof FilterInterface) => {
-    if(Filters[category].includes(e)){
-      
-      setFilters(prev => {
-        const updatedFilters = { ...prev }
-        updatedFilters[category] = [...prev[category].filter(cat=>cat !== e)]
-        return updatedFilters
-      })
-    }else{
-
-      setFilters(prev => {
-        const updatedFilters = { ...prev };
-        updatedFilters[category] = [...prev[category], e];
-        return updatedFilters;
-      });
+    if (filter[category].includes(e)) {
+      deleteFilter(category, e);
+    } else {
+      addFilter(category, e);
     }
   };
 
-  const handlePriceChange = (e:number[]) =>{
-    setFilters(prev => {
-      const updatedFilters = { ...prev }
-      updatedFilters.price = [e.toString()]
-      return updatedFilters
-    })
-    
-  }
   
   return (
-    <div className='basis-1/4 flex flex-col gap-[30px]'>
+    <div className='basis-1/4 flex flex-col gap-[30px] sticky top-[150px]'>
         <BrandFilter 
-        values={Filters.brand}        
-        onChange={(e)=>handleFilterChange(e,'brand')}/>
+          values={filter.brand}        
+          onChange={(e)=>handleFilterChange(e,'brand')}/>
         <SizeFilter
-          values={Filters.size}        
+          values={filter.size}        
           onChange={(e)=>handleFilterChange(e,'size')}
         />
         <LengthFilter
-             values={Filters.length}        
+             values={filter.length}        
              onChange={(e)=>handleFilterChange(e,'length')}
         />
         <ColorFilter
-          values={Filters.color}        
+          values={filter.color}        
           onChange={(e)=>handleFilterChange(e,'color')}
         />
         <PriceSlider
-         values={Filters.price}        
+         values={['10','500']}        
          onChange={(e)=>handlePriceChange(e)}
         />
         <AboutDresses/>
