@@ -2,7 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    scrollbar-color: #C4C4C4;
+}
 
+*::-webkit-scrollbar {
+    width: 4px; 
+  }
+  
+  *::-webkit-scrollbar-track {
+    background-color: #C4C4C4; /* Color of the track */
+    border-radius: 15px; 
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: #edecec; /* Color of the thumb */
+    border-radius: 15px; 
+  }
 
 .transparent-text{
     color: transparent;

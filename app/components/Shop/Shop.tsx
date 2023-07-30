@@ -3,16 +3,21 @@
 import React from 'react'
 import { ProductComponent } from '../Product/ProductComponent'
 import { SmallBanner } from '../Banners/SmallBanner'
+import { products } from '@/app/constants'
 
-export const Shop = () => {
+interface Props{
+  currentProducts: typeof products
+}
+export const Shop = ({currentProducts}:Props) => {
   return (
-    <section className='flex flex-col gap-[44px] w-full'>
+    <section className='flex flex-col gap-[44px] w-full pl-[15px] '>
 
         <div className="lg:basis-3/4 w-full grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1  gap-[26px]">
-            <ProductComponent/>
-            <ProductComponent/>
-            <ProductComponent/>
-            <ProductComponent/>
+            {
+              currentProducts.slice(0,4).map((product)=>(
+                <ProductComponent {...product} />
+              ))
+            }
         </div>
               <SmallBanner
                     image='ShopBanner-2'
@@ -24,9 +29,11 @@ export const Shop = () => {
                     small
                     />
           <div className="lg:basis-3/4 w-full grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1  gap-[26px]">
-            <ProductComponent/>
-            <ProductComponent/>
-            <ProductComponent/>
+            {
+                currentProducts.slice(4).map((product)=>(
+                  <ProductComponent {...product} />
+                ))
+              }
         </div>
     </section>
   )

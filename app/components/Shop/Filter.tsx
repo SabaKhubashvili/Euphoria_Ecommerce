@@ -20,7 +20,7 @@ export const Filter = () => {
   
   
   return (
-    <div className='basis-1/4 flex flex-col gap-[30px] sticky top-[150px]'>
+    <div className='basis-1/4 flex flex-col gap-[30px] sticky top-[150px] h-[750px] overflow-x-auto pr-[15px]'>
       <FilteredBy />
         <BrandFilter 
           values={filter.brand}        
