@@ -8,6 +8,7 @@ import useMediaQuery from '@/app/hooks/UseMediaQuery'
 import { largeScreens } from '@/app/Screens/Screens'
 import { products } from '@/app/constants'
 import { usePagination } from '@/app/hooks/UsePagination'
+import { Pagination } from '../Pagination'
 
 export const ShopProducts = () => {
   const IsAboveLargeScreens = useMediaQuery(largeScreens)
@@ -23,7 +24,10 @@ export const ShopProducts = () => {
               <Filter/>
             </>
           }
-            <Shop currentProducts={products.slice(0 + 16 * currentPage,currentPage > 0 ? (currentPage + 1) * 16  : 16)}/>
+          <div className='flex flex-col items-center gap-[30px]'>
+            <Shop currentProducts={products.slice((currentPage -1 ) * 16  , (currentPage ) * 16)}/>
+            <Pagination productsLength={products.length}/>
+          </div>
         </div>
     </section>
   )

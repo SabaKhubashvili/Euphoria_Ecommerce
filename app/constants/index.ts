@@ -271,6 +271,150 @@ export const products: productInterface[] = [
       description: "Experience luxury and comfort with this premium product.",
       name: "Product 20",
       image: "Product"
-    }
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
+    {
+      price: '38,00',
+      description: "The ultimate tool for DIY enthusiasts.",
+      name: "Product 19",
+      image: "Product"
+    },
+    {
+      price: '80,00',
+      description: "Experience luxury and comfort with this premium product.",
+      name: "Product 20",
+      image: "Product"
+    },
   ];
   
