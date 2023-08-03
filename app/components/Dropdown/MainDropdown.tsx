@@ -6,7 +6,10 @@ interface Props {
   label: string;
   onClick?: () => {};
   type?: string;
-  content: string[];
+  content: {
+    onClick:()=>void,
+    label:string
+  }[];
   size?: "sm" | "md" | "lg" | "xl";
 }
 
@@ -25,7 +28,6 @@ export const MainDropdown = ({
     if(isOpen){
       const handleOutsideClick = (mouse: MouseEvent) => {
         if (ref.current && !ref.current.contains(mouse.target as Node)) {
-          console.log('close');
           setIsOpen(false);
         }
       };
@@ -35,9 +37,9 @@ export const MainDropdown = ({
   },[isOpen])
 
   return (
-    <div className="relative border-[1px] border-solid border-divider p-[11px] w-fit" ref={ref}>
+    <div className="relative  w-fit" ref={ref}>
       <div
-        className={`flex justify-between items-center cursor-pointer
+        className={`flex justify-between items-center cursor-pointer border-[1px] border-solid border-divider p-[11px]
         ${
           size === "sm"
             ? "gap-[20px]"
@@ -64,9 +66,9 @@ export const MainDropdown = ({
         </div>
       </div>
       {isOpen && (
-        <div className="absolute z-10 top-[48px] bg-white w-full left-0 select-none p-[11px] ">
+        <div className="absolute z-10 top-[48px] bg-white w-full left-0 select-none p-[11px] flex flex-col gap-[5px] ">
           {content.map((cont) => (
-            <div className="cursor-pointer" key={cont}>{cont}</div>
+            <div className="cursor-pointer" onClick={cont.onClick} key={cont.label}>{cont.label}</div>
           ))}
         </div>
       )}

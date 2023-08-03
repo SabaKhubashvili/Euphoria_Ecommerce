@@ -23,5 +23,5 @@ export const usePagination = create<PaginationStore>((set)=>({
         set(({
             currentPage:page
         }))
-    }
+    },
 }))

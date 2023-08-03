@@ -7,6 +7,7 @@ import { products } from "@/app/constants";
 import { NextIconGray, PrevIconGray } from "@/public/Svg/Icons";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { usePagination } from "@/app/hooks/UsePagination";
+import { useFilter } from "@/app/hooks/UseFilter";
 
 interface Props {
   currentProducts: typeof products;
@@ -15,7 +16,7 @@ interface Props {
 export const Shop = ({ currentProducts, productsLength }: Props) => {
   const {nextPage,previousPage,currentPage} = usePagination()
   const maxNumber = Math.ceil(productsLength / 16);
-
+  const {setPriceSort, priceFrom} = useFilter()
    const handleNextPage = useCallback(() => {
     if (currentPage < maxNumber) {
       nextPage();
@@ -42,12 +43,13 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
         <div className="flex gap-[20px]">
             <MainDropdown
              size="xl"
-             label="price (High to low)"
-             content={['High to low','Low to high','New','Old']} />
+             label={priceFrom ? priceFrom === 'high' ? 'Low To High' : 'High to low' : 'Sort by'}
+             content={[{label:'price (High to low)',onClick:()=>setPriceSort('low')},{label:'price (Low to high)',onClick:()=>setPriceSort('high')}]} />
             <MainDropdown
              size="sm"
              label="48"
-             content={['16','32','48','64']} />
+             content={[{label:'12',onClick:()=>console.log('smth')},{label:'32',onClick:()=>console.log('smth')}]}
+              />
         </div>
       </div>
       <div className="flex flex-col gap-[44px]">
