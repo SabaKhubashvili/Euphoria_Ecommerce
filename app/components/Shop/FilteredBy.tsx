@@ -22,13 +22,13 @@ export const FilteredBy = () => {
                     <div className='mt-[26px] flex flex-col gap-[20px]'>
                         {
                             activeFilters.map(comp=>(
-                                <div className=''>
+                                <div key={comp}>
                                     <h1 className=' font-Oswald text-[24px] mb-[10px]'>{comp !== 'price' && comp}</h1>
                                     {
                                         comp === 'price' ? 
                                         <div className='flex gap-[14px]'>
                                         {filter[comp as keyof typeof filter].map(component=>(
-                                            <div onClick={()=>deleteFilter(comp as keyof typeof filter, component)} 
+                                            <div onClick={()=>deleteFilter(comp as keyof typeof filter, component)}  key={component}
                                             className='cursor-pointer uppercase text-[14px] font-Roboto flex gap-[8px] items-center'>
                                                <p className='font-bold font-Roboto'>from {component.split(',')[0]}$</p> 
                                                <p className='font-bold font-Roboto'>to {component.split(',')[1]}$</p>
@@ -38,7 +38,13 @@ export const FilteredBy = () => {
                                         :
                                         <div className='flex gap-[14px] flex-wrap '>
                                             {filter[comp as keyof typeof filter].map(component=>(
-                                                <p onClick={()=>deleteFilter(comp as keyof typeof filter, component)} className='cursor-pointer uppercase text-[14px] font-Roboto flex gap-[8px] items-center'><CloseIcon />{component}</p>
+                                                <p 
+                                                onClick={()=>deleteFilter(comp as keyof typeof filter, component)} 
+                                                className='cursor-pointer uppercase text-[14px] font-Roboto flex gap-[8px] items-center'
+                                                key={component}
+                                                >
+                                                    <CloseIcon />{component}
+                                                </p>
                                                 ))}
                                         </div>
                                     }

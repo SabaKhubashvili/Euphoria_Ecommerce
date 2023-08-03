@@ -173,8 +173,8 @@ export const ColorFilter = ({values,onChange}:Props) => {
         <div className="flex gap-[10px] flex-wrap xl:w-4/6">
         {
         FilterConstant['color'].map((color) => (
-          <div className={`p-[2px]  cursor-pointer ${values.includes(color) && 'border-[1px] border-black'}`} key={color} onClick={()=>onChange(color)}>
-            <div className={`w-[15px] h-[15px] ${color}`} />
+          <div className={`p-[2px]  cursor-pointer ${values.includes(color.name) && 'border-[1px] border-black'}`} key={color.name} onClick={()=>onChange(color.name)}>
+            <div className={`w-[15px] h-[15px] ${color.class}`} />
           </div>
         ))
       }
@@ -242,11 +242,11 @@ export const AboutDresses = () => {
       </div>
       {isOpen && (
         <p className="text-[18px] leading-[28px] font-light">
-          Every day we’re gonna be dropping the latest trends to hel p you nail
-          every Summer sitch. Whether it’s a graduation, you r mate's wedding,
+          Every day we&rsquo;re gonna be dropping the latest trends to hel p you nail
+          every Summer sitch. Whether it&rsquo;s a graduation, you r mate&rsquo;s wedding,
           or just a cute day at the races with the ga ls, our occasion dresses
           have got you covered. Not looking for something fancy? No stress .
-          We’ve got day dresses for days (aka bodycon dresses, t-shirt dresses,
+          We&rsquo;ve got day dresses for days (aka bodycon dresses, t-shirt dresses,
           oversized shirt dresses).
         </p>
       )}

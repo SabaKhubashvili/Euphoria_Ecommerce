@@ -16,13 +16,13 @@ export const Pagination = ({ productsLength }: Props) => {
       window.scrollTo(0,0);
       nextPage();
     }
-  }, [currentPage, maxNumber]);
+  }, [currentPage, maxNumber, nextPage]);
   const handlePrevPage = useCallback(() => {
-    if (currentPage !== 0) {
+    if (currentPage !== 1) {
       window.scrollTo(0,0);
       previousPage();
     }
-  }, [currentPage, maxNumber]);
+  }, [currentPage, previousPage]);
 
   
   
@@ -40,8 +40,10 @@ export const Pagination = ({ productsLength }: Props) => {
         rounded-md text-black font-bold cursor-pointer
         ${number === currentPage ? 'border-black' : 'border-[#79777d]'}
         `} onClick={()=>{
-          window.scrollTo(150,0);
-          manualPage(number)
+          if(currentPage !== number){
+            window.scrollTo(150,0);
+            manualPage(number)
+          }
           }} key={number}>
           {number}
         </div>
