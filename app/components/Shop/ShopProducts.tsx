@@ -13,25 +13,27 @@ import { useFilter } from "@/app/hooks/UseFilter";
 
 export const ShopProducts = () => {
   const IsAboveLargeScreens = useMediaQuery(largeScreens);
-  const { currentPage } = usePagination();
+  const { currentPage,manualPage } = usePagination();
   const { priceFrom } = useFilter();
 
   const currentProducts: productInterface[] = useMemo(() => {
     let currentProducts = products;
+    console.log((currentPage - 1) * 16, currentPage * 16);
     if (priceFrom) {
       if (priceFrom === "high") {
         currentProducts = products
+          .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
           .slice((currentPage - 1) * 16, currentPage * 16)
-          .sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
       } else if (priceFrom === "low") {
         currentProducts = products
+          .sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
           .slice((currentPage - 1) * 16, currentPage * 16)
-          .sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
       }
       return currentProducts;
     } else {
       return products.slice((currentPage - 1) * 16, currentPage * 16);
     }
+    
   }, [priceFrom, currentPage]);
 
   return (
