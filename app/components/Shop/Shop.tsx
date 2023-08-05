@@ -14,7 +14,7 @@ interface Props {
   productsLength: number
 }
 export const Shop = ({ currentProducts, productsLength }: Props) => {
-  const {nextPage,previousPage,currentPage,productPerPage, setProductPerPage} = usePagination()
+  const {nextPage,previousPage,currentPage,productPerPage, setProductPerPage,manualPage} = usePagination()
   const maxNumber = Math.ceil(productsLength / productPerPage);
   const {setPriceSort, priceFrom} = useFilter()
    const handleNextPage = useCallback(() => {
@@ -27,8 +27,14 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
       previousPage();
     }
   }, [currentPage, previousPage]);
-
-
+  const handleProductPerPageChange = (productNum: 16 | 32 | 48 | 64) => {
+    setProductPerPage(productNum);
+    const totalPages = Math.ceil(productsLength / productNum);
+    if (currentPage > totalPages) {
+      manualPage(totalPages);
+    }
+  };
+  
   return (
     <section className="flex flex-col gap-[20px] w-full pl-[15px] ">
       <div className="flex justify-between items-center">
@@ -49,10 +55,10 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
              size="sm"
              label={`${productPerPage}`}
              content={[
-             {label:'16',onClick:()=>setProductPerPage(16)},
-             {label:'32',onClick:()=>setProductPerPage(32)},
-             {label:'48',onClick:()=>setProductPerPage(48)},
-             {label:'64',onClick:()=>setProductPerPage(64)},
+             {label:'16',onClick:()=>handleProductPerPageChange(16)},
+             {label:'32',onClick:()=>handleProductPerPageChange(32)},
+             {label:'48',onClick:()=>handleProductPerPageChange(48)},
+             {label:'64',onClick:()=>handleProductPerPageChange(64)},
             
             ]}
               />
