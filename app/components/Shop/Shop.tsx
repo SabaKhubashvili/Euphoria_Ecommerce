@@ -14,8 +14,8 @@ interface Props {
   productsLength: number
 }
 export const Shop = ({ currentProducts, productsLength }: Props) => {
-  const {nextPage,previousPage,currentPage} = usePagination()
-  const maxNumber = Math.ceil(productsLength / 16);
+  const {nextPage,previousPage,currentPage,productPerPage, setProductPerPage} = usePagination()
+  const maxNumber = Math.ceil(productsLength / productPerPage);
   const {setPriceSort, priceFrom} = useFilter()
    const handleNextPage = useCallback(() => {
     if (currentPage < maxNumber) {
@@ -47,8 +47,14 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
              content={[{label:'price (High to low)',onClick:()=>setPriceSort('low')},{label:'price (Low to high)',onClick:()=>setPriceSort('high')}]} />
             <MainDropdown
              size="sm"
-             label="48"
-             content={[{label:'12',onClick:()=>console.log('smth')},{label:'32',onClick:()=>console.log('smth')}]}
+             label={`${productPerPage}`}
+             content={[
+             {label:'16',onClick:()=>setProductPerPage(16)},
+             {label:'32',onClick:()=>setProductPerPage(32)},
+             {label:'48',onClick:()=>setProductPerPage(48)},
+             {label:'64',onClick:()=>setProductPerPage(64)},
+            
+            ]}
               />
         </div>
       </div>

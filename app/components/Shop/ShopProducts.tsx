@@ -13,28 +13,28 @@ import { useFilter } from "@/app/hooks/UseFilter";
 
 export const ShopProducts = () => {
   const IsAboveLargeScreens = useMediaQuery(largeScreens);
-  const { currentPage,manualPage } = usePagination();
+  const { currentPage,manualPage,productPerPage } = usePagination();
   const { priceFrom } = useFilter();
 
   const currentProducts: productInterface[] = useMemo(() => {
     let currentProducts = products;
-    console.log((currentPage - 1) * 16, currentPage * 16);
+    console.log((currentPage - 1) * productPerPage, currentPage * productPerPage);
     if (priceFrom) {
       if (priceFrom === "high") {
         currentProducts = products
           .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
-          .slice((currentPage - 1) * 16, currentPage * 16)
+          .slice((currentPage - 1) * productPerPage, currentPage * productPerPage)
       } else if (priceFrom === "low") {
         currentProducts = products
           .sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
-          .slice((currentPage - 1) * 16, currentPage * 16)
+          .slice((currentPage - 1) * productPerPage, currentPage * productPerPage)
       }
       return currentProducts;
     } else {
-      return products.slice((currentPage - 1) * 16, currentPage * 16);
+      return products.slice((currentPage - 1) * productPerPage, currentPage * productPerPage);
     }
     
-  }, [priceFrom, currentPage]);
+  }, [priceFrom, currentPage,productPerPage]);
 
   return (
     <section className="w-full pb-[30px]">
@@ -54,7 +54,9 @@ export const ShopProducts = () => {
             productsLength={products.length}
             currentProducts={currentProducts}
           />
-          <Pagination productsLength={products.length} />
+          { productPerPage < products.length &&
+            <Pagination productsLength={products.length} />
+          }
         </div>
       </div>
     </section>

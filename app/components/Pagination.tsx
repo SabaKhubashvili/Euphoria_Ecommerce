@@ -7,8 +7,8 @@ interface Props {
   productsLength: number;
 }
 export const Pagination = ({ productsLength }: Props) => {
-  const { nextPage, previousPage, manualPage, currentPage } = usePagination();
-  const maxNumber = Math.ceil(productsLength / 16);
+  const { nextPage, previousPage, manualPage, currentPage, productPerPage } = usePagination();
+  const maxNumber = Math.ceil(productsLength / productPerPage);
   const numbers = Array.from({ length: maxNumber }, (_, index) => index + 1);
 
   const handleNextPage = useCallback(() => {
