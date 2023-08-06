@@ -25,7 +25,7 @@ export const BrandFilter = ({ onChange, values }: Props) => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <h1 className="text-[24px] font-medium">Brand</h1>
+        <h1 className="xl:text-[24px]  text-[20px] font-medium">Brand</h1>
         {isOpen ? (
           <div className="w-5 cursor-pointer">
             <MinusIcon />
@@ -73,7 +73,7 @@ export const SizeFilter = ({ onChange, values }: Props) => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <h1 className="text-[24px] font-medium">Size (Inches)</h1>
+        <h1 className="xl:text-[24px] text-[20px]  font-medium">Size (Inches)</h1>
         {isOpen ? (
           <div className="w-5 cursor-pointer">
             <MinusIcon />
@@ -113,7 +113,7 @@ export const LengthFilter = ({ values, onChange }: Props) => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <h1 className="text-[24px] font-medium">Dress length</h1>
+        <h1 className="xl:text-[24px] text-[20px]  font-medium">Dress length</h1>
         {isOpen ? (
           <div className="w-5 cursor-pointer">
             <MinusIcon />
@@ -158,7 +158,7 @@ export const ColorFilter = ({values,onChange}:Props) => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <h1 className="text-[24px] font-medium">Color</h1>
+        <h1 className="xl:text-[24px] text-[20px]  font-medium">Color</h1>
         {isOpen ? (
           <div className="w-5 cursor-pointer">
             <MinusIcon />
@@ -198,7 +198,7 @@ export const PriceSlider = ({values,onChange}:PriceProps) => {
 
   return (
     <div className="flex flex-col gap-[31px]">
-      <h1 className="text-[24px] font-medium">Price</h1>
+      <h1 className="xl:text-[24px] text-[20px]  font-medium">Price</h1>
       <Slider
         getAriaLabel={() => "Temperature range"}
         value={value}
@@ -229,7 +229,7 @@ export const AboutDresses = () => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <h1 className="text-[24px] font-medium">About Dresses</h1>
+        <h1 className="xl:text-[24px] text-[20px]  font-medium">About Dresses</h1>
         {isOpen ? (
           <div className="w-5 cursor-pointer">
             <MinusIcon />

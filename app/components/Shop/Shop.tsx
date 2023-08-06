@@ -37,7 +37,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
   
   return (
     <section className="flex flex-col gap-[20px] w-full pl-[15px] ">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between  sm:flex-row flex-col sm:items-center items-start gap-[10px]">
         <div className="flex gap-[5px] items-center">
           <div className="cursor-pointer" onClick={handlePrevPage}>
             <PrevIconGray/>
@@ -46,7 +46,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
             <NextIconGray />
           </div>
         </div>
-        <div className="flex gap-[20px]">
+        <div className="flex gap-[20px] sm:order-none order-first">
             <MainDropdown
              size="xl"
              label={priceFrom ? priceFrom === 'high' ? 'Low To High' : 'High to low' : 'Sort by'}
@@ -65,7 +65,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
         </div>
       </div>
       <div className="flex flex-col gap-[44px]">
-        <div className="lg:basis-3/4 w-full grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1  gap-[26px]">
+        <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
           {currentProducts.slice(0, 4).map((product) => (
             <ProductComponent key={product.id} {...product} />
           ))}

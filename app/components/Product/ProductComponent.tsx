@@ -5,15 +5,17 @@ import React from 'react'
 import { MainButton } from '../buttons/MainButton'
 import { GrayButton } from '../buttons/GrayButton'
 import { productInterface, products } from '@/app/constants'
+import Link from 'next/link'
 
 export const ProductComponent = ({
+  id,
   name,
   image,
   description,
   price
 }:productInterface) => {
   return (
-    <div className='flex flex-col gap-[14px] col-span-1'>
+    <Link href={`/${id}`} className='flex flex-col gap-[14px] col-span-1'>
       <div className='relative w-full'>
         <Image
           width={400}
@@ -39,6 +41,6 @@ export const ProductComponent = ({
           </div>
           <h3 className='uppercase text-[22px] font-medium'>{price} EUR</h3>
       </div>
-    </div>
+    </Link>
   )
 }

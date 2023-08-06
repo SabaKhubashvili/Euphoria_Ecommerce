@@ -17,8 +17,7 @@ export const ShopProducts = () => {
   const { priceFrom } = useFilter();
 
   const currentProducts: productInterface[] = useMemo(() => {
-    let currentProducts = products;
-    console.log((currentPage - 1) * productPerPage, currentPage * productPerPage);
+    let currentProducts = products; 
     if (priceFrom) {
       if (priceFrom === "high") {
         currentProducts = products
@@ -43,13 +42,9 @@ export const ShopProducts = () => {
       >
         Home/Shop
       </p>
-      <div className="flex items-start  mt-[18px]">
-        {IsAboveLargeScreens && (
-          <>
-            <Filter />
-          </>
-        )}
-        <div className="flex flex-col items-center gap-[30px]">
+      <div className="grid items-start mt-[18px] lg:grid-cols-10">
+          <Filter />
+        <div className="flex flex-col items-center gap-[30px] lg:col-span-8">
           <Shop
             productsLength={products.length}
             currentProducts={currentProducts}
