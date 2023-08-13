@@ -15,7 +15,7 @@ export const ProductComponent = ({
   price
 }:productInterface) => {
   return (
-    <Link href={`/${id}`} className='flex flex-col gap-[14px] col-span-1'>
+    <Link href={`/product/${id}`} className='flex flex-col gap-[14px] col-span-1'>
       <div className='relative w-full'>
         <Image
           width={400}
