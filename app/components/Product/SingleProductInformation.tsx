@@ -18,8 +18,8 @@ const SingleProductInformation = () => {
         FENDI
       </div>
       <h1
-        className="max-w-[493px] 2xl:text-[48px] xl:text-[40px] md:text-[30px] font-medium 
-                2xl:leading-[56px] xl:leading-[50px] md:leading-[35px]"
+        className="max-w-[493px] 2xl:text-[48px] xl:text-[40px] text-[30px] font-medium 
+                2xl:leading-[56px] xl:leading-[50px] md:leading-[35px] lg:mt-0 mt-[10px]"
       >
         {/* Title */}
         Women Black Checked Fit and Flare Dress
@@ -111,7 +111,7 @@ const SingleProductInformation = () => {
           </div>
         </div>
       </div>
-      <div className="flex gap-[24px] mt-[36px]">
+      <div className="flex gap-[24px] mt-[36px] xs:flex-nowrap flex-wrap">
         <div className="flex flex-col gap-[10px]">
           <h3 className="uppercase text-[14px] font-medium">Quantity</h3>
           <Counter
@@ -127,7 +127,7 @@ const SingleProductInformation = () => {
           </h2>
         </div>
       </div>
-      <div className="mt-[38px] flex gap-[15px]">
+      <div className="mt-[38px] flex gap-[15px] xs:flex-nowrap flex-wrap">
         <div className="w-full max-w-[221px] h-[50px]">
           <MainButton label="Add to bag" onClick={() => {}} small full />
         </div>
@@ -135,8 +135,8 @@ const SingleProductInformation = () => {
           <SecondaryButton label="Save" onClick={() => {}} small full leftSvg={<GrayHeartIcon/>} />
         </div>
       </div>
-      <div className="flex flex-wrap gap-[15px] mt-[15px]">
-            <div className="flex gap-[10px] uppercase text-[12px] items-center">
+      <div className="flex flex-wrap gap-[15px] mt-[15px] w-full">
+            <div className="flex gap-[10gpx] uppercase text-[12px] items-center">
                 <CheckedIcon/>
                 <p className="text-gray" >Free Shipping</p>
             </div>
