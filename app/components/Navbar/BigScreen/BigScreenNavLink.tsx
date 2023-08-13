@@ -14,7 +14,7 @@ export const BigScreenNavLink = ({to,label}:Props) => {
   return (
     <Link
         href={to}
-        className={`uppercase text-white font-semibold text-[15px] relative  mx-auto px-auto flex flex-col items-center
+        className={`uppercase text-white font-semibold xl:text-[15px] text-[12px] relative  mx-auto px-auto flex flex-col items-center
         `}
         >
             {label}
@@ -22,7 +22,7 @@ export const BigScreenNavLink = ({to,label}:Props) => {
             {
                 pathname === to &&(
                     <div className='absolute -bottom-1 h-[2px] w-[120%] bg-secondary'>
-
+                            
                     </div>
                 )
             }

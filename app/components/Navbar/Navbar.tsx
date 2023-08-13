@@ -27,7 +27,7 @@ export const Navbar = () => {
                 !isAboveLargeScreens && 
                 <HamburgerIcon menuToggle={menuToggle} setMenuToggle={setMenuToggle}/>
               }
-              <Link href={'/'} className="md:w-[90px] w-[65px]  md:h-[40px] h-[27px]">
+              <Link href={'/'} className=" x;:w-[90px] xl:h-[40px] md:w-[75px] md:h-[30px] w-[65px]   h-[27px]">
                     <Logo/>
               </Link>
               {
