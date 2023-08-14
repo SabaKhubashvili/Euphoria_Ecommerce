@@ -5,7 +5,7 @@ import { MainButton } from "../buttons/MainButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
 import { CheckedIcon, GrayHeartIcon } from "@/public/Svg/Icons";
 
-const SingleProductInformation = () => {
+export const SingleProductInformation = () => {
   const [quantity, setQuantity] = useState<number>(1);
 
   return (
@@ -136,21 +136,83 @@ const SingleProductInformation = () => {
         </div>
       </div>
       <div className="flex flex-wrap gap-[15px] mt-[15px] w-full">
-            <div className="flex gap-[10gpx] uppercase text-[12px] items-center">
-                <CheckedIcon/>
-                <p className="text-gray" >Free Shipping</p>
-            </div>
-            <div className="flex gap-[4px] uppercase text-[12px]">   
-                <p className="text-gray font-bold">Product code:</p>
-                <p className="text-gray" > RFKK1024</p>
-            </div>
-            <div className="flex gap-[4px] uppercase text-[12px]">   
-                <p className="text-gray font-bold ">Tags</p>
-                <p className="text-gray" > NEW arrivals, Top women</p>
-            </div>
+          <div className="flex gap-[10gpx] uppercase text-[12px] items-center">
+              <CheckedIcon/>
+              <p className="text-gray" >Free Shipping</p>
+          </div>
+          <div className="flex gap-[4px] uppercase text-[12px]">   
+              <p className="text-gray font-bold">Product code:</p>
+              <p className="text-gray" > RFKK1024</p>
+          </div>
+          <div className="flex gap-[4px] uppercase text-[12px]">   
+              <p className="text-gray font-bold ">Tags</p>
+              <p className="text-gray" > NEW arrivals, Top women</p>
+          </div>
       </div>
     </React.Fragment>
   );
 };
 
-export default SingleProductInformation;
+
+
+
+export const SingleProductDetails = () => {
+    const [openCategories,setOpenCategories] = useState({
+        Details:false,
+        OtherInformation:false,
+        AnotherTab:false
+    })
+  return (
+    <div className='flex flex-col gap-[10px] mt-[41px]'>
+      <div className='bg-[#F8F9FB] px-[27px] py-[25px]'>
+        <div className='flex items-center justify-between pb-[25px]'>
+            <h1 className='2xl:text-[24px] xl:text-[22px] lg:text-[20px]'>
+                Details 
+            </h1>
+              <div className='cursor-pointer transition-all duration-300' onClick={()=>setOpenCategories(prev=>({...prev,Details:!prev.Details}))}>
+                  <div className='w-[20px] h-[3px] bg-divider' /> 
+                  <div className={`w-[20px] h-[3px] bg-divider transition-all duration-300 ${
+                      openCategories.Details  ? 'rotate-0 mt-0 !bg-[#F8F9FB] ' : 'rotate-90 -mt-[3px]'
+                  }`} /> 
+              </div>
+        </div>
+        {
+            openCategories.Details && 
+            <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col">
+              <div className="flex lg:flex-row flex-col lg:justify-between lg:gap-[52px] gap-[15px]">
+                <div className="flex flex-col gap-[15px]">
+                  <div className="flex flex-col gap-[10px]">
+                    <h2 className="uppercase font-medium">ABOUT PRODUCT</h2>
+                    <p>Cool off this summer in the Mini Ruffle Smocked Tank Top from our very own LA Hearts. This tank features a smocked body, adjustable straps, scoop neckline, ruffled hems, and a cropped fit.</p>
+                  </div>
+                  <ul className="list-disc list-inside ">
+                    <h2 className="uppercase font-medium mb-[10px]">ABOUT PRODUCT</h2>
+                    <li className=" font-light">Smocked Body</li>
+                    <li className=" font-light">Adjustabe straps</li>
+                    <li className=" font-light">Scoop necklice</li>
+                    <li className=" font-light">Rufled hems</li>
+                    <li className=" font-light">Croped length</li>
+                    <li className=" font-light">Model wearing a small</li>
+                    <li className=" font-light">100% ryaon</li>
+                    <li className=" font-light">Machine washable</li>
+                  </ul>
+                  <ul className="list-disc list-inside ">
+                    <h2 className="uppercase font-medium mb-[10px]">Advantages</h2>
+                    <li className=" font-light">Model wearing a small</li>
+                    <li className=" font-light">100% ryaon</li>
+                    <li className=" font-light">Machine washable</li>
+                  </ul>
+                </div>
+                <div className="flex flex-col gap-[10px] lg:max-w-[50%]">
+                    <h2 className="uppercase font-medium">Shipping</h2>
+                    <p>
+                    We offer Free Standard Shipping for all orders over $75 to the 50 states and the District of Columbia. The minimum order value must be $75 before taxes, shipping and handling. Shipping fees are non-refundable. Please allow up to 2 business days (excluding weekends, holidays, and sale days) to process your order. Processing Time + Shipping Time = Delivery Time
+                    </p>
+                  </div>
+              </div>
+            </div>
+        }
+      </div>
+    </div>
+  )
+}

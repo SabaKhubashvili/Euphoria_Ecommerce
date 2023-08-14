@@ -1,8 +1,9 @@
 import React from 'react'
 import { Container } from '../../components/Container';
 import Image from 'next/image';
-import Counter from '@/app/components/buttons/Counter';
-import SingleProductInformation from '@/app/components/Product/SingleProductInformation';
+import { FacebookBlackIcon, InstagramBlackIcon, TwitterBlackIcon } from '@/public/Svg/Social';
+import { SingleProductDetails,SingleProductInformation } from '@/app/components/Product/SingleProductPageUi';
+
 
 interface params{
     productId:string
@@ -25,11 +26,18 @@ const page = ({
                     height={790}
                     className='w-full object-cover h-full'
                     />
+                    <div className='flex justify-center items-center gap-[10px] mt-[15px] text-[12px] font-medium'>
+                      SHARE: 
+                      <FacebookBlackIcon/>
+                      <TwitterBlackIcon/>
+                      <InstagramBlackIcon/>
+                    </div>
               </div>
               <div className='col-span-1'>
                 <SingleProductInformation/>
               </div> 
             </div>
+            <SingleProductDetails/>
           </div>
         </Container>
     </main>
