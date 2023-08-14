@@ -25,7 +25,7 @@ export const ProductComponent = ({
           className='w-full h-full object-cover peer'
         />
         <div className="absolute bottom-[-4px] w-full  transition-all duration-200 bg-white left-0 right-0 
-         hover:opacity-100 peer-hover:opacity-100  opacity-0 py-[20px]  flex px-[10px] gap-[5px]
+         lg:hover:opacity-100 peer-hover:opacity-100  opacity-0 py-[20px]  flex px-[10px] gap-[5px]
           mx-auto 
          ">
             <MainButton full small label='Add to bag' onClick={()=>{}}/>
@@ -36,10 +36,10 @@ export const ProductComponent = ({
 
       <div className='flex flex-col gap-[18px]'>
           <div>
-            <p className='uppercase text-gray font-semibold text-[12px]'>{name}</p>
-            <h1 className='text-[18px] font-light'>{description}</h1>
+            <p className='uppercase text-gray font-semibold xl:text-[12px] md:text-[10px] sm:text-[9px] text-[8px]'>{name}</p>
+            <h1 className='xl:text-[18px] md:text-[16px] sm:text-[14px] text-[12px] font-light'>{description}</h1>
           </div>
-          <h3 className='uppercase text-[22px] font-medium'>{price} EUR</h3>
+          <h3 className='uppercase 2xl:text-[22px] xl:text-[20px] md:text-[18px] sm:text-[16px] text-[14px] font-medium'>{price} EUR</h3>
       </div>
     </Link>
   )

@@ -132,87 +132,168 @@ export const SingleProductInformation = () => {
           <MainButton label="Add to bag" onClick={() => {}} small full />
         </div>
         <div className="w-full max-w-[221px] h-[50px]">
-          <SecondaryButton label="Save" onClick={() => {}} small full leftSvg={<GrayHeartIcon/>} />
+          <SecondaryButton
+            label="Save"
+            onClick={() => {}}
+            small
+            full
+            leftSvg={<GrayHeartIcon />}
+          />
         </div>
       </div>
       <div className="flex flex-wrap gap-[15px] mt-[15px] w-full">
-          <div className="flex gap-[10gpx] uppercase text-[12px] items-center">
-              <CheckedIcon/>
-              <p className="text-gray" >Free Shipping</p>
-          </div>
-          <div className="flex gap-[4px] uppercase text-[12px]">   
-              <p className="text-gray font-bold">Product code:</p>
-              <p className="text-gray" > RFKK1024</p>
-          </div>
-          <div className="flex gap-[4px] uppercase text-[12px]">   
-              <p className="text-gray font-bold ">Tags</p>
-              <p className="text-gray" > NEW arrivals, Top women</p>
-          </div>
+        <div className="flex gap-[10gpx] uppercase text-[12px] items-center">
+          <CheckedIcon />
+          <p className="text-gray">Free Shipping</p>
+        </div>
+        <div className="flex gap-[4px] uppercase text-[12px]">
+          <p className="text-gray font-bold">Product code:</p>
+          <p className="text-gray"> RFKK1024</p>
+        </div>
+        <div className="flex gap-[4px] uppercase text-[12px]">
+          <p className="text-gray font-bold ">Tags</p>
+          <p className="text-gray"> NEW arrivals, Top women</p>
+        </div>
       </div>
     </React.Fragment>
   );
 };
 
-
-
-
-export const SingleProductDetails = () => {
-    const [openCategories,setOpenCategories] = useState({
-        Details:false,
-        OtherInformation:false,
-        AnotherTab:false
-    })
+const Details = () => {
   return (
-    <div className='flex flex-col gap-[10px] mt-[41px]'>
-      <div className='bg-[#F8F9FB] px-[27px] py-[25px]'>
-        <div className='flex items-center justify-between pb-[25px]'>
-            <h1 className='2xl:text-[24px] xl:text-[22px] lg:text-[20px]'>
-                Details 
-            </h1>
-              <div className='cursor-pointer transition-all duration-300' onClick={()=>setOpenCategories(prev=>({...prev,Details:!prev.Details}))}>
-                  <div className='w-[20px] h-[3px] bg-divider' /> 
-                  <div className={`w-[20px] h-[3px] bg-divider transition-all duration-300 ${
-                      openCategories.Details  ? 'rotate-0 mt-0 !bg-[#F8F9FB] ' : 'rotate-90 -mt-[3px]'
-                  }`} /> 
-              </div>
+    <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col mt-[25px]">
+      <div className="flex lg:flex-row flex-col lg:justify-between lg:gap-[52px] gap-[15px]">
+        <div className="flex flex-col gap-[15px]">
+          <div className="flex flex-col gap-[10px]">
+            <h2 className="uppercase font-medium">ABOUT PRODUCT</h2>
+            <p>
+              Cool off this summer in the Mini Ruffle Smocked Tank Top from our
+              very own LA Hearts. This tank features a smocked body, adjustable
+              straps, scoop neckline, ruffled hems, and a cropped fit.
+            </p>
+          </div>
+          <ul className="list-disc list-inside ">
+            <h2 className="uppercase font-medium mb-[10px]">ABOUT PRODUCT</h2>
+            <li className=" font-light">Smocked Body</li>
+            <li className=" font-light">Adjustabe straps</li>
+            <li className=" font-light">Scoop necklice</li>
+            <li className=" font-light">Rufled hems</li>
+            <li className=" font-light">Croped length</li>
+            <li className=" font-light">Model wearing a small</li>
+            <li className=" font-light">100% ryaon</li>
+            <li className=" font-light">Machine washable</li>
+          </ul>
+          <ul className="list-disc list-inside ">
+            <h2 className="uppercase font-medium mb-[10px]">Advantages</h2>
+            <li className=" font-light">Model wearing a small</li>
+            <li className=" font-light">100% ryaon</li>
+            <li className=" font-light">Machine washable</li>
+          </ul>
         </div>
-        {
-            openCategories.Details && 
-            <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col">
-              <div className="flex lg:flex-row flex-col lg:justify-between lg:gap-[52px] gap-[15px]">
-                <div className="flex flex-col gap-[15px]">
-                  <div className="flex flex-col gap-[10px]">
-                    <h2 className="uppercase font-medium">ABOUT PRODUCT</h2>
-                    <p>Cool off this summer in the Mini Ruffle Smocked Tank Top from our very own LA Hearts. This tank features a smocked body, adjustable straps, scoop neckline, ruffled hems, and a cropped fit.</p>
-                  </div>
-                  <ul className="list-disc list-inside ">
-                    <h2 className="uppercase font-medium mb-[10px]">ABOUT PRODUCT</h2>
-                    <li className=" font-light">Smocked Body</li>
-                    <li className=" font-light">Adjustabe straps</li>
-                    <li className=" font-light">Scoop necklice</li>
-                    <li className=" font-light">Rufled hems</li>
-                    <li className=" font-light">Croped length</li>
-                    <li className=" font-light">Model wearing a small</li>
-                    <li className=" font-light">100% ryaon</li>
-                    <li className=" font-light">Machine washable</li>
-                  </ul>
-                  <ul className="list-disc list-inside ">
-                    <h2 className="uppercase font-medium mb-[10px]">Advantages</h2>
-                    <li className=" font-light">Model wearing a small</li>
-                    <li className=" font-light">100% ryaon</li>
-                    <li className=" font-light">Machine washable</li>
-                  </ul>
-                </div>
-                <div className="flex flex-col gap-[10px] lg:max-w-[50%]">
-                    <h2 className="uppercase font-medium">Shipping</h2>
-                    <p>
-                    We offer Free Standard Shipping for all orders over $75 to the 50 states and the District of Columbia. The minimum order value must be $75 before taxes, shipping and handling. Shipping fees are non-refundable. Please allow up to 2 business days (excluding weekends, holidays, and sale days) to process your order. Processing Time + Shipping Time = Delivery Time
-                    </p>
-                  </div>
-              </div>
-            </div>
-        }
+        <div className="flex flex-col gap-[10px] lg:max-w-[50%]">
+          <h2 className="uppercase font-medium">Shipping</h2>
+          <p>
+            We offer Free Standard Shipping for all orders over $75 to the 50
+            states and the District of Columbia. The minimum order value must be
+            $75 before taxes, shipping and handling. Shipping fees are
+            non-refundable. Please allow up to 2 business days (excluding
+            weekends, holidays, and sale days) to process your order. Processing
+            Time + Shipping Time = Delivery Time
+          </p>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
+
+const OtherInformation = () => {
+  return (
+    <div className="font-light border-t-[1px] border-t-divider mt-[25px] pt-[32px]">
+      Clothing is not just a practical necessity; it's a means of expressing
+      identity, culture, and style. The world of fashion is vast and
+      ever-evolving, offering a myriad of choices that cater to individual
+      preferences and societal trends. From the timeless elegance of a tailored
+      suit to the carefree comfort of a casual t-shirt and jeans, clothing plays
+      a pivotal role in how we present ourselves to the world. Historical
+      Significance: From Loincloths to Haute Couture Throughout history,
+      clothing has served various purposes beyond just covering the body. In
+      ancient civilizations, garments were crafted using materials like animal
+      hides and plant fibers. Clothing indicated social status, with luxurious
+      fabrics and intricate designs reserved for the elite. Over time, clothing
+      styles evolved, influenced by cultural exchanges, technological
+      advancements, and changing social norms. The 20th century witnessed a
+      fashion revolution with the advent of haute couture and ready-to-wear
+      collections. Designers like Coco Chanel and Christian Dior revolutionized
+      how people approached fashion, blending traditional craftsmanship with
+      innovation. Today, fashion conglomerates, independent designers, and
+      sustainable fashion movements continue to reshape the industry. Cultural
+      Diversity: The Global Tapestry of Fashion Clothing is a powerful cultural
+      marker, reflecting the heritage and beliefs of diverse communities around
+      the world. Traditional clothing, such as the vibrant saris of India, the
+      intricate kimonos of Japan, and the bold patterns of African textiles,
+      showcase the beauty of cultural expression. Globalization and
+      multiculturalism have led to cross-cultural fashion influences, resulting
+      in fusion styles that celebrate diversity.
+    </div>
+  );
+};
+
+export const SingleProductDetails = () => {
+  const [openCategories, setOpenCategories] = useState({
+    Details: false,
+    OtherInformation: false,
+  });
+  return (
+    <div className="flex flex-col gap-[10px] mt-[41px]">
+      <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
+        <div className="flex items-center justify-between">
+          <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px]">
+            Details
+          </h1>
+          <div
+            className="cursor-pointer transition-all duration-300"
+            onClick={() =>
+              setOpenCategories((prev) => ({ ...prev, Details: !prev.Details }))
+            }
+          >
+            <div className="w-[20px] h-[3px] bg-divider" />
+            <div
+              className={`w-[20px] h-[3px] bg-divider transition-all duration-300 ${
+                openCategories.Details
+                  ? "rotate-0 mt-0 !bg-[#F8F9FB] "
+                  : "rotate-90 -mt-[3px]"
+              }`}
+            />
+          </div>
+        </div>
+        {openCategories.Details && <Details />}
+      </div>
+      <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
+        <div className="flex items-center justify-between">
+          <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px]">
+          Other Information
+          </h1>
+          <div
+            className="cursor-pointer transition-all duration-300"
+            onClick={() =>
+              setOpenCategories((prev) => ({
+                ...prev,
+                OtherInformation: !prev.OtherInformation,
+              }))
+            }
+          >
+            <div className="w-[20px] h-[3px] bg-divider" />
+            <div
+              className={`w-[20px] h-[3px] bg-divider transition-all duration-300 ${
+                openCategories.OtherInformation
+                  ? "rotate-0 mt-0 !bg-[#F8F9FB] "
+                  : "rotate-90 -mt-[3px]"
+              }`}
+            />
+          </div>
+        </div>
+        {openCategories.OtherInformation && <OtherInformation />}
+      </div>
+    </div>
+  );
+};

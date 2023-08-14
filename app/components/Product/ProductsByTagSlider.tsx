@@ -42,7 +42,7 @@ export const ProductsByTagSlider = ({ title, sliderName }: Props) => {
         spaceBetween={20}
       >
         {products.slice(0, 15).map((product,index) => (
-          <SwiperSlide className="!w-[280px]" key={index}>
+          <SwiperSlide className="2xl:!w-[280px] xl:!w-[210px] lg:!w-[180px] md:!w-[160px] sm:!w-[130px] !w-[120px]" key={index}>
             <ProductComponent {...product} />
           </SwiperSlide>
         ))}
