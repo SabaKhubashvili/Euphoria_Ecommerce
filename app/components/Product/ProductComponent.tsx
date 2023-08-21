@@ -26,15 +26,15 @@ export const ProductComponent = ({
         />
         <div className="absolute bottom-[-4px] w-full  transition-all duration-200 bg-white left-0 right-0 
          lg:hover:opacity-100 peer-hover:opacity-100  opacity-0 py-[20px]  flex px-[10px] gap-[5px]
-          mx-auto 
+          mx-auto xl:h-[100px] lg:h-[90px] md:h-[80px] h-[70px]
          ">
-            <MainButton full small label='Add to bag' onClick={()=>{}}/>
-            <GrayButton full small label='Save' onClick={()=>{}}/>
+            <MainButton full small  label='Add to bag' onClick={()=>{}}/>
+            <GrayButton full small  label='Save' onClick={()=>{}}/>
         </div>
       </div>
 
 
-      <div className='flex flex-col gap-[18px]'>
+      <div className='flex flex-col md:h-[98px] h-[77px] justify-between'>
           <div>
             <p className='uppercase text-gray font-semibold xl:text-[12px] md:text-[10px] sm:text-[9px] text-[8px]'>{name}</p>
             <h1 className='xl:text-[18px] md:text-[16px] sm:text-[14px] text-[12px] font-light'>{description}</h1>

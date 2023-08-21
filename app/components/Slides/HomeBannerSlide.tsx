@@ -20,7 +20,7 @@ export const HomeBannerSlide = () => {
     '>
         <div className='flex flex-col lg:gap-[48px] gap-y-[9px] lg:justify-normal justify-center lg:items-start items-center
          lg:basis-1/2 relative before:absolute lg:before:content-border-line before:right-0 before:w-[80%]'>
-            <h1 className='font-semibold xl:leading-[96px] lg:leading-[80x] leading-[40px] xl:text-[70px] lg:text-[58px] text-[36px] lg:max-w-none max-w-[292px] lg:text-start text-center   '>
+            <h1 className='font-semibold xl:leading-[96px] lg:leading-[58px] leading-[40px] xl:text-[70px] lg:text-[58px] text-[36px] lg:max-w-none max-w-[292px] lg:text-start text-center   '>
                 SUMMER SALE GEt
                 <span className='transparent-text'>
                   {' '} 30% OFF {' '}

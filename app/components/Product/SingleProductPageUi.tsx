@@ -7,7 +7,10 @@ import { CheckedIcon, GrayHeartIcon } from "@/public/Svg/Icons";
 
 export const SingleProductInformation = () => {
   const [quantity, setQuantity] = useState<number>(1);
-
+  const [clothingVariant,setClothingVariant] = useState({
+    color:'',
+    size:'',
+  })
   return (
     <React.Fragment>
       <h4 className=" text-gray text-[14px] leading-[48px]">
@@ -28,22 +31,25 @@ export const SingleProductInformation = () => {
         <p className="text-[14px] uppercase ">Select Color</p>
         <div className="flex gap-[5px] mt-[10px]">
           <div
+             onClick={()=>setClothingVariant(prev=>({...prev,color:'red'}))}
             className={`p-[2px]  cursor-pointer ${
-              false && "border-[1px] border-black"
+              clothingVariant.color === 'red' && "border-[1px] border-black"
             }`}
           >
             <div className={`w-[15px] h-[15px] bg-red-400`} />
           </div>
           <div
+             onClick={()=>setClothingVariant(prev=>({...prev,color:'green'}))}
             className={`p-[2px]  cursor-pointer ${
-              false && "border-[1px] border-black"
+              clothingVariant.color === 'green' && "border-[1px] border-black"
             }`}
           >
             <div className={`w-[15px] h-[15px] bg-green-400`} />
           </div>
           <div
+            onClick={()=>setClothingVariant(prev=>({...prev,color:'blue'}))}
             className={`p-[2px]  cursor-pointer ${
-              true && "border-[1px] border-black"
+              clothingVariant.color === 'blue' && "border-[1px] border-black"
             }`}
           >
             <div className={`w-[15px] h-[15px] bg-blue-400`} />
@@ -54,60 +60,67 @@ export const SingleProductInformation = () => {
         <p className="text-[14px] uppercase ">Select size (Inches)</p>
         <div className="flex gap-[5px] mt-[10px] flex-wrap">
           <div
+               onClick={()=>setClothingVariant(prev=>({...prev,size:'W21'}))}
             className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
                      py-[10px] px-[10px] 
-                    ${false && "!text-black !border-black"}
+                    ${clothingVariant.size === 'W21' && "!text-black !border-black"}
                     `}
           >
-            w27
+            W21
           </div>
           <div
+               onClick={()=>setClothingVariant(prev=>({...prev,size:'W22'}))}
             className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
                      py-[10px] px-[10px] 
-                    ${false && "!text-black !border-black"}
+                    ${clothingVariant.size === 'W22' && "!text-black !border-black"}
                     `}
           >
-            w27
+            W22
           </div>
           <div
+               onClick={()=>setClothingVariant(prev=>({...prev,size:'W23'}))}
             className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
                      py-[10px] px-[10px] 
-                    ${false && "!text-black !border-black"}
+                    ${clothingVariant.size === 'W23' && "!text-black !border-black"}
                     `}
           >
-            w27
+            W23
           </div>
           <div
+               onClick={()=>setClothingVariant(prev=>({...prev,size:'W24'}))}
             className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
                      py-[10px] px-[10px] 
-                    ${false && "!text-black !border-black"}
+                    ${clothingVariant.size === 'W24' && "!text-black !border-black"}
                     `}
           >
-            w27
+            W24
           </div>
           <div
+               onClick={()=>setClothingVariant(prev=>({...prev,size:'W25'}))}
             className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
                      py-[10px] px-[10px] 
-                    ${true && "!text-black !border-black"}
+                    ${clothingVariant.size === 'W25' && "!text-black !border-black"}
                     `}
           >
-            w27
+            W25
           </div>
           <div
+               onClick={()=>setClothingVariant(prev=>({...prev,size:'W26'}))}
             className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
                      py-[10px] px-[10px] 
-                    ${false && "!text-black !border-black"}
+                    ${clothingVariant.size === 'W26' && "!text-black !border-black"}
                     `}
           >
-            w27
+            W26
           </div>
           <div
+               onClick={()=>setClothingVariant(prev=>({...prev,size:'W27'}))}
             className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
                      py-[10px] px-[10px] 
-                    ${false && "!text-black !border-black"}
+                    ${clothingVariant.size === 'W27' && "!text-black !border-black"}
                     `}
           >
-            w27
+            W27
           </div>
         </div>
       </div>
@@ -121,8 +134,8 @@ export const SingleProductInformation = () => {
           />
         </div>
         <div>
-          <h3 className="uppercase text-[14px] font-medium">Price total</h3>
-          <h2 className="text-[26px] font-bold uppercase">
+          <h3 className="uppercase text-[14px] font-medium select-none">Price total</h3>
+          <h2 className="text-[26px] font-bold uppercase select-none">
             {quantity * 90} ,00 EUR
           </h2>
         </div>
@@ -245,9 +258,17 @@ export const SingleProductDetails = () => {
   });
   return (
     <div className="flex flex-col gap-[10px] mt-[41px]">
-      <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
+      <div
+        className="bg-[#F8F9FB] px-[27px] py-[25px] cursor-pointer"
+        onClick={() =>
+          setOpenCategories((prev) => ({
+            ...prev,
+            OtherInformation: !prev.OtherInformation,
+          }))
+        }
+      >
         <div className="flex items-center justify-between">
-          <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px]">
+          <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px] select-none">
             Details
           </h1>
           <div
@@ -269,19 +290,19 @@ export const SingleProductDetails = () => {
         {openCategories.Details && <Details />}
       </div>
       <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
-        <div className="flex items-center justify-between">
-          <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px]">
-          Other Information
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() =>
+            setOpenCategories((prev) => ({
+              ...prev,
+              OtherInformation: !prev.OtherInformation,
+            }))
+          }
+        >
+          <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px] select-none">
+            Other Information
           </h1>
-          <div
-            className="cursor-pointer transition-all duration-300"
-            onClick={() =>
-              setOpenCategories((prev) => ({
-                ...prev,
-                OtherInformation: !prev.OtherInformation,
-              }))
-            }
-          >
+          <div className="cursor-pointer transition-all duration-300">
             <div className="w-[20px] h-[3px] bg-divider" />
             <div
               className={`w-[20px] h-[3px] bg-divider transition-all duration-300 ${
