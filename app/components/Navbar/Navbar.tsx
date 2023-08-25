@@ -17,7 +17,6 @@ export const Navbar = () => {
   const genericHamburgerLine = `h-1 w-8 my-1 rounded-full bg-white transition ease transform duration-300`;
   return (
     <React.Fragment>
-
       <nav className="relative  w-full">
         <div className="fixed top-0 w-full bg-black py-[36px] z-[99] ">
 

@@ -15,10 +15,6 @@ export const SmallScreenNavLinks = () => {
             to='/shop'
         />
         <SmallScreenNavLink
-            label='Blog'
-            to='/blog'
-        />
-        <SmallScreenNavLink
             label='Sale'
             to='/sale'
         />

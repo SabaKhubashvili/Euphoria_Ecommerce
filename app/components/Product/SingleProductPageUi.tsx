@@ -253,9 +253,10 @@ const OtherInformation = () => {
 
 export const SingleProductDetails = () => {
   const [openCategories, setOpenCategories] = useState({
-    Details: false,
+    Details: true,
     OtherInformation: false,
   });
+  
   return (
     <div className="flex flex-col gap-[10px] mt-[41px]">
       <div
@@ -263,7 +264,7 @@ export const SingleProductDetails = () => {
         onClick={() =>
           setOpenCategories((prev) => ({
             ...prev,
-            OtherInformation: !prev.OtherInformation,
+            Details: !prev.Details,
           }))
         }
       >

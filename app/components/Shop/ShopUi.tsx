@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SyntheticEvent, useState } from "react";
 import { Roboto } from "../assets/Fonts";
 import { Slider } from "@mui/material";
 import Box from "@mui/material/Box";
@@ -191,13 +191,13 @@ export const PriceSlider = ({values,onChange}:PriceProps) => {
     setValue(newValue as number[]);
   };
 
-  const handleChangeCommitted = (event: React.ChangeEvent<{}>, newValue: number | number[]) => {
+  const handleChangeCommitted = (event: Event | SyntheticEvent<Element | Event> , newValue: number | number[]) => {
     const [leftValue, rightValue] = newValue as number[];
     onChange([leftValue,rightValue])
   };
 
   return (
-    <div className="flex flex-col gap-[31px]">
+    <div className="flex flex-col gap-[31px] overflow-hidden ">
       <h1 className="2xl:text-[24px] xl:text-[22px] text-[20px]  font-medium">Price</h1>
       <Slider
         getAriaLabel={() => "Temperature range"}
@@ -205,6 +205,10 @@ export const PriceSlider = ({values,onChange}:PriceProps) => {
         onChange={handleChange}
         onChangeCommitted={handleChangeCommitted}
         valueLabelDisplay="auto"
+        style={{
+          margin:'auto',
+          width:'90%'
+        }}
         max={1500}
         sx={{
           color: "black",

@@ -15,7 +15,7 @@ interface Props {
 export const SliderController = ({ NextEl, PrevEl, light }: Props) => {
   return (
     <div className="flex gap-[3px] lg:justify-end justify-between w-full">
-      <div className={`${PrevEl} cursor-pointer`}>
+      <div className={`${PrevEl} cursor-pointer`} >
         {light ? <PrevIconGray /> : <PrevIcon />}
       </div>
       <div className={`${NextEl} cursor-pointer`}>

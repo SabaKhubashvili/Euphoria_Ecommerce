@@ -15,10 +15,6 @@ export const BigScreenNavLinks = () => {
             to='/shop'
         />
         <BigScreenNavLink
-            label='Blog'
-            to='/blog'
-        />
-        <BigScreenNavLink
             label='Sale'
             to='/sale'
         />
