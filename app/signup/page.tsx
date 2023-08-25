@@ -26,7 +26,7 @@ const page = () => {
            flex justify-center items-center  flex-col
           
            ">
-            <div className="flex flex-col items-start justify-start w-[500px]">
+            <div className="flex flex-col items-start justify-start  sm:w-[600px] w-full px-[20px]">
               <h2 className="text-[24px] leading-[68px]">
                 Personal Information
               </h2>

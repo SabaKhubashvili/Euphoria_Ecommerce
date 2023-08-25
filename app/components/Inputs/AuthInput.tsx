@@ -25,16 +25,16 @@ export const AuthInput = ({
   type = "text",
 }: Props) => {
   return (
-    <div className={`flex justify-between items-start gap-[30px]`}>
+    <div className={`flex justify-between items-start sm:flex-row flex-col w-full `}>
       {label && (
         <p
-          className={`text-[16px] mt-[2px] text-secondaryBlack leading-[20px] ${Roboto.className} `}
+          className={`text-[16px] mt-[2px] text-secondaryBlack leading-[20px] xs:mb-0 mb-2 ${Roboto.className} `}
         >
           {label}
           {required && <span className="text-red-500 ml-[10px]">*</span>}
         </p>
       )}
-      <div className="w-full">
+      <div className="xs:basis-2/3 w-full">
         <input
           id={id}
           name={name}

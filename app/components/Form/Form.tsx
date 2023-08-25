@@ -72,7 +72,7 @@ export function Form({
         >
           {!hideError && errorType.length > 0 ? (
             <div
-              className={`bg-red-500 flex text-white justify-between items-center py-2 px-5`}
+              className={`bg-red-500 flex w-full text-white justify-between items-center py-2 px-5`}
             >
               <div>
                 <div>
