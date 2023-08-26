@@ -81,7 +81,7 @@ export function Form({
                   ))}
                 </div>
               </div>
-              <p className="w-6" onClick={() => setErrorType("")}>
+              <p className="w-6 cursor-pointer" onClick={() => setErrorType("")}>
                 <CloseIconWhite/>
               </p>
             </div>
