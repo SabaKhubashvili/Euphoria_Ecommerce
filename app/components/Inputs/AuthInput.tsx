@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Roboto } from "../assets/Fonts";
+import { EyeHidden, EyeShown } from "@/public/Svg/Icons";
 
 interface Props {
   id: string;
@@ -24,8 +25,11 @@ export const AuthInput = ({
   required,
   type = "text",
 }: Props) => {
+  const [insideType, setInsideType] = useState(type);
   return (
-    <div className={`flex justify-between items-start sm:flex-row flex-col w-full `}>
+    <div
+      className={`flex justify-between items-start sm:flex-row flex-col w-full `}
+    >
       {label && (
         <p
           className={`text-[16px] mt-[2px] text-secondaryBlack leading-[20px] xs:mb-0 mb-2 ${Roboto.className} `}
@@ -35,17 +39,42 @@ export const AuthInput = ({
         </p>
       )}
       <div className="xs:basis-2/3 w-full">
-        <input
-          id={id}
-          name={name}
-          placeholder={placeholder}
-          onChange={onChange}
-          type={type}
-          className={`
-          w-full px-[16px] py-[10px] border-[1px] border-solid border-divider outline-none
-          ${feedback && "border-rose-500 text-rose-500"}
-          `}
-        />
+        <div className="relative w-full">
+          <input
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            onChange={onChange}
+            type={insideType}
+            className={`
+            w-full px-[16px] py-[10px] border-[1px] border-solid border-divider outline-none
+            ${feedback && "border-rose-500 text-rose-500"}
+            `}
+          />
+          {type === "password" && (
+            <div className="absolute right-2 flex items-center top-0 bottom-0">
+              {insideType === "password" ? (
+                <div
+                  onClick={() => {
+                    setInsideType("text");
+                  }}
+                  className="w-5"
+                >
+                  <EyeHidden />
+                </div>
+              ) : (
+                <div
+                  onClick={() => {
+                    setInsideType("password");
+                  }}
+                  className="w-5"
+                >
+                  <EyeShown />
+                </div>
+              )}
+            </div>
+          )}
+        </div>
         {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>}
       </div>
     </div>

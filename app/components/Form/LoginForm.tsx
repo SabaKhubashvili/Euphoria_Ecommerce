@@ -46,6 +46,7 @@ export const LoginForm = () => {
         id="password"
         label="Password"
         placeholder="Password"
+        type="password"
         onChange={formik.handleChange}
         feedback={formik.errors.password}
         required
