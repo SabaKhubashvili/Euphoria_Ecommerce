@@ -14,7 +14,6 @@ import { largeScreens } from "@/app/Screens/Screens";
 export const Navbar = () => {
   const isAboveLargeScreens = useMediaQuery(largeScreens)
   const [menuToggle,setMenuToggle] = useState<boolean>(false)
-  const genericHamburgerLine = `h-1 w-8 my-1 rounded-full bg-white transition ease transform duration-300`;
   return (
     <React.Fragment>
       <nav className="relative  w-full">
@@ -31,8 +30,7 @@ export const Navbar = () => {
               </Link>
               {
                 isAboveLargeScreens &&
-                
-                <BigScreenNavLinks/>
+                  <BigScreenNavLinks/>
               }
               <Menu/>
             </div>

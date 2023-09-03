@@ -38,7 +38,9 @@ export const AuthForm = () => {
       } else if (!/\d/.test(values.password)) {
         errors.password = "Password must contain at least 1 number";
       }
-      if (values.password !== values.confirmPassword) {
+      if(!values.confirmPassword){
+        errors.confirmPassword = "Confirm password is required";
+      } else if (values.password !== values.confirmPassword) {
         errors.confirmPassword = "Passwords dont match";
       }
       return errors;

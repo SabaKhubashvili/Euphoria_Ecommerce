@@ -70,7 +70,7 @@ export const BigScreenFooter = () => {
                 <li className='text-gray text-[13px] uppercase '>
                   <a href="https://www.linkedin.com/in/sabakhubashvili/" className='flex gap-[18px]'  target='_blank'>
                     <LinkedinIcon/>
-                    <p className='text-gray '>Twitter</p>
+                    <p className='text-gray '>Linkedin</p>
                   </a>
                 </li>
                 <li className='text-gray text-[13px] uppercase'>
