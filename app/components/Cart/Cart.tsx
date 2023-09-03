@@ -30,7 +30,7 @@ export const Cart = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="!py-[24px] flex flex-col border-b-[1px] border-b-divider border-solid">
+          <tbody className="!py-[24px] flex flex-col border-b-[1px] gap-[15px] border-b-divider border-solid">
             <tr className="flex justify-between w-full">
               <td className="w-[30%] inline-flex gap-[10px] "> 
                 <Image
@@ -49,13 +49,13 @@ export const Cart = () => {
                   </div>
                 </div>
               </td>
-              <td className="uppercase text-black text-[14px] text-start item-center">
+              <td className="uppercase text-black text-[14px] text-start flex items-center ml-[15px]">
                 120,00 EUR
               </td>
-              <td className="uppercase text-black text-[14px] text-start item-center">
+              <td className="uppercase text-black text-[14px] text-start flex items-center">
                 W32
               </td>
-              <td className="uppercase text-black text-[14px] text-start item-center">
+              <td className="uppercase text-black text-[14px] text-start flex items-center ml-[15px]">
                 <Counter
                   value={quantity}
                   setValue={(value: number) => {
@@ -64,14 +64,14 @@ export const Cart = () => {
                   max={20}
                 />
               </td>
-              <td className="uppercase text-black text-[14px] text-start item-center">
+              <td className="uppercase text-black text-[14px] text-start flex items-center">
                 {120 * quantity},00 EURO
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="col-span-1">Info</div>
+      <div className="col-span-1 bg-black">Info</div>
     </div>
   );
 };
