@@ -19,7 +19,7 @@ export const Cart = () => {
 
   return (
     <div className="grid grid-cols-3 gap-[20px] mb-[40px]">
-      <div className="col-span-2">
+      <div className="lg:col-span-2 col-span-3   max-h-[750px] overflow-y-scroll overflow-x-auto">
         <table className="w-full  p-6 " cellPadding={10}>
           <thead className="w-full pb-[10px] ">
             <tr className="w-full border-b-[1px] border-b-divider border-solid pb-[10px]  justify-between  ">
@@ -40,7 +40,8 @@ export const Cart = () => {
               </th>
             </tr>
           </thead>
-          <tbody className="border-b-[1px] gap-[15px] border-b-divider border-solid">
+          <tbody className="border-b-[1px]  border-b-divider border-solid"
+          >
             <tr className="w-full !py-[24px]">
               <td className="inline-flex w-fit mr-[20px] gap-[10px] ">
                 <Image
@@ -50,10 +51,10 @@ export const Cart = () => {
                   height={110}
                   className="object-cover w-[83px] h-[103px]"
                 />
-                <div className=" -col gap-[13px]">
+                <div className=" -col gap-[13px] xl:min-w-[0px] min-w-[200px] ">
                   {" "}
                   {/* Adjusted gap value */}
-                  <h2 className="text-[18px] font-medium tracking-[0.5px] uppercase">
+                  <h2 className="md:text-[18px] text-[15px] font-medium tracking-[0.5px] uppercase">
                     Angels malu zip jeans slim black used
                   </h2>
                   <div className="p-[2px] border-[1px] border-divider w-[20px] h-[20px]">
@@ -61,13 +62,13 @@ export const Cart = () => {
                   </div>
                 </div>
               </td>
-              <td className="uppercase text-black text-[14px]   items-center ml-[15px]  text-center">
+              <td className="uppercase text-black text-[14px]   items-center ml-[15px]  text-center xl:min-w-[0px] min-w-[200px] ">
                 120,00 EUR
               </td>
-              <td className="uppercase text-black text-[14px]   items-center  text-center">
+              <td className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] min-w-[200px] ">
                 W32
               </td>
-              <td className="uppercase text-black text-[14px]  items-center ml-[15px] mx-auto flex justify-center">
+              <td className="uppercase text-black text-[14px]  items-center ml-[15px] mx-auto flex justify-center xl:min-w-[0px] min-w-[200px] ">
                 <Counter
                   value={quantity}
                   setValue={(value: number) => {
@@ -77,7 +78,7 @@ export const Cart = () => {
                   max={20}
                 />
               </td>
-              <td className="uppercase text-black text-[14px] items-center select-none  text-center">
+              <td className="uppercase text-black text-[14px] items-center select-none  text-center xl:min-w-[0px] min-w-[200px] ">
                 {120 * quantity},00 EURO
                 <div></div>
               </td>
@@ -85,10 +86,10 @@ export const Cart = () => {
           </tbody>
         </table>
       </div>
-      <div className="col-span-1 flex flex-col gap-[24px]">
-        <div className="w-full border-[2px] border-solid border-divider bg-lightBlue pt-[36px] pb-[21px] px-[32px]">
+      <div className="lg:col-span-1 col-span-3 flex flex-col gap-[24px]">
+        <div className="w-full border-[2px] border-solid border-divider bg-lightBlue pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">
           <div>
-            <h1 className="text-[24px] leading-[68px]">Apply Discount Code</h1>
+            <h1 className="lg:text-[24px] text-[18px]  leading-[68px]">Apply Discount Code</h1>
             <div className="flex">
               <SearchInput placeholder="Enter discount code" />
               <div className="w-[170px]">
@@ -103,15 +104,15 @@ export const Cart = () => {
           </div>
           <div className="flex flex-col gap-[15px] pt-[20px]">
             <div className="flex flex-col gap-[8px]">
-              <h1 className="text-[24px] leading-[28px]">
+              <h1 className=" xl:text-[24px] lg:text-[19px] leading-[28px]">
                 Estimate Shipping and Tax
               </h1>
-              <p className=" text-gray">
+              <p className=" text-gray xl:text-[18px] lg:text-[16px] text-[15px] ">
                 Enter your destination to get a shipping estimate.
               </p>
             </div>
             <div className="flex flex-col gap-[26px] pt-[10px]">
-              <div className="flex items-center full gap-[10px]">
+              <div className="flex xl:flex-row flex-col xl:items-center full gap-[10px]">
                 <h2 className="flex basis-1/3">
                   Country <span className="text-rose-700">*</span>
                 </h2>
@@ -146,7 +147,7 @@ export const Cart = () => {
                   ]}
                 />
               </div>
-              <div className="flex full gap-[10px] items-center">
+              <div className="flex full gap-[10px] xl:flex-row flex-col xl:items-center">
                 <h2 className="flex basis-1/3">
                   State/Province <span className="text-rose-700">*</span>
                 </h2>
@@ -181,7 +182,7 @@ export const Cart = () => {
                   ]}
                 />
               </div>
-              <div className="flex full gap-[10px] items-center">
+              <div className="flex full gap-[10px] xl:flex-row flex-col xl:items-center">
                 <h2 className="flex basis-1/3">
                   Zip/Postal Code <span className="text-rose-700">*</span>
                 </h2>
@@ -200,17 +201,17 @@ export const Cart = () => {
         </div>
         <div className="border-[2px] border-solid border-divider bg-lightBlue 
         ">
-          <div className=" flex flex-col gap-[10px] pt-[36px] pb-[21px] px-[32px]">
+          <div className=" flex flex-col gap-[10px] pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">
 
-            <div className="flex justify-between ">
+            <div className="flex justify-between xl:text-[24px] lg:text-[20px] md:text-[17px] text-[15px] ">
                   <p>Subtotal</p>
                   <p>120.00 EUR</p>
             </div>
-            <div className="flex justify-between font-medium text-gray">
+            <div className="flex justify-between font-medium xl:text-[24px] lg:text-[20px] md:text-[17px] text-[15px] text-gray">
                   <p>Delivering</p>
                   <p>0.00 EUR</p>
             </div>
-            <div className="flex justify-between text-[24px] pt-[10px]">
+            <div className="flex justify-between xl:text-[24px] lg:text-[20px] md:text-[17px] text-[15px] pt-[10px]">
                   <p>Order total</p>
                   <p>{totalPrice} EUR</p>
             </div>
