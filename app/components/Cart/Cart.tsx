@@ -9,6 +9,11 @@ import { MainDropdown } from "../Dropdown/MainDropdown";
 
 export const Cart = () => {
   const [quantity, setQuantity] = useState<number>(1);
+  const [locationInfo,setLocationInfo] = useState({
+    country:'',
+    state:'',
+    zip:''
+  })
 
   return (
     <div className="grid grid-cols-3 gap-[20px] mb-[40px]">
@@ -92,52 +97,61 @@ export const Cart = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-[15px]">
+        <div className="flex flex-col gap-[15px] pt-[20px]">
           <div className="flex flex-col gap-[8px]">
-            <h1 className="text-[24px] leading-[68px]">
+            <h1 className="text-[24px] leading-[28px]">
               Estimate Shipping and Tax
             </h1>
-            <p>Enter your destination to get a shipping estimate.</p>
+            <p className=" text-gray">Enter your destination to get a shipping estimate.</p>
           </div>
-          <div className="flex flex-col gap-[26px]">
-                  <div className="flex full gap-[10px]">
+          <div className="flex flex-col gap-[26px] pt-[10px]">
+                  <div className="flex items-center full gap-[10px]">
                     <h2 className="flex basis-1/3">
                     Country <span className="text-rose-700" >*</span>
                     </h2>
                     <MainDropdown
-                    full
-                      label="Smth"
-                      content={[{
-                        onClick() {
-                          console.log('s')
-                        },
-                        label:'Hey'
-                      }]}
+                      full
+                      label={locationInfo.country.length > 0 ? locationInfo.country : 'Choose country'}
+                      content={[
+                        {
+                        onClick:(value)=>{value && setLocationInfo((prev)=>({...prev,country:value}))},
+                        label:'Georgia'
+                      },
+                        {
+                        onClick:(value)=>{value && setLocationInfo((prev)=>({...prev,country:value}))},
+                        label:'Usa'
+                      },
+                    ]}
                       
                     />
                   </div>
-                  <div className="flex full gap-[10px]">
+                  <div className="flex full gap-[10px] items-center">
                     <h2 className="flex basis-1/3">
                     State/Province <span className="text-rose-700" >*</span>
                     </h2>
                     <MainDropdown
                     full
-                      label="Smth"
-                      content={[{
-                        onClick() {
-                          console.log('s')
-                        },
-                        label:'Hey'
-                      }]}
+                      label={locationInfo.state.length > 0 ? locationInfo.state : 'Choose country'}
+                      content={[
+                        {
+                        onClick:(value)=>{value && setLocationInfo((prev)=>({...prev,state:value}))},
+                        label:'Tbilisi'
+                      },
+                        {
+                        onClick:(value)=>{value && setLocationInfo((prev)=>({...prev,state:value}))},
+                        label:'Batumi'
+                      },
+                    ]}
                       
                     />
                   </div>
-                  <div className="flex full gap-[10px]">
+                  <div className="flex full gap-[10px] items-center">
                     <h2 className="flex basis-1/3">
                     Zip/Postal Code <span className="text-rose-700" >*</span>
                     </h2>
                     <SearchInput
                         placeholder=""
+                        onChange={(e)=>setLocationInfo(prev=>({...prev,zip:e.target.value}))}
                     />
                   </div>
           </div>

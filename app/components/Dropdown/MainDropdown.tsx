@@ -4,10 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface Props {
   label: string;
-  onClick?: () => {};
   type?: string;
   content: {
-    onClick:()=>void,
+    onClick:(value:string | null | undefined)=>void,
     label:string
   }[];
   size?: "sm" | "md" | "lg" | "xl";
@@ -16,7 +15,6 @@ interface Props {
 
 export const MainDropdown = ({
   label,
-  onClick,
   type,
   content,
   size = 'md',
@@ -70,7 +68,10 @@ export const MainDropdown = ({
       {isOpen && (
         <div className="absolute z-10 top-[48px] bg-white w-full left-0 select-none p-[11px] flex flex-col gap-[5px] ">
           {content.map((cont) => (
-            <div className="cursor-pointer" onClick={cont.onClick} key={cont.label}>{cont.label}</div>
+            <div className="cursor-pointer" onClick={()=>{
+              cont.onClick(cont.label)
+              setIsOpen(false)
+            }} key={cont.label}>{cont.label}</div>
           ))}
         </div>
       )}
