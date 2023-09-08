@@ -11,6 +11,7 @@ interface Props {
     label:string
   }[];
   size?: "sm" | "md" | "lg" | "xl";
+  full?:boolean
 }
 
 export const MainDropdown = ({
@@ -19,6 +20,7 @@ export const MainDropdown = ({
   type,
   content,
   size = 'md',
+  full
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -37,7 +39,7 @@ export const MainDropdown = ({
   },[isOpen])
 
   return (
-    <div className="relative  w-fit" ref={ref}>
+    <div className={`relative ${full ? 'w-full' : 'w-fit'}`} ref={ref}>
       <div
         className={`flex justify-between items-center cursor-pointer border-[1px] border-solid border-divider p-[11px]
         ${

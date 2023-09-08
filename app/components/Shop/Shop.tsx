@@ -59,7 +59,6 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
              {label:'32',onClick:()=>handleProductPerPageChange(32)},
              {label:'48',onClick:()=>handleProductPerPageChange(48)},
              {label:'64',onClick:()=>handleProductPerPageChange(64)},
-            
             ]}
               />
         </div>

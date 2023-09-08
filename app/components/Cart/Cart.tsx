@@ -1,14 +1,17 @@
-'use client'
+"use client";
 
 import Image from "next/image";
 import React, { useState } from "react";
 import Counter from "../buttons/Counter";
+import { SearchInput } from "../Inputs/SearchInput";
+import { GrayButton } from "../buttons/GrayButton";
+import { MainDropdown } from "../Dropdown/MainDropdown";
 
 export const Cart = () => {
   const [quantity, setQuantity] = useState<number>(1);
 
   return (
-    <div className="grid grid-cols-3 gap-[20px]">
+    <div className="grid grid-cols-3 gap-[20px] mb-[40px]">
       <div className="col-span-2">
         <table className="w-full  p-6 " cellPadding={10}>
           <thead className="w-full pb-[10px] ">
@@ -32,15 +35,17 @@ export const Cart = () => {
           </thead>
           <tbody className="border-b-[1px] gap-[15px] border-b-divider border-solid">
             <tr className="w-full !py-[24px]">
-              <td className="inline-flex w-fit mr-[20px] gap-[10px] "> 
+              <td className="inline-flex w-fit mr-[20px] gap-[10px] ">
                 <Image
-                  src={'/Images/Product/Product.webp'}
+                  src={"/Images/Product/Product.webp"}
                   alt="Product"
                   width={90}
                   height={110}
                   className="object-cover w-[83px] h-[103px]"
                 />
-                <div className=" -col gap-[13px]"> {/* Adjusted gap value */}
+                <div className=" -col gap-[13px]">
+                  {" "}
+                  {/* Adjusted gap value */}
                   <h2 className="text-[18px] font-medium tracking-[0.5px] uppercase">
                     Angels malu zip jeans slim black used
                   </h2>
@@ -66,15 +71,78 @@ export const Cart = () => {
               </td>
               <td className="uppercase text-black text-[14px] items-center select-none  text-center">
                 {120 * quantity},00 EURO
-                <div>
-              
-                </div>
+                <div></div>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div className="col-span-1 bg-black">Info</div>
+      <div className="col-span-1 border-[2px] border-solid border-divider bg-lightBlue pt-[36px] pb-[21px] px-[32px]">
+        <div>
+          <h1 className="text-[24px] leading-[68px]">Apply Discount Code</h1>
+          <div className="flex">
+            <SearchInput placeholder="Enter discount code" />
+            <div className="w-[170px]">
+              <GrayButton
+                onClick={() => {}}
+                label="Apply Discount"
+                small
+                full
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-[15px]">
+          <div className="flex flex-col gap-[8px]">
+            <h1 className="text-[24px] leading-[68px]">
+              Estimate Shipping and Tax
+            </h1>
+            <p>Enter your destination to get a shipping estimate.</p>
+          </div>
+          <div className="flex flex-col gap-[26px]">
+                  <div className="flex full gap-[10px]">
+                    <h2 className="flex basis-1/3">
+                    Country <span className="text-rose-700" >*</span>
+                    </h2>
+                    <MainDropdown
+                    full
+                      label="Smth"
+                      content={[{
+                        onClick() {
+                          console.log('s')
+                        },
+                        label:'Hey'
+                      }]}
+                      
+                    />
+                  </div>
+                  <div className="flex full gap-[10px]">
+                    <h2 className="flex basis-1/3">
+                    State/Province <span className="text-rose-700" >*</span>
+                    </h2>
+                    <MainDropdown
+                    full
+                      label="Smth"
+                      content={[{
+                        onClick() {
+                          console.log('s')
+                        },
+                        label:'Hey'
+                      }]}
+                      
+                    />
+                  </div>
+                  <div className="flex full gap-[10px]">
+                    <h2 className="flex basis-1/3">
+                    Zip/Postal Code <span className="text-rose-700" >*</span>
+                    </h2>
+                    <SearchInput
+                        placeholder=""
+                    />
+                  </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
