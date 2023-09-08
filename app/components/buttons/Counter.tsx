@@ -26,7 +26,7 @@ const Counter = ({ value, setValue, max }: Props) => {
       >
         <GrayMinusIcon />
       </p>
-      <p className="select-none">{value}</p>
+      <p className="select-none text-center w-[10px]">{value}</p>
       <p
         className="cursor-pointer"
         onClick={() => {
