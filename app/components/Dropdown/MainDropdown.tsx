@@ -56,7 +56,7 @@ export const MainDropdown = ({
           setIsOpen((prev) => !prev);
         }}
       >
-        <p className="select-none">{label}</p>
+        <p className="select-none md:text-[16px] text-[14px]">{label}</p>
         <div
           className={`${
             isOpen ? "rotate-180" : "rotate-0"
