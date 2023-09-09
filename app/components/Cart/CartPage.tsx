@@ -7,9 +7,10 @@ import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 
 export enum Steps {
-  Cart = "Cart",
-  Shipping = "Shipping",
-  Payment = "payment",
+  Cart = 0,
+  Shipping = 1,
+  Payment = 2,
+  Done = 3
 }
 
 export const CartPage = () => {
@@ -37,7 +38,7 @@ export const CartPage = () => {
             />
           </div>
         </div>
-      ) : step === Steps.Shipping ? (
+      ) : step === Steps.Shipping || step === Steps.Payment || step === Steps.Done ? (
         <motion.div
           initial={{ opacity: 0, x: "100%" }}
           animate={{ opacity: 1, x: 0 }}
@@ -48,24 +49,74 @@ export const CartPage = () => {
             Home / Create Order
           </p>
           <div className="pt-[26px] flex justify-center items-center">
-                <div className="relative w-[194px]">
-                    <div className="h-[9px] w-full bg-advanced" />
-                    <div className="absolute left-0 right-0 m-auto w-fit top-[-14px] bottom-0">
+            <div className="relative w-[194px]">
+              <div
+                className={`h-[9px] w-full
+                bg-divider`}
+              >{ step === Steps.Payment || step ===  Steps.Done ?
+                <motion.div
+                  initial={{ opacity: 0, width: "0%" }}
+                  animate={{ opacity: 1, width: '100%' }}
+                  exit={{ opacity: 0, width:0 }}
+                  transition={{ duration: 0.1 }}
+                  className="h-[9px] bg-advanced"
+            />
+          :
+          ''}
 
-                    <Icon
-                        svg={WebsiteIcons['DoneCircle']}
-                        />
-                        </div>
-                </div>
-                <div className="relative w-[194px]">
-                    <div className="h-[9px] w-full bg-divider" />
-                    <div className="absolute left-0 right-0 m-auto w-fit top-[-14px] bottom-0">
-                    <h2 className="absolute text-center left-0 right-0 m-auto top-[8px]">2</h2>
-                    <Icon
-                        svg={WebsiteIcons['Circle']}
-                        />
-                    </div>
-                </div>
+              </div>
+              <div
+                className={`absolute left-0 right-0 m-auto w-fit top-[-14px] bottom-0`}
+              >
+                {step === Steps.Payment || step === Steps.Done ? (
+                  <React.Fragment>
+                    <Icon svg={WebsiteIcons["DoneCircle"]} />
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <h2 className="absolute text-center left-0 right-0 m-auto top-[8px]">
+                      1
+                    </h2>
+                    <Icon svg={WebsiteIcons["Circle"]} />
+                  </React.Fragment>
+                )}
+              </div>
+            </div>
+            <div className="relative w-[194px]">
+            <div
+                className={`h-[9px] w-full
+                bg-divider`}
+              >{ step === Steps.Done &&
+                <motion.div
+                  initial={{ opacity: 0, width: "0%" }}
+                  animate={{ opacity: 1, width: '100%' }}
+                  exit={{ opacity: 0, width:0 }}
+                  transition={{ duration: 0.1 }}
+                  className="h-[9px] bg-advanced"
+            />}
+
+              </div>
+              <div className="absolute left-0 right-0 m-auto w-fit top-[-14px] bottom-0">
+              {step === Steps.Done ? (
+                  <React.Fragment>
+                    <Icon svg={WebsiteIcons["DoneCircle"]} />
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <h2 className="absolute text-center left-0 right-0 m-auto top-[8px]">
+                      2
+                    </h2>
+                    <Icon svg={WebsiteIcons["Circle"]} />
+                  </React.Fragment>
+                )}
+              </div>
+            </div>
+            <div onClick={()=>{setStep(Steps.Payment)}}>
+              Click here payment
+            </div>
+            <div onClick={()=>{setStep(Steps.Done)}}>
+              Click here
+            </div>
           </div>
         </motion.div>
       ) : (
