@@ -40,37 +40,45 @@ export const CartPage = () => {
       zip:''
     },
     validate: (values) => {
-      if (values.email.length <= 0) {
-        formik.errors.email === "Email is required";
+      const errors:any = {};
+  
+      if (values.email.length === 0) {
+        errors.email = "Email is required";
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
       ) {
-        formik.errors.email = "Invalid email address";
+        errors.email = "Invalid email address";
       }
-      if (values.firstName.length <= 0) {
-        formik.errors.firstName = "firstName is required";
+  
+      if (values.firstName.length === 0) {
+        errors.firstName = "First name is required";
       } 
-      if(values.streetAdress.length <= 0){
-        formik.errors.streetAdress = 'Street adress is required'
+  
+      if (values.streetAdress.length === 0) {
+        errors.streetAdress = 'Street address is required';
       }
-      if(values.city.length <= 0){
-        formik.errors.city = 'City is required'
+  
+      if (values.city.length === 0) {
+        errors.city = 'City is required';
       }
-      if(values.zip.length <= 0 ){
-        formik.errors.zip = 'Zip code is required'
+  
+      if (values.zip.length === 0) {
+        errors.zip = 'Zip code is required';
       }
-      console.log(formik.errors);
-      
+  
+      return errors;
     },
     onSubmit: (values) => {
-      console.log("submit");
+      setStep(Steps.Payment)
     },
   });
   const handleNextButton = useCallback(() => {
     if (step === Steps.Shipping) {
       formik.handleSubmit();
     } else {
-      setStep((prev) => prev + 1);
+      if(step !== Steps.Done){
+        setStep((prev) => prev + 1);
+      }
     }
   }, [step, Steps]);
 
@@ -179,16 +187,18 @@ export const CartPage = () => {
                       type="email"
                       placeholder="Email"
                       onChange={formik.handleChange}
+                      feedback={formik.errors.email}
                     />
                     <AuthInput
                       label="Zip/Postal Code"
                       required
                       id="zip"
-                      name="email"
-                      type="email"
+                      name="zip"
+                      type="zip"
                       placeholder=""
                       defaultValue={formik.values.zip}
                       onChange={formik.handleChange}
+                      feedback={formik.errors.zip}
                     />
                   </div>
                 </div>
@@ -201,12 +211,13 @@ export const CartPage = () => {
                     type="text"
                     placeholder=""
                     onChange={formik.handleChange}
+                    feedback={formik.errors.firstName}
                   />
                   <AuthInput
                     label="Last Name"
                     required
-                    id="lastname"
-                    name="lastname"
+                    id="lastName"
+                    name="lastName"
                     type="text"
                     placeholder=""
                     onChange={formik.handleChange}
@@ -219,13 +230,14 @@ export const CartPage = () => {
                     type="text"
                     placeholder=""
                     onChange={formik.handleChange}
+                    feedback={formik.errors.streetAdress}
                   />
 
                   <div className="flex full gap-[10px] justify-between xl:flex-row flex-col xl:items-center">
                     <h2 className={`${Roboto.className} flex `}>
                       State/Province <span className="text-rose-700">*</span>
                     </h2>
-                    <div className="basis-2/3">
+                    <div className="basis-2/3 ">
                       <MainDropdown
                         full
                         label={
@@ -248,12 +260,18 @@ export const CartPage = () => {
                           },
                         ]}
                       />
+                    {
+                      formik.errors.city && 
+                      <div className="text-rose-700 pt-[4px]">
+                        { formik.errors.city}
+                      </div>
+                    }
                     </div>
                   </div>
                 </div>
               </div>
               <div className="flex justify-between w-full items-center">
-                <MainButton label="Next" onClick={handleNextButton} />
+                <MainButton label="Next" onClick={handleNextButton} type='Submit' />
                 <h3
                   className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium"
                   onClick={() => {

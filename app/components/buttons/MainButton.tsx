@@ -5,11 +5,13 @@ interface Props{
     label:string,
     small?:boolean
     full?:boolean
+    type?:string
 }
 
-export const MainButton = ({onClick,label,small,full}:Props) => {
+export const MainButton = ({onClick,label,small,full,type = 'button'}:Props) => {
   return (
     <button 
+    type={type}
     onClick={onClick}
     className={`w-fit  font-medium select-none
     tracking-[0.5px] uppercase bg-black
