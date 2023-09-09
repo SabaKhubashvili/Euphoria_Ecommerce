@@ -7,15 +7,11 @@ import { SearchInput } from "../Inputs/SearchInput";
 import { GrayButton } from "../buttons/GrayButton";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { MainButton } from "../buttons/MainButton";
-import { Steps } from "./CartPage";
+import { InfoType, Steps } from "./CartPage";
 
-export const Cart = ({setStep}:{setStep:(value:Steps)=>void}) => {
+
+export const Cart = ({setStep,setInfo,info}:{setStep:(value:Steps)=>void,setInfo:(value:any)=>void,info:InfoType}) => {
   const [quantity, setQuantity] = useState<number>(1);
-  const [locationInfo, setLocationInfo] = useState({
-    country: "",
-    state: "",
-    zip: "",
-  });
   const [totalPrice, setTotalPrice] = useState(120.0);
 
   return (
@@ -320,16 +316,15 @@ export const Cart = ({setStep}:{setStep:(value:Steps)=>void}) => {
                 <MainDropdown
                   full
                   label={
-                    locationInfo.country.length > 0
-                      ? locationInfo.country
+                    info.country.length > 0
+                      ? info.country
                       : "Choose country"
                   }
                   content={[
                     {
                       onClick: (value) => {
                         value &&
-                          setLocationInfo((prev) => ({
-                            ...prev,
+                          setInfo(({
                             country: value,
                           }));
                       },
@@ -338,8 +333,7 @@ export const Cart = ({setStep}:{setStep:(value:Steps)=>void}) => {
                     {
                       onClick: (value) => {
                         value &&
-                          setLocationInfo((prev) => ({
-                            ...prev,
+                          setInfo(({
                             country: value,
                           }));
                       },
@@ -355,16 +349,15 @@ export const Cart = ({setStep}:{setStep:(value:Steps)=>void}) => {
                 <MainDropdown
                   full
                   label={
-                    locationInfo.state.length > 0
-                      ? locationInfo.state
-                      : "Choose country"
+                    info.state.length > 0
+                      ? info.state
+                      : "Choose City"
                   }
                   content={[
                     {
                       onClick: (value) => {
                         value &&
-                          setLocationInfo((prev) => ({
-                            ...prev,
+                          setInfo(({
                             state: value,
                           }));
                       },
@@ -373,8 +366,7 @@ export const Cart = ({setStep}:{setStep:(value:Steps)=>void}) => {
                     {
                       onClick: (value) => {
                         value &&
-                          setLocationInfo((prev) => ({
-                            ...prev,
+                          setInfo(({
                             state: value,
                           }));
                       },
@@ -390,8 +382,7 @@ export const Cart = ({setStep}:{setStep:(value:Steps)=>void}) => {
                 <SearchInput
                   placeholder=""
                   onChange={(e) =>
-                    setLocationInfo((prev) => ({
-                      ...prev,
+                    setInfo(({
                       zip: e.target.value,
                     }))
                   }

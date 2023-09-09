@@ -13,6 +13,7 @@ interface Props {
   feedback?: string;
   required?: boolean;
   type?: string;
+  defaultValue?:string
 }
 
 export const AuthInput = ({
@@ -24,6 +25,7 @@ export const AuthInput = ({
   feedback,
   required,
   type = "text",
+  defaultValue
 }: Props) => {
   const [insideType, setInsideType] = useState(type);
   return (
@@ -46,6 +48,7 @@ export const AuthInput = ({
             placeholder={placeholder}
             onChange={onChange}
             type={insideType}
+            defaultValue={defaultValue}
             className={`
             w-full px-[16px] py-[10px] border-[1px] border-solid border-divider outline-none
             ${feedback && "border-rose-500 text-rose-500"}
