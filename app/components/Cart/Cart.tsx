@@ -11,12 +11,10 @@ import { InfoType, Steps } from "./CartPage";
 
 export const Cart = ({
   setStep,
-  setInfo,
-  info,
+  zipOnchange
 }: {
   setStep: (value: Steps) => void;
-  setInfo: (value: any) => void;
-  info: InfoType;
+  zipOnchange:(e:any)=>void
 }) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState(120.0);
@@ -316,7 +314,7 @@ export const Cart = ({
               </p>
             </div>
             <div className="flex flex-col gap-[26px] pt-[10px]">
-              <div className="flex xl:flex-row flex-col xl:items-center full gap-[10px]">
+              {/* <div className="flex xl:flex-row flex-col xl:items-center full gap-[10px]">
                 <h2 className="flex basis-1/3">
                   Country <span className="text-rose-700">*</span>
                 </h2>
@@ -375,18 +373,16 @@ export const Cart = ({
                     },
                   ]}
                 />
-              </div>
+              </div> */}
               <div className="flex full gap-[10px] xl:flex-row flex-col xl:items-center">
                 <h2 className="flex basis-1/3">
                   Zip/Postal Code <span className="text-rose-700">*</span>
                 </h2>
                 <SearchInput
+                  id="zip"
+                  name="zip"
                   placeholder=""
-                  onChange={(e) =>
-                    setInfo({
-                      zip: e.target.value,
-                    })
-                  }
+                  onChange={zipOnchange}
                 />
               </div>
             </div>

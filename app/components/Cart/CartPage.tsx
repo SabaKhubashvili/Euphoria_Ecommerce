@@ -28,32 +28,52 @@ export interface InfoType {
 
 export const CartPage = () => {
   const [step, setStep] = useState<Steps>(Steps.Cart);
-  const [info, setInfo] = useState({
-    country: "",
-    state: "",
-    zip: "",
+
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      streetAdress: "",
+      city: "",
+      zip:''
+    },
+    validate: (values) => {
+      if (values.email.length <= 0) {
+        formik.errors.email === "Email is required";
+      } else if (
+        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
+      ) {
+        formik.errors.email = "Invalid email address";
+      }
+      if (values.firstName.length <= 0) {
+        formik.errors.firstName = "firstName is required";
+      } 
+      if(values.streetAdress.length <= 0){
+        formik.errors.streetAdress = 'Street adress is required'
+      }
+      if(values.city.length <= 0){
+        formik.errors.city = 'City is required'
+      }
+      if(values.zip.length <= 0 ){
+        formik.errors.zip = 'Zip code is required'
+      }
+      console.log(formik.errors);
+      
+    },
+    onSubmit: (values) => {
+      console.log("submit");
+    },
   });
-
-  const formik  = useFormik({
-    initialValues:{
-      email:''
-    },
-    validate:(values)=>{
-
-    },
-    onSubmit:(values)=>{
-      console.log('submit');
+  const handleNextButton = useCallback(() => {
+    if (step === Steps.Shipping) {
+      formik.handleSubmit();
+    } else {
+      setStep((prev) => prev + 1);
     }
-  })
-  const handleNextButton = useCallback(()=>{
-    if(step === Steps.Done){
-      formik.handleSubmit()
-    }else{
-      setStep((prev)=>prev+1)
-      console.log('click');
-    }
-    
-  },[step,Steps])
+  }, [step, Steps]);
+
   return (
     <div className="max-w-[1400px] mx-auto mb-[150px]">
       {step === Steps.Cart ? (
@@ -69,10 +89,7 @@ export const CartPage = () => {
               setStep={(value) => {
                 setStep(value);
               }}
-              setInfo={(info: InfoType) => {
-                setInfo((prev) => ({ ...prev, ...info }));
-              }}
-              info={info}
+              zipOnchange={formik.handleChange}
             />
           </div>
         </div>
@@ -89,22 +106,30 @@ export const CartPage = () => {
             Home / Create Order
           </p>
           <div className="pt-[26px] mx-auto flex justify-center items-center relative w-[388px]">
-              <div
-                className={`h-[9px] w-full absolute 
+            <div
+              className={`h-[9px] w-full absolute 
                 bg-divider`}
-              >
-                {step === Steps.Payment || step === Steps.Done ? (
-                  <motion.div
-                    initial={{ opacity: 0, width: "0%" }}
-                    animate={{ opacity: 1, width: step === Steps.Payment ?  "50%" : step === Steps.Done ? '100%' : '0%' }}
-                    exit={{ opacity: 0, width: '0%' }}
-                    transition={{ duration: 0.3 }}
-                    className="h-[9px] bg-advanced"
-                  />
-                ) : (
-                  ""
-                )}
-              </div>
+            >
+              {step === Steps.Payment || step === Steps.Done ? (
+                <motion.div
+                  initial={{ opacity: 0, width: "0%" }}
+                  animate={{
+                    opacity: 1,
+                    width:
+                      step === Steps.Payment
+                        ? "50%"
+                        : step === Steps.Done
+                        ? "100%"
+                        : "0%",
+                  }}
+                  exit={{ opacity: 0, width: "0%" }}
+                  transition={{ duration: 0.3 }}
+                  className="h-[9px] bg-advanced"
+                />
+              ) : (
+                ""
+              )}
+            </div>
             <div className="relative w-1/2">
               <div
                 className={`absolute left-0 right-0 m-auto w-fit top-[-20px] bottom-0`}
@@ -162,7 +187,7 @@ export const CartPage = () => {
                       name="email"
                       type="email"
                       placeholder=""
-                      defaultValue={info.zip}
+                      defaultValue={formik.values.zip}
                       onChange={formik.handleChange}
                     />
                   </div>
@@ -171,8 +196,8 @@ export const CartPage = () => {
                   <AuthInput
                     label="First Name"
                     required
-                    id="firstname"
-                    name="firstname"
+                    id="firstName"
+                    name="firstName"
                     type="text"
                     placeholder=""
                     onChange={formik.handleChange}
@@ -189,8 +214,8 @@ export const CartPage = () => {
                   <AuthInput
                     label="Street Adress"
                     required
-                    id="streetadress"
-                    name="streetadress"
+                    id="streetAdress"
+                    name="streetAdress"
                     type="text"
                     placeholder=""
                     onChange={formik.handleChange}
@@ -204,26 +229,20 @@ export const CartPage = () => {
                       <MainDropdown
                         full
                         label={
-                          info.state.length > 0 ? info.state : "Choose City"
+                          formik.values.city.length > 0 ?  formik.values.city : "Choose City"
                         }
                         content={[
                           {
                             onClick: (value) => {
                               value &&
-                                setInfo((prev) => ({
-                                  ...prev,
-                                  state: value,
-                                }));
+                                formik.setFieldValue('city',value)
                             },
                             label: "Tbilisi",
                           },
                           {
                             onClick: (value) => {
                               value &&
-                                setInfo((prev) => ({
-                                  ...prev,
-                                  state: value,
-                                }));
+                                formik.setFieldValue('city',value)
                             },
                             label: "Batumi",
                           },
@@ -234,10 +253,7 @@ export const CartPage = () => {
                 </div>
               </div>
               <div className="flex justify-between w-full items-center">
-                <MainButton
-                  label="Next"
-                  onClick={handleNextButton}
-                />
+                <MainButton label="Next" onClick={handleNextButton} />
                 <h3
                   className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium"
                   onClick={() => {
