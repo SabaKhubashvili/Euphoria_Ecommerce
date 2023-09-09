@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Cart } from "./Cart";
 import { motion } from "framer-motion";
 import { Icon } from "../Icon";
@@ -11,6 +11,7 @@ import { AuthInput } from "../Inputs/AuthInput";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { Roboto } from "../assets/Fonts";
 import { MainButton } from "../buttons/MainButton";
+import { useFormik } from "formik";
 
 export enum Steps {
   Cart = 0,
@@ -32,8 +33,27 @@ export const CartPage = () => {
     state: "",
     zip: "",
   });
-  console.log(info);
 
+  const formik  = useFormik({
+    initialValues:{
+      email:''
+    },
+    validate:(values)=>{
+
+    },
+    onSubmit:(values)=>{
+      console.log('submit');
+    }
+  })
+  const handleNextButton = useCallback(()=>{
+    if(step === Steps.Done){
+      formik.handleSubmit()
+    }else{
+      setStep((prev)=>prev+1)
+      console.log('click');
+    }
+    
+  },[step,Steps])
   return (
     <div className="max-w-[1400px] mx-auto mb-[150px]">
       {step === Steps.Cart ? (
@@ -63,31 +83,31 @@ export const CartPage = () => {
           initial={{ opacity: 0, x: "100%" }}
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: "100%" }}
-          transition={{ duration: 0.1 }}
+          transition={{ duration: 0.2 }}
         >
           <p className="text-gray text-[14px]  text-center">
             Home / Create Order
           </p>
-          <div className="pt-[26px] flex justify-center items-center">
-            <div className="relative w-[194px]">
+          <div className="pt-[26px] mx-auto flex justify-center items-center relative w-[388px]">
               <div
-                className={`h-[9px] w-full
+                className={`h-[9px] w-full absolute 
                 bg-divider`}
               >
                 {step === Steps.Payment || step === Steps.Done ? (
                   <motion.div
                     initial={{ opacity: 0, width: "0%" }}
-                    animate={{ opacity: 1, width: "100%" }}
-                    exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.1 }}
+                    animate={{ opacity: 1, width: step === Steps.Payment ?  "50%" : step === Steps.Done ? '100%' : '0%' }}
+                    exit={{ opacity: 0, width: '0%' }}
+                    transition={{ duration: 0.3 }}
                     className="h-[9px] bg-advanced"
                   />
                 ) : (
                   ""
                 )}
               </div>
+            <div className="relative w-1/2">
               <div
-                className={`absolute left-0 right-0 m-auto w-fit top-[-14px] bottom-0`}
+                className={`absolute left-0 right-0 m-auto w-fit top-[-20px] bottom-0`}
               >
                 {step === Steps.Payment || step === Steps.Done ? (
                   <React.Fragment>
@@ -103,22 +123,8 @@ export const CartPage = () => {
                 )}
               </div>
             </div>
-            <div className="relative w-[194px]">
-              <div
-                className={`h-[9px] w-full
-                bg-divider`}
-              >
-                {step === Steps.Done && (
-                  <motion.div
-                    initial={{ opacity: 0, width: "0%" }}
-                    animate={{ opacity: 1, width: "100%" }}
-                    exit={{ opacity: 0, width: 0 }}
-                    transition={{ duration: 0.1 }}
-                    className="h-[9px] bg-advanced"
-                  />
-                )}
-              </div>
-              <div className="absolute left-0 right-0 m-auto w-fit top-[-14px] bottom-0">
+            <div className="relative w-1/2">
+              <div className="absolute left-0 right-0 m-auto w-fit top-[-20px] bottom-0">
                 {step === Steps.Done ? (
                   <React.Fragment>
                     <Icon svg={WebsiteIcons["DoneCircle"]} />
@@ -147,7 +153,7 @@ export const CartPage = () => {
                       name="email"
                       type="email"
                       placeholder="Email"
-                      onChange={() => {}}
+                      onChange={formik.handleChange}
                     />
                     <AuthInput
                       label="Zip/Postal Code"
@@ -157,7 +163,7 @@ export const CartPage = () => {
                       type="email"
                       placeholder=""
                       defaultValue={info.zip}
-                      onChange={() => {}}
+                      onChange={formik.handleChange}
                     />
                   </div>
                 </div>
@@ -169,7 +175,7 @@ export const CartPage = () => {
                     name="firstname"
                     type="text"
                     placeholder=""
-                    onChange={() => {}}
+                    onChange={formik.handleChange}
                   />
                   <AuthInput
                     label="Last Name"
@@ -178,7 +184,7 @@ export const CartPage = () => {
                     name="lastname"
                     type="text"
                     placeholder=""
-                    onChange={() => {}}
+                    onChange={formik.handleChange}
                   />
                   <AuthInput
                     label="Street Adress"
@@ -187,7 +193,7 @@ export const CartPage = () => {
                     name="streetadress"
                     type="text"
                     placeholder=""
-                    onChange={() => {}}
+                    onChange={formik.handleChange}
                   />
 
                   <div className="flex full gap-[10px] justify-between xl:flex-row flex-col xl:items-center">
@@ -230,7 +236,7 @@ export const CartPage = () => {
               <div className="flex justify-between w-full items-center">
                 <MainButton
                   label="Next"
-                  onClick={() => setStep((prev) => prev + 1)}
+                  onClick={handleNextButton}
                 />
                 <h3
                   className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium"

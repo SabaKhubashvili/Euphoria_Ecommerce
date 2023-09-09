@@ -9,8 +9,15 @@ import { MainDropdown } from "../Dropdown/MainDropdown";
 import { MainButton } from "../buttons/MainButton";
 import { InfoType, Steps } from "./CartPage";
 
-
-export const Cart = ({setStep,setInfo,info}:{setStep:(value:Steps)=>void,setInfo:(value:any)=>void,info:InfoType}) => {
+export const Cart = ({
+  setStep,
+  setInfo,
+  info,
+}: {
+  setStep: (value: Steps) => void;
+  setInfo: (value: any) => void;
+  info: InfoType;
+}) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [totalPrice, setTotalPrice] = useState(120.0);
 
@@ -316,26 +323,24 @@ export const Cart = ({setStep,setInfo,info}:{setStep:(value:Steps)=>void,setInfo
                 <MainDropdown
                   full
                   label={
-                    info.country.length > 0
-                      ? info.country
-                      : "Choose country"
+                    info.country.length > 0 ? info.country : "Choose country"
                   }
                   content={[
                     {
                       onClick: (value) => {
                         value &&
-                          setInfo(({
+                          setInfo({
                             country: value,
-                          }));
+                          });
                       },
                       label: "Georgia",
                     },
                     {
                       onClick: (value) => {
                         value &&
-                          setInfo(({
+                          setInfo({
                             country: value,
-                          }));
+                          });
                       },
                       label: "Usa",
                     },
@@ -348,27 +353,23 @@ export const Cart = ({setStep,setInfo,info}:{setStep:(value:Steps)=>void,setInfo
                 </h2>
                 <MainDropdown
                   full
-                  label={
-                    info.state.length > 0
-                      ? info.state
-                      : "Choose City"
-                  }
+                  label={info.state.length > 0 ? info.state : "Choose City"}
                   content={[
                     {
                       onClick: (value) => {
                         value &&
-                          setInfo(({
+                          setInfo({
                             state: value,
-                          }));
+                          });
                       },
                       label: "Tbilisi",
                     },
                     {
                       onClick: (value) => {
                         value &&
-                          setInfo(({
+                          setInfo({
                             state: value,
-                          }));
+                          });
                       },
                       label: "Batumi",
                     },
@@ -382,9 +383,9 @@ export const Cart = ({setStep,setInfo,info}:{setStep:(value:Steps)=>void,setInfo
                 <SearchInput
                   placeholder=""
                   onChange={(e) =>
-                    setInfo(({
+                    setInfo({
                       zip: e.target.value,
-                    }))
+                    })
                   }
                 />
               </div>
