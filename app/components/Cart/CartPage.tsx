@@ -12,6 +12,8 @@ import { MainDropdown } from "../Dropdown/MainDropdown";
 import { Roboto } from "../assets/Fonts";
 import { MainButton } from "../buttons/MainButton";
 import { useFormik } from "formik";
+import Image from "next/image";
+import { Dropdown_Down } from "@/public/Svg/Icons";
 
 export enum Steps {
   Cart = 0,
@@ -29,7 +31,6 @@ export interface InfoType {
 export const CartPage = () => {
   const [step, setStep] = useState<Steps>(Steps.Cart);
 
-
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -37,11 +38,11 @@ export const CartPage = () => {
       lastName: "",
       streetAdress: "",
       city: "",
-      zip:''
+      zip: "",
     },
     validate: (values) => {
-      const errors:any = {};
-  
+      const errors: any = {};
+
       if (values.email.length === 0) {
         errors.email = "Email is required";
       } else if (
@@ -49,34 +50,34 @@ export const CartPage = () => {
       ) {
         errors.email = "Invalid email address";
       }
-  
+
       if (values.firstName.length === 0) {
         errors.firstName = "First name is required";
-      } 
-  
+      }
+
       if (values.streetAdress.length === 0) {
-        errors.streetAdress = 'Street address is required';
+        errors.streetAdress = "Street address is required";
       }
-  
+
       if (values.city.length === 0) {
-        errors.city = 'City is required';
+        errors.city = "City is required";
       }
-  
+
       if (values.zip.length === 0) {
-        errors.zip = 'Zip code is required';
+        errors.zip = "Zip code is required";
       }
-  
+
       return errors;
     },
     onSubmit: (values) => {
-      setStep(Steps.Payment)
+      setStep(Steps.Payment);
     },
   });
   const handleNextButton = useCallback(() => {
     if (step === Steps.Shipping) {
       formik.handleSubmit();
     } else {
-      if(step !== Steps.Done){
+      if (step !== Steps.Done) {
         setStep((prev) => prev + 1);
       }
     }
@@ -113,7 +114,7 @@ export const CartPage = () => {
           <p className="text-gray text-[14px]  text-center">
             Home / Create Order
           </p>
-          <div className="pt-[26px] mx-auto flex justify-center items-center relative w-[388px]">
+          <div className="pt-[26px] mx-auto flex justify-center items-center relative lg:w-[388px] sm:w-[300px] w-[80%]">
             <div
               className={`h-[9px] w-full absolute 
                 bg-divider`}
@@ -140,40 +141,44 @@ export const CartPage = () => {
             </div>
             <div className="relative w-1/2">
               <div
-                className={`absolute left-0 right-0 m-auto w-fit top-[-20px] bottom-0`}
+                className={`absolute left-0 right-0 m-auto w-fit sm:top-[-20px] top-[-14px] bottom-0`}
               >
                 {step === Steps.Payment || step === Steps.Done ? (
-                  <React.Fragment>
+                  <div className="sm:w-[40px] sm:h-[40px] h-[30px] w-[30px]">
                     <Icon svg={WebsiteIcons["DoneCircle"]} />
-                  </React.Fragment>
+                  </div>
                 ) : (
                   <React.Fragment>
-                    <h2 className="absolute text-center left-0 right-0 m-auto top-[8px]">
+                    <h2 className="absolute text-center left-0 right-0 m-auto sm:top-[8px] top-[3px]">
                       1
                     </h2>
-                    <Icon svg={WebsiteIcons["Circle"]} />
+                    <div className="sm:w-[40px] sm:h-[40px] h-[30px] w-[30px]">
+                      <Icon svg={WebsiteIcons["Circle"]} />
+                    </div>
                   </React.Fragment>
                 )}
               </div>
             </div>
             <div className="relative w-1/2">
-              <div className="absolute left-0 right-0 m-auto w-fit top-[-20px] bottom-0">
+              <div className="absolute left-0 right-0 m-auto w-fit sm:top-[-20px] top-[-14px] bottom-0">
                 {step === Steps.Done ? (
-                  <React.Fragment>
+                  <div className="sm:w-[40px] sm:h-[40px] h-[30px] w-[30px]">
                     <Icon svg={WebsiteIcons["DoneCircle"]} />
-                  </React.Fragment>
+                  </div>
                 ) : (
                   <React.Fragment>
-                    <h2 className="absolute text-center left-0 right-0 m-auto top-[8px]">
+                    <h2 className="absolute text-center left-0 right-0 m-auto sm:top-[8px] top-[3px]">
                       2
                     </h2>
-                    <Icon svg={WebsiteIcons["Circle"]} />
+                    <div className="sm:w-[40px] sm:h-[40px] h-[30px] w-[30px]">
+                      <Icon svg={WebsiteIcons["Circle"]} />
+                    </div>
                   </React.Fragment>
                 )}
               </div>
             </div>
           </div>
-          <div className="flex justify-between lg:flex-row flex-col pt-[57px]">
+          <div className="flex justify-between lg:flex-row flex-col pt-[57px] gap-[20px]">
             <div className="flex flex-col gap-[40px] w-full lg:basis-3/5">
               <div className="flex flex-col gap-[36px] ">
                 <div className="pb-[36px] border-b-divider border-b-[1px]">
@@ -241,37 +246,40 @@ export const CartPage = () => {
                       <MainDropdown
                         full
                         label={
-                          formik.values.city.length > 0 ?  formik.values.city : "Choose City"
+                          formik.values.city.length > 0
+                            ? formik.values.city
+                            : "Choose City"
                         }
                         content={[
                           {
                             onClick: (value) => {
-                              value &&
-                                formik.setFieldValue('city',value)
+                              value && formik.setFieldValue("city", value);
                             },
                             label: "Tbilisi",
                           },
                           {
                             onClick: (value) => {
-                              value &&
-                                formik.setFieldValue('city',value)
+                              value && formik.setFieldValue("city", value);
                             },
                             label: "Batumi",
                           },
                         ]}
                       />
-                    {
-                      formik.errors.city && 
-                      <div className="text-rose-700 pt-[4px]">
-                        { formik.errors.city}
-                      </div>
-                    }
+                      {formik.errors.city && (
+                        <div className="text-rose-700 pt-[4px]">
+                          {formik.errors.city}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
               </div>
               <div className="flex justify-between w-full items-center">
-                <MainButton label="Next" onClick={handleNextButton} type='Submit' />
+                <MainButton
+                  label="Next"
+                  onClick={handleNextButton}
+                  type="Submit"
+                />
                 <h3
                   className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium"
                   onClick={() => {
@@ -280,6 +288,118 @@ export const CartPage = () => {
                 >
                   Back
                 </h3>
+              </div>
+            </div>
+            <div className="py-[40px]  px-[30px] border-divider border-[2px] bg-lightBlue h-fit lg:basis-2/5">
+              <h1 className="text-[24px]">Shipping Address</h1>
+              <div className="pt-[22px]">
+                <h4
+                  className={`text-[16px] text-secondaryBlack pb-[13px] border-b-divider border-b-[1px] ${Roboto.className}`}
+                >
+                  1 Item in Cart
+                </h4>
+                <div className="pt-[19px] flex flex-col gap-[14px] h-[400px] overflow-y-auto">
+                  <div className="flex justify-between">
+                    <div className="flex gap-[16px] basis-2/3">
+                      <Image
+                        src={"/Images/Product/Product.webp"}
+                        width={100}
+                        height={100}
+                        alt="CartImage"
+                        className="xl:w-[83px] xl:h-[100px] w-[70px] h-[90px]"
+                      />
+                      <div>
+                        <h4 className="xl:text-[18px] text-[16px] font-medium">
+                          Angels malu zip jeans slim black used
+                        </h4>
+                        <p className="text-secondaryBlack pt-[10px]">
+                          <span className=" text-gray">Qty:</span> 1
+                        </p>
+                        <p className=" text-secondaryBlack uppercase text-[14px] flex items-center gap-[10px] cursor-pointer">
+                          VIEW DETAILS <Dropdown_Down />
+                        </p>
+                      </div>
+                    </div>
+                    <div className="basis-1/3 text-end">
+                      <p className="text-secondaryBlack">129.00 EUR</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="flex gap-[16px] basis-2/3">
+                      <Image
+                        src={"/Images/Product/Product.webp"}
+                        width={100}
+                        height={100}
+                        alt="CartImage"
+                        className="xl:w-[83px] xl:h-[100px] w-[70px] h-[90px]"
+                      />
+                      <div>
+                        <h4 className="xl:text-[18px] text-[16px] font-medium">
+                          Angels malu zip jeans slim black used
+                        </h4>
+                        <p className="text-secondaryBlack pt-[10px]">
+                          <span className=" text-gray">Qty:</span> 1
+                        </p>
+                        <p className=" text-secondaryBlack uppercase text-[14px] flex items-center gap-[10px] cursor-pointer">
+                          VIEW DETAILS <Dropdown_Down />
+                        </p>
+                      </div>
+                    </div>
+                    <div className="basis-1/3 text-end">
+                      <p className="text-secondaryBlack">129.00 EUR</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="flex gap-[16px] basis-2/3">
+                      <Image
+                        src={"/Images/Product/Product.webp"}
+                        width={100}
+                        height={100}
+                        alt="CartImage"
+                        className="xl:w-[83px] xl:h-[100px] w-[70px] h-[90px]"
+                      />
+                      <div>
+                        <h4 className="xl:text-[18px] text-[16px] font-medium">
+                          Angels malu zip jeans slim black used
+                        </h4>
+                        <p className="text-secondaryBlack pt-[10px]">
+                          <span className=" text-gray">Qty:</span> 1
+                        </p>
+                        <p className=" text-secondaryBlack uppercase text-[14px] flex items-center gap-[10px] cursor-pointer">
+                          VIEW DETAILS <Dropdown_Down />
+                        </p>
+                      </div>
+                    </div>
+                    <div className="basis-1/3 text-end">
+                      <p className="text-secondaryBlack">129.00 EUR</p>
+                    </div>
+                  </div>
+                  <div className="flex justify-between">
+                    <div className="flex gap-[16px] basis-2/3">
+                      <Image
+                        src={"/Images/Product/Product.webp"}
+                        width={100}
+                        height={100}
+                        alt="CartImage"
+                        className="xl:w-[83px] xl:h-[100px] w-[70px] h-[90px]"
+                      />
+                      <div>
+                        <h4 className="xl:text-[18px] text-[16px] font-medium">
+                          Angels malu zip jeans slim black used
+                        </h4>
+                        <p className="text-secondaryBlack pt-[10px]">
+                          <span className=" text-gray">Qty:</span> 1
+                        </p>
+                        <p className=" text-secondaryBlack uppercase text-[14px] flex items-center gap-[10px] cursor-pointer">
+                          VIEW DETAILS <Dropdown_Down />
+                        </p>
+                      </div>
+                    </div>
+                    <div className="basis-1/3 text-end">
+                      <p className="text-secondaryBlack">129.00 EUR</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
