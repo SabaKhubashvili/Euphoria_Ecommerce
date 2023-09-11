@@ -16,6 +16,7 @@ import Image from "next/image";
 import { Dropdown_Down } from "@/public/Svg/Icons";
 import { CartAdressInfo } from "./CartAdressInfo";
 import { CartPay } from "./CartPay";
+import { CartDone } from "./CartDone";
 
 
 export enum Steps {
@@ -77,12 +78,15 @@ export const CartPage = () => {
     },
   });
   const handleNextButton = useCallback(() => {
+    window.scrollTo({
+      top:0
+    })
     if (step === Steps.Shipping) {
       formik.handleSubmit();
-    } else {
-      if (step !== Steps.Done) {
+    } else if(step !== Steps.Done) {
+
         setStep((prev) => prev + 1);
-      }
+
     }
   }, [step, Steps]);
 
@@ -192,9 +196,19 @@ export const CartPage = () => {
             }
             />
             :
-            <CartPay/>
+            step === Steps.Payment ? 
+            <CartPay
+              setStep={()=>{setStep(Steps.Done)}}
+            />
+            :
+            step === Steps.Done ?
+              <CartDone/>
+            :
+            ''
           }
-          <div className="flex justify-between w-full items-center lg:w-3/5 pt-[20px]">
+          { step !== Steps.Payment && step !== Steps.Done ?
+
+            <div className={`flex justify-between w-full items-center lg:w-3/5  pt-[20px]`}>
             <MainButton label="Next" onClick={handleNextButton} type="Submit" />
             <h3
               className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium cursor-pointer"
@@ -205,6 +219,9 @@ export const CartPage = () => {
               Back
             </h3>
           </div>
+          :
+          ''
+            }
         </motion.div>
       ) : (
         ""
