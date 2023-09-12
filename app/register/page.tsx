@@ -7,10 +7,7 @@ import { Form } from "../components/Form/Form";
 import { AuthForm } from "../components/Form/AuthForm";
 
 const page = () => {
-  const onSubmit = () =>{
-    console.log('submit');
-    
-  }
+
   return (
     <main className=" pt-[129px]">
       <Container>

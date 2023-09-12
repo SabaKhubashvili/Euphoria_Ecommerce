@@ -375,7 +375,7 @@ export const Cart = ({
                 />
               </div> */}
               <div className="flex full gap-[10px] xl:flex-row flex-col xl:items-center">
-                <h2 className="flex basis-1/3">
+                <h2 className="flex basis-2/5">
                   Zip/Postal Code <span className="text-rose-700">*</span>
                 </h2>
                 <SearchInput

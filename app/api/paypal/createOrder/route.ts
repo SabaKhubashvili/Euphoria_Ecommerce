@@ -1,6 +1,8 @@
-import client from '@/app/utils/paypal'; 
+
+import client from '@/app/utils/paypal';
 import paypal from '@paypal/checkout-server-sdk';
 import { NextResponse } from 'next/server';
+
 
 export async function POST(req: Request) {
   try {
@@ -18,7 +20,7 @@ export async function POST(req: Request) {
       purchase_units: [
         {
           amount: {
-            currency_code: 'USD',
+            currency_code: 'GEL',
             value: order_price + "",
           },
         },

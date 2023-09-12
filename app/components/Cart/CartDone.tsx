@@ -10,8 +10,8 @@ export const CartDone = () => {
   return (
     <div className="flex flex-col  justify-center items-center pt-[86px]">
       <Icon svg={WebsiteIcons["AnimatedCheckmark"]} />
-      <h1 className="text-[25px]">Your order was succesfully placed</h1>
-      <p className="pt-[10px] text-secondaryBlack">
+      <h1 className="text-[25px] text-center">Your order was succesfully placed</h1>
+      <p className="pt-[10px] text-secondaryBlack text-center">
         You will recieve message on mail
       </p>
       <div className="pt-[35px]">
