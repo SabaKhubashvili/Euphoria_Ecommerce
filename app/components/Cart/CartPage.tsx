@@ -18,7 +18,6 @@ import { CartAdressInfo } from "./CartAdressInfo";
 import { CartPay } from "./CartPay";
 import { CartDone } from "./CartDone";
 
-
 export enum Steps {
   Cart = 0,
   Shipping = 1,
@@ -46,7 +45,6 @@ export const CartPage = () => {
     },
     validate: (values) => {
       // const errors: any = {};
-
       // if (values.email.length === 0) {
       //   errors.email = "Email is required";
       // } else if (
@@ -54,23 +52,18 @@ export const CartPage = () => {
       // ) {
       //   errors.email = "Invalid email address";
       // }
-
       // if (values.firstName.length === 0) {
       //   errors.firstName = "First name is required";
       // }
-
       // if (values.streetAdress.length === 0) {
       //   errors.streetAdress = "Street address is required";
       // }
-
       // if (values.city.length === 0) {
       //   errors.city = "City is required";
       // }
-
       // if (values.zip.length === 0) {
       //   errors.zip = "Zip code is required";
       // }
-
       // return errors;
     },
     onSubmit: (values) => {
@@ -79,14 +72,12 @@ export const CartPage = () => {
   });
   const handleNextButton = useCallback(() => {
     window.scrollTo({
-      top:0
-    })
+      top: 0,
+    });
     if (step === Steps.Shipping) {
       formik.handleSubmit();
-    } else if(step !== Steps.Done) {
-
-        setStep((prev) => prev + 1);
-
+    } else if (step !== Steps.Done) {
+      setStep((prev) => prev + 1);
     }
   }, [step, Steps]);
 
@@ -185,43 +176,48 @@ export const CartPage = () => {
               </div>
             </div>
           </div>
-          { step  === Steps.Shipping ?
-
+          {step === Steps.Shipping ? (
             <CartAdressInfo
-            errors={formik.errors}
-            handleChange={formik.handleChange}
-            values={formik.values}
-            setFieldValue={(field: string, value: string) =>
-              formik.setFieldValue(field, value)
-            }
+              errors={formik.errors}
+              handleChange={formik.handleChange}
+              values={formik.values}
+              setFieldValue={(field: string, value: string) =>
+                formik.setFieldValue(field, value)
+              }
             />
-            :
-            step === Steps.Payment ? 
+          ) : step === Steps.Payment ? (
             <CartPay
-              setStep={()=>{setStep(Steps.Done)}}
-            />
-            :
-            step === Steps.Done ?
-              <CartDone/>
-            :
-            ''
-          }
-          { step !== Steps.Payment && step !== Steps.Done ?
-
-            <div className={`flex justify-between w-full items-center lg:w-3/5  pt-[20px]`}>
-            <MainButton label="Next" onClick={handleNextButton} type="Submit" />
-            <h3
-              className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium cursor-pointer"
-              onClick={() => {
-                setStep((prev) => prev - 1);
+              setStep={() => {
+                setStep(Steps.Done);
               }}
+              info={formik.values}
+            />
+          ) : step === Steps.Done ? (
+            <CartDone />
+          ) : (
+            ""
+          )}
+          {step !== Steps.Payment && step !== Steps.Done ? (
+            <div
+              className={`flex justify-between w-full items-center lg:w-3/5  pt-[20px]`}
             >
-              Back
-            </h3>
-          </div>
-          :
-          ''
-            }
+              <MainButton
+                label="Next"
+                onClick={handleNextButton}
+                type="Submit"
+              />
+              <h3
+                className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium cursor-pointer"
+                onClick={() => {
+                  setStep((prev) => prev - 1);
+                }}
+              >
+                Back
+              </h3>
+            </div>
+          ) : (
+            ""
+          )}
         </motion.div>
       ) : (
         ""
