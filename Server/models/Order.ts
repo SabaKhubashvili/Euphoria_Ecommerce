@@ -11,10 +11,12 @@ const OrderSchema = new mongoose.Schema({
             }
         }
     ],
-    amount:{type:Number,required:true},
-    adress:{type:String,required:true},
-    city:{type:String,required:true},
-    zipCode:{type:String,required:true},
+    adressInfo:{
+        amount:{type:Number,required:true},
+        adress:{type:String,required:true},
+        city:{type:String,required:true},
+        zipCode:{type:String,required:true},
+    },
     status:{type:String,required:true,default:"pending"}
   });
   
