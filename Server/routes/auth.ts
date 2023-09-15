@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User");
 const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
+
 router.post("/register", async (req: any, res: any) => {
   const hashedPassword = await bcrypt.hash(req.body.password.toString(), 15);
 
@@ -39,7 +40,7 @@ router.post("/login", async (req: any, res: any) => {
       {expiresIn:'3d'}
     )
     
-    const {password, ...userData} = user._doc
+    const {password,_id, ...userData} = user._doc
     res.status(200).json({...userData,accessToken});
   } catch (error) {
     res.status(500).json(error);

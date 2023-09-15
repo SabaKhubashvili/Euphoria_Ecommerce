@@ -5,6 +5,9 @@ import { Form } from "./Form";
 import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
 import Link from "next/link";
+import axios from "axios";
+import { PostRequest } from "@/app/RestClient/RequestTypes";
+import { apiUrls } from "@/app/RestClient/ApiUrls";
 
 export const LoginForm = () => {
   const formik = useFormik({
@@ -23,7 +26,9 @@ export const LoginForm = () => {
         return errors
     },
     onSubmit: (values) => {
-      console.log(values);
+      axios.post('http://localhost:5000/api/auth/login',values)
+      .then(res=>console.log(res))
+      .catch(err=>console.log(err))
     },
   });
 

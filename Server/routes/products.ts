@@ -57,12 +57,34 @@ router.put(
         .status(200)
         .json({ message: "Product sucesfully placed", success: true });
     } catch (error) {
+      return res.status(500).json({
+        message: "Something went wrong adding product",
+        success: false,
+      });
+    }
+  }
+);          
+
+router.delete(
+  "/:id",
+  verifyTokenAndAdminAuthorization,
+  async (req: any, res: any) => {
+    const { id } = req.params;
+
+    try {
+      const product = Product.findOne(id);
+      if(!product){
+        res.status(400).json({ message: "Product not found", success: false });
+      }
+
+      await product.delete();
+      return res
+        .status(200)
+        .json({ message: "Sucesfully deleted", success: true });
+    } catch (error) {
       return res
         .status(500)
-        .json({
-          message: "Something went wrong adding product",
-          success: false,
-        });
+        .json({ message: "Something went wrong", success: false });
     }
   }
 );

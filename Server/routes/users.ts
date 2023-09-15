@@ -28,7 +28,7 @@ router.put("/:id", verifyTokenAuthorization, async (req: any, res: any) => {
   }
 });
 
-// Deletee user
+// Delete user
 router.delete("/:id", verifyTokenAndAdminAuthorization, async (req:any, res:any) => {
     try {
       await User.findByIdAndDelete(req.params.id);
