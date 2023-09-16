@@ -5,9 +5,9 @@ import { Form } from "./Form";
 import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
 import Link from "next/link";
-import axios from "axios";
 import { PostRequest } from "@/app/RestClient/RequestTypes";
 import { apiUrls } from "@/app/RestClient/ApiUrls";
+import { getCookie, setCookie } from "cookies-next";
 
 export const LoginForm = () => {
   const formik = useFormik({
@@ -16,22 +16,34 @@ export const LoginForm = () => {
       password: "",
     },
     validate: (values) => {
-        const errors:any = {}
-        if(!values.email){
-            errors.email = 'Email is required'
-        }
-        if(!values.password){
-            errors.password = 'Password is required'
-        }
-        return errors
+      const errors: any = {};
+      if (!values.email) {
+        errors.email = "Email is required";
+      }
+      if (!values.password) {
+        errors.password = "Password is required";
+      }
+      return errors;
     },
     onSubmit: (values) => {
-      axios.post('http://localhost:5000/api/auth/login',values)
-      .then(res=>console.log(res))
-      .catch(err=>console.log(err))
+      PostRequest(
+        apiUrls.Login,
+        values,
+        (res: any) => {
+          const expirationDate = new Date();
+          expirationDate.setDate(expirationDate.getDate() + 3);
+          const { username, email } = res.data;
+          setCookie("accessToken", res.data.accessToken, {
+            expires: expirationDate,
+          });
+          localStorage.setItem("userInfo", JSON.stringify({ username, email }));
+        },
+        (err: any) => {}
+      );
     },
   });
-
+  console.log(getCookie('accessToken'));
+  
   return (
     <Form
       className="w-full flex flex-col gap-[15px]"
