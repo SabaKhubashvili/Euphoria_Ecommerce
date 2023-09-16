@@ -8,7 +8,9 @@ export const BigScreenNavLinks = () => {
   const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
   return (
-    <div className="flex gap-[29px] items-center xl:ml-[260px]">
+    <div className="">
+
+    <div className="flex gap-[29px] items-center w-fit">
       <BigScreenNavLink label="Home" to="/" />
       <BigScreenNavLink label="Shop" to="/shop" />
       <BigScreenNavLink label="Sale" to="/sale" />
@@ -16,7 +18,7 @@ export const BigScreenNavLinks = () => {
       {/* <BigScreenNavLink
             label='Search'
             to='/search'
-        /> */}
+          /> */}
       <div className="flex gap-[6px] items-center">
         <motion.input
           className="bg-transparent border-[1px] border-white h-[100%] p-2 rounded-[7px] py-[2px] px-[20px] text-white"
@@ -25,8 +27,9 @@ export const BigScreenNavLinks = () => {
           animate={{ width: "100%" }}
           exit={{ width: 0}}
           transition={{ duration: 0.5 }}
-        />
+          />
       </div>
     </div>
+          </div>
   );
 };

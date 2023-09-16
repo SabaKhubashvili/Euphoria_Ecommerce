@@ -6,13 +6,14 @@ import { CartIcon, HeartIcon, SearchIcon } from '@/public/Svg/Icons'
 import { Roboto } from '../../assets/Fonts'
 import useMediaQuery from '@/app/hooks/UseMediaQuery'
 import Link from 'next/link'
+import { UseUser } from '@/app/hooks/UseUser'
 
 export const Menu = () => {
   const isAboveLargeScreens = useMediaQuery('(min-width:1024px)')
-
+  const {isAuthenticated} = UseUser()
   return (
     <div className='flex gap-[31px] basis-auto justify-end'>
-      { isAboveLargeScreens &&
+      { isAboveLargeScreens && !isAuthenticated &&
 
         <AuthButtons/>
       }
@@ -32,7 +33,7 @@ export const Menu = () => {
                 </div>
               </div>
                 { isAboveLargeScreens &&
-                  <div href={'/cart'}>
+                  <div>
                     <h3 className='leading-[20px] text-[13px] tracking-[0.12px] text-white h-fit '>Shopping Cart</h3> 
                     <h3 className={` ${Roboto.className} leading-[20px] font-bold  text-[15px] tracking-[0.12px] text-white h-fit`}>0,00 EUR</h3> 
                   </div>
