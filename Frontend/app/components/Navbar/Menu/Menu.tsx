@@ -6,14 +6,13 @@ import { CartIcon, HeartIcon, SearchIcon } from '@/public/Svg/Icons'
 import { Roboto } from '../../assets/Fonts'
 import useMediaQuery from '@/app/hooks/UseMediaQuery'
 import Link from 'next/link'
-import { UseUser } from '@/app/hooks/UseUser'
+import { isAuthenticated } from '@/app/Libs/IsAuthenticated'
 
 export const Menu = () => {
   const isAboveLargeScreens = useMediaQuery('(min-width:1024px)')
-  const {isAuthenticated} = UseUser()
   return (
     <div className='flex gap-[31px] basis-auto justify-end'>
-      { isAboveLargeScreens && !isAuthenticated &&
+      { isAboveLargeScreens && isAuthenticated() &&
 
         <AuthButtons/>
       }
