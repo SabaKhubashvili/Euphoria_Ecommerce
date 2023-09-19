@@ -9,11 +9,9 @@ import { PostRequest } from "@/app/RestClient/RequestTypes";
 import { apiUrls } from "@/app/RestClient/ApiUrls";
 import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
-import { UseUser } from "@/app/hooks/UseUser";
 
 export const LoginForm = () => {
   const router = useRouter()
-  const {setIsAuthenticated,setJwtToken} = UseUser()
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -41,8 +39,6 @@ export const LoginForm = () => {
             expires: expirationDate,
           });
           localStorage.setItem("userInfo", JSON.stringify({ username, email }));
-          setIsAuthenticated(true)
-          setJwtToken(res.data.accessToken)
           router.push('/')
         },
         (err: any) => {}

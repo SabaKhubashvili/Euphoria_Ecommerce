@@ -3,7 +3,6 @@ import type { NextRequest } from "next/server";
 import jwt from "jsonwebtoken";
 import { getCookie } from "cookies-next";
 import {SignJWT, jwtVerify, type JWTPayload} from 'jose';
-import { UseUser } from "./app/hooks/UseUser";
 
 async function verifyToken(token: string | null) {
   try {

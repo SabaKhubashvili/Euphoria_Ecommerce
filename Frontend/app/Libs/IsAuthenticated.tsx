@@ -2,7 +2,7 @@ import { getCookie } from 'cookies-next';
 import jwt_decode from 'jwt-decode';
 
 export const isAuthenticated = () => {
-  const token = getCookie('token');
+  const token = getCookie('accessToken');
   if (!token) {
     return false;
   }
