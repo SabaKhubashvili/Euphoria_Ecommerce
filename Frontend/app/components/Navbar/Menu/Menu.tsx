@@ -14,7 +14,6 @@ export const Menu = () => {
   const isAboveLargeScreens = useMediaQuery("(min-width:1024px)");
   const router = useRouter()
   const handleSignout = () =>{
-    console.log(isAuthenticated());
     if(isAuthenticated()){
       
       deleteCookie('accessToken')

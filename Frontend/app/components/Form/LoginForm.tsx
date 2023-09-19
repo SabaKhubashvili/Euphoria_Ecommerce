@@ -39,6 +39,7 @@ export const LoginForm = () => {
             expires: expirationDate,
           });
           localStorage.setItem("userInfo", JSON.stringify({ username, email }));
+          router.refresh()
           router.push('/')
         },
         (err: any) => {}
