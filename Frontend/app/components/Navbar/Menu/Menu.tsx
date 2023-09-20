@@ -27,7 +27,7 @@ export const Menu = () => {
       !isAuthenticated() ? (
         <AuthButtons />
       ) : (
-        <div onClick={handleSignout} className="uppercase font-semibold xl:text-[15px] text-[13px] text-white whitespace-nowrap flex items-center">
+        <div onClick={handleSignout} className="cursor-pointer uppercase font-semibold xl:text-[15px] text-[13px] text-white whitespace-nowrap flex items-center">
           Sign out
         </div>
       )}
