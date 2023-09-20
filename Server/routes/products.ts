@@ -4,16 +4,37 @@ const {
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
 const Product = require("../models/Product");
+const mongoose = require('mongoose')
 
 // getAllProducts
 router.get("/getall", async (req: any, res: any) => {
   try {
     const products = await Product.find();
-    console.log(products);
 
     return res.status(200).json(products);
   } catch (error) {
     return res.status(500).json({ message: "Something wrong happened" });
+  }
+});
+
+
+router.get('/:id', async (req: any, res: any) => {
+  const productId = req.params.id;
+
+  if (!mongoose.isValidObjectId(productId)) {
+    return res.status(400).json({ message: 'Invalid product ID' });
+  }
+  try {
+    const product = await Product.findById(productId);
+
+    if (!product) {
+      return res.status(404).json({ message: 'Product not found' });
+    }
+
+    return res.status(200).json(product);
+  } catch (err) {
+    console.error(err); // Log the error for debugging purposes
+    return res.status(500).json({ message: 'Internal server error' });
   }
 });
 

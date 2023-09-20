@@ -18,7 +18,7 @@ app.use(express.json());
 
 app.use('/api/user',userRoute)
 app.use('/api/auth',authRouter)
-app.use('/api/products',productRouter)
+app.use('/api/product',productRouter)
 app.use('/api/cart',cartRouter)
 
 app.listen(process.env.PORT || 5000,()=>{
