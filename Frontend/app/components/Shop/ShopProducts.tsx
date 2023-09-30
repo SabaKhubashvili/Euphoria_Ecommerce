@@ -48,7 +48,7 @@ export const ShopProducts = () => {
       }
     }
   }, [priceFrom, currentPage, productPerPage, isProductsLoading]);
-
+ 
   return (
     <section className="w-full pb-[30px]">
       <p

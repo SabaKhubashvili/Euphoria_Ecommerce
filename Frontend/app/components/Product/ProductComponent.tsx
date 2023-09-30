@@ -8,14 +8,15 @@ import { productInterface, products } from '@/app/constants'
 import Link from 'next/link'
 
 export const ProductComponent = ({
-  id,
+  _id,
   name,
   image,
   description,
   price
 }:productInterface) => {
+  
   return (
-    <Link href={`/product/${id}`} className='flex flex-col gap-[14px] col-span-1'>
+    <Link href={`/product/${_id}`} className='flex flex-col gap-[14px] col-span-1'>
       <div className='relative w-full'>
         <Image
           width={400}

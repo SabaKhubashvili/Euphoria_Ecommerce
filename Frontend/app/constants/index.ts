@@ -136,7 +136,7 @@ export const FilterConstant = {
         'knee length',
         'hight low',
         'long',
-        'midi'
+        'mid'
     ],
     color:[
       { name: 'green', class: 'bg-green-800' },
@@ -146,7 +146,7 @@ export const FilterConstant = {
 }
 
 export interface productInterface{
-    id:number
+    _id:number
     price:string,
     description:string,
     name:string,
@@ -154,70 +154,70 @@ export interface productInterface{
 }
 export const products: productInterface[] = [
   {
-    id: 1,
+    _id: 1,
     price: '10,00',
     description: "This is a great product.",
     name: "Product 1",
     image: "Product"
   },
   {
-    id: 2,
+    _id: 2,
     price: '25,00',
     description: "An amazing product for your needs.",
     name: "Product 2",
     image: "Product"
   },
   {
-    id: 3,
+    _id: 3,
     price: '50,00',
     description: "A must-have item for every home.",
     name: "Product 3",
     image: "Product"
   },
   {
-    id: 4,
+    _id: 4,
     price: '15,00',
     description: "High-quality and durable product.",
     name: "Product 4",
     image: "Product"
   },
   {
-    id: 5,
+    _id: 5,
     price: '30,00',
     description: "Get the best value with this product.",
     name: "Product 5",
     image: "Product"
   },
   {
-    id: 6,
+    _id: 6,
     price: '18,50',
     description: "An affordable and reliable option.",
     name: "Product 6",
     image: "Product"
   },
   {
-    id: 7,
+    _id: 7,
     price: '40,00',
     description: "Elegant and stylish design for your home.",
     name: "Product 7",
     image: "Product"
   },
   {
-    id: 8,
+    _id: 8,
     price: '12,99',
     description: "Experience the latest technology with this product.",
     name: "Product 8",
     image: "Product"
   },
   {
-    id: 9,
+    _id: 9,
     price: '35,00',
     description: "Perfect for outdoor adventures and activities.",
     name: "Product 9",
     image: "Product"
   },
   {
-    id: 10,
+    _id: 10,
     price: '22,75',
     description: "Enhance your productivity with this amazing product.",
     name: "Product 10",
@@ -225,126 +225,126 @@ export const products: productInterface[] = [
   },
   // ... (remaining products)
   {
-    id: 11,
+    _id: 11,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 19",
     image: "Product"
   },
   {
-    id: 12,
+    _id: 12,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 20",
     image: "Product"
   },
   {
-    id: 13,
+    _id: 13,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 21",
     image: "Product"
   },
   {
-    id: 14,
+    _id: 14,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 24",
     image: "Product"
   },
   {
-    id: 15,
+    _id: 15,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 19",
     image: "Product"
   },
   {
-    id: 16,
+    _id: 16,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 22",
     image: "Product"
   },
   {
-    id: 17,
+    _id: 17,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 195",
     image: "Product"
   },
   {
-    id: 18,
+    _id: 18,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 20",
     image: "Product"
   },
   {
-    id: 19,
+    _id: 19,
     price: '10,00',
     description: "This is a great product.",
     name: "Product 1",
     image: "Product"
   },
   {
-    id: 20,
+    _id: 20,
     price: '25,00',
     description: "An amazing product for your needs.",
     name: "Product 2",
     image: "Product"
   },
   {
-    id: 28761,
+    _id: 28761,
     price: '50,00',
     description: "A must-have item for every home.",
     name: "Product 3",
     image: "Product"
   },
   {
-    id: 212212789,
+    _id: 212212789,
     price: '15,00',
     description: "High-quality and durable product.",
     name: "Product 4",
     image: "Product"
   },
   {
-    id: 25521211,
+    _id: 25521211,
     price: '30,00',
     description: "Get the best value with this product.",
     name: "Product 5",
     image: "Product"
   },
   {
-    id: 212122241,
+    _id: 212122241,
     price: '18,50',
     description: "An affordable and reliable option.",
     name: "Product 6",
     image: "Product"
   },
   {
-    id: 512211,
+    _id: 512211,
     price: '40,00',
     description: "Elegant and stylish design for your home.",
     name: "Product 7",
     image: "Product"
   },
   {
-    id: 832121,
+    _id: 832121,
     price: '12,99',
     description: "Experience the latest technology with this product.",
     name: "Product 8",
     image: "Product"
   },
   {
-    id: 926111,
+    _id: 926111,
     price: '35,00',
     description: "Perfect for outdoor adventures and activities.",
     name: "Product 9",
     image: "Product"
   },
   {
-    id: 121051,
+    _id: 121051,
     price: '22,75',
     description: "Enhance your productivity with this amazing product.",
     name: "Product 16",
@@ -352,56 +352,56 @@ export const products: productInterface[] = [
   },
   // ... (remaining products)
   {
-    id: 12112121,
+    _id: 12112121,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 17",
     image: "Product"
   },
   {
-    id: 1212,
+    _id: 1212,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 18",
     image: "Product"
   },
   {
-    id: 12121213,
+    _id: 12121213,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 19",
     image: "Product"
   },
   {
-    id: 12141212,
+    _id: 12141212,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 21",
     image: "Product"
   },
   {
-    id: 122415,
+    _id: 122415,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 22",
     image: "Product"
   },
   {
-    id: 165121,
+    _id: 165121,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 23",
     image: "Product"
   },
   {
-    id: 211317,
+    _id: 211317,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 24",
     image: "Product"
   },
   {
-    id: 1218,
+    _id: 1218,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 25",

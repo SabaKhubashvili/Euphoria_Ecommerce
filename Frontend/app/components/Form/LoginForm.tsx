@@ -5,9 +5,10 @@ import { Form } from "./Form";
 import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
 import Link from "next/link";
-import { getCookie, setCookie } from "cookies-next";
+import {  setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -28,7 +29,7 @@ export const LoginForm = () => {
     },
     onSubmit: async (values) => {
       try {
-        const res = await RestClient.postRequest(apiUrls.Login, values);
+        const res = await RestClient.postRequest(BaseUrl.login, values);
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 3);
         const { username, email } = res.data;
