@@ -5,10 +5,12 @@ import { Form } from "./Form";
 import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
 import Link from "next/link";
-import {  setCookie } from "cookies-next";
+import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
+import { ToastContainer, toast  } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const LoginForm = () => {
   const router = useRouter();
@@ -39,8 +41,17 @@ export const LoginForm = () => {
         localStorage.setItem("userInfo", JSON.stringify({ username, email }));
         router.refresh();
         router.push("/");
-      } catch (err) {
-        console.log(err);
+      } catch (err:any) {
+        toast.error(err.response.data.message, {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
       }
     },
   });
