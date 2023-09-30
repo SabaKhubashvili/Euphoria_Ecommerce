@@ -3,6 +3,7 @@ import { SmallBanner } from '../components/Banners/SmallBanner'
 import { ShopProducts } from '../components/Shop/ShopProducts'
 import { Container } from '../components/Container'
 
+
 export const metadata = {
     title:'Discover Your Perfect Style - Shop the Latest Trends in Fashion at CRISP',
     description:'Discover stylish clothing, footwear, and accessories that elevate your wardrobe. Explore our curated collection for quality fashion at CRISP.',

@@ -1,10 +1,8 @@
+import { Providers } from './Providers';
 import { Footer } from './components/Footer/Footer';
 import { Navbar } from './components/Navbar/Navbar'
-import { OnlyClient } from './components/OnlyClient';
 import { Oswald } from './components/assets/Fonts';
 import './globals.css'
-
-
 
 export const metadata = {
   title: 'Create Next App',
@@ -20,11 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={Oswald.className}>
-        <OnlyClient>
+        <Providers>
           <Navbar/>
           {children}
           <Footer/>
-        </OnlyClient>
+        </Providers>
       </body>
     </html>
   )

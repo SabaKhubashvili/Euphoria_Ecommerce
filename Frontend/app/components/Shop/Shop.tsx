@@ -10,7 +10,7 @@ import { usePagination } from "@/app/hooks/UsePagination";
 import { useFilter } from "@/app/hooks/UseFilter";
 
 interface Props {
-  currentProducts: typeof products;
+  currentProducts: typeof products | null;
   productsLength: number
 }
 export const Shop = ({ currentProducts, productsLength }: Props) => {
@@ -65,7 +65,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
       </div>
       <div className="flex flex-col gap-[44px]">
         <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-4">
-          {currentProducts.slice(0, 4).map((product) => (
+          {currentProducts?.slice(0, 4).map((product) => (
             <ProductComponent key={product.id} {...product} />
           ))}
         </div>
@@ -79,7 +79,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
           small
         />
         <div className="lg:basis-3/4 w-full grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1  gap-[26px]">
-          {currentProducts.slice(4).map((product) => (
+          {currentProducts?.slice(4).map((product) => (
             <ProductComponent key={product.id} {...product} />
           ))}
         </div>

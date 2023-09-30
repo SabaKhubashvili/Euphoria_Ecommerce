@@ -1,32 +1,13 @@
-import axios from "axios";
+import axios from "axios"
 
-export const PostRequest = (
-  url: string,
-  data: any,
-  next: (res: any) => void,
-  ifError: (err: any) => void
-) => {
-  axios
-    .post(url, data)
-    .then((res) => {
-      next(res);
-    })
-    .catch((err) => {
-      ifError(err);
-    });
-};
 
-export const GetRequest = (
-  url: string,
-  next: (res: any) => void,
-  ifError: (err: any) => void
-) => {
-  axios
-    .get(url)
-    .then((res) => {
-      next(res);
-    })
-    .catch((err) => {
-      ifError(err);
-    });
-};
+class RestClient{
+    static GetRequest = (getUrl:string)=>{
+        return axios.get(getUrl)
+    }
+    static postRequest = (getUrl:string,Data:any)=>{
+        return axios.post(getUrl,Data)
+    }
+}
+
+export default RestClient

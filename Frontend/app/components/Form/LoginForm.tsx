@@ -5,13 +5,12 @@ import { Form } from "./Form";
 import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
 import Link from "next/link";
-import { PostRequest } from "@/app/RestClient/RequestTypes";
-import { apiUrls } from "@/app/RestClient/ApiUrls";
 import { getCookie, setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import RestClient from "@/app/RestClient/RequestTypes";
 
 export const LoginForm = () => {
-  const router = useRouter()
+  const router = useRouter();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -27,27 +26,24 @@ export const LoginForm = () => {
       }
       return errors;
     },
-    onSubmit: (values) => {
-      PostRequest(
-        apiUrls.Login,
-        values,
-        (res: any) => {
-          const expirationDate = new Date();
-          expirationDate.setDate(expirationDate.getDate() + 3);
-          const { username, email } = res.data;
-          setCookie("accessToken", res.data.accessToken, {
-            expires: expirationDate,
-          });
-          localStorage.setItem("userInfo", JSON.stringify({ username, email }));
-          router.refresh()
-          router.push('/')
-        },
-        (err: any) => {}
-      );
+    onSubmit: async (values) => {
+      try {
+        const res = await RestClient.postRequest(apiUrls.Login, values);
+        const expirationDate = new Date();
+        expirationDate.setDate(expirationDate.getDate() + 3);
+        const { username, email } = res.data;
+        setCookie("accessToken", res.data.accessToken, {
+          expires: expirationDate,
+        });
+        localStorage.setItem("userInfo", JSON.stringify({ username, email }));
+        router.refresh();
+        router.push("/");
+      } catch (err) {
+        console.log(err);
+      }
     },
   });
-  console.log(getCookie('accessToken'));
-  
+
   return (
     <Form
       className="w-full flex flex-col gap-[15px]"
