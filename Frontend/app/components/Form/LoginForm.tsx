@@ -15,6 +15,8 @@ import "react-toastify/dist/ReactToastify.css";
 export const LoginForm = () => {
   const router = useRouter();
   const formik = useFormik({
+    validateOnBlur:false,
+    validateOnChange:false,
     initialValues: {
       email: "",
       password: "",

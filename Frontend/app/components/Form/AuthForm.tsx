@@ -6,9 +6,16 @@ import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
 import { MainButton } from "../buttons/MainButton";
 import Link from "next/link";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 export const AuthForm = () => {
+  const router = useRouter()
   const formik = useFormik({
+    validateOnBlur:false,
+    validateOnChange:false,
     initialValues: {
       email: "",
       password: "",
@@ -46,7 +53,33 @@ export const AuthForm = () => {
       return errors;
     },
     onSubmit: async (values) => {
-      console.log(values);
+        try{
+          const res =  await RestClient.postRequest(BaseUrl.register,values)
+          toast.success('Sucesfully registered', {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          router.push('/login')
+          window.scrollTo(0,0)
+        }catch(err:any){
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          
+        }
     },
   });
 
