@@ -2,10 +2,10 @@
 
 import Image from "next/image"
 
-export const Logo = () => {
+export const Logo = ({dark}:{dark?:boolean}) => {
   return (
     <Image
-        src={'/Images/Logo/logo.png'}
+        src={dark ? '/Images/Logo/logo_dark.png' : '/Images/Logo/logo.png'}
         alt="Logo"
         width={550}
         height={500}

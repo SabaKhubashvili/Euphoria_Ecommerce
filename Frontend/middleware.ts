@@ -63,8 +63,7 @@ export async function middleware(request: NextRequest) {
     }
   }
   if(request.nextUrl.pathname.startsWith('/admin')){
-    if(!await checkIfIsAdmin(request))
-    {
+    if(!await checkIfIsAdmin(request)){
       return NextResponse.redirect(new URL("/login", request.url));
     }
   }
