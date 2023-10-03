@@ -51,3 +51,36 @@ export const Roboto = localFont({
     ]
   })
   
+export const PublicSans = localFont({
+    src:[
+      {
+        path:'../../../public/static/PublicSans-ExtraLight.ttf',
+        weight:'200'
+      },
+      {
+        path:'../../../public/static/PublicSans-Light.ttf',
+        weight:'300'
+      },
+      {
+        path:'../../../public/static/PublicSans-Regular.ttf',
+        weight:'400'
+      },
+      {
+        path:'../../../public/static/PublicSans-Medium.ttf',
+        weight:'500'
+      },
+      {
+        path:'../../../public/static/PublicSans-SemiBold.ttf',
+        weight:'600'
+      },
+      {
+        path:'../../../public/static/PublicSans-Bold.ttf',
+        weight:'700'
+      },
+      {
+        path:'../../../public/static/PublicSans-ExtraBold.ttf',
+        weight:'800'
+      },
+    ]
+  })
+  

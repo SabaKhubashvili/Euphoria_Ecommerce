@@ -8,12 +8,12 @@ export const PageContainer = ({children}:{children:React.ReactNode}) => {
     const controls = useAnimation();
 
     const sidebarVariants = {
-      open: { width: '25%' },
-      closed: { width: '20%' },
+      open: { width: '20%' },
+      closed: { width: '15%' },
     };
   
     const toggleSidebar = () => {
-      setIsSidebarOpen(!isSidebarOpen);
+      setIsSidebarOpen(prev=>!prev);
       controls.start(isSidebarOpen ? 'closed' : 'open');
     };
 
@@ -23,7 +23,7 @@ export const PageContainer = ({children}:{children:React.ReactNode}) => {
         initial="closed"
         animate={controls}
         variants={sidebarVariants}
-        exit={{ width:'20%' }}
+        exit={{ width:'15%' }}
         transition={{ duration: 0.3 }}
       >
             <Sidebar isSidebarOpen={isSidebarOpen} setIsSidebarOpen={toggleSidebar} />

@@ -9,7 +9,7 @@ export const Logo = ({dark}:{dark?:boolean}) => {
         alt="Logo"
         width={550}
         height={500}
-        className="w-full h-full"
+        className="w-full h-full select-none"
     />
   )
 }

@@ -6,12 +6,12 @@ export const WebsiteIcons = {
         <line x1="1.5" y1="-1.5" x2="11.4985" y2="-1.5" transform="matrix(-0.707106 0.707107 -0.707106 -0.707107 25.877 15)" stroke="black" stroke-width="3" stroke-linecap="square"/>
     </svg>
     `,
-    Circle: `
+  Circle: `
     <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 40 40" fill="none">
   <circle cx="20" cy="20" r="17" transform="rotate(-180 20 20)" fill="white" stroke="#C4C4C4" stroke-width="6"/>
 </svg>
 `,
-  AnimatedCheckmark:`
+  AnimatedCheckmark: `
   <svg
   width="115px"
   height="115px"
@@ -58,10 +58,11 @@ export const WebsiteIcons = {
   </g>
 </svg>
   `,
-  AdminMenu:`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  AdminMenu: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
   <path d="M20 6H13" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M20 12H11" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M20 18H13" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M8 8L4 12L8 16" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
-  </svg>`
+  </svg>`,
+
 };

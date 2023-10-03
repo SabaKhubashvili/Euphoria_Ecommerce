@@ -19,7 +19,8 @@ module.exports = {
       },
       fontFamily:{
         Oswald: ['var(--font-Oswald)'],
-        Roboto:['var(--font-Roboto)']
+        Roboto:['var(--font-Roboto)'],
+        PublicSans:['var(--font-PublicSans)'],
       },
       content:{
         'border-line':'url("../public/Svg/Vectors/border-line.svg")',
