@@ -1,6 +1,8 @@
 import { BarChart } from "@/app/components/Charts/BarChart";
 import { MultiAxisChart } from "@/app/components/Charts/MultiAxisChart";
+import { SimpleLineChart } from "@/app/components/Charts/SimpleLineChart";
 import { Icon } from "@/app/components/Icon";
+import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
 import { PageContainer } from "@/app/components/admin/container/PageContainer";
 import { PublicSans } from "@/app/components/assets/Fonts";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
@@ -55,6 +57,32 @@ const Page = () => {
       cost: 500,
     },
   ];
+  const SessionsData = [
+    {
+      name:'5 days ago',
+      sessionCount:25
+    },
+    {
+      name:'4 days ago',
+      sessionCount:52
+    },
+    {
+      name:'3 days ago',
+      sessionCount:34
+    },
+    {
+      name:'2 days ago',
+      sessionCount:12
+    },
+    {
+      name:'yesterday',
+      sessionCount:25
+    },
+    {
+      name:'today',
+      sessionCount:125
+    },
+  ]
 
   return (
     <main className="bg-[#FAFAFA]">
@@ -89,7 +117,7 @@ const Page = () => {
           </div>
 
           <div className="flex flex-col gap-[24px]">
-            <div className="flex flex-wrap">
+            <div className="flex flex-wrap  justify-between mt-[40px] gap-y-4">
               <div className="xl:w-[60%] w-[100%] p-[24px] bg-white flex">
                 <div className="flex flex-col justify-between gap-[30px] flex-grow min-w-[180px]">
                   <div>
@@ -102,7 +130,7 @@ const Page = () => {
                   </div>
                   <div className="flex flex-col gap-[16px]">
                     <h1 className="text-[32px] font-bold">
-                      $350K{" "}
+                      $350K
                       <span className="text-skyblue text-[18px]">$235K</span>
                     </h1>
                     <div className="flex gap-[8px]">
@@ -114,9 +142,23 @@ const Page = () => {
                     </div>
                   </div>
                 </div>
-                <div className="h-[200px] flex-grow pl-[20px]">
-                  <MultiAxisChart data={data}/>
-                </div>
+                 <div className="h-[200px] flex-grow pl-[20px]">
+                    <MultiAxisChart data={data}/>
+                  </div>
+              </div>
+              <div className="xl:w-[39%] w-[100%]">
+                <SimpleLineChartComponent title="Sessions" mainValue='16.5K' data={SessionsData} lineColor={'#D02626'} percentage='-3%'/>
+              </div>
+            </div>
+            <div className="flex justify-between gap-[26px] xl:flex-nowrap flex-wrap">
+              <div className="xl:basis-1/3 basis-full">
+                <SimpleLineChartComponent title="Total Orders" mainValue='25.7K' data={SessionsData} lineColor={'#1EB564'} percentage='6%'/>
+              </div>
+              <div className="xl:basis-1/3 w-[48%]">
+                <SimpleLineChartComponent title="Total Profit" mainValue='50K' data={SessionsData} lineColor={'#1EB564'} percentage='12%'/>
+              </div>
+              <div className="xl:basis-1/3 w-[48%]">
+                <SimpleLineChartComponent title="Discounted amount" mainValue='12K' data={SessionsData} lineColor={'#D02626'} percentage='-2%'/>
               </div>
             </div>
           </div>

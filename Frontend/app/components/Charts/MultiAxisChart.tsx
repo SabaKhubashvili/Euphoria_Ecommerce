@@ -34,10 +34,10 @@ export const MultiAxisChart = ({ data }: Props) => {
         <Line
           type="monotone"
           dataKey="sales"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
+          stroke="#0F60FF"
+          strokeWidth={3}
         />
-        <Line type="monotone" dataKey="cost" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="cost" stroke="#0FB7FF" strokeWidth={3} />
       </LineChart>
     </ResponsiveContainer>
   );
