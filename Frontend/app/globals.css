@@ -95,6 +95,11 @@
   transform-origin: center;
 }
 
+.recharts-wrapper , .recharts-surface{
+  width: 100% !important;
+  height: 100% !important;
+}
+
 @keyframes outline {
 from {
   stroke-dasharray: 0, 345.576px;
