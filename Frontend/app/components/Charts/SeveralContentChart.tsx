@@ -2,6 +2,7 @@
 import { WebsiteIcons } from '@/public/Svg/IconsObject'
 import React, { useEffect, useRef, useState } from 'react'
 import { Icon } from '../Icon'
+import LinearChart from './LinearChart'
 
 enum dataTypes{
     customers = 1,
@@ -23,6 +24,16 @@ export const SeveralContentChart = () => {
         }
     },[activeType])
 
+    const weeklyIncomeData = [
+      { day: 'Monday', income: Math.floor(Math.random() * 1000) },
+      { day: 'Tuesday', income: Math.floor(Math.random() * 1000) },
+      { day: 'Wednesday', income: Math.floor(Math.random() * 1000) },
+      { day: 'Thursday', income: Math.floor(Math.random() * 1000) },
+      { day: 'Friday', income: Math.floor(Math.random() * 1000) },
+      { day: 'Saturday', income: Math.floor(Math.random() * 1000) },
+      { day: 'Sunday', income: Math.floor(Math.random() * 1000) },
+    ];
+        
     
   return (
     <div className="flex">
@@ -74,7 +85,9 @@ export const SeveralContentChart = () => {
                       </div>
 
                       {/* Charts */}
-                      sa
+                      <div className='w-full h-[400px]'>
+                        <LinearChart XAxisKey={'day'} data={weeklyIncomeData} valueKey='income' />
+                      </div>
                     </div>
                 </div>
             </div>

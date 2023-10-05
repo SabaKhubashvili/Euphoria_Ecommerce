@@ -1,4 +1,3 @@
-import { BarChart } from "@/app/components/Charts/BarChart";
 import { MultiAxisChart } from "@/app/components/Charts/MultiAxisChart";
 import { SeveralContentChart } from "@/app/components/Charts/SeveralContentChart";
 import { SimpleLineChart } from "@/app/components/Charts/SimpleLineChart";
@@ -84,12 +83,7 @@ const Page = () => {
       sessionCount:125
     },
   ]
-  // const indicator = (element: HTMLDivElement) => {
-  //   if (underline) {
-  //     underline.style.left = element.offsetLeft + 'px';
-  //     underline.style.width = element.offsetWidth + 'px';
-  //   }
-  // };
+
   return (
     <main className="bg-[#FAFAFA]">
       <PageContainer>
