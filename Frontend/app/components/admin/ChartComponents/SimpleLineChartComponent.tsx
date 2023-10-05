@@ -14,7 +14,7 @@ interface Props{
 export const SimpleLineChartComponent = ({title,data,lineColor,percentage,mainValue}:Props) => {
   const isPositiveNum = percentage[0] !== '-'
   return (
-    <div className="w-full p-[24px] bg-white flex rounded-lg">
+    <div className="w-full p-[24px] bg-white flex rounded-[16px]">
     <div className="flex flex-col justify-between gap-[30px] flex-grow min-w-[180px]">
       <div>
         <h2 className="font-semibold leading-[26px] text-[18px]">

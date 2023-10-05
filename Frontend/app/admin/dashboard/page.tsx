@@ -120,7 +120,7 @@ const Page = () => {
 
             {/* Top Charts */}
             <div className="flex flex-wrap  justify-between mt-[40px] gap-y-4">
-              <div className="xl:w-[60%] w-[100%] p-[24px] bg-white flex">
+              <div className="xl:w-[60%] w-[100%] p-[24px] bg-white flex rounded-[16px]">
                 <div className="flex flex-col justify-between gap-[30px] flex-grow min-w-[180px]">
                   <div>
                     <h2 className="font-semibold leading-[26px] text-[18px]">
