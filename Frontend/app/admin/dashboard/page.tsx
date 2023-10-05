@@ -1,5 +1,6 @@
 import { BarChart } from "@/app/components/Charts/BarChart";
 import { MultiAxisChart } from "@/app/components/Charts/MultiAxisChart";
+import { SeveralContentChart } from "@/app/components/Charts/SeveralContentChart";
 import { SimpleLineChart } from "@/app/components/Charts/SimpleLineChart";
 import { Icon } from "@/app/components/Icon";
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
@@ -83,7 +84,12 @@ const Page = () => {
       sessionCount:125
     },
   ]
-
+  // const indicator = (element: HTMLDivElement) => {
+  //   if (underline) {
+  //     underline.style.left = element.offsetLeft + 'px';
+  //     underline.style.width = element.offsetWidth + 'px';
+  //   }
+  // };
   return (
     <main className="bg-[#FAFAFA]">
       <PageContainer>
@@ -117,6 +123,8 @@ const Page = () => {
           </div>
 
           <div className="flex flex-col gap-[24px]">
+
+            {/* Top Charts */}
             <div className="flex flex-wrap  justify-between mt-[40px] gap-y-4">
               <div className="xl:w-[60%] w-[100%] p-[24px] bg-white flex">
                 <div className="flex flex-col justify-between gap-[30px] flex-grow min-w-[180px]">
@@ -150,17 +158,22 @@ const Page = () => {
                 <SimpleLineChartComponent title="Sessions" mainValue='16.5K' data={SessionsData} lineColor={'#D02626'} percentage='-3%'/>
               </div>
             </div>
+
+           {/* 3 Linecharts */}
             <div className="flex justify-between gap-[26px] xl:flex-nowrap flex-wrap">
               <div className="xl:basis-1/3 basis-full">
                 <SimpleLineChartComponent title="Total Orders" mainValue='25.7K' data={SessionsData} lineColor={'#1EB564'} percentage='6%'/>
               </div>
-              <div className="xl:basis-1/3 w-[48%]">
+              <div className="xl:basis-1/3 md:w-[48%] w-full">
                 <SimpleLineChartComponent title="Total Profit" mainValue='50K' data={SessionsData} lineColor={'#1EB564'} percentage='12%'/>
               </div>
-              <div className="xl:basis-1/3 w-[48%]">
+              <div className="xl:basis-1/3 md:w-[48%] w-full">
                 <SimpleLineChartComponent title="Discounted amount" mainValue='12K' data={SessionsData} lineColor={'#D02626'} percentage='-2%'/>
               </div>
             </div>
+
+            {/* Reports && activity */}
+            <SeveralContentChart/>
           </div>
         </div>
       </PageContainer>
