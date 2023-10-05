@@ -43,7 +43,7 @@ export const SeveralContentChart = () => {
   ];
 
   return (
-    <div className="flex">
+    <div className="flex w-full">
       <div className="w-full p-[24px] bg-white rounded-[16px]">
         <div className="flex justify-between w-full">
           {/* Header */}

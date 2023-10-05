@@ -2,6 +2,7 @@ import { MultiAxisChart } from "@/app/components/Charts/MultiAxisChart";
 import { SeveralContentChart } from "@/app/components/Charts/SeveralContentChart";
 import { SimpleLineChart } from "@/app/components/Charts/SimpleLineChart";
 import { Icon } from "@/app/components/Icon";
+import { PieChartComponent } from "@/app/components/admin/ChartComponents/PieChartComponent";
 import { SimpleAreaChartComponent } from "@/app/components/admin/ChartComponents/SimpleAreaChartComponent";
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
 import { PageContainer } from "@/app/components/admin/container/PageContainer";
@@ -60,31 +61,54 @@ const Page = () => {
   ];
   const SessionsData = [
     {
-      name:'5 days ago',
-      sessionCount:25
+      name: "5 days ago",
+      sessionCount: 25,
     },
     {
-      name:'4 days ago',
-      sessionCount:52
+      name: "4 days ago",
+      sessionCount: 52,
     },
     {
-      name:'3 days ago',
-      sessionCount:34
+      name: "3 days ago",
+      sessionCount: 34,
     },
     {
-      name:'2 days ago',
-      sessionCount:12
+      name: "2 days ago",
+      sessionCount: 12,
     },
     {
-      name:'yesterday',
-      sessionCount:25
+      name: "yesterday",
+      sessionCount: 25,
     },
     {
-      name:'today',
-      sessionCount:125
+      name: "today",
+      sessionCount: 125,
     },
-  ]
-
+  ];
+  const MostSaledProducts = [
+    { name: "Product 1", price: 10.99 },
+    { name: "Product 2", price: 24.99 },
+    { name: "Product 3", price: 5.99 },
+    { name: "Product 1", price: 10.99 },
+    { name: "Product 2", price: 24.99 },
+    { name: "Product 3", price: 5.99 },
+    { name: "Product 1", price: 10.99 },
+    { name: "Product 2", price: 24.99 },
+    { name: "Product 3", price: 5.99 },
+    { name: "Product 1", price: 10.99 },
+    { name: "Product 2", price: 24.99 },
+    { name: "Product 3", price: 5.99 },
+    { name: "Product 1", price: 10.99 },
+    { name: "Product 2", price: 24.99 },
+    { name: "Product 3", price: 5.99 },
+    { name: "Product 1", price: 10.99 },
+    { name: "Product 2", price: 24.99 },
+    { name: "Product 3", price: 5.99 },
+    { name: "Product 1", price: 10.99 },
+    { name: "Product 2", price: 24.99 },
+    { name: "Product 3", price: 5.99 },
+  ];
+  
   return (
     <main className="bg-[#FAFAFA]">
       <PageContainer>
@@ -118,7 +142,6 @@ const Page = () => {
           </div>
 
           <div className="flex flex-col gap-[24px]">
-
             {/* Top Charts */}
             <div className="flex flex-wrap  justify-between mt-[40px] gap-y-4">
               <div className="xl:w-[60%] w-[100%] p-[24px] bg-white flex rounded-[16px]">
@@ -138,37 +161,101 @@ const Page = () => {
                     </h1>
                     <div className="flex gap-[8px]">
                       <div className="flex gap-[4px] items-center">
-                      <Icon svg={WebsiteIcons['TopArrowGreen']}/>
+                        <Icon svg={WebsiteIcons["TopArrowGreen"]} />
                         <span className="text-green">8.56K</span>
                       </div>
-                      <h3 className="text-secondaryGray font-medium text-[14px] leading-[20px]">vs last 7 days</h3>
+                      <h3 className="text-secondaryGray font-medium text-[14px] leading-[20px]">
+                        vs last 7 days
+                      </h3>
                     </div>
                   </div>
                 </div>
-                 <div className="h-[200px] flex-grow pl-[20px]">
-                    <MultiAxisChart data={data}/>
-                  </div>
+                <div className="h-[200px] flex-grow pl-[20px]">
+                  <MultiAxisChart data={data} />
+                </div>
               </div>
               <div className="xl:w-[39%] w-[100%]">
-                <SimpleLineChartComponent title="Sessions" mainValue='16.5K' data={SessionsData} lineColor={'#D02626'} percentage='-3%'/>
+                <SimpleLineChartComponent
+                  title="Sessions"
+                  mainValue="16.5K"
+                  data={SessionsData}
+                  lineColor={"#D02626"}
+                  percentage="-3%"
+                />
               </div>
             </div>
 
-           {/* 3 Linecharts */}
+            {/* 3 Linecharts */}
             <div className="flex justify-between gap-[26px] xl:flex-nowrap flex-wrap">
               <div className="xl:basis-1/3 basis-full">
-                <SimpleAreaChartComponent title="Total Orders" mainValue='25.7K' data={SessionsData} lineColor={'#1EB564'} percentage='6%'/>
+                <SimpleAreaChartComponent
+                  title="Total Orders"
+                  mainValue="25.7K"
+                  data={SessionsData}
+                  lineColor={"#1EB564"}
+                  percentage="6%"
+                />
               </div>
               <div className="xl:basis-1/3 md:w-[48%] w-full">
-                <SimpleAreaChartComponent title="Total Profit" mainValue='50K' data={SessionsData} lineColor={'#1EB564'} percentage='12%'/>
+                <SimpleAreaChartComponent
+                  title="Total Profit"
+                  mainValue="50K"
+                  data={SessionsData}
+                  lineColor={"#1EB564"}
+                  percentage="12%"
+                />
               </div>
               <div className="xl:basis-1/3 md:w-[48%] w-full">
-                <SimpleAreaChartComponent title="Discounted amount" mainValue='12K' data={SessionsData} lineColor={'#D02626'} percentage='-2%'/>
+                <SimpleAreaChartComponent
+                  title="Discounted amount"
+                  mainValue="12K"
+                  data={SessionsData}
+                  lineColor={"#D02626"}
+                  percentage="-2%"
+                />
               </div>
             </div>
+            <div className="flex gap-[26px]">
+              {/* Reports && activity */}
+              <div className="!w-[60%]">
+                <SeveralContentChart />
+              </div>
+              <div className="!w-[39%] bg-white p-[24px]">
+                <div className="flex justify-between">
+                  <div>
+                    <h3 className="text-[18px] font-semibold leading-[26px]">
+                      Trending Products
+                    </h3>
+                    <p className="text-secondaryGray font-medium text-[14px]">
+                      Total 10,4k visitors
+                    </p>
+                  </div>
+                  <Icon svg={WebsiteIcons["Verticaldots"]} />
+                </div>
+                <div className="flex flex-col gap-[18px] pt-[20px] h-[566px] overflow-y-auto">
+                  { MostSaledProducts.map(product=>(
 
-            {/* Reports && activity */}
-            <SeveralContentChart/>
+                    <div className="flex  items-center justify-between">
+                    <div className="flex gap-[16px]">
+                      <div className="w-[46px] h-[46px]">
+                        {/* Here must be image */} img
+                      </div>
+                      <div>
+                        <h3 className="text-[15px] font-bold">
+                          {product.name}
+                        </h3>
+                        <p className="text-secondaryGray text-[13px] leading-[20px]">
+                          Item: #FXZ-4567
+                        </p>
+                      </div>
+                    </div>
+                    <div className="text-[15px] font-medium">${product.price}</div>
+                  </div>
+                  ))
+                  }
+                  </div>
+              </div>
+            </div>
           </div>
         </div>
       </PageContainer>
