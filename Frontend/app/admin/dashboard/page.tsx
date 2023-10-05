@@ -2,6 +2,7 @@ import { MultiAxisChart } from "@/app/components/Charts/MultiAxisChart";
 import { SeveralContentChart } from "@/app/components/Charts/SeveralContentChart";
 import { SimpleLineChart } from "@/app/components/Charts/SimpleLineChart";
 import { Icon } from "@/app/components/Icon";
+import { SimpleAreaChartComponent } from "@/app/components/admin/ChartComponents/SimpleAreaChartComponent";
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
 import { PageContainer } from "@/app/components/admin/container/PageContainer";
 import { PublicSans } from "@/app/components/assets/Fonts";
@@ -156,13 +157,13 @@ const Page = () => {
            {/* 3 Linecharts */}
             <div className="flex justify-between gap-[26px] xl:flex-nowrap flex-wrap">
               <div className="xl:basis-1/3 basis-full">
-                <SimpleLineChartComponent title="Total Orders" mainValue='25.7K' data={SessionsData} lineColor={'#1EB564'} percentage='6%'/>
+                <SimpleAreaChartComponent title="Total Orders" mainValue='25.7K' data={SessionsData} lineColor={'#1EB564'} percentage='6%'/>
               </div>
               <div className="xl:basis-1/3 md:w-[48%] w-full">
-                <SimpleLineChartComponent title="Total Profit" mainValue='50K' data={SessionsData} lineColor={'#1EB564'} percentage='12%'/>
+                <SimpleAreaChartComponent title="Total Profit" mainValue='50K' data={SessionsData} lineColor={'#1EB564'} percentage='12%'/>
               </div>
               <div className="xl:basis-1/3 md:w-[48%] w-full">
-                <SimpleLineChartComponent title="Discounted amount" mainValue='12K' data={SessionsData} lineColor={'#D02626'} percentage='-2%'/>
+                <SimpleAreaChartComponent title="Discounted amount" mainValue='12K' data={SessionsData} lineColor={'#D02626'} percentage='-2%'/>
               </div>
             </div>
 

@@ -44,7 +44,7 @@ export const SeveralContentChart = () => {
 
   return (
     <div className="flex">
-      <div className="xl:w-[60%] w-[100%] p-[24px] bg-white rounded-[16px]">
+      <div className="w-full p-[24px] bg-white rounded-[16px]">
         <div className="flex justify-between w-full">
           {/* Header */}
           <div className="flex flex-col">
