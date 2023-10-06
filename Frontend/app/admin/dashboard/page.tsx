@@ -7,6 +7,7 @@ import { SimpleAreaChartComponent } from "@/app/components/admin/ChartComponents
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
 import { PageContainer } from "@/app/components/admin/container/PageContainer";
 import { PublicSans } from "@/app/components/assets/Fonts";
+import { MainTable } from "@/app/components/tables/MainTable";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import Image from "next/image";
 import React from "react";
@@ -232,9 +233,8 @@ const Page = () => {
                   </div>
                   <Icon svg={WebsiteIcons["Verticaldots"]} />
                 </div>
-                <div className="flex flex-col gap-[18px] pt-[20px] h-[566px] overflow-y-auto">
+                <div className="flex flex-col gap-[18px] mt-[20px] h-[566px] overflow-y-auto">
                   { MostSaledProducts.map(product=>(
-
                     <div className="flex  items-center justify-between">
                     <div className="flex gap-[16px]">
                       <div className="w-[46px] h-[46px]">
@@ -255,6 +255,13 @@ const Page = () => {
                   }
                   </div>
               </div>
+            </div>
+            <div className="flex flex-col gap-[24px] bg-white rounded-[16px] p-[24px]">
+                  <div className="flex items-center justify-between">
+                      <h1 className="text-[20px] font-medium text-blackBlue">Recent Orders</h1>
+                      <Icon svg={WebsiteIcons['Verticaldots']}/>
+                  </div>        
+                  <MainTable/>
             </div>
           </div>
         </div>
