@@ -1,11 +1,8 @@
 import { MultiAxisChart } from "@/app/components/Charts/MultiAxisChart";
 import { SeveralContentChart } from "@/app/components/Charts/SeveralContentChart";
-import { SimpleLineChart } from "@/app/components/Charts/SimpleLineChart";
 import { Icon } from "@/app/components/Icon";
-import { PieChartComponent } from "@/app/components/admin/ChartComponents/PieChartComponent";
 import { SimpleAreaChartComponent } from "@/app/components/admin/ChartComponents/SimpleAreaChartComponent";
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
-import { PageContainer } from "@/app/components/admin/container/PageContainer";
 import { PublicSans } from "@/app/components/assets/Fonts";
 import { MainTable } from "@/app/components/tables/MainTable";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
@@ -112,7 +109,6 @@ const Page = () => {
   
   return (
     <main className="bg-[#FAFAFA]">
-      <PageContainer>
         <div className={`pt-[20px] ${PublicSans.className} w-full`}>
           <div className="flex justify-between">
             <h1 className="font-bold text-[24px] leading-[22px] flex-grow">
@@ -197,7 +193,7 @@ const Page = () => {
                   percentage="6%"
                 />
               </div>
-              <div className="xl:basis-1/3 md:w-[48%] w-full">
+              <div className="xl:basis-1/3 md:w-[47%] w-full">
                 <SimpleAreaChartComponent
                   title="Total Profit"
                   mainValue="50K"
@@ -206,7 +202,7 @@ const Page = () => {
                   percentage="12%"
                 />
               </div>
-              <div className="xl:basis-1/3 md:w-[48%] w-full">
+              <div className="xl:basis-1/3 md:w-[47%] w-full">
                 <SimpleAreaChartComponent
                   title="Discounted amount"
                   mainValue="12K"
@@ -216,12 +212,12 @@ const Page = () => {
                 />
               </div>
             </div>
-            <div className="flex gap-[26px]">
+            <div className="flex gap-[26px] xl:flex-nowrap flex-wrap">
               {/* Reports && activity */}
-              <div className="!w-[60%]">
+              <div className="xl:!w-[60%] w-full">
                 <SeveralContentChart />
               </div>
-              <div className="!w-[39%] bg-white p-[24px]">
+              <div className="xl:!w-[39%] w-full bg-white p-[24px]">
                 <div className="flex justify-between">
                   <div>
                     <h3 className="text-[18px] font-semibold leading-[26px]">
@@ -265,7 +261,6 @@ const Page = () => {
             </div>
           </div>
         </div>
-      </PageContainer>
     </main>
   );
 };

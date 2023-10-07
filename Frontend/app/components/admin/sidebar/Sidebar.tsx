@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Logo } from "../../assets/Logo";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
@@ -17,6 +17,9 @@ import { User } from "@/public/Svg/AdminIcons/User";
 import { Settings } from "@/public/Svg/AdminIcons/Settings";
 import { useMediaQuery } from "@mui/material";
 import { extraLargeScreens } from "@/app/Screens/Screens";
+import Link from "next/link";
+
+
 
 export const Sidebar = ({
   isSidebarOpen,
@@ -27,6 +30,26 @@ export const Sidebar = ({
 }) => {
   const pathname = usePathname();
   const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
+
+
+  const bgRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const updateActiveElement = () => {
+      const activeElement = document.querySelector(".SidebarActiveComponent") as HTMLDivElement;
+      if (activeElement && bgRef.current) {
+        bgRef.current.style.top = activeElement.offsetTop + "px";
+        bgRef.current.style.height = activeElement.offsetHeight + "px";
+      }
+    };
+    updateActiveElement();
+
+    window.addEventListener("resize", updateActiveElement);
+    return () => {
+      window.removeEventListener("resize", updateActiveElement);
+    };
+  }, [pathname]);
+
   return (
     <div className="bg-white">
       <div className="flex justify-between items-center pl-[18px] py-[20px] pr-[14px]">
@@ -53,8 +76,9 @@ export const Sidebar = ({
         Main Menu
       </h1>
       }
-      <div className="px-[14px] flex flex-col gap-[8px]">
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+      <div className="px-[14px] flex flex-col gap-[8px] relative">
+          <div className={`w-full bg-[#F3F4F8] absolute z-[1] transition-all duration-150 rounded-[6px]`} ref={bgRef} /> {/*  Bg if active */}
+        <Link className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/dashboard")&& 'SidebarActiveComponent' } `} href={'/admin/dashboard'}>
           <AdminDashboard isActive={pathname.startsWith("/admin/dashboard")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -62,13 +86,13 @@ export const Sidebar = ({
                 pathname.startsWith("/admin/dashboard")
                   ? "text-black"
                   : " text-[#8B909A]"
-              }
-            >
+                }
+                >
               Dashboard
             </p>
           )}
-        </div>
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+        </Link>
+        <Link className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/orders") && 'SidebarActiveComponent' } `} href={'/admin/orders'}>
           <ShoppingCart isActive={pathname.startsWith("/admin/orders")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -81,8 +105,8 @@ export const Sidebar = ({
               Order Managment
             </p>
           )}
-        </div>
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+        </Link>
+        <Link href={'/admin/customers'} className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/customers")&& 'SidebarActiveComponent' } `}>
           <Users isActive={pathname.startsWith("/admin/customers")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -95,8 +119,8 @@ export const Sidebar = ({
               Customers
             </p>
           )}
-        </div>
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+        </Link>
+        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/coupon") && 'SidebarActiveComponent' } `}>
           <Coupon isActive={pathname.startsWith("/admin/coupon")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -110,7 +134,7 @@ export const Sidebar = ({
             </p>
           )}
         </div>
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/categories") && 'SidebarActiveComponent' } `}>
           <Categories isActive={pathname.startsWith("/admin/categories")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -124,7 +148,7 @@ export const Sidebar = ({
             </p>
           )}
         </div>
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/transactions") && 'SidebarActiveComponent' } `}>
           <Transaction isActive={pathname.startsWith("/admin/transactions")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -147,26 +171,24 @@ export const Sidebar = ({
       </h1>
 }
       <div className="px-[14px] flex flex-col gap-[8px]">
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
-          <CirclePlus isActive={pathname.startsWith("/admin/product/add")} />
+        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] `}>
+          <CirclePlus isActive={false} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
               className={
-                pathname.startsWith("/admin/product/add")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                   "text-[#8B909A]"
               }
             >
               Add Products
             </p>
           )}
         </div>
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
-          <Box isActive={pathname.startsWith("/admin/product/add")} />
+        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/productList") && 'SidebarActiveComponent' } `}>
+          <Box isActive={pathname.startsWith("/admin/productList")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
               className={
-                pathname.startsWith("/admin/product/add")
+                pathname.startsWith("/admin/productList")
                   ? "text-black"
                   : "text-[#8B909A]"
               }
@@ -184,7 +206,7 @@ export const Sidebar = ({
       </h1>
 }
       <div className="px-[14px] flex flex-col gap-[8px]">
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/managment") && 'SidebarActiveComponent' } `}>
           <User isActive={pathname.startsWith("/admin/managment")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -198,7 +220,7 @@ export const Sidebar = ({
             </p>
           )}
         </div>
-        <div className="flex gap-[8px] px-[16px] py-[8px] cursor-pointer">
+        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/roles") && 'SidebarActiveComponent' } `}>
           <Settings isActive={pathname.startsWith("/admin/roles")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
