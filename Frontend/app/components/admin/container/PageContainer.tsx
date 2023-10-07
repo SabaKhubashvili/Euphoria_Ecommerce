@@ -1,23 +1,26 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Sidebar } from "../sidebar/Sidebar";
 import { motion, useAnimation } from "framer-motion";
-import { smallScreens } from "@/app/Screens/Screens";
+import { extraLargeScreens, smallScreens } from "@/app/Screens/Screens";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
+
+
 export const PageContainer = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
-  const isAboveSmallScreens = useMediaQuery(smallScreens)
+  const isAboveSmallScreens = useMediaQuery(smallScreens);
+  const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
   const controls = useAnimation();
 
-  const sidebarVariants = {
-    open: { width: "20%" },
-    closed: { width: "fit-content" },
-  };
-  const bodyVariants = {
-    open: { width: "80%" },
-    closed: { width: "85%" },
-  };
+
+
+  const sidebarVariants = useMemo(() => {
+    return {
+      open: { width: "40%" },
+      closed: { width: "fit-content" },
+    };
+  }, [isSidebarOpen, isAboveLargeScreens]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -25,28 +28,27 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="flex gap-[26px] w-full pr-[26px]">
-      {isAboveSmallScreens&&
-
+    <div className="flex gap-[26px] w-full pr-[26px] justify-between">
+      {isAboveSmallScreens && (
         <motion.div
-        initial="closed"
-        animate={controls}
-        variants={sidebarVariants}
-        exit={{ width: "15%" }}
-        transition={{ duration: 0.3 }}
-      >
-        <Sidebar
-          isSidebarOpen={isSidebarOpen}
-          setIsSidebarOpen={toggleSidebar}
+          initial="closed"
+          animate={controls}
+          variants={sidebarVariants}
+          exit={{ width: "15%" }}
+          transition={{ duration: 0.3 }}
+        >
+          <Sidebar
+            isSidebarOpen={isSidebarOpen}
+            setIsSidebarOpen={toggleSidebar}
           />
-      </motion.div>
-        }
+        </motion.div>
+      )}
       <motion.div
         initial="closed"
         animate={controls}
-        variants={bodyVariants}
         exit={{ width: "15%" }}
         transition={{ duration: 0.3 }}
+        className="bg-[#FAFAFA] pl-[20px] flex-grow"
       >
         {children}
       </motion.div>

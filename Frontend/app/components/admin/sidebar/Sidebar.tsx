@@ -51,7 +51,7 @@ export const Sidebar = ({
   }, [pathname]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white h-full">
       <div className="flex justify-between items-center pl-[18px] py-[20px] pr-[14px]">
         { (isAboveLargeScreens) && (
           <div className="w-[90px] h-[40px]">

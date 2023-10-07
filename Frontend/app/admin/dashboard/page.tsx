@@ -3,6 +3,7 @@ import { SeveralContentChart } from "@/app/components/Charts/SeveralContentChart
 import { Icon } from "@/app/components/Icon";
 import { SimpleAreaChartComponent } from "@/app/components/admin/ChartComponents/SimpleAreaChartComponent";
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
+import { PageTop } from "@/app/components/admin/pageTop/PageTop";
 import { PublicSans } from "@/app/components/assets/Fonts";
 import { MainTable } from "@/app/components/tables/MainTable";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
@@ -108,35 +109,9 @@ const Page = () => {
   ];
   
   return (
-    <main className="bg-[#FAFAFA]">
-        <div className={`pt-[20px] ${PublicSans.className} w-full`}>
-          <div className="flex justify-between">
-            <h1 className="font-bold text-[24px] leading-[22px] flex-grow">
-              Dashboard
-            </h1>
-            <div className="flex gap-[24px] items-center">
-              <div className="relative cursor-pointer">
-                <Icon svg={WebsiteIcons["Bell"]} />
-                <div className="w-fit h-fit">
-                  <Icon
-                    svg={WebsiteIcons["RedDot"]}
-                    className="absolute -right-2 -top-2 "
-                  />
-                  <p className="text-[#FFF]  absolute -right-[3px] -top-[5px] text-[13px] font-semibold leading-[14px]">
-                    2
-                  </p>
-                </div>
-              </div>
-              <div>
-                <Image
-                  src={"/Images/User/Avatar_Placeholder.png"}
-                  alt="Avatar Placeholder"
-                  width={30}
-                  height={30}
-                />
-              </div>
-            </div>
-          </div>
+    <main className="">
+        <div className={`${PublicSans.className} w-full`}>
+          <PageTop pageTitle="Dashboard"/>
 
           <div className="flex flex-col gap-[24px]">
             {/* Top Charts */}

@@ -4,7 +4,9 @@ import React from 'react'
 const page = () => {
   return (
    <main>
-    sasba
+    <div className='pt-[28px]'>
+      
+    </div>
    </main>
   )
 }
