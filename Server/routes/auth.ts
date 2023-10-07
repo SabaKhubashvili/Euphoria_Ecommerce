@@ -4,19 +4,30 @@ const bcrypt = require("bcrypt");
 const jwt = require('jsonwebtoken')
 
 router.post("/register", async (req: any, res: any) => {
-  const hashedPassword = await bcrypt.hash(req.body.password.toString(), 15);
-
-  const newUser = new User({
-    username: req.body.username,
-    email: req.body.email,
-    password: hashedPassword,
-  });
-
+  
   try {
+    if(!req.body.firstname || !req.body.lastname || !req.body.email || !req.body.password){
+      return res.status(400).json({message:"All fields are required"})
+    }
+    const doesUserExist = await User.findOne({ email: req.body.email })
+
+    
+    if(doesUserExist?._doc){
+      return res.status(409).json({message: "Email is already registered"})
+    }
+    const hashedPassword = await bcrypt.hash(req.body.password.toString(), 15);
+    
+    const newUser = new User({
+      firstname: req.body.firstname,
+      lastname:req.body.lastname,
+      email: req.body.email,
+      password: hashedPassword,
+    });
+
     const savedUser = await newUser.save();
     res.status(201).json(savedUser);
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json('err');
   }
 });
 
