@@ -92,7 +92,7 @@ export const Sidebar = ({
             </p>
           )}
         </Link>
-        <Link className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/orders") && 'SidebarActiveComponent' } `} href={'/admin/orders'}>
+        <Link className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2]  ${pathname.startsWith("/admin/orders") && 'SidebarActiveComponent' } `} href={'/admin/orders'}>
           <ShoppingCart isActive={pathname.startsWith("/admin/orders")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
