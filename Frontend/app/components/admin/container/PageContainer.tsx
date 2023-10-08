@@ -17,7 +17,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
 
   const sidebarVariants = useMemo(() => {
     return {
-      open: { width: "40%" },
+      open: { width: "20%" },
       closed: { width: "fit-content" },
     };
   }, [isSidebarOpen, isAboveLargeScreens]);

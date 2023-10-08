@@ -20,7 +20,6 @@ export const OrderManagmentVariations = () => {
         
       if (underlineRef.current) {
         const activeElement = document.querySelector(".activeTableVariationOrders") as HTMLDivElement;
-        console.log(activeElement);
         
         underlineRef.current.style.left = activeElement.offsetLeft + "px";
         underlineRef.current.style.width = activeElement.offsetWidth + "px";
