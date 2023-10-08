@@ -1,4 +1,5 @@
 "use client";
+
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Icon } from "../Icon";
@@ -32,6 +33,7 @@ export const SeveralContentChart = () => {
     };
   }, [activeType]);
 
+  
   const weeklyIncomeData = [
     { day: "Monday", income: Math.floor(Math.random() * 1000) },
     { day: "Tuesday", income: Math.floor(Math.random() * 1000) },

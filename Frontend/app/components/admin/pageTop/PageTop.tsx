@@ -2,10 +2,11 @@ import React from "react";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import Image from "next/image";
+import { PublicSans } from "../../assets/Fonts";
 
 export const PageTop = ({pageTitle}:{pageTitle:string}) => {
   return (
-    <div className="flex justify-between pt-[28px]">
+    <div className={`flex justify-between pt-[28px] ${PublicSans.className}`}>
       <h1 className="font-bold text-[24px] leading-[22px] flex-grow">
         {pageTitle}
       </h1>
