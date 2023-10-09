@@ -232,7 +232,11 @@ const Page = () => {
                       <h1 className="text-[20px] font-medium text-blackBlue">Recent Orders</h1>
                       <Icon svg={WebsiteIcons['Verticaldots']}/>
                   </div>        
-                  <MainTable/>
+                  <MainTable
+                    type="secondary"
+                    topContent={[]}
+                    bodyContent={[{}]}
+                  />
             </div>
           </div>
         </div>

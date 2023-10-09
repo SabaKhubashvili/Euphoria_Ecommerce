@@ -5,6 +5,8 @@ import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { MainDropdown } from "../../Dropdown/MainDropdown";
+import { MainTable } from "../../tables/MainTable";
+import { orders } from "@/app/constants";
 
 enum Variations {
   All = 0,
@@ -112,6 +114,25 @@ export const OrderManagmentVariations = () => {
           label="Filter by date range"
         />
       </div>
+      <div className="h-[600px]">
+        <MainTable bodyContent={orders} topContent={['Order id', 'created', 'customer', 'total', 'profit', 'status' , ' ']} type="primary"/>
+      </div>
+      <div className="w-full flex justify-between items-center px-[24px]">
+          <div className="flex items-center gap-[10px] text-secondaryGray">
+            <span>Showing</span>
+            <MainDropdown type="primary" size="xs" label="10"   content={[
+            { label: "16", onClick: () => console.log("smt") },
+            { label: "32", onClick: () => console.log("smt") },
+            { label: "48", onClick: () => console.log("smt") },
+            { label: "64", onClick: () => console.log("smt") },
+          ]}/>
+          <span>of 50</span>
+          </div>
+          <div>
+            Here must be pagination
+          </div>
+      </div>
+
     </React.Fragment>
   );
 };

@@ -408,3 +408,114 @@ export const products: productInterface[] = [
     image: "Product"
   },
 ];
+
+export const orders: {
+  id: number;
+  created_at: string;
+  customer: string;
+  total_price: number;
+  profit: number;
+  status: string;
+  empty_string: string;
+}[] = [
+  {
+      id: 1,
+      created_at: "2023-10-09 08:00:00",
+      customer: "Customer A",
+      total_price: 100.00,
+      profit: 25.00,
+      status: "Pending",
+      empty_string: "",
+  },
+  {
+      id: 2,
+      created_at: "2023-10-09 09:30:00",
+      customer: "Customer B",
+      total_price: 75.50,
+      profit: 15.25,
+      status: "Completed",
+      empty_string: "",
+  },
+  {
+      id: 3,
+      created_at: "2023-10-09 11:15:00",
+      customer: "Customer C",
+      total_price: 200.00,
+      profit: 40.00,
+      status: "Shipped",
+      empty_string: "",
+  },
+  {
+      id: 2,
+      created_at: "2023-10-09 09:30:00",
+      customer: "Customer B",
+      total_price: 75.50,
+      profit: 15.25,
+      status: "Completed",
+      empty_string: "",
+  },
+  {
+      id: 3,
+      created_at: "2023-10-09 11:15:00",
+      customer: "Customer C",
+      total_price: 200.00,
+      profit: 40.00,
+      status: "Shipped",
+      empty_string: "",
+  },
+  {
+      id: 2,
+      created_at: "2023-10-09 09:30:00",
+      customer: "Customer B",
+      total_price: 75.50,
+      profit: 15.25,
+      status: "Completed",
+      empty_string: "",
+  },
+  {
+      id: 3,
+      created_at: "2023-10-09 11:15:00",
+      customer: "Customer C",
+      total_price: 200.00,
+      profit: 40.00,
+      status: "Shipped",
+      empty_string: "",
+  },
+  {
+      id: 2,
+      created_at: "2023-10-09 09:30:00",
+      customer: "Customer B",
+      total_price: 75.50,
+      profit: 15.25,
+      status: "Completed",
+      empty_string: "",
+  },
+  {
+      id: 3,
+      created_at: "2023-10-09 11:15:00",
+      customer: "Customer C",
+      total_price: 200.00,
+      profit: 40.00,
+      status: "Shipped",
+      empty_string: "",
+  },
+  {
+      id: 2,
+      created_at: "2023-10-09 09:30:00",
+      customer: "Customer B",
+      total_price: 75.50,
+      profit: 15.25,
+      status: "Completed",
+      empty_string: "",
+  },
+  {
+      id: 3,
+      created_at: "2023-10-09 11:15:00",
+      customer: "Customer C",
+      total_price: 200.00,
+      profit: 40.00,
+      status: "Shipped",
+      empty_string: "",
+  },
+];
+
