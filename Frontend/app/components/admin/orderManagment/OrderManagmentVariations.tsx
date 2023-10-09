@@ -1,6 +1,9 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { SecondaryInput } from "../../Inputs/SecondaryInput";
+import { Icon } from "../../Icon";
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
 
 enum Variations {
   All = 0,
@@ -31,7 +34,7 @@ export const OrderManagmentVariations = () => {
   }, [activeVariation]);
 
   return (
-    <div>
+    <React.Fragment>
       <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative">
         <div className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200" ref={underlineRef} />
         {/* Underline */}
@@ -84,6 +87,9 @@ export const OrderManagmentVariations = () => {
           Delivered
         </div>
       </div>
-    </div>
+      <div className=" pt-[24px] w-[204px]">
+          <SecondaryInput placeholder="Search by order id" type="secondary" rightSvg={<Icon svg={WebsiteIcons['Search']} />} />
+      </div>
+    </React.Fragment>
   );
 };

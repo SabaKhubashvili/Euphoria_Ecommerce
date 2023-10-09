@@ -1,9 +1,5 @@
 import React from "react";
 import { Container } from "../components/Container";
-import { SecondaryInput } from "../components/Inputs/SecondaryInput";
-import { AuthInput } from "../components/Inputs/AuthInput";
-import { Formik } from "formik";
-import { Form } from "../components/Form/Form";
 import { AuthForm } from "../components/Form/AuthForm";
 
 const page = () => {

@@ -1,11 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import { BigScreenNavLink } from "./BigScreenNavLink";
-import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { motion } from "framer-motion";
 export const BigScreenNavLinks = () => {
-  const [searchOpen, setSearchOpen] = useState<boolean>(false);
 
   return (
     <div className="">

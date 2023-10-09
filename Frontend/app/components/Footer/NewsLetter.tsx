@@ -10,7 +10,7 @@ export const NewsLetter = () => {
           <p className={`${Roboto.className} text-[13px] uppercase lg:pt-[30px] mt-[10px] text-white`}>Subscribe to our newsletters</p>
 
           <div className='mt-[10px] flex flex-col gap-[7px]'>
-                <SecondaryInput placeholder='Email Address'/>
+                <SecondaryInput type='primary' placeholder='Email Address'/>
                 <GrayButton label='Subscribe!' onClick={()=>{}}/>
           </div>
     </div>
