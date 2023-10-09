@@ -2,8 +2,6 @@ import React from "react";
 import { AuthInput } from "../Inputs/AuthInput";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { Roboto } from "../assets/Fonts";
-import Image from "next/image";
-import { Dropdown_Down } from "@/public/Svg/Icons";
 import { SmallCartInfo } from "./SmallCartInfo";
 
 interface Props {
@@ -102,6 +100,7 @@ export const CartAdressInfo = ({
                       label: "Batumi",
                     },
                   ]}
+                  type="primary"
                 />
                 {errors.city && (
                   <div className="text-rose-700 pt-[4px]">{errors.city}</div>

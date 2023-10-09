@@ -5,9 +5,8 @@ import React, { useState } from "react";
 import Counter from "../buttons/Counter";
 import { SearchInput } from "../Inputs/SearchInput";
 import { GrayButton } from "../buttons/GrayButton";
-import { MainDropdown } from "../Dropdown/MainDropdown";
 import { MainButton } from "../buttons/MainButton";
-import { InfoType, Steps } from "./CartPage";
+import { Steps } from "./CartPage";
 
 export const Cart = ({
   setStep,

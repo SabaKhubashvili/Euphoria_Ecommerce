@@ -28,7 +28,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <div className="flex gap-[26px] w-full pr-[26px] justify-between">
+    <div className="flex gap-[26px] w-full  justify-between">
       {isAboveSmallScreens && (
         <motion.div
           initial="closed"
@@ -48,7 +48,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
         animate={controls}
         exit={{ width: "15%" }}
         transition={{ duration: 0.3 }}
-        className="bg-[#FAFAFA] pl-[20px] flex-grow"
+        className="bg-[#FAFAFA] pl-[20px] flex-grow pr-[26px]"
       >
         {children}
       </motion.div>

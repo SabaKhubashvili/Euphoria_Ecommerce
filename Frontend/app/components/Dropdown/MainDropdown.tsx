@@ -4,13 +4,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface Props {
   label: string;
-  type?: string;
+  type?: 'primary' | 'secondary';
   content: {
     onClick:(value:string | null | undefined)=>void,
     label:string
   }[];
-  size?: "sm" | "md" | "lg" | "xl";
-  full?:boolean
+  size?: "xs" | "sm" | "md" | "lg" | "xl";
+  full?:boolean,
 }
 
 export const MainDropdown = ({
@@ -39,8 +39,18 @@ export const MainDropdown = ({
   return (
     <div className={`relative ${full ? 'w-full' : 'w-fit'}`} ref={ref}>
       <div
-        className={`flex justify-between items-center cursor-pointer border-[1px] border-solid border-divider p-[11px]
+        className={`flex justify-between items-center cursor-pointer  p-[11px]
         ${
+          type === 'primary' 
+          ?
+          'border-[1px] border-solid border-divider'
+          :
+          'rounded-[6px] bg-white'
+        }
+        ${
+          size === 'xs' ?
+          'gap-[8px]'
+          :
           size === "sm"
             ? "gap-[20px]"
             : size === "md"
@@ -56,7 +66,8 @@ export const MainDropdown = ({
           setIsOpen((prev) => !prev);
         }}
       >
-        <p className="select-none md:text-[16px] text-[14px]">{label}</p>
+        <p className={`select-none md:text-[16px] text-[14px] 
+        ${type === 'primary' ? 'text-black' : type === 'secondary' ? 'text-secondaryGray' : ''}`}>{label}</p>
         <div
           className={`${
             isOpen ? "rotate-180" : "rotate-0"

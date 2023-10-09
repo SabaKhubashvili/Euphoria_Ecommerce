@@ -48,10 +48,12 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
         </div>
         <div className="flex gap-[20px] sm:order-none order-first">
             <MainDropdown
+            type="primary"
              size="xl"
              label={priceFrom ? priceFrom === 'high' ? 'Low To High' : 'High to low' : 'Sort by'}
              content={[{label:'price (High to low)',onClick:()=>setPriceSort('low')},{label:'price (Low to high)',onClick:()=>setPriceSort('high')}]} />
             <MainDropdown
+             type="primary"
              size="sm"
              label={`${productPerPage}`}
              content={[

@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
+import { MainDropdown } from "../../Dropdown/MainDropdown";
 
 enum Variations {
   All = 0,
@@ -20,15 +21,16 @@ export const OrderManagmentVariations = () => {
 
   useEffect(() => {
     const updateActiveELement = () => {
-        
       if (underlineRef.current) {
-        const activeElement = document.querySelector(".activeTableVariationOrders") as HTMLDivElement;
-        
+        const activeElement = document.querySelector(
+          ".activeTableVariationOrders"
+        ) as HTMLDivElement;
+
         underlineRef.current.style.left = activeElement.offsetLeft + "px";
         underlineRef.current.style.width = activeElement.offsetWidth + "px";
       }
     };
-    updateActiveELement()
+    updateActiveELement();
     document.addEventListener("resize", updateActiveELement);
     return () => document.removeEventListener("resize", updateActiveELement);
   }, [activeVariation]);
@@ -36,14 +38,17 @@ export const OrderManagmentVariations = () => {
   return (
     <React.Fragment>
       <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative">
-        <div className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200" ref={underlineRef} />
+        <div
+          className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200"
+          ref={underlineRef}
+        />
         {/* Underline */}
         <div
           className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-                  activeVariation === Variations.All
-                    ? "text-purple activeTableVariationOrders"
-                    : "text-secondaryGray"
-                }`}
+            activeVariation === Variations.All
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
           onClick={() => {
             setActiveVariation(Variations.All);
           }}
@@ -52,10 +57,10 @@ export const OrderManagmentVariations = () => {
         </div>
         <div
           className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-               activeVariation === Variations.Pending
-                 ? "text-purple activeTableVariationOrders"
-                 : "text-secondaryGray"
-             }`}
+            activeVariation === Variations.Pending
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
           onClick={() => {
             setActiveVariation(Variations.Pending);
           }}
@@ -64,10 +69,10 @@ export const OrderManagmentVariations = () => {
         </div>
         <div
           className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-               activeVariation === Variations.Confirmed
-                 ? "text-purple activeTableVariationOrders"
-                 : "text-secondaryGray"
-             }`}
+            activeVariation === Variations.Confirmed
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
           onClick={() => {
             setActiveVariation(Variations.Confirmed);
           }}
@@ -76,10 +81,10 @@ export const OrderManagmentVariations = () => {
         </div>
         <div
           className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-               activeVariation === Variations.Delivered
-                 ? "text-purple activeTableVariationOrders"
-                 : "text-secondaryGray"
-             }`}
+            activeVariation === Variations.Delivered
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
           onClick={() => {
             setActiveVariation(Variations.Delivered);
           }}
@@ -87,8 +92,25 @@ export const OrderManagmentVariations = () => {
           Delivered
         </div>
       </div>
-      <div className=" pt-[24px] w-[204px]">
-          <SecondaryInput placeholder="Search by order id" type="secondary" rightSvg={<Icon svg={WebsiteIcons['Search']} />} />
+      <div className=" pt-[24px] flex justify-between items-center">
+        <div className="w-[204px]">
+          <SecondaryInput
+            placeholder="Search by order id"
+            type="secondary"
+            rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
+          />
+        </div>
+        <MainDropdown
+          content={[
+            { label: "16", onClick: () => console.log("smt") },
+            { label: "32", onClick: () => console.log("smt") },
+            { label: "48", onClick: () => console.log("smt") },
+            { label: "64", onClick: () => console.log("smt") },
+          ]}
+          type="secondary"
+          size="xs"
+          label="Filter by date range"
+        />
       </div>
     </React.Fragment>
   );
