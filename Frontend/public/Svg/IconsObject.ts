@@ -98,5 +98,11 @@ export const WebsiteIcons = {
       <rect width="18" height="18" fill="white"/>
     </clipPath>
   </defs>
+</svg>`,
+  prevGray:`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M10 4L6 8L10 12" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  nextGray:`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M6 4L10 8L6 12" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
 };

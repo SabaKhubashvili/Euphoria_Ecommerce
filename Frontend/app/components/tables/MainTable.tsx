@@ -11,8 +11,7 @@ interface Props {
 
 export const MainTable = ({ type, topContent, bodyContent }: Props) => {
 
-  console.log(`body length: ${Object.keys(bodyContent[0]).length}  // top Content: ${topContent.length}`);
-  
+
   const HeaderCell = ({ text }: { text: string }) => (
     <h1 className={`text-secondaryGray uppercase font-medium md:text-[16px] text-[13px] 
     `}

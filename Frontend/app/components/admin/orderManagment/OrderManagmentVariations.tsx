@@ -7,6 +7,7 @@ import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { MainDropdown } from "../../Dropdown/MainDropdown";
 import { MainTable } from "../../tables/MainTable";
 import { orders } from "@/app/constants";
+import { AdminPagination } from "../AdminPagination";
 
 enum Variations {
   All = 0,
@@ -129,7 +130,7 @@ export const OrderManagmentVariations = () => {
           <span>of 50</span>
           </div>
           <div>
-            Here must be pagination
+            <AdminPagination length={12}/>
           </div>
       </div>
 
