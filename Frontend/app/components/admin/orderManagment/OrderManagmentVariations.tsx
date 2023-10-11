@@ -1,13 +1,15 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState,useMemo } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { MainDropdown } from "../../Dropdown/MainDropdown";
 import { MainTable } from "../../tables/MainTable";
 import { orders } from "@/app/constants";
-import { AdminPagination } from "../AdminPagination";
+import { Pagination } from "../../Pagination";
+import { UseAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
+import { ordersInterface } from "@/app/types";
 
 enum Variations {
   All = 0,
@@ -21,7 +23,7 @@ export const OrderManagmentVariations = () => {
     Variations.All
   );
   const underlineRef = useRef<HTMLDivElement>(null);
-
+  const { nextPage, prevPage, manualPage, currentPage, ordersPerPage } = UseAdminOrdersPagination();
   useEffect(() => {
     const updateActiveELement = () => {
       if (underlineRef.current) {
@@ -37,7 +39,13 @@ export const OrderManagmentVariations = () => {
     document.addEventListener("resize", updateActiveELement);
     return () => document.removeEventListener("resize", updateActiveELement);
   }, [activeVariation]);
-
+  
+  const ordersOnPage: ordersInterface[] = useMemo(() => {
+    const startIndex = (currentPage - 1) * ordersPerPage;
+    const endIndex = currentPage * ordersPerPage;
+    return orders.slice(startIndex, endIndex);
+  }, [orders, currentPage, ordersPerPage]);
+  
   return (
     <React.Fragment>
       <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative">
@@ -116,7 +124,7 @@ export const OrderManagmentVariations = () => {
         />
       </div>
       <div className="h-[600px]">
-        <MainTable bodyContent={orders} topContent={['Order id', 'created', 'customer', 'total', 'profit', 'status' , ' ']} type="primary"/>
+        <MainTable bodyContent={ordersOnPage} topContent={['Order id', 'created', 'customer', 'total', 'profit', 'status' , ' ']} type="primary"/>
       </div>
       <div className="w-full flex justify-between items-center px-[24px]">
           <div className="flex items-center gap-[10px] text-secondaryGray">
@@ -130,7 +138,15 @@ export const OrderManagmentVariations = () => {
           <span>of 50</span>
           </div>
           <div>
-            <AdminPagination length={12}/>
+          <Pagination
+              currentPage={currentPage} 
+              nextPage={nextPage}
+              productPerPage={ordersPerPage}
+              manualPage={manualPage} 
+              previousPage={prevPage}
+              productsLength={orders.length} 
+              type="secondary"
+            />
           </div>
       </div>
 

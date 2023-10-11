@@ -1,5 +1,5 @@
 
-import { SingleFooterComponentRowType, } from "../types"
+import { SingleFooterComponentRowType, ordersInterface, } from "../types"
 import { FacebookIcon,InstagramIcon,LinkedinIcon } from "@/public/Svg/Social"
 
 export const FooterFeatures = [
@@ -409,15 +409,7 @@ export const products: productInterface[] = [
   },
 ];
 
-export const orders: {
-  id: number;
-  created_at: string;
-  customer: string;
-  total_price: number;
-  profit: number;
-  status: string;
-  empty_string: string;
-}[] = [
+export const orders: ordersInterface[] = [
   {
       id: 1,
       created_at: "2023-10-09 08:00:00",
@@ -425,7 +417,7 @@ export const orders: {
       total_price: 100.00,
       profit: 25.00,
       status: "Pending",
-      empty_string: "",
+      empty: "",
   },
   {
       id: 2,
@@ -434,7 +426,7 @@ export const orders: {
       total_price: 75.50,
       profit: 15.25,
       status: "Completed",
-      empty_string: "",
+      empty: "",
   },
   {
       id: 3,
@@ -443,79 +435,79 @@ export const orders: {
       total_price: 200.00,
       profit: 40.00,
       status: "Shipped",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 2,
+      id: 4,
       created_at: "2023-10-09 09:30:00",
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
       status: "Completed",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 3,
+      id: 5,
       created_at: "2023-10-09 11:15:00",
       customer: "Customer C",
       total_price: 200.00,
       profit: 40.00,
       status: "Shipped",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 2,
+      id: 6,
       created_at: "2023-10-09 09:30:00",
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
       status: "Completed",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 3,
+      id: 7,
       created_at: "2023-10-09 11:15:00",
       customer: "Customer C",
       total_price: 200.00,
       profit: 40.00,
       status: "Shipped",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 2,
+      id: 8,
       created_at: "2023-10-09 09:30:00",
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
       status: "Completed",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 3,
+      id: 9,
       created_at: "2023-10-09 11:15:00",
       customer: "Customer C",
       total_price: 200.00,
       profit: 40.00,
       status: "Shipped",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 2,
+      id: 10,
       created_at: "2023-10-09 09:30:00",
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
       status: "Completed",
-      empty_string: "",
+      empty: "",
   },
   {
-      id: 3,
+      id: 11,
       created_at: "2023-10-09 11:15:00",
       customer: "Customer C",
       total_price: 200.00,
       profit: 40.00,
       status: "Shipped",
-      empty_string: "",
+      empty: "",
   },
 ];
 

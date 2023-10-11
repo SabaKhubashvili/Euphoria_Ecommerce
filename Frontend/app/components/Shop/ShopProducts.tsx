@@ -4,8 +4,6 @@ import React, { useMemo } from "react";
 import { Filter } from "./Filter";
 import { Shop } from "./Shop";
 import { Roboto } from "../assets/Fonts";
-import useMediaQuery from "@/app/hooks/UseMediaQuery";
-import { largeScreens } from "@/app/Screens/Screens";
 import { productInterface, products } from "@/app/constants";
 import { usePagination } from "@/app/hooks/UsePagination";
 import { Pagination } from "../Pagination";
@@ -13,8 +11,8 @@ import { useFilter } from "@/app/hooks/UseFilter";
 import { getAllProducts } from "@/app/actions/getAllProducts";
 
 export const ShopProducts = () => {
-  const IsAboveLargeScreens = useMediaQuery(largeScreens);
-  const { currentPage, manualPage, productPerPage } = usePagination();
+
+  const { nextPage, previousPage, manualPage, currentPage, productPerPage } = usePagination();
   const { priceFrom } = useFilter();
   const { 
     data: products, 
@@ -64,7 +62,14 @@ export const ShopProducts = () => {
             currentProducts={currentProducts || null}
           />
           {products?.length && productPerPage < products?.length && (
-            <Pagination productsLength={products.length} />
+            <Pagination 
+              currentPage={currentPage} 
+              nextPage={nextPage}
+              productPerPage={productPerPage}
+              manualPage={manualPage} 
+              previousPage={previousPage}
+              productsLength={products.length} 
+            />
           )}
         </div>
       </div>

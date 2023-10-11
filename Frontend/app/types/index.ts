@@ -15,3 +15,12 @@ export interface FilterInterface{
     price:string[]
 }
   
+export interface ordersInterface{
+    id: number;
+  created_at: string;
+  customer: string;
+  total_price: number;
+  profit: number;
+  status: string;
+  empty: string;
+}
