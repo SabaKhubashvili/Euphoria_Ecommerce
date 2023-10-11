@@ -21,6 +21,6 @@ export interface ordersInterface{
   customer: string;
   total_price: number;
   profit: number;
-  status: string;
+  status: 'Confirmed' | 'Delivered' | 'Pending';
   empty: string;
 }

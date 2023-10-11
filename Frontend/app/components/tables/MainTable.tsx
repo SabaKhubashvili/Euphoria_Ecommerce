@@ -11,7 +11,8 @@ interface Props {
 }
 
 export const MainTable = ({ type, topContent, bodyContent }: Props) => {
-
+  console.log(type);
+  
 
   const HeaderCell = ({ text }: { text: string }) => (
     <h1 className={`text-secondaryGray uppercase font-medium md:text-[16px] text-[13px] 
@@ -30,13 +31,21 @@ export const MainTable = ({ type, topContent, bodyContent }: Props) => {
       {text}
     </h1>
   );
-  const StatusRowCell = ({ text }: { text: "Pending" | "Delivered" }) => (
+  const StatusRowCell = ({ text }: { text: "Pending" | "Delivered" | "Confirmed" }) => (
     <h1
-      className={`text-black  font-medium xl:text-[16px] text-[13px] ${text === "Pending" ? "text-yellow-500" : "text-green"
-        }`}
+      className={`text-black  font-medium xl:text-[16px] text-[13px]  cursor-pointer flex items-center justify-between ${type === 'primary' && 'px-[10px] py-[5px] rounded-[4px]'}
+      ${text === "Pending" ? `
+      ${type === 'primary' ? 'bg-[#ffc60029] text-[#FFC600]' :  ' text-yellow-500 ' }` : 
+      text === 'Confirmed' ?  ` ${type === 'primary' ? 'text-[#28C76F] bg-[#28c76f29]' : 'text-green'}`
+      :  type === 'primary' ? 'text-[#33189D] bg-[#33189d29]' : 'text-[#33189D]' }`}
       style={{ flexBasis: 100 / topContent.length + '%' }}
     >
-      {text}
+      <span>
+        {text}
+      </span>
+
+      <Dropdown_Down/>
+
     </h1>
   );
 

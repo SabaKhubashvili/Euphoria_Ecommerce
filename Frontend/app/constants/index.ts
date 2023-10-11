@@ -425,7 +425,7 @@ export const orders: ordersInterface[] = [
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
-      status: "Completed",
+      status: "Confirmed",
       empty: "",
   },
   {
@@ -443,7 +443,7 @@ export const orders: ordersInterface[] = [
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
-      status: "Completed",
+      status: "Confirmed",
       empty: "",
   },
   {
@@ -461,7 +461,7 @@ export const orders: ordersInterface[] = [
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
-      status: "Completed",
+      status: "Confirmed",
       empty: "",
   },
   {
@@ -479,7 +479,7 @@ export const orders: ordersInterface[] = [
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
-      status: "Completed",
+      status: "Confirmed",
       empty: "",
   },
   {
@@ -497,7 +497,7 @@ export const orders: ordersInterface[] = [
       customer: "Customer B",
       total_price: 75.50,
       profit: 15.25,
-      status: "Completed",
+      status: "Confirmed",
       empty: "",
   },
   {

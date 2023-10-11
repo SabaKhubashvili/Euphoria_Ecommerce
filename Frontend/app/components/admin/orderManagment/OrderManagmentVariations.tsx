@@ -23,7 +23,7 @@ export const OrderManagmentVariations = () => {
     Variations.All
   );
   const underlineRef = useRef<HTMLDivElement>(null);
-  const { nextPage, prevPage, manualPage, currentPage, ordersPerPage } = UseAdminOrdersPagination();
+  const { nextPage, prevPage, manualPage, currentPage, ordersPerPage, setProductPerPage } = UseAdminOrdersPagination();
   useEffect(() => {
     const updateActiveELement = () => {
       if (underlineRef.current) {
@@ -111,7 +111,7 @@ export const OrderManagmentVariations = () => {
             rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
           />
         </div>
-        <MainDropdown
+        {/* <MainDropdown
           content={[
             { label: "16", onClick: () => console.log("smt") },
             { label: "32", onClick: () => console.log("smt") },
@@ -121,7 +121,7 @@ export const OrderManagmentVariations = () => {
           type="secondary"
           size="xs"
           label="Filter by date range"
-        />
+        /> */}
       </div>
       <div className="h-[600px]">
         <MainTable bodyContent={ordersOnPage} topContent={['Order id', 'created', 'customer', 'total', 'profit', 'status' , ' ']} type="primary"/>
@@ -129,11 +129,12 @@ export const OrderManagmentVariations = () => {
       <div className="w-full flex justify-between items-center px-[24px]">
           <div className="flex items-center gap-[10px] text-secondaryGray">
             <span>Showing</span>
-            <MainDropdown type="primary" size="xs" label="10"   content={[
-            { label: "16", onClick: () => console.log("smt") },
-            { label: "32", onClick: () => console.log("smt") },
-            { label: "48", onClick: () => console.log("smt") },
-            { label: "64", onClick: () => console.log("smt") },
+            <MainDropdown type="primary" size="xs" label={`${ordersPerPage}`}   content={[
+            { label: "10", onClick: () => setProductPerPage(10)},
+            { label: "20", onClick: () => setProductPerPage(20) },
+            { label: "30", onClick: () => setProductPerPage(30) },
+            { label: "40", onClick: () => setProductPerPage(40) },
+            { label: "50", onClick: () => setProductPerPage(50) },
           ]}/>
           <span>of 50</span>
           </div>

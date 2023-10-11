@@ -6,7 +6,7 @@ interface AdminOrdersPagination{
     nextPage:()=>void,
     prevPage:()=>void,
     manualPage:(page:number)=>void,
-
+    setProductPerPage: (number: 10 | 20 | 30 | 40 | 50) => void
 }
 
 export const UseAdminOrdersPagination = create<AdminOrdersPagination>((set)=>({
@@ -27,4 +27,9 @@ export const UseAdminOrdersPagination = create<AdminOrdersPagination>((set)=>({
             currentPage: page
         }))
     },
+    setProductPerPage:(perPage)=>{
+        set({
+            ordersPerPage:perPage
+        })
+    }
 }))
