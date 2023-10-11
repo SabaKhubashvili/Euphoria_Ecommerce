@@ -6,6 +6,7 @@ import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents
 import { PageTop } from "@/app/components/admin/pageTop/PageTop";
 import { PublicSans } from "@/app/components/assets/Fonts";
 import { MainTable } from "@/app/components/tables/MainTable";
+import { orders } from "@/app/constants";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import Image from "next/image";
 import React from "react";
@@ -234,8 +235,8 @@ const Page = () => {
                   </div>        
                   <MainTable
                     type="secondary"
-                    topContent={[]}
-                    bodyContent={[{}]}
+                    topContent={['Order id', 'created', 'customer', 'total', 'profit', 'status' , ' ']}
+                    bodyContent={orders.slice(0,10)}
                   />
             </div>
           </div>

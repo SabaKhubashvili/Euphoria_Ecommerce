@@ -33,18 +33,19 @@ export const MainTable = ({ type, topContent, bodyContent }: Props) => {
   );
   const StatusRowCell = ({ text }: { text: "Pending" | "Delivered" | "Confirmed" }) => (
     <h1
-      className={`text-black  font-medium xl:text-[16px] text-[13px]  cursor-pointer flex items-center justify-between ${type === 'primary' && 'px-[10px] py-[5px] rounded-[4px]'}
-      ${text === "Pending" ? `
-      ${type === 'primary' ? 'bg-[#ffc60029] text-[#FFC600]' :  ' text-yellow-500 ' }` : 
+      className={`  font-medium xl:text-[16px] text-[13px]  cursor-pointer flex items-center justify-between ${type === 'primary' && 'px-[10px] py-[5px] rounded-[4px]'}
+      ${text === "Pending" ? `${type === 'primary' ? 'bg-[#ffc60029] text-[#FFC600]' :  ' text-yellow-500 ' }`
+       : 
       text === 'Confirmed' ?  ` ${type === 'primary' ? 'text-[#28C76F] bg-[#28c76f29]' : 'text-green'}`
       :  type === 'primary' ? 'text-[#33189D] bg-[#33189d29]' : 'text-[#33189D]' }`}
       style={{ flexBasis: 100 / topContent.length + '%' }}
     >
-      <span>
+    
         {text}
-      </span>
-
+      {
+      type === 'primary' &&
       <Dropdown_Down/>
+    }
 
     </h1>
   );
@@ -64,7 +65,7 @@ export const MainTable = ({ type, topContent, bodyContent }: Props) => {
       <div className={`flex flex-col h-full overflow-y-auto w-full`}>
         {bodyContent.map((cont: any, index: number) => (
           <div key={index} className="flex  items-center py-[8px] px-[20px] ">
-            <RowCell text={'#' + cont.id.toString()} />
+            <RowCell text={'#' + cont.id?.toString()} />
             <RowCell text={cont.created_at} />
             <RowCell text={cont.customer} />
             <RowCell text={'$' + cont.total_price} />

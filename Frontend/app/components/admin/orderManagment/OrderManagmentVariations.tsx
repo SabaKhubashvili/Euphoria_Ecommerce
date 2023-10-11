@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState,useMemo } from "react";
+import React, { useEffect, useRef, useState, useMemo } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
@@ -23,7 +23,16 @@ export const OrderManagmentVariations = () => {
     Variations.All
   );
   const underlineRef = useRef<HTMLDivElement>(null);
-  const { nextPage, prevPage, manualPage, currentPage, ordersPerPage, setProductPerPage } = UseAdminOrdersPagination();
+  const {
+    nextPage,
+    prevPage,
+    manualPage,
+    currentPage,
+    ordersPerPage,
+    setProductPerPage,
+  } = UseAdminOrdersPagination();
+  const [orderId, setOrderId] = useState<string>("");
+  const [filteredOrders, setFilteredOrders] = useState<ordersInterface[]>();
   useEffect(() => {
     const updateActiveELement = () => {
       if (underlineRef.current) {
@@ -39,13 +48,20 @@ export const OrderManagmentVariations = () => {
     document.addEventListener("resize", updateActiveELement);
     return () => document.removeEventListener("resize", updateActiveELement);
   }, [activeVariation]);
-  
+
   const ordersOnPage: ordersInterface[] = useMemo(() => {
     const startIndex = (currentPage - 1) * ordersPerPage;
     const endIndex = currentPage * ordersPerPage;
     return orders.slice(startIndex, endIndex);
   }, [orders, currentPage, ordersPerPage]);
-  
+
+  const searchForOrder = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const filtered = orders.filter((order) => order.id.toString() === orderId);
+    setFilteredOrders(filtered);
+  };
+
   return (
     <React.Fragment>
       <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative">
@@ -104,12 +120,22 @@ export const OrderManagmentVariations = () => {
         </div>
       </div>
       <div className=" pt-[24px] flex justify-between items-center">
-        <div className="w-[204px]">
-          <SecondaryInput
-            placeholder="Search by order id"
-            type="secondary"
-            rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
-          />
+        <div className="flex gap-[5px] items-center">
+          <div className="w-[204px]">
+            <SecondaryInput
+              placeholder="Search by order id"
+              type="secondary"
+              rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
+              onChange={(e) => setOrderId(e.target.value)}
+              onSubmit={searchForOrder}
+            />
+          </div>
+          <div
+            className="cursor-pointer bg-purple text-white px-[10px] py-[8px] rounded-[6px]"
+            onClick={() => setFilteredOrders(undefined)}
+          >
+            Reset
+          </div>
         </div>
         {/* <MainDropdown
           content={[
@@ -124,33 +150,49 @@ export const OrderManagmentVariations = () => {
         /> */}
       </div>
       <div className="h-[600px]">
-        <MainTable bodyContent={ordersOnPage} topContent={['Order id', 'created', 'customer', 'total', 'profit', 'status' , ' ']} type="primary"/>
+        <MainTable
+          bodyContent={filteredOrders || ordersOnPage}
+          topContent={[
+            "Order id",
+            "created",
+            "customer",
+            "total",
+            "profit",
+            "status",
+            " ",
+          ]}
+          type="primary"
+        />
       </div>
       <div className="w-full flex justify-between items-center px-[24px]">
-          <div className="flex items-center gap-[10px] text-secondaryGray">
-            <span>Showing</span>
-            <MainDropdown type="primary" size="xs" label={`${ordersPerPage}`}   content={[
-            { label: "10", onClick: () => setProductPerPage(10)},
-            { label: "20", onClick: () => setProductPerPage(20) },
-            { label: "30", onClick: () => setProductPerPage(30) },
-            { label: "40", onClick: () => setProductPerPage(40) },
-            { label: "50", onClick: () => setProductPerPage(50) },
-          ]}/>
+        <div className="flex items-center gap-[10px] text-secondaryGray">
+          <span>Showing</span>
+          <MainDropdown
+            type="primary"
+            size="xs"
+            label={`${ordersPerPage}`}
+            content={[
+              { label: "10", onClick: () => setProductPerPage(10) },
+              { label: "20", onClick: () => setProductPerPage(20) },
+              { label: "30", onClick: () => setProductPerPage(30) },
+              { label: "40", onClick: () => setProductPerPage(40) },
+              { label: "50", onClick: () => setProductPerPage(50) },
+            ]}
+          />
           <span>of 50</span>
-          </div>
-          <div>
+        </div>
+        <div>
           <Pagination
-              currentPage={currentPage} 
-              nextPage={nextPage}
-              productPerPage={ordersPerPage}
-              manualPage={manualPage} 
-              previousPage={prevPage}
-              productsLength={orders.length} 
-              type="secondary"
-            />
-          </div>
+            currentPage={currentPage}
+            nextPage={nextPage}
+            productPerPage={ordersPerPage}
+            manualPage={manualPage}
+            previousPage={prevPage}
+            productsLength={orders.length}
+            type="secondary"
+          />
+        </div>
       </div>
-
     </React.Fragment>
   );
 };
