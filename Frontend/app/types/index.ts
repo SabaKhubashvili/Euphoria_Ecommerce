@@ -24,3 +24,9 @@ export interface ordersInterface{
   status: 'Confirmed' | 'Delivered' | 'Pending';
   empty: string;
 }
+export interface Customer {
+    name: string;
+    email: string;
+    phone: string;
+    createdAt: string;
+  }

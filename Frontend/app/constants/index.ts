@@ -1,5 +1,5 @@
 
-import { SingleFooterComponentRowType, ordersInterface, } from "../types"
+import { Customer, SingleFooterComponentRowType, ordersInterface, } from "../types"
 import { FacebookIcon,InstagramIcon,LinkedinIcon } from "@/public/Svg/Social"
 
 export const FooterFeatures = [
@@ -511,3 +511,97 @@ export const orders: ordersInterface[] = [
   },
 ];
 
+
+
+export const customers: Customer[] = [
+  {
+    name: "Alice Johnson",
+    email: "alice.johnson@example.com",
+    phone: "555-555-5558",
+    createdAt: "2023-10-11T11:30:00)"
+  },
+  {
+    name: "David Williams",
+    email: "david.williams@example.com",
+    phone: "555-555-5559",
+    createdAt:"2023-10-11T12:00:00",
+  },
+  {
+    name: "Sophia Brown",
+    email: "sophia.brown@example.com",
+    phone: "555-555-5560",
+    createdAt: "2023-10-11T12:30:00",
+  },
+  {
+    name: "Michael Lee",
+    email: "michael.lee@example.com",
+    phone: "555-555-5561",
+    createdAt: "2023-10-11T13:00:00",
+  },
+  {
+    name: "Olivia Taylor",
+    email: "olivia.taylor@example.com",
+    phone: "555-555-5562",
+    createdAt: "2023-10-11T13:30:00",
+  },
+  {
+    name: "William Anderson",
+    email: "william.anderson@example.com",
+    phone: "555-555-5563",
+    createdAt: "2023-10-11T14:00:00",
+  },
+  {
+    name: "Mia Martinez",
+    email: "mia.martinez@example.com",
+    phone: "555-555-5564",
+    createdAt: "2023-10-11T14:30:00",
+  },
+  {
+    name: "James White",
+    email: "james.white@example.com",
+    phone: "555-555-5565",
+    createdAt: "2023-10-11T15:00:00",
+  },
+  {
+    name: "Emma Garcia",
+    email: "emma.garcia@example.com",
+    phone: "555-555-5566",
+    createdAt: "2023-10-11T15:30:00",
+  },
+  {
+    name: "Alexander Harris",
+    email: "alexander.harris@example.com",
+    phone: "555-555-5567",
+    createdAt: "2023-10-11T16:00:00",
+  },
+  {
+    name: "Ava Rodriguez",
+    email: "ava.rodriguez@example.com",
+    phone: "555-555-5568",
+    createdAt: "2023-10-11T16:30:00",
+  },
+  {
+    name: "Daniel Wilson",
+    email: "daniel.wilson@example.com",
+    phone: "555-555-5569",
+    createdAt: "2023-10-11T17:00:00",
+  },
+  {
+    name: "Ella King",
+    email: "ella.king@example.com",
+    phone: "555-555-5570",
+    createdAt: "2023-10-11T17:30:00",
+  },
+  {
+    name: "William Turner",
+    email: "william.turner@example.com",
+    phone: "555-555-5571",
+    createdAt: "2023-10-11T18:00:00",
+  },
+  {
+    name: "Isabella Moore",
+    email: "isabella.moore@example.com",
+    phone: "555-555-5572",
+    createdAt: "2023-10-11T18:30:00",
+  },
+];
