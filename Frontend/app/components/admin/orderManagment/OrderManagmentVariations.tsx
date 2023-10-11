@@ -33,6 +33,7 @@ export const OrderManagmentVariations = () => {
   } = UseAdminOrdersPagination();
   const [orderId, setOrderId] = useState<string>("");
   const [filteredOrders, setFilteredOrders] = useState<ordersInterface[]>();
+
   useEffect(() => {
     const updateActiveELement = () => {
       if (underlineRef.current) {
@@ -52,12 +53,45 @@ export const OrderManagmentVariations = () => {
   const ordersOnPage: ordersInterface[] = useMemo(() => {
     const startIndex = (currentPage - 1) * ordersPerPage;
     const endIndex = currentPage * ordersPerPage;
-    return orders.slice(startIndex, endIndex);
-  }, [orders, currentPage, ordersPerPage]);
+    let returningOrders = orders.slice(startIndex, endIndex);
+
+    if (activeVariation === Variations.Confirmed) {
+      returningOrders = returningOrders.filter(
+        (order) => order.status === "Confirmed"
+      );
+    } else if (activeVariation === Variations.Delivered) {
+      returningOrders = returningOrders.filter(
+        (order) => order.status === "Delivered"
+      );
+    } else if (activeVariation === Variations.Pending) {
+      returningOrders = returningOrders.filter(
+        (order) => order.status === "Pending"
+      );
+    }
+    return returningOrders;
+  }, [orders, currentPage, ordersPerPage, activeVariation]);
+
+  const ordersLength = useMemo(()=>{
+    if (activeVariation === Variations.Confirmed) {
+      return orders.filter(
+        (order) => order.status === "Confirmed"
+      ).length;
+    } else if (activeVariation === Variations.Delivered) {
+      return orders.filter(
+        (order) => order.status === "Delivered"
+      ).length;
+    } else if (activeVariation === Variations.Pending) {
+      return orders.filter(
+        (order) => order.status === "Pending"
+      ).length;
+    }else{
+      return orders.length
+    }
+  },[orders,activeVariation])
 
   const searchForOrder = (e: React.FormEvent) => {
     e.preventDefault();
-
+    setActiveVariation(Variations.All)
     const filtered = orders.filter((order) => order.id.toString() === orderId);
     setFilteredOrders(filtered);
   };
@@ -77,6 +111,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
+            setFilteredOrders(undefined)
+            setOrderId('')
+            manualPage(1)
             setActiveVariation(Variations.All);
           }}
         >
@@ -89,6 +126,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
+            setFilteredOrders(undefined)
+            setOrderId('')
+            manualPage(1)
             setActiveVariation(Variations.Pending);
           }}
         >
@@ -101,6 +141,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
+            setFilteredOrders(undefined)
+            setOrderId('')
+            manualPage(1)
             setActiveVariation(Variations.Confirmed);
           }}
         >
@@ -113,6 +156,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
+            setFilteredOrders(undefined)
+            setOrderId('')
+            manualPage(1)
             setActiveVariation(Variations.Delivered);
           }}
         >
@@ -127,6 +173,7 @@ export const OrderManagmentVariations = () => {
               type="secondary"
               rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
               onChange={(e) => setOrderId(e.target.value)}
+              value={orderId}
               onSubmit={searchForOrder}
             />
           </div>
@@ -162,6 +209,7 @@ export const OrderManagmentVariations = () => {
             " ",
           ]}
           type="primary"
+          notFoundMessage="No order was found"
         />
       </div>
       <div className="w-full flex justify-between items-center px-[24px]">
@@ -188,7 +236,7 @@ export const OrderManagmentVariations = () => {
             productPerPage={ordersPerPage}
             manualPage={manualPage}
             previousPage={prevPage}
-            productsLength={orders.length}
+            productsLength={ordersLength}
             type="secondary"
           />
         </div>

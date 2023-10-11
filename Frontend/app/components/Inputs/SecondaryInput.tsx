@@ -8,6 +8,7 @@ interface Props {
   rightSvg?: React.ReactElement;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (e: React.FormEvent) => void;
+  value?:string
 }
 
 export const SecondaryInput = ({
@@ -16,6 +17,7 @@ export const SecondaryInput = ({
   rightSvg,
   onChange,
   onSubmit,
+  value
 }: Props) => {
   return (
     <div>
@@ -23,6 +25,7 @@ export const SecondaryInput = ({
         <form onSubmit={onSubmit} className="relative w-full">
           <input
             type="text"
+            value={value}
             onChange={onChange && onChange}
             className={`w-full  outline-none bg-transparent 
       border-[1px]
@@ -49,6 +52,7 @@ export const SecondaryInput = ({
           <input
             type="text"
             onChange={onChange && onChange}
+            value={value}
             className={`w-full  outline-none bg-transparent 
       border-[1px]
       ${

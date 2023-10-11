@@ -2,16 +2,18 @@
 
 import { Dropdown_Down } from "@/public/Svg/Icons";
 import React from "react";
+import { Icon } from "../Icon";
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
 
 
 interface Props {
   type: "primary" | "secondary";
   topContent: any;
   bodyContent: any;
+  notFoundMessage?:string
 }
 
-export const MainTable = ({ type, topContent, bodyContent }: Props) => {
-  console.log(type);
+export const MainTable = ({ type, topContent, bodyContent, notFoundMessage }: Props) => {
   
 
   const HeaderCell = ({ text }: { text: string }) => (
@@ -63,7 +65,7 @@ export const MainTable = ({ type, topContent, bodyContent }: Props) => {
         ))}
       </div>
       <div className={`flex flex-col h-full overflow-y-auto w-full`}>
-        {bodyContent.map((cont: any, index: number) => (
+        {bodyContent.length > 0  ?bodyContent.map((cont: any, index: number) => (
           <div key={index} className="flex  items-center py-[8px] px-[20px] ">
             <RowCell text={'#' + cont.id?.toString()} />
             <RowCell text={cont.created_at} />
@@ -75,7 +77,15 @@ export const MainTable = ({ type, topContent, bodyContent }: Props) => {
               <Dropdown_Down />
             </div>
           </div>
-        ))}
+        ))
+          :
+          <div className="flex flex-col gap-[5px] items-center justify-center text-[18px] font-bold w-full h-full ">
+            <div className="w-[30px] h-[30px]">
+              <Icon svg={WebsiteIcons['notFound']}/>
+            </div>
+            {notFoundMessage}
+          </div>
+      }
       </div>
     </div>
   );
