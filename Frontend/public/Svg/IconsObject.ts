@@ -111,5 +111,18 @@ export const WebsiteIcons = {
     fillRule="evenodd"
     d="M7.493.015l-.386.04c-1.873.187-3.76 1.153-5.036 2.579C.66 4.211-.057 6.168.009 8.253c.115 3.601 2.59 6.65 6.101 7.518a8.034 8.034 0 006.117-.98 8 8 0 003.544-4.904c.172-.701.212-1.058.212-1.887s-.04-1.186-.212-1.887C14.979 2.878 12.315.498 9 .064 8.716.027 7.683-.006 7.493.015m1.36 1.548a6.34 6.34 0 011.987.597c.698.34 1.18.686 1.747 1.253A5.956 5.956 0 0113.84 5.16c.445.915.646 1.798.646 2.84a6.188 6.188 0 01-.66 2.867c-.172.351-.519.914-.681 1.105l-.055.065-4.563-4.564L3.963 2.91l.065-.055c.191-.162.754-.509 1.105-.681a6.436 6.436 0 013.72-.611M7.48 8.534l4.56 4.561-.067.053a7.66 7.66 0 01-1.106.68 6.76 6.76 0 01-1.987.616c-.424.065-1.336.065-1.76 0-1.948-.296-3.592-1.359-4.627-2.993a7.502 7.502 0 01-.634-1.332 6.62 6.62 0 01-.189-3.584 6.767 6.767 0 011.096-2.388c.07-.095.133-.173.141-.173.007 0 2.065 2.052 4.573 4.56"
   ></path>
+</svg>`,
+  edit:`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M9 7H6C4.89543 7 4 7.89543 4 9V18C4 19.1046 4.89543 20 6 20H15C16.1046 20 17 19.1046 17 18V15" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M9 15H12L20.5 6.49998C21.3284 5.67156 21.3284 4.32841 20.5 3.49998C19.6716 2.67156 18.3284 2.67156 17.5 3.49998L9 12V15" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M16 5L19 8" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  delete:`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M4 7H20" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M10 11V17" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M14 11V17" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M5 7L6 19C6 20.1046 6.89543 21 8 21H16C17.1046 21 18 20.1046 18 19L19 7" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M9 7V4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V7" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>`
+
 };

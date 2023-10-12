@@ -10,6 +10,7 @@ import { orders } from "@/app/constants";
 import { Pagination } from "../../Pagination";
 import { UseAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
 import { ordersInterface } from "@/app/types";
+import { Dropdown_Down } from "@/public/Svg/Icons";
 
 enum Variations {
   All = 0,
@@ -71,31 +72,35 @@ export const OrderManagmentVariations = () => {
     return returningOrders;
   }, [orders, currentPage, ordersPerPage, activeVariation]);
 
-  const ordersLength = useMemo(()=>{
+  const ordersLength = useMemo(() => {
     if (activeVariation === Variations.Confirmed) {
-      return orders.filter(
-        (order) => order.status === "Confirmed"
-      ).length;
+      return orders.filter((order) => order.status === "Confirmed").length;
     } else if (activeVariation === Variations.Delivered) {
-      return orders.filter(
-        (order) => order.status === "Delivered"
-      ).length;
+      return orders.filter((order) => order.status === "Delivered").length;
     } else if (activeVariation === Variations.Pending) {
-      return orders.filter(
-        (order) => order.status === "Pending"
-      ).length;
-    }else{
-      return orders.length
+      return orders.filter((order) => order.status === "Pending").length;
+    } else {
+      return orders.length;
     }
-  },[orders,activeVariation])
+  }, [orders, activeVariation]);
 
   const searchForOrder = (e: React.FormEvent) => {
     e.preventDefault();
-    setActiveVariation(Variations.All)
+    setActiveVariation(Variations.All);
     const filtered = orders.filter((order) => order.id.toString() === orderId);
     setFilteredOrders(filtered);
   };
 
+  const actions = (
+    <div
+      style={{
+        flexBasis: 100 / (Object.keys(ordersOnPage[0]).length + 1) + "%",
+      }}
+      className="flex justify-end"
+    >
+      <Dropdown_Down />
+    </div>
+  );
   return (
     <React.Fragment>
       <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative">
@@ -111,9 +116,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
-            setFilteredOrders(undefined)
-            setOrderId('')
-            manualPage(1)
+            setFilteredOrders(undefined);
+            setOrderId("");
+            manualPage(1);
             setActiveVariation(Variations.All);
           }}
         >
@@ -126,9 +131,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
-            setFilteredOrders(undefined)
-            setOrderId('')
-            manualPage(1)
+            setFilteredOrders(undefined);
+            setOrderId("");
+            manualPage(1);
             setActiveVariation(Variations.Pending);
           }}
         >
@@ -141,9 +146,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
-            setFilteredOrders(undefined)
-            setOrderId('')
-            manualPage(1)
+            setFilteredOrders(undefined);
+            setOrderId("");
+            manualPage(1);
             setActiveVariation(Variations.Confirmed);
           }}
         >
@@ -156,9 +161,9 @@ export const OrderManagmentVariations = () => {
               : "text-secondaryGray"
           }`}
           onClick={() => {
-            setFilteredOrders(undefined)
-            setOrderId('')
-            manualPage(1)
+            setFilteredOrders(undefined);
+            setOrderId("");
+            manualPage(1);
             setActiveVariation(Variations.Delivered);
           }}
         >
@@ -210,7 +215,7 @@ export const OrderManagmentVariations = () => {
           ]}
           type="primary"
           notFoundMessage="No order was found"
-          hasActions
+          actions={actions}
         />
       </div>
       <div className="w-full flex justify-between items-center px-[24px]">

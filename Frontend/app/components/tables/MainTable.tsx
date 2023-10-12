@@ -10,7 +10,7 @@ interface Props {
   topContent: any;
   bodyContent: any;
   notFoundMessage?: string;
-  hasActions?: boolean;
+  actions?: React.ReactNode
 }
 
 export const MainTable = ({
@@ -18,14 +18,14 @@ export const MainTable = ({
   topContent,
   bodyContent,
   notFoundMessage,
-  hasActions,
+  actions
 }: Props) => {
   const HeaderCell = ({ text }: { text: string }) => (
     <h1
       className={`text-secondaryGray uppercase font-medium md:text-[16px] text-[13px] 
     `}
       style={{
-        flexBasis: hasActions
+        flexBasis: actions
           ? 100 / (Object.keys(bodyContent[0]).length + 1) + "%"
           : 100 / Object.keys(bodyContent[0]).length + "%",
       }}
@@ -39,7 +39,7 @@ export const MainTable = ({
       className={`text-black  font-medium xl:text-[16px] text-[13px] py-[18px]
     `}
       style={{
-        flexBasis: hasActions
+        flexBasis: actions
           ? 100 / (Object.keys(bodyContent[0]).length + 1) + "%"
           : 100 / Object.keys(bodyContent[0]).length + "%",
       }}
@@ -74,7 +74,7 @@ export const MainTable = ({
           : "text-[#33189D]"
       }`}
       style={{
-        flexBasis: hasActions
+        flexBasis: actions
           ? 100 / (Object.keys(bodyContent[0]).length + 1) + "%"
           : 100 / Object.keys(bodyContent[0]).length + "%",
       }}
@@ -116,18 +116,9 @@ export const MainTable = ({
                   ""
                 )
               )}
-              {hasActions && 
+              {actions && 
 
-                <div
-                style={{
-                  flexBasis: hasActions
-                    ? 100 / (Object.keys(bodyContent[0]).length + 1) + "%"
-                    : 100 / Object.keys(bodyContent[0]).length + "%",
-                }}
-                className="flex justify-end"
-                >
-                <Dropdown_Down />
-              </div>
+                actions
               }
             </div>
           ))
