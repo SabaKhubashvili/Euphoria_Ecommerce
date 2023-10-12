@@ -8,7 +8,7 @@ import { MainDropdown } from "../../Dropdown/MainDropdown";
 import { MainTable } from "../../tables/MainTable";
 import { orders } from "@/app/constants";
 import { Pagination } from "../../Pagination";
-import { UseAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
+import { useAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
 import { ordersInterface } from "@/app/types";
 import { Dropdown_Down } from "@/public/Svg/Icons";
 
@@ -31,7 +31,7 @@ export const OrderManagmentVariations = () => {
     currentPage,
     ordersPerPage,
     setProductPerPage,
-  } = UseAdminOrdersPagination();
+  } = useAdminOrdersPagination();
   const [orderId, setOrderId] = useState<string>("");
   const [filteredOrders, setFilteredOrders] = useState<ordersInterface[]>();
 
@@ -103,7 +103,7 @@ export const OrderManagmentVariations = () => {
   );
   return (
     <React.Fragment>
-      <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative pb-[50px]">
+      <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative ">
         <div
           className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200"
           ref={underlineRef}

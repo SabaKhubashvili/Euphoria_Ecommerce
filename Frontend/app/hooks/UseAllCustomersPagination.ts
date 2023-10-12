@@ -1,17 +1,16 @@
 import {create} from 'zustand'
-
-interface AdminOrdersPagination{
+interface AllCustomersPagination{
     currentPage:number,
-    ordersPerPage: 10 | 20 | 30 | 40 | 50
+    customersPerPage: 10 | 20 | 30 | 40 | 50
     nextPage:()=>void,
     prevPage:()=>void,
     manualPage:(page:number)=>void,
-    setProductPerPage: (number: 10 | 20 | 30 | 40 | 50) => void
+    setCustomersPerPage: (number: 10 | 20 | 30 | 40 | 50) => void
 }
 
-export const UseAdminOrdersPagination = create<AdminOrdersPagination>((set)=>({
+export const useAllCustomersPagination = create<AllCustomersPagination>((set)=>({
     currentPage:1,
-    ordersPerPage: 10,
+    customersPerPage: 10,
     nextPage:()=>{
         set((state)=>({
             currentPage: state.currentPage + 1
@@ -27,9 +26,9 @@ export const UseAdminOrdersPagination = create<AdminOrdersPagination>((set)=>({
             currentPage: page
         }))
     },
-    setProductPerPage:(perPage)=>{
+    setCustomersPerPage:(perPage)=>{
         set({
-            ordersPerPage:perPage
+            customersPerPage:perPage
         })
     }
 }))

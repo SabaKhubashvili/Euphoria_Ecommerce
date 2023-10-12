@@ -8,10 +8,19 @@ import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { MainDropdown } from "../../Dropdown/MainDropdown";
 import { Pagination } from "../../Pagination";
+import { useAllCustomersPagination } from "@/app/hooks/UseAllCustomersPagination";
 
 export const CustomersTable = () => {
   const [findUserName, setFindUserName] = useState<string>("");
-
+  const {
+    nextPage,
+    prevPage,
+    manualPage,
+    currentPage,
+    customersPerPage,
+    setCustomersPerPage,
+  } = useAllCustomersPagination();
+  
   const actions = (
     <div
       style={{
@@ -57,25 +66,25 @@ export const CustomersTable = () => {
           <MainDropdown
             type="primary"
             size="xs"
-            label={`${5}`}
+            label={`${customersPerPage}`}
             content={[
-              { label: "10", onClick: () => console.log(10) },
-              { label: "20", onClick: () => console.log(20) },
-              { label: "30", onClick: () => console.log(30) },
-              { label: "40", onClick: () => console.log(40) },
-              { label: "50", onClick: () => console.log(50) },
+              { label: "10", onClick: () => setCustomersPerPage(10) },
+              { label: "20", onClick: () => setCustomersPerPage(20) },
+              { label: "30", onClick: () => setCustomersPerPage(30) },
+              { label: "40", onClick: () => setCustomersPerPage(40) },
+              { label: "50", onClick: () => setCustomersPerPage(50) },
             ]}
             />
           <span>of 50</span>
         </div>
         <div>
           <Pagination
-            currentPage={4}
-            nextPage={()=>{}}
-            productPerPage={5}
-            manualPage={()=>{}}
-            previousPage={()=>{}}
-            productsLength={16}
+            currentPage={currentPage}
+            nextPage={nextPage}
+            productPerPage={customersPerPage}
+            manualPage={manualPage}
+            previousPage={prevPage}
+            productsLength={customers.length}
             type="secondary"
             />
         </div>
