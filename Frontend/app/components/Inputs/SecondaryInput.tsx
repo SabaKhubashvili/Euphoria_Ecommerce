@@ -31,9 +31,11 @@ export const SecondaryInput = ({
       border-[1px]
       ${
         type === "primary"
-          ? "placeholder:text-white text-white border-white py-[14px] px-[12px]"
+          ? `placeholder:text-white text-white border-white py-[14px] px-[12px] ${
+            rightSvg && "pr-[28px]"
+          }`
           : type === "secondary"
-          ? `bg-white placeholder:text-secondaryGray py-[8px] px-[16px] border-secondaryGray text-[15px] ${
+          ? `bg-white placeholder:text-secondaryGray py-[8px] px-[16px] border-[0px] text-[15px] rounded-[4px] ${
               rightSvg && "pr-[28px]"
             }`
           : ""
@@ -54,12 +56,14 @@ export const SecondaryInput = ({
             onChange={onChange && onChange}
             value={value}
             className={`w-full  outline-none bg-transparent 
-      border-[1px]
+            border-[1px]
       ${
         type === "primary"
-          ? "placeholder:text-white text-white border-white py-[14px] px-[12px]"
+          ? `placeholder:text-white text-white border-white py-[14px] px-[12px] ${
+            rightSvg && "pr-[28px]"
+          }`
           : type === "secondary"
-          ? `bg-white placeholder:text-secondaryGray py-[8px] px-[16px] border-secondaryGray text-[15px] ${
+          ? `bg-white placeholder:text-secondaryGray py-[8px] px-[16px] border-[0px] rounded-[4px] text-[15px] ${
               rightSvg && "pr-[28px]"
             }`
           : ""

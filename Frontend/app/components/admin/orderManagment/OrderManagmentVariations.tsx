@@ -103,7 +103,7 @@ export const OrderManagmentVariations = () => {
   );
   return (
     <React.Fragment>
-      <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative">
+      <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative pb-[50px]">
         <div
           className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200"
           ref={underlineRef}
@@ -171,7 +171,7 @@ export const OrderManagmentVariations = () => {
         </div>
       </div>
       <div className=" pt-[24px] flex justify-between items-center">
-        <div className="flex gap-[5px] items-center">
+        <div className="flex gap-[10px] items-center">
           <div className="w-[204px]">
             <SecondaryInput
               placeholder="Search by order id"
@@ -201,50 +201,52 @@ export const OrderManagmentVariations = () => {
           label="Filter by date range"
         /> */}
       </div>
-      <div className="h-[600px]">
-        <MainTable
-          bodyContent={filteredOrders || ordersOnPage}
-          topContent={[
-            "Order id",
-            "created",
-            "customer",
-            "total",
-            "profit",
-            "status",
-            " ",
-          ]}
-          type="primary"
-          notFoundMessage="No order was found"
-          actions={actions}
-        />
-      </div>
-      <div className="w-full flex justify-between items-center px-[24px]">
-        <div className="flex items-center gap-[10px] text-secondaryGray">
-          <span>Showing</span>
-          <MainDropdown
-            type="primary"
-            size="xs"
-            label={`${ordersPerPage}`}
-            content={[
-              { label: "10", onClick: () => setProductPerPage(10) },
-              { label: "20", onClick: () => setProductPerPage(20) },
-              { label: "30", onClick: () => setProductPerPage(30) },
-              { label: "40", onClick: () => setProductPerPage(40) },
-              { label: "50", onClick: () => setProductPerPage(50) },
+      <div className="bg-white">
+        <div className="h-[600px] mt-[16px]">
+          <MainTable
+            bodyContent={filteredOrders || ordersOnPage}
+            topContent={[
+              "Order id",
+              "created",
+              "customer",
+              "total",
+              "profit",
+              "status",
+              " ",
             ]}
+            type="primary"
+            notFoundMessage="No order was found"
+            actions={actions}
           />
-          <span>of 50</span>
         </div>
-        <div>
-          <Pagination
-            currentPage={currentPage}
-            nextPage={nextPage}
-            productPerPage={ordersPerPage}
-            manualPage={manualPage}
-            previousPage={prevPage}
-            productsLength={ordersLength}
-            type="secondary"
-          />
+        <div className="w-full flex justify-between items-center px-[24px]">
+          <div className="flex items-center gap-[10px] text-secondaryGray">
+            <span>Showing</span>
+            <MainDropdown
+              type="primary"
+              size="xs"
+              label={`${ordersPerPage}`}
+              content={[
+                { label: "10", onClick: () => setProductPerPage(10) },
+                { label: "20", onClick: () => setProductPerPage(20) },
+                { label: "30", onClick: () => setProductPerPage(30) },
+                { label: "40", onClick: () => setProductPerPage(40) },
+                { label: "50", onClick: () => setProductPerPage(50) },
+              ]}
+            />
+            <span>of 50</span>
+          </div>
+          <div>
+            <Pagination
+              currentPage={currentPage}
+              nextPage={nextPage}
+              productPerPage={ordersPerPage}
+              manualPage={manualPage}
+              previousPage={prevPage}
+              productsLength={ordersLength}
+              type="secondary"
+            />
+          </div>
         </div>
       </div>
     </React.Fragment>

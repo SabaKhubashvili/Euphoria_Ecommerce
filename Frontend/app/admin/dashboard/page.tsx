@@ -6,21 +6,12 @@ import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents
 import { PageTop } from "@/app/components/admin/pageTop/PageTop";
 import { PublicSans } from "@/app/components/assets/Fonts";
 import { MainTable } from "@/app/components/tables/MainTable";
-import { orders } from "@/app/constants";
+import { MostSaledProducts, SessionsData, orders } from "@/app/constants";
+import { Dropdown_Down } from "@/public/Svg/Icons";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import Image from "next/image";
 import React from "react";
 
 const Page = () => {
-  const labels = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-  ];
 
   const data = [
     {
@@ -59,61 +50,26 @@ const Page = () => {
       cost: 500,
     },
   ];
-  const SessionsData = [
-    {
-      name: "5 days ago",
-      sessionCount: 25,
-    },
-    {
-      name: "4 days ago",
-      sessionCount: 52,
-    },
-    {
-      name: "3 days ago",
-      sessionCount: 34,
-    },
-    {
-      name: "2 days ago",
-      sessionCount: 12,
-    },
-    {
-      name: "yesterday",
-      sessionCount: 25,
-    },
-    {
-      name: "today",
-      sessionCount: 125,
-    },
-  ];
-  const MostSaledProducts = [
-    { name: "Product 1", price: 10.99 },
-    { name: "Product 2", price: 24.99 },
-    { name: "Product 3", price: 5.99 },
-    { name: "Product 1", price: 10.99 },
-    { name: "Product 2", price: 24.99 },
-    { name: "Product 3", price: 5.99 },
-    { name: "Product 1", price: 10.99 },
-    { name: "Product 2", price: 24.99 },
-    { name: "Product 3", price: 5.99 },
-    { name: "Product 1", price: 10.99 },
-    { name: "Product 2", price: 24.99 },
-    { name: "Product 3", price: 5.99 },
-    { name: "Product 1", price: 10.99 },
-    { name: "Product 2", price: 24.99 },
-    { name: "Product 3", price: 5.99 },
-    { name: "Product 1", price: 10.99 },
-    { name: "Product 2", price: 24.99 },
-    { name: "Product 3", price: 5.99 },
-    { name: "Product 1", price: 10.99 },
-    { name: "Product 2", price: 24.99 },
-    { name: "Product 3", price: 5.99 },
-  ];
-  
+
+
+
+  const actions = (
+    <div
+      style={{
+        flexBasis: 100 / (Object.keys(orders[0]).length + 1) + "%",
+      }}
+      className="flex justify-end cursor-pointer"
+    >
+      <Dropdown_Down />
+    </div>
+  );
+
+
   return (
     <main className="">
         <div className={`${PublicSans.className} w-full`}>
           <PageTop pageTitle="Dashboard"/>
-
+          
           <div className="flex flex-col gap-[24px]">
             {/* Top Charts */}
             <div className="flex flex-wrap  justify-between mt-[40px] gap-y-4">
@@ -237,6 +193,7 @@ const Page = () => {
                     type="secondary"
                     topContent={['Order id', 'created', 'customer', 'total', 'profit', 'status' , ' ']}
                     bodyContent={orders.slice(0,10)}
+                    actions={actions}
                   />
             </div>
           </div>

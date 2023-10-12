@@ -605,3 +605,54 @@ export const customers: Customer[] = [
     createdAt: "2023-10-11T18:30:00",
   },
 ];
+
+export   const MostSaledProducts = [
+  { name: "Product 1", price: 10.99 },
+  { name: "Product 2", price: 24.99 },
+  { name: "Product 3", price: 5.99 },
+  { name: "Product 1", price: 10.99 },
+  { name: "Product 2", price: 24.99 },
+  { name: "Product 3", price: 5.99 },
+  { name: "Product 1", price: 10.99 },
+  { name: "Product 2", price: 24.99 },
+  { name: "Product 3", price: 5.99 },
+  { name: "Product 1", price: 10.99 },
+  { name: "Product 2", price: 24.99 },
+  { name: "Product 3", price: 5.99 },
+  { name: "Product 1", price: 10.99 },
+  { name: "Product 2", price: 24.99 },
+  { name: "Product 3", price: 5.99 },
+  { name: "Product 1", price: 10.99 },
+  { name: "Product 2", price: 24.99 },
+  { name: "Product 3", price: 5.99 },
+  { name: "Product 1", price: 10.99 },
+  { name: "Product 2", price: 24.99 },
+  { name: "Product 3", price: 5.99 },
+];
+
+export   const SessionsData = [
+  {
+    name: "5 days ago",
+    sessionCount: 25,
+  },
+  {
+    name: "4 days ago",
+    sessionCount: 52,
+  },
+  {
+    name: "3 days ago",
+    sessionCount: 34,
+  },
+  {
+    name: "2 days ago",
+    sessionCount: 12,
+  },
+  {
+    name: "yesterday",
+    sessionCount: 25,
+  },
+  {
+    name: "today",
+    sessionCount: 125,
+  },
+];
