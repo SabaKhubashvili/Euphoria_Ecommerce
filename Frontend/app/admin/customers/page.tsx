@@ -7,17 +7,22 @@ const page = () => {
   return (
     <main>
       <PageTop pageTitle='Customers'/>
+      <div className='h-[700px]'>
+
       <MainTable
           bodyContent={customers}
           topContent={[
             "Name",
+            "Email",
             "Phone Number",
             "Created",
             "Action",
           ]}
           type="primary"
           notFoundMessage="No order was found"
-        />
+          hasActions
+          />
+          </div>
     </main>
   )
 }

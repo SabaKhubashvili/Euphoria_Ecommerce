@@ -210,6 +210,7 @@ export const OrderManagmentVariations = () => {
           ]}
           type="primary"
           notFoundMessage="No order was found"
+          hasActions
         />
       </div>
       <div className="w-full flex justify-between items-center px-[24px]">

@@ -417,7 +417,7 @@ export const orders: ordersInterface[] = [
       total_price: 100.00,
       profit: 25.00,
       status: "Pending",
-      empty: "",
+      
   },
   {
       id: 2,
@@ -426,7 +426,7 @@ export const orders: ordersInterface[] = [
       total_price: 75.50,
       profit: 15.25,
       status: "Confirmed",
-      empty: "",
+      
   },
   {
       id: 3,
@@ -435,7 +435,7 @@ export const orders: ordersInterface[] = [
       total_price: 200.00,
       profit: 40.00,
       status: "Pending",
-      empty: "",
+      
   },
   {
       id: 4,
@@ -444,7 +444,7 @@ export const orders: ordersInterface[] = [
       total_price: 75.50,
       profit: 15.25,
       status: "Confirmed",
-      empty: "",
+      
   },
   {
       id: 5,
@@ -453,7 +453,7 @@ export const orders: ordersInterface[] = [
       total_price: 200.00,
       profit: 40.00,
       status: "Pending",
-      empty: "",
+      
   },
   {
       id: 6,
@@ -462,7 +462,7 @@ export const orders: ordersInterface[] = [
       total_price: 75.50,
       profit: 15.25,
       status: "Confirmed",
-      empty: "",
+      
   },
   {
       id: 7,
@@ -471,7 +471,7 @@ export const orders: ordersInterface[] = [
       total_price: 200.00,
       profit: 40.00,
       status: "Pending",
-      empty: "",
+      
   },
   {
       id: 8,
@@ -480,7 +480,7 @@ export const orders: ordersInterface[] = [
       total_price: 75.50,
       profit: 15.25,
       status: "Confirmed",
-      empty: "",
+      
   },
   {
       id: 9,
@@ -489,7 +489,7 @@ export const orders: ordersInterface[] = [
       total_price: 200.00,
       profit: 40.00,
       status: "Delivered",
-      empty: "",
+      
   },
   {
       id: 10,
@@ -498,7 +498,7 @@ export const orders: ordersInterface[] = [
       total_price: 75.50,
       profit: 15.25,
       status: "Pending",
-      empty: "",
+      
   },
   {
       id: 11,
@@ -507,7 +507,7 @@ export const orders: ordersInterface[] = [
       total_price: 200.00,
       profit: 40.00,
       status: "Pending",
-      empty: "",
+      
   },
 ];
 
