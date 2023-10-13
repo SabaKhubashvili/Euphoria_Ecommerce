@@ -9,8 +9,7 @@ import { setCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
-import { ToastContainer, toast  } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast  } from "react-toastify";
 
 export const LoginForm = () => {
   const router = useRouter();

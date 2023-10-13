@@ -11,6 +11,7 @@ import { Pagination } from "../../Pagination";
 import { useAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
 import { ordersInterface } from "@/app/types";
 import { Dropdown_Down } from "@/public/Svg/Icons";
+import { toast } from "react-toastify";
 
 enum Variations {
   All = 0,
@@ -30,7 +31,7 @@ export const OrderManagmentVariations = () => {
     manualPage,
     currentPage,
     ordersPerPage,
-    setProductPerPage,
+    setOrdersPerPage,
   } = useAdminOrdersPagination();
   const [orderId, setOrderId] = useState<string>("");
   const [filteredOrders, setFilteredOrders] = useState<ordersInterface[]>();
@@ -88,7 +89,20 @@ export const OrderManagmentVariations = () => {
     e.preventDefault();
     setActiveVariation(Variations.All);
     const filtered = orders.filter((order) => order.id.toString() === orderId);
-    setFilteredOrders(filtered);
+    if(filtered.length <= 0){
+      toast.error('No order was found', {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }else{
+      setFilteredOrders(filtered);
+    }
   };
 
   const actions = (
@@ -101,6 +115,12 @@ export const OrderManagmentVariations = () => {
       <Dropdown_Down />
     </div>
   );
+
+  const changeCustomersOnPage = (number: 10 | 20 | 30 | 40 | 50) =>{
+    (number)
+    manualPage(0)
+  }
+
   return (
     <React.Fragment>
       <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative ">
@@ -227,11 +247,11 @@ export const OrderManagmentVariations = () => {
               size="xs"
               label={`${ordersPerPage}`}
               content={[
-                { label: "10", onClick: () => setProductPerPage(10) },
-                { label: "20", onClick: () => setProductPerPage(20) },
-                { label: "30", onClick: () => setProductPerPage(30) },
-                { label: "40", onClick: () => setProductPerPage(40) },
-                { label: "50", onClick: () => setProductPerPage(50) },
+                { label: "10", onClick: () => setOrdersPerPage(10) },
+                { label: "20", onClick: () => setOrdersPerPage(20) },
+                { label: "30", onClick: () => setOrdersPerPage(30) },
+                { label: "40", onClick: () => setOrdersPerPage(40) },
+                { label: "50", onClick: () => setOrdersPerPage(50) },
               ]}
             />
             <span>of 50</span>
@@ -243,7 +263,7 @@ export const OrderManagmentVariations = () => {
               productPerPage={ordersPerPage}
               manualPage={manualPage}
               previousPage={prevPage}
-              productsLength={ordersLength}
+              productsLength={filteredOrders?.length || ordersLength}
               type="secondary"
             />
           </div>

@@ -4,7 +4,6 @@ import React from "react";
 import { Form } from "./Form";
 import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
-import { MainButton } from "../buttons/MainButton";
 import Link from "next/link";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";

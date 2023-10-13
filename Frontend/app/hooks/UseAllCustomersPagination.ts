@@ -28,7 +28,7 @@ export const useAllCustomersPagination = create<AllCustomersPagination>((set)=>(
     },
     setCustomersPerPage:(perPage)=>{
         set({
-            customersPerPage:perPage
+            customersPerPage: perPage
         })
     }
 }))
