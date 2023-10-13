@@ -5,6 +5,9 @@ import { Sidebar } from "../sidebar/Sidebar";
 import { motion, useAnimation } from "framer-motion";
 import { extraLargeScreens, smallScreens } from "@/app/Screens/Screens";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
+import { useCouponModal } from "@/app/hooks/UseCouponModal";
+import { Modal } from "../../modals/Modal";
+import { PublicSans } from "../../assets/Fonts";
 
 
 export const PageContainer = ({ children }: { children: React.ReactNode }) => {
@@ -12,7 +15,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
   const isAboveSmallScreens = useMediaQuery(smallScreens);
   const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
   const controls = useAnimation();
-
+  const {isOpen: isCouponModalOpen, onClose: couponModalOnclose} = useCouponModal()
 
 
   const sidebarVariants = useMemo(() => {
@@ -26,9 +29,19 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
     setIsSidebarOpen((prev) => !prev);
     controls.start(isSidebarOpen ? "closed" : "open");
   };
-
+  const couponModalBody = (
+    <div>
+      dsadsadas
+    </div>
+  )
   return (
-    <div className="flex gap-[26px] w-full  justify-between">
+    <div className={` ${PublicSans.className} flex gap-[26px] w-full  justify-between`}>
+      <Modal
+        title={'Coupon'}
+        body={couponModalBody}
+        isOpen={isCouponModalOpen}
+        onClose={couponModalOnclose}
+      />
       {isAboveSmallScreens && (
         <motion.div
           initial="closed"

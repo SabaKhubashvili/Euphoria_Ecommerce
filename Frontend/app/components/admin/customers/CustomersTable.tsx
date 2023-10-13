@@ -47,7 +47,7 @@ export const CustomersTable = () => {
   const searchForCustomer = (e: React.FormEvent) => {
     e.preventDefault();    
     const filtered = customers.filter(
-      (customer) => customer.name.includes(findUserName)
+      (customer) => customer.name.toLowerCase().includes(findUserName.toLowerCase())
     );
     if(filtered.length <= 0){
       toast.error('No customer was found', {

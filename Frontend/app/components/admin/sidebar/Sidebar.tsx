@@ -18,6 +18,7 @@ import { Settings } from "@/public/Svg/AdminIcons/Settings";
 import { useMediaQuery } from "@mui/material";
 import { extraLargeScreens } from "@/app/Screens/Screens";
 import Link from "next/link";
+import { useCouponModal } from "@/app/hooks/UseCouponModal";
 
 
 
@@ -30,8 +31,8 @@ export const Sidebar = ({
 }) => {
   const pathname = usePathname();
   const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
-
-
+  const {onOpen} = useCouponModal()
+  
   const bgRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -120,7 +121,7 @@ export const Sidebar = ({
             </p>
           )}
         </Link>
-        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/coupon") && 'SidebarActiveComponent' } `}>
+        <div onClick={onOpen} className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/coupon") && 'SidebarActiveComponent' } `}>
           <Coupon isActive={pathname.startsWith("/admin/coupon")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -134,7 +135,7 @@ export const Sidebar = ({
             </p>
           )}
         </div>
-        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/categories") && 'SidebarActiveComponent' } `}>
+        <div className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/categories") && 'SidebarActiveComponent' } `}>
           <Categories isActive={pathname.startsWith("/admin/categories")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
