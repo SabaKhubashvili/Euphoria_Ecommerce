@@ -8,6 +8,10 @@ import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { useCouponModal } from "@/app/hooks/UseCouponModal";
 import { Modal } from "../../modals/Modal";
 import { PublicSans } from "../../assets/Fonts";
+import { MainTable } from "../../tables/MainTable";
+import { Icon } from "../../Icon";
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
+import { coupon_codes } from "@/app/constants";
 
 
 export const PageContainer = ({ children }: { children: React.ReactNode }) => {
@@ -29,15 +33,26 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
     setIsSidebarOpen((prev) => !prev);
     controls.start(isSidebarOpen ? "closed" : "open");
   };
+  const couponActions = (
+    <div className="flex gap-[10px]">
+      <Icon svg={WebsiteIcons['delete']}/>
+      <Icon svg={WebsiteIcons['edit']}/>
+    </div>
+  )
   const couponModalBody = (
-    <div>
-      dsadsadas
+    <div className="md:h-[400px] h-full">
+      <MainTable
+        topContent={['Coupon','Percentage']}
+        actions={couponActions}
+        bodyContent={coupon_codes}
+        type="secondary"
+      />
     </div>
   )
   return (
     <div className={` ${PublicSans.className} flex gap-[26px] w-full  justify-between`}>
       <Modal
-        title={'Coupon'}
+        title={'Coupons'}
         body={couponModalBody}
         isOpen={isCouponModalOpen}
         onClose={couponModalOnclose}

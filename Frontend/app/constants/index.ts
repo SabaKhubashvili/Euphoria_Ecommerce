@@ -656,3 +656,28 @@ export   const SessionsData = [
     sessionCount: 125,
   },
 ];
+
+export const coupon_codes: {
+  code:string,
+  discountPercentage:number
+}[] = [
+  { code: "CODE123", discountPercentage: 10 },
+  { code: "SAVEBIG20", discountPercentage: 20 },
+  { code: "HALFOFF50", discountPercentage: 50 },
+  { code: "DEAL30", discountPercentage: 30 },
+  { code: "SUMMER25", discountPercentage: 25 },
+  { code: "FALL15", discountPercentage: 15 },
+  { code: "WINTER50", discountPercentage: 50 },
+  { code: "SPRING20", discountPercentage: 20 },
+  { code: "BONUS10", discountPercentage: 10 },
+  { code: "SPECIAL5", discountPercentage: 5 },
+  { code: "HOLIDAY40", discountPercentage: 40 },
+  { code: "SAVINGS7", discountPercentage: 7 },
+  { code: "GIFT35", discountPercentage: 35 },
+  { code: "EXTRA12", discountPercentage: 12 },
+  { code: "EARLYBIRD15", discountPercentage: 15 },
+  { code: "LATEST50", discountPercentage: 50 },
+  { code: "FLASH60", discountPercentage: 60 },
+  { code: "SUPER20", discountPercentage: 20 },
+  { code: "BEST25", discountPercentage: 25 },
+];
