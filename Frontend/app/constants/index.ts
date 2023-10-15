@@ -824,3 +824,27 @@ export const TransactionsData: Array<{ id: number, customer: string, date: strin
       method: "PayPal"
   },
 ];
+
+
+export const categoryData: { category: string, products: number, sales: number, profit: string }[] = [
+  { category: "Electronics", products: 100, sales: 5000, profit: "$2000" },
+  { category: "Clothing", products: 200, sales: 8000, profit: "$3000" },
+  { category: "Home Decor", products: 50, sales: 2500, profit: "$1000" },
+  { category: "Toys", products: 75, sales: 3000, profit: "$1200" },
+  { category: "Books", products: 120, sales: 6000, profit: "$2400" },
+  { category: "Sports Equipment", products: 90, sales: 4500, profit: "$1800" },
+  { category: "Beauty Products", products: 150, sales: 7500, profit: "$3000" },
+  { category: "Furniture", products: 80, sales: 4000, profit: "$1600" },
+  { category: "Jewelry", products: 60, sales: 3000, profit: "$1200" },
+  { category: "Food and Beverages", products: 250, sales: 12500, profit: "$5000" },
+  { category: "Automotive", products: 70, sales: 3500, profit: "$1400" },
+  { category: "Garden Supplies", products: 40, sales: 2000, profit: "$800" },
+  { category: "Health and Wellness", products: 110, sales: 5500, profit: "$2200" },
+  { category: "Pet Supplies", products: 45, sales: 2250, profit: "$900" },
+  { category: "Music Instruments", products: 30, sales: 1500, profit: "$600" },
+  { category: "Art and Crafts", products: 65, sales: 3250, profit: "$1300" },
+  { category: "Office Supplies", products: 85, sales: 4250, profit: "$1700" },
+  { category: "Travel Accessories", products: 25, sales: 1250, profit: "$500" },
+  { category: "Fitness Equipment", products: 55, sales: 2750, profit: "$1100" },
+  { category: "Baby Products", products: 70, sales: 3500, profit: "$1400" }
+];

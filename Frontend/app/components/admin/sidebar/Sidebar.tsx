@@ -135,7 +135,7 @@ export const Sidebar = ({
             </p>
           )}
         </div>
-        <div className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/categories") && 'SidebarActiveComponent' } `}>
+        <Link href={'/admin/categories'} className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/categories") && 'SidebarActiveComponent' } `}>
           <Categories isActive={pathname.startsWith("/admin/categories")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
@@ -148,7 +148,7 @@ export const Sidebar = ({
               Categories
             </p>
           )}
-        </div>
+        </Link>
         <Link href={'/admin/transactions'} className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/transactions") && 'SidebarActiveComponent' } `}>
           <Transaction isActive={pathname.startsWith("/admin/transactions")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
