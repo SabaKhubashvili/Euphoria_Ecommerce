@@ -681,3 +681,146 @@ export const coupon_codes: {
   { code: "SUPER20", discountPercentage: 20 },
   { code: "BEST25", discountPercentage: 25 },
 ];
+
+export const TransactionsData: Array<{ id: number, customer: string, date: string, total: string, method: string }> = [
+  {
+      id: 1,
+      customer: "John Doe",
+      date: "2023-10-15",
+      total: "$100.00",
+      method: "Credit Card"
+  },
+  {
+      id: 2,
+      customer: "Jane Smith",
+      date: "2023-10-14",
+      total: "$75.50",
+      method: "PayPal"
+  },
+  {
+      id: 3,
+      customer: "Robert Johnson",
+      date: "2023-10-13",
+      total: "$50.25",
+      method: "Cash"
+  },
+  {
+      id: 4,
+      customer: "Alice Johnson",
+      date: "2023-10-12",
+      total: "$45.00",
+      method: "Credit Card"
+  },
+  {
+      id: 5,
+      customer: "David Brown",
+      date: "2023-10-11",
+      total: "$30.75",
+      method: "PayPal"
+  },
+  {
+      id: 6,
+      customer: "Mary White",
+      date: "2023-10-10",
+      total: "$85.50",
+      method: "Cash"
+  },
+  {
+      id: 7,
+      customer: "Sarah Wilson",
+      date: "2023-10-09",
+      total: "$110.00",
+      method: "Credit Card"
+  },
+  {
+      id: 8,
+      customer: "Michael Davis",
+      date: "2023-10-08",
+      total: "$120.25",
+      method: "PayPal"
+  },
+  {
+      id: 9,
+      customer: "Emily Turner",
+      date: "2023-10-07",
+      total: "$55.75",
+      method: "Cash"
+  },
+  {
+      id: 10,
+      customer: "James Miller",
+      date: "2023-10-06",
+      total: "$95.00",
+      method: "Credit Card"
+  },
+  {
+      id: 11,
+      customer: "Olivia Smith",
+      date: "2023-10-05",
+      total: "$70.00",
+      method: "PayPal"
+  },
+  {
+      id: 12,
+      customer: "William Johnson",
+      date: "2023-10-04",
+      total: "$25.50",
+      method: "Cash"
+  },
+  {
+      id: 13,
+      customer: "Sophia Davis",
+      date: "2023-10-03",
+      total: "$60.00",
+      method: "Credit Card"
+  },
+  {
+      id: 14,
+      customer: "Daniel Brown",
+      date: "2023-10-02",
+      total: "$45.25",
+      method: "PayPal"
+  },
+  {
+      id: 15,
+      customer: "Ava Johnson",
+      date: "2023-10-01",
+      total: "$70.50",
+      method: "Cash"
+  },
+  {
+      id: 16,
+      customer: "Liam Wilson",
+      date: "2023-09-30",
+      total: "$85.00",
+      method: "Credit Card"
+  },
+  {
+      id: 17,
+      customer: "Mia Davis",
+      date: "2023-09-29",
+      total: "$95.25",
+      method: "PayPal"
+  },
+  {
+      id: 18,
+      customer: "Benjamin Turner",
+      date: "2023-09-28",
+      total: "$40.75",
+      method: "Cash"
+  },
+  {
+      id: 19,
+      customer: "Evelyn Wilson",
+      date: "2023-09-27",
+      total: "$110.00",
+      method: "Credit Card"
+  },
+  {
+      id: 20,
+      customer: "Logan Smith",
+      date: "2023-09-26",
+      total: "$75.50",
+      method: "PayPal"
+  },
+];

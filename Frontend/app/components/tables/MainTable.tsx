@@ -110,7 +110,7 @@ export const MainTable = ({
                   key === "status" ? (
                     <StatusRowCell key={key} text={cont[key]} />
                   ) : (
-                    <RowCell key={key} text={cont[key]} />
+                    <RowCell key={key} text={key.toLowerCase() === 'id' ? '#' + cont[key] :cont[key]} />
                   )
                 ) : (
                   ""

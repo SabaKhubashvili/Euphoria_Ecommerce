@@ -99,8 +99,8 @@ export const Sidebar = ({
             <p
               className={
                 pathname.startsWith("/admin/orders")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Order Managment
@@ -113,8 +113,8 @@ export const Sidebar = ({
             <p
               className={
                 pathname.startsWith("/admin/customers")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Customers
@@ -127,8 +127,8 @@ export const Sidebar = ({
             <p
               className={
                 pathname.startsWith("/admin/coupon")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Coupon Code
@@ -141,28 +141,28 @@ export const Sidebar = ({
             <p
               className={
                 pathname.startsWith("/admin/categories")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Categories
             </p>
           )}
         </div>
-        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/transactions") && 'SidebarActiveComponent' } `}>
+        <Link href={'/admin/transactions'} className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${pathname.startsWith("/admin/transactions") && 'SidebarActiveComponent' } `}>
           <Transaction isActive={pathname.startsWith("/admin/transactions")} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p
               className={
                 pathname.startsWith("/admin/transactions")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Transaction
             </p>
           )}
-        </div>
+        </Link>
       </div>
       { (isSidebarOpen || isAboveLargeScreens) &&
       <h1
@@ -190,8 +190,8 @@ export const Sidebar = ({
             <p
               className={
                 pathname.startsWith("/admin/productList")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Product List
@@ -213,8 +213,8 @@ export const Sidebar = ({
             <p
               className={
                 pathname.startsWith("/admin/managment")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Manage Admins
@@ -227,8 +227,8 @@ export const Sidebar = ({
             <p
               className={
                 pathname.startsWith("/admin/roles")
-                  ? "text-black"
-                  : "text-[#8B909A]"
+                  ? "text-black text-[15px]"
+                  : "text-[#8B909A] text-[15px]"
               }
             >
               Admin Roles

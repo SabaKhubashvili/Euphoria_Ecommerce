@@ -58,7 +58,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
           <SecondaryInput placeholder="Code" type="third" />
           <SecondaryInput placeholder="Percentage" type="third" />
           </div>
-          <div className="bg-black  h-full text-white  flex-grow
+          <div className="bg-black  h-full text-white  w-full
            border-[1px] text-center text-[14px] font-medium py-[10px] cursor-pointer select-none rounded-[4px]">
             Create
           </div>
