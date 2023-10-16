@@ -20,7 +20,7 @@ export const SecondaryInput = ({
   value,
 }: Props) => {
   return (
-    <div>
+    <div className="w-full">
       {onSubmit ? (
         <form onSubmit={onSubmit} className="relative w-full">
           <input
@@ -49,7 +49,7 @@ export const SecondaryInput = ({
           )}
         </form>
       ) : (
-        <div>
+        <div className="relative w-full">
           <input
             type="text"
             onChange={onChange && onChange}

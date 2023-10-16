@@ -123,6 +123,20 @@ export const WebsiteIcons = {
   <path d="M14 11V17" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M5 7L6 19C6 20.1046 6.89543 21 8 21H16C17.1046 21 18 20.1046 18 19L19 7" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
   <path d="M9 7V4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V7" stroke="#8B909A" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>`,
+  Price:`<svg
+  xmlns="http://www.w3.org/2000/svg"
+  transform="rotate(270)"
+  width="20"
+  height="20"
+  viewBox="0 0 24 24"
+>
+  <path d="M12 22a1 1 0 00.707-.293l9-9a1 1 0 00.29-.784l-.643-8.357a1 1 0 00-.92-.921L12.077 2a1 1 0 00-.784.29l-9 9a1 1 0 000 1.414l9 9A1 1 0 0012 22zm.382-17.968l7.044.542.542 7.044L12 19.586 4.414 12zm2.061 5.525a2 2 0 112.828 0 2 2 0 01-2.828 0z"></path>
+</svg>`,
+  Information:`  <svg xmlns="http://www.w3.org/2000/svg" fill="#8B909A" viewBox="0 0 24 24">
+  <g>
+    <path d="M12.5 2.2a10.3 10.3 0 1010.3 10.3A10.299 10.299 0 0012.5 2.2zm0 3.3a1 1 0 11-1 1 1.002 1.002 0 011-1zM14 19h-3v-1h1v-8h-1V9h2v9h1z"></path>
+    <path fill="none" d="M0 0h24v24H0z"></path>
+  </g>
 </svg>`
-
 };

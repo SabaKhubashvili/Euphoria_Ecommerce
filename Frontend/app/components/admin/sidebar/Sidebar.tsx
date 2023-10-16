@@ -19,6 +19,7 @@ import { useMediaQuery } from "@mui/material";
 import { extraLargeScreens } from "@/app/Screens/Screens";
 import Link from "next/link";
 import { useCouponModal } from "@/app/hooks/UseCouponModal";
+import { UseAddProductModal } from "@/app/hooks/UseAddProductModal";
 
 
 
@@ -32,6 +33,7 @@ export const Sidebar = ({
   const pathname = usePathname();
   const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
   const {onOpen} = useCouponModal()
+  const {onOpen:addProductModalOnOpen} = UseAddProductModal()
   
   const bgRef = useRef<HTMLDivElement>(null)
 
@@ -172,7 +174,7 @@ export const Sidebar = ({
       </h1>
 }
       <div className="px-[14px] flex flex-col gap-[8px]">
-        <div className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] `}>
+        <div onClick={addProductModalOnOpen} className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] `}>
           <CirclePlus isActive={false} />
           {(isAboveLargeScreens || isSidebarOpen) && (
             <p

@@ -54,14 +54,12 @@ export const Modal = ({ isOpen, onClose, title, body, footer }: Props) => {
                 <span className=" text-xl font-medium ">
                   {title}
                 </span>
-                <div onClick={handleClose}>
+                <div onClick={handleClose} className="cursor-pointer">
                   <CloseIcon/>
                 </div>
               </div>
               {body}
-              <div>
-                {footer}
-              </div>
+              {footer}
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { PageContainer } from "./components/admin/container/PageContainer";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
-
+  
   return (
     <React.Fragment>
       {pathname.startsWith('/admin') ? (
