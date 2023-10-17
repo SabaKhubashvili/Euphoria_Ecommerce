@@ -155,7 +155,7 @@ export const AddProductModal = () => {
                 alt={`ProductImage${key}`}
                 width={500}
                 height={500}
-                className="w-full"
+                className="w-full rounded-sm"
               />
             </div>
           ))
