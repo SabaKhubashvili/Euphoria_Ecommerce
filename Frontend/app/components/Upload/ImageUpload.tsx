@@ -29,7 +29,7 @@ export const ImageUpload = ({
   return (
     <CldUploadWidget
     onUpload={handleUpload}
-    uploadPreset='cwyyjcnj'
+    uploadPreset={process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET}
     options={{
       maxFiles:1,
       resourceType:'image'

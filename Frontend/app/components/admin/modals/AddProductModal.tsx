@@ -10,6 +10,7 @@ import { Textarea } from "../../Inputs/Textarea";
 import { GrayButton } from "../../buttons/GrayButton";
 import { MainButton } from "../../buttons/MainButton";
 import { ImageUpload } from "../../Upload/ImageUpload";
+import Image from "next/image";
 
 enum STEPS {
   productInformation = 0,
@@ -27,7 +28,7 @@ export const AddProductModal = () => {
     xl: false,
     xxl: false,
   });
-  const [productImage,setProductImage] = useState<string>()
+  const [productImages, setProductImages] = useState<string[]>([]);
 
   const MainButtonCont = useMemo(() => {
     if (activeStep === STEPS.image) {
@@ -36,20 +37,26 @@ export const AddProductModal = () => {
       return "Next";
     }
   }, [activeStep]);
-  const secondaryButtonOnClick = useCallback((e:any) => {
-    e.stopPropagation()
-    if (activeStep === STEPS.image) {
-      setActiveStep((prev) => prev - 1);
-    }
-  }, [activeStep, STEPS]);
-  const mainButtonOnClick = useCallback((e:any) => {
-    e.stopPropagation()
-    if (activeStep === STEPS.productInformation) {
-      setActiveStep(STEPS.image);
-    } else {
-      console.log("submit");
-    }
-  }, [activeStep, STEPS]);
+  const secondaryButtonOnClick = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      if (activeStep === STEPS.image) {
+        setActiveStep((prev) => prev - 1);
+      }
+    },
+    [activeStep, STEPS]
+  );
+  const mainButtonOnClick = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      if (activeStep === STEPS.productInformation) {
+        setActiveStep(STEPS.image);
+      } else {
+        console.log("submit");
+      }
+    },
+    [activeStep, STEPS]
+  );
 
   let modalBody = (
     <div className="flex flex-col gap-[10px]">
@@ -131,12 +138,30 @@ export const AddProductModal = () => {
     </div>
   );
 
-  if(activeStep === STEPS.image){
+  if (activeStep === STEPS.image) {
     modalBody = (
-      <div className="h-[300px]">
-          <ImageUpload onChange={setProductImage} value={productImage} label="Upload Product image"/>
+      <div className="flex flex-col gap-[30px]">
+        <div className="h-[300px]">
+          <ImageUpload
+            onChange={(image)=>{setProductImages(prevImages => [...prevImages, image]);}}
+            label="Upload Product image"
+          />
+        </div>
+        <div className="flex gap-[10px] flex-wrap">{
+          productImages.map((image,key)=>(
+            <div className="basis-1/3" key={key}>
+              <Image
+                src={image}
+                alt={`ProductImage${key}`}
+                width={500}
+                height={500}
+                className="w-full"
+              />
+            </div>
+          ))
+        }</div>
       </div>
-    )
+    );
   }
   return (
     <Modal
