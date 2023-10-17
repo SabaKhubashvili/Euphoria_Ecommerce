@@ -91,7 +91,7 @@ export const RadioDropdown = ({
            className="cursor-pointer flex justify-between uppercase"
            onClick={(e) => {
              e.stopPropagation();
-             cont.onClick(!cont.checked);
+             cont.onClick(!cont.checked); 
            }}
            key={cont.label}
          >

@@ -9,6 +9,7 @@ import { RadioDropdown } from "../../Dropdown/RadioDropdown";
 import { Textarea } from "../../Inputs/Textarea";
 import { GrayButton } from "../../buttons/GrayButton";
 import { MainButton } from "../../buttons/MainButton";
+import { ImageUpload } from "../../Upload/ImageUpload";
 
 enum STEPS {
   productInformation = 0,
@@ -26,6 +27,7 @@ export const AddProductModal = () => {
     xl: false,
     xxl: false,
   });
+  const [productImage,setProductImage] = useState<string>()
 
   const MainButtonCont = useMemo(() => {
     if (activeStep === STEPS.image) {
@@ -128,6 +130,14 @@ export const AddProductModal = () => {
       />
     </div>
   );
+
+  if(activeStep === STEPS.image){
+    modalBody = (
+      <div className="h-[300px]">
+          <ImageUpload onChange={setProductImage} value={productImage} label="Upload Product image"/>
+      </div>
+    )
+  }
   return (
     <Modal
       isOpen={isOpen}

@@ -1,24 +1,26 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { CldUploadWidget } from 'next-cloudinary'
-import Image from 'next/image'
-import { TbPhotoPlus } from "react-icons/tb"
+import { Icon } from '../Icon'
+import { WebsiteIcons } from '@/public/Svg/IconsObject'
 declare global {
     var cloudinary:any
 }
 
 interface Props{
     onChange:(value:string)=>void,
-    value:string,
+    value?:string,
     isAboveSmallScreens?:boolean
     disabled?:boolean,
-    label:string
+    label:string,
+    type?: 'main' | 'secondary' | 'third'
 }
 
 export const ImageUpload = ({
     onChange,
     value,
     disabled,
-    label
+    label,
+    type = 'main'
 }:Props) => {
     const handleUpload = useCallback((result:any)=>{
         onChange(result.info.secure_url)
@@ -31,25 +33,30 @@ export const ImageUpload = ({
     options={{
       maxFiles:1,
       resourceType:'image'
-    
     }}
     
     >
       {({open})=>(
         <div
         onClick={()=> !disabled && open()}
-        className="h-full"
+        className="h-full w-full cursor-pointer"
       >
-        <div className={`h-full cursor-pointer sm:px-[27px] sm:py-[12px] px-[16px] py-[12px] dark:bg-[#07543721] bg-[#F9F9F9] 
-        flex gap-[10px] w-fit rounded-[88px] items-center
-        ${disabled && 'cursor-not-allowed'}
-        ${value && 'dark:bg-[#54ffbd2c] bg-[#ecebeb]'}
-        `}>
-            <TbPhotoPlus color='#FFF'/>
-            <div className='dark:text-white text-[#24B47E] font-medium text-[14px] whitespace-nowrap'>
-                {label}
-            </div>
-        </div>
+        {
+          type === 'main' ?
+          <div className='w-full h-full border-[1px] border-secondaryGray border-solid py-[3rem] px-4 rouned-md flex justify-center items-center'>
+                <div className='flex flex-col gap-[10px] items-center justify-center'>
+                  <div className='w-[50px] h-[50px]'>
+                    <Icon svg={WebsiteIcons['Camera']}/>
+                  </div>
+                  <h3 className='text-secondaryGray font-bold text-[16px]'>
+                    {label}
+                  </h3>
+                </div>
+          </div>
+          :
+          ''
+        }
+        
       </div>
       )}
 
