@@ -125,7 +125,7 @@ export const AddProductModal = () => {
   );
 
   const footerContent = (
-    <div className="flex gap-[10px]">
+    <div className="flex gap-[10px] items-center">
       {activeStep !== STEPS.productInformation && (
         <MainButton label={"Previous"} onClick={secondaryButtonOnClick} full />
       )}
@@ -147,15 +147,15 @@ export const AddProductModal = () => {
             label="Upload Product image"
           />
         </div>
-        <div className="flex gap-[10px] flex-wrap">{
+        <div className="flex gap-[5px] flex-wrap">{
           productImages.map((image,key)=>(
-            <div className="basis-1/3" key={key}>
+            <div className="w-[49%]" key={key}>
               <Image
                 src={image}
                 alt={`ProductImage${key}`}
                 width={500}
                 height={500}
-                className="w-full max-h-[118px] max-w-[300px] object-cover rounded-sm"
+                className="w-full h-[444px]  object-cover rounded-sm"
               />
             </div>
           ))

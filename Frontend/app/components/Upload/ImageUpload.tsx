@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useCallback, useState } from "react";
-import { CldUploadWidget } from "next-cloudinary";
+import React, { useState,useRef } from "react";
+import Image from 'next/image'
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import Cropper, { ReactCropperElement } from "react-cropper";
+import "cropperjs/dist/cropper.css";
 declare global {
   var cloudinary: any;
 }
@@ -29,7 +30,8 @@ export const ImageUpload = ({
 }: Props) => {
   const [isDragging,setIsDragging] = useState(false)
   const [enterCount, setEnterCount] = useState(0);
-
+  const [crop, setCrop] = useState()
+  const cropperRef = useRef<ReactCropperElement>(null)
   const uploadFileToCloudinary = async (files: FileList | null) => {
     if (files && files.length > 0) {
       const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
@@ -69,6 +71,7 @@ export const ImageUpload = ({
       }
     }
   };
+  
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
@@ -101,6 +104,20 @@ export const ImageUpload = ({
     uploadFileToCloudinary(e.dataTransfer.files);
   };
 
+  const hanldeCrop = () => {
+    const cropper = cropperRef.current?.cropper;
+    console.log(cropper?.getCroppedCanvas().toDataURL());
+    cropperRef?.current?.cropper.getCroppedCanvas().toBlob((blob) => {
+      if (blob) {
+        const croppedFile = new File([blob], 'cropped-image.jpg', { type: 'image/jpeg' });
+        console.log(croppedFile);
+        
+      }
+    }, 'image/jpeg');
+  };
+
+
+
   return (
     <div
     onDragOver={handleDragOver}
@@ -108,10 +125,16 @@ export const ImageUpload = ({
     onDrop={handleDrop}
     onDragLeave={handleDragLeave}
     className="h-full w-full cursor-pointer">
+      <Cropper
+        src="/Images/Product/Product.webp"
+        style={{ height: 400, width: "100%" }}
+        initialAspectRatio={9 / 16}
+        guides={false}
+        ref={cropperRef}
+     />
       <input accept="image/*" onChange={(e) => uploadFileToCloudinary(e.target.files)} type="file" name="UploadImage" id="UploadImage" hidden />
       {type === "main" ? (
         <label
-
           htmlFor="UploadImage"
           className={`w-full cursor-pointer h-full border-[1px] border-secondaryGray border-solid py-[3rem] px-4 rouned-md flex justify-center items-center
           ${isDragging && ' opacity-50  '}
