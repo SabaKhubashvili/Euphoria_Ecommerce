@@ -140,8 +140,8 @@ export const AddProductModal = () => {
 
   if (activeStep === STEPS.image) {
     modalBody = (
-      <div className="flex flex-col gap-[30px]">
-        <div className="h-[300px]">
+      <div className={`flex flex-col ${productImages.length > 0 && 'gap-[30px]'} `}>
+        <div className="h-fit">
           <ImageUpload
             onChange={(image)=>{setProductImages(prevImages => [...prevImages, image]);}}
             label="Upload Product image"
