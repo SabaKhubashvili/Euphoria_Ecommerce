@@ -40,9 +40,9 @@ export const Modal = ({ isOpen, onClose, title, body, footer }: Props) => {
   }
   return (
     <div
-      className={`fixed inset-0 w-full h-full bg-neutral-800/70 z-[100] flex justify-center items-center`}
+      className={`fixed inset-0 w-full h-full bg-neutral-800/70 z-[100] flex justify-center items-center  overflow-y-auto`}
     >
-      <div className={`md:w-4/6 lg:w-3/6 xl:w-2/5 w-full my-6 mx-auto h-full md:h-auto md:max-h-[600px] overflow-y-auto`}>
+      <div className={`md:w-4/6 lg:w-3/6 xl:w-2/5 w-full my-6 mx-auto h-full md:h-auto md:max-h-[600px]`}>
         <div
           className={`
            ${showModal ? "translate-y-0" : "translate-y-[2000%]"}

@@ -29,7 +29,7 @@ export const AddProductModal = () => {
     xxl: false,
   });
   const [productImages, setProductImages] = useState<string[]>([]);
-
+  
   const MainButtonCont = useMemo(() => {
     if (activeStep === STEPS.image) {
       return "Add";

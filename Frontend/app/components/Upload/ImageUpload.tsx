@@ -36,11 +36,13 @@ export const ImageUpload = ({
   const cropperRef = useRef<ReactCropperElement>(null);
 
   const uploadFileToCloudinary = async (files: FileList | File | null) => {
-    if (files && files.length > 0) {
+
+    if (files) {
+      console.log('upload');
       const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
       const uploadPreset =
         process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "";
-
+        
       const formData = new FormData();
       if (files instanceof FileList) {
         for (let i = 0; i < files.length; i++) {
@@ -156,9 +158,9 @@ export const ImageUpload = ({
           const croppedFile = new File([blob], "cropped-image.jpg", {
             type: "image/jpeg",
           });
-          uploadFileToCloudinary(croppedFile);
-          onChange(URL.createObjectURL(croppedFile));
           setCroppingImage(false);
+          
+          uploadFileToCloudinary(croppedFile);
         }
       }, "image/jpeg");
     }
