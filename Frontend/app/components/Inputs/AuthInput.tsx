@@ -13,7 +13,8 @@ interface Props {
   feedback?: string;
   required?: boolean;
   type?: string;
-  defaultValue?:string
+  defaultValue?:string,
+  disabled?:boolean
 }
 
 export const AuthInput = ({
@@ -25,7 +26,8 @@ export const AuthInput = ({
   feedback,
   required,
   type = "text",
-  defaultValue
+  defaultValue,
+  disabled
 }: Props) => {
   const [insideType, setInsideType] = useState(type);
   return (
@@ -49,17 +51,20 @@ export const AuthInput = ({
             onChange={onChange}
             type={insideType}
             defaultValue={defaultValue}
+            disabled={disabled}
             className={`
             w-full px-[16px] py-[10px] border-[1px] border-solid border-divider outline-none
             ${feedback && "border-rose-500 text-rose-500"}
+            ${disabled && 'opacity-75'}
+            transition-all duration-200
             `}
           />
           {type === "password" && (
-            <div className="absolute right-2 flex items-center top-0 bottom-0">
+            <div className="absolute right-2 flex items-center top-0 bottom-0 cursor-pointer">
               {insideType === "password" ? (
                 <div
                   onClick={() => {
-                    setInsideType("text");
+                   !disabled  && setInsideType("text");
                   }}
                   className="w-5"
                 >
@@ -68,7 +73,7 @@ export const AuthInput = ({
               ) : (
                 <div
                   onClick={() => {
-                    setInsideType("password");
+                    !disabled  && setInsideType("password");
                   }}
                   className="w-5"
                 >

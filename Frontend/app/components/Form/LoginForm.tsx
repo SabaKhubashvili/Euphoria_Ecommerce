@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Form } from "./Form";
 import { useFormik } from "formik";
 import { AuthInput } from "../Inputs/AuthInput";
@@ -13,6 +13,8 @@ import { toast  } from "react-toastify";
 
 export const LoginForm = () => {
   const router = useRouter();
+  const [isLoading,setIsLoading] = useState<boolean>(false)
+
   const formik = useFormik({
     validateOnBlur:false,
     validateOnChange:false,
@@ -31,15 +33,16 @@ export const LoginForm = () => {
       return errors;
     },
     onSubmit: async (values) => {
+      setIsLoading(true)
       try {
         const res = await RestClient.postRequest(BaseUrl.login, values);
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 3);
-        const { username, email } = res.data;
+        const { firstname, email } = res.data;
         setCookie("accessToken", res.data.accessToken, {
           expires: expirationDate,
-        });
-        localStorage.setItem("userInfo", JSON.stringify({ username, email }));
+        }); 
+        localStorage.setItem("userInfo", JSON.stringify({ firstname, email }));
         router.refresh();
         router.push("/");
       } catch (err:any) {
@@ -70,6 +73,7 @@ export const LoginForm = () => {
         onChange={formik.handleChange}
         feedback={formik.errors.email}
         required
+        disabled={isLoading}
       />
       <AuthInput
         name="password"
@@ -80,21 +84,25 @@ export const LoginForm = () => {
         onChange={formik.handleChange}
         feedback={formik.errors.password}
         required
+        disabled={isLoading}
       />
       <div className="flex justify-between items-center w-full xs:flex-nowrap flex-wrap">
         <button
           className={`w-fit  font-medium select-none
         tracking-[0.5px] uppercase bg-black
         lg:hover:bg-secondary text-white transition-colors duration-200
-        px-[3rem] py-2
+        px-[3rem] py-2 
+        ${isLoading && 'cursor-not-allowed opacity-75'}
         `}
           type="submit"
+          disabled={isLoading}
         >
           Submit
         </button>
         <Link
-          className=" text-gray font-medium text-[14px] tracking-[0.5px] uppercase"
+          className={` text-gray font-medium text-[14px] tracking-[0.5px] uppercase select-none transition-all duration-200 ${isLoading && 'opacity-75 cursor-not-allowed'}`}
           href={"/"}
+          aria-disabled={isLoading}
         >
           Back
         </Link>

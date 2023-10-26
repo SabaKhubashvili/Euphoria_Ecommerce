@@ -32,7 +32,7 @@ async function checkIfIsAdmin(request:NextRequest) {
       accessToken,
       new TextEncoder().encode(process.env.JWT_SECRET)
     );
-    
+      
     return payload !== undefined && payload.isAdmin;
   } catch (error) {
     return false;
