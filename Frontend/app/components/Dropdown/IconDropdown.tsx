@@ -15,6 +15,8 @@ export const IconDropdown = ({ svg, content }: Props) => {
 
     useEffect(()=>{
         if(isOpen){
+            console.log('open');
+            
             const handleOutsideClick = (e:MouseEvent) =>{
                 if(DropdownRef.current && !DropdownRef.current.contains(e.target as Node)){
                     setIsOpen(false)
