@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Coupon = ({isActive}:{isActive:boolean}) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="none">
         <path d="M13.75 4.58334V6.41667" stroke={isActive ? "#23272E":  "#8B909A" } strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M13.75 4.58334V6.41667" stroke={isActive ? "#23272E":  "#8B909A" } strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
         <path d="M13.75 10.0833V11.9167" stroke={isActive ? "#23272E":  "#8B909A" } strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>

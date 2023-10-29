@@ -19,8 +19,8 @@ export const Modal = ({ isOpen, onClose, title, body, footer }: Props) => {
   const handleClose = useCallback(() => {
     setShowModal(false);
     setTimeout(onClose, 300);
-  }, [setShowModal]);
-  
+  }, [onClose,setShowModal]);
+
   useEffect(()=>{
     if(showModal){
       const handleOutsideClick = (e:MouseEvent) =>{

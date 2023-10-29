@@ -20,7 +20,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
   const sidebarVariants = useMemo(() => {
     return {
       open: { width: "20%" },
-      closed: { width: "fit-content" },
+      closed: { width: "fit-content"},
     };
   }, []);
 
@@ -31,7 +31,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
  
   return (
     <div
-      className={` ${PublicSans.className} flex gap-[26px] w-full  justify-between`}
+      className={` ${PublicSans.className} flex gap-[26px] w-full 2xl:justify-start justify-between`}
     >
       <CouponModal/>
       <AddProductModal/>
@@ -42,6 +42,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
           variants={sidebarVariants}
           exit={{ width: "15%" }}
           transition={{ duration: 0.3 }}
+          style={{minWidth: isAboveLargeScreens ? '220px' : isSidebarOpen ?  '220px' : ''}}
         >
           <Sidebar
             isSidebarOpen={isSidebarOpen}
@@ -54,7 +55,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
         animate={controls}
         exit={{ width: "15%" }}
         transition={{ duration: 0.3 }}
-        className="bg-[#FAFAFA] pl-[20px] flex-grow pr-[26px]"
+        className="bg-[#FAFAFA] pl-[20px] flex-grow pr-[26px] max-w-[2268px]"
       >
         {children}
       </motion.div>

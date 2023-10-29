@@ -51,15 +51,15 @@ export const Sidebar = ({
     return () => {
       window.removeEventListener("resize", updateActiveElement);
     };
-  }, [pathname]);
+  }, [pathname, isSidebarOpen]);
 
   return (
     <div className="bg-white h-full">
       <div className="flex justify-between items-center pl-[18px] py-[20px] pr-[14px]">
         {isAboveLargeScreens && (
-          <div className="w-[90px] h-[40px]">
+          <Link href={"/"} className="w-[90px] h-[40px]">
             <Logo dark />
-          </div>
+          </Link>
         )}
         {!isAboveLargeScreens && (
           <div
@@ -93,16 +93,19 @@ export const Sidebar = ({
             } `}
             href={"/admin/dashboard"}
           >
-            <AdminDashboard
-              isActive={pathname.startsWith("/admin/dashboard")}
-            />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <AdminDashboard
+                isActive={pathname.startsWith("/admin/dashboard")}
+              />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
+                className={` ${
                   pathname.startsWith("/admin/dashboard")
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
+                    xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Dashboard
               </p>
@@ -114,14 +117,17 @@ export const Sidebar = ({
             } `}
             href={"/admin/orders"}
           >
-            <ShoppingCart isActive={pathname.startsWith("/admin/orders")} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <ShoppingCart isActive={pathname.startsWith("/admin/orders")} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
+                className={` ${
                   pathname.startsWith("/admin/orders")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
+                    ? "text-black"
+                    : " text-[#8B909A]"
                 }
+              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Order Managment
               </p>
@@ -134,14 +140,17 @@ export const Sidebar = ({
               "SidebarActiveComponent"
             } `}
           >
-            <Users isActive={pathname.startsWith("/admin/customers")} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <Users isActive={pathname.startsWith("/admin/customers")} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
+                className={` ${
                   pathname.startsWith("/admin/customers")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
+                    ? "text-black"
+                    : " text-[#8B909A]"
                 }
+              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Customers
               </p>
@@ -149,18 +158,14 @@ export const Sidebar = ({
           </Link>
           <div
             onClick={onOpen}
-            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
-              pathname.startsWith("/admin/coupon") && "SidebarActiveComponent"
-            } `}
+            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] `}
           >
-            <Coupon isActive={pathname.startsWith("/admin/coupon")} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <Coupon isActive={false} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
-                  pathname.startsWith("/admin/coupon")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
-                }
+                className={` xl:text-[13px] 2xl:text-[17px] text-[14px] text-[#8B909A] `}
               >
                 Coupon Code
               </p>
@@ -173,14 +178,17 @@ export const Sidebar = ({
               "SidebarActiveComponent"
             } `}
           >
-            <Categories isActive={pathname.startsWith("/admin/categories")} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <Categories isActive={pathname.startsWith("/admin/categories")} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
+                className={` ${
                   pathname.startsWith("/admin/categories")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
+                    ? "text-black"
+                    : " text-[#8B909A]"
                 }
+              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Categories
               </p>
@@ -193,16 +201,19 @@ export const Sidebar = ({
               "SidebarActiveComponent"
             } `}
           >
-            <Transaction
-              isActive={pathname.startsWith("/admin/transactions")}
-            />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <Transaction
+                isActive={pathname.startsWith("/admin/transactions")}
+              />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
+                className={` ${
                   pathname.startsWith("/admin/transactions")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
+                    ? "text-black"
+                    : " text-[#8B909A]"
                 }
+              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Transaction
               </p>
@@ -221,7 +232,9 @@ export const Sidebar = ({
             onClick={addProductModalOnOpen}
             className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] `}
           >
-            <CirclePlus isActive={false} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <CirclePlus isActive={false} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p className={"text-[#8B909A]"}>Add Products</p>
             )}
@@ -232,14 +245,17 @@ export const Sidebar = ({
               pathname.startsWith("/admin/products") && "SidebarActiveComponent"
             } `}
           >
-            <Box isActive={pathname.startsWith("/admin/products")} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <Box isActive={pathname.startsWith("/admin/products")} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
+                className={` ${
                   pathname.startsWith("/admin/products")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
+                    ? "text-black"
+                    : " text-[#8B909A]"
                 }
+              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Product List
               </p>
@@ -260,14 +276,17 @@ export const Sidebar = ({
               "SidebarActiveComponent"
             } `}
           >
-            <User isActive={pathname.startsWith("/admin/managment")} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <User isActive={pathname.startsWith("/admin/managment")} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
+                className={` ${
                   pathname.startsWith("/admin/managment")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
+                    ? "text-black"
+                    : " text-[#8B909A]"
                 }
+              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Manage Admins
               </p>
@@ -278,14 +297,17 @@ export const Sidebar = ({
               pathname.startsWith("/admin/roles") && "SidebarActiveComponent"
             } `}
           >
-            <Settings isActive={pathname.startsWith("/admin/roles")} />
+            <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
+              <Settings isActive={pathname.startsWith("/admin/roles")} />
+            </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={
-                  pathname.startsWith("/admin/roles")
-                    ? "text-black text-[15px]"
-                    : "text-[#8B909A] text-[15px]"
+                className={` ${
+                  pathname.startsWith("/admin/dashboard")
+                    ? "text-black"
+                    : " text-[#8B909A]"
                 }
+                    xl:text-[13px] 2xl:text-[17px] text-[14px]`}
               >
                 Admin Roles
               </p>

@@ -2,7 +2,7 @@ import React from 'react'
 
 export const Users = ({isActive}:{isActive:boolean}) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 22 22" fill="none">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 22 22" fill="none">
   <ellipse cx="8.25004" cy="6.41667" rx="3.66667" ry="3.66667" stroke={isActive ? "#23272E":  "#8B909A" } strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
   <ellipse cx="8.25004" cy="6.41667" rx="3.66667" ry="3.66667" stroke={isActive ? "#23272E":  "#8B909A" } strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>
   <path d="M2.75 19.25V17.4167C2.75 15.3916 4.39162 13.75 6.41667 13.75H10.0833C12.1084 13.75 13.75 15.3916 13.75 17.4167V19.25" stroke={isActive ? "#23272E":  "#8B909A" } strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/>

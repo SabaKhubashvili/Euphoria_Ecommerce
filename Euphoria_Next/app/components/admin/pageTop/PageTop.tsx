@@ -32,7 +32,7 @@ export const PageTop = ({pageTitle}:{pageTitle:string}) => {
 
   return (
     <div className={`flex justify-between pt-[28px] ${PublicSans.className}`}>
-      <h1 className="font-bold text-[24px] leading-[22px] flex-grow">
+      <h1 className="font-bold md:text-[20px] text-[17px] xl:text-[24px] leading-[22px] flex-grow">
         {pageTitle}
       </h1>
       <div className="flex gap-[24px] items-center">

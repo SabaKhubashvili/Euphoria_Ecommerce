@@ -72,7 +72,7 @@ export const CartPage = () => {
     } else if (step !== Steps.Done) {
       setStep((prev) => prev + 1);
     }
-  }, [step, Steps, formik]);
+  }, [step, formik]);
 
   return (
     <div className="max-w-[1400px] mx-auto mb-[150px]">
