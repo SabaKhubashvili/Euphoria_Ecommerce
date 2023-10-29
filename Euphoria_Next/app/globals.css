@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    scrollbar-color: #C4C4C4;
+}
+
+*::-webkit-scrollbar {
+    width: 4px; 
+  }
+  
+  *::-webkit-scrollbar-track {
+    background-color: #C4C4C4; /* Color of the track */
+    border-radius: 15px; 
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color: #edecec; /* Color of the thumb */
+    border-radius: 15px; 
+  }
+
+.transparent-text{
+    color: transparent;
+    -webkit-text-stroke: 2px black;
+    text-stroke: 2px black;
+    text-shadow: none;
+}
+
+
+.mySwiper .swiper-pagination {
+    position: absolute;
+    z-index: 5;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    bottom: 0;
+    margin: 10px;
+    gap:10px;
+    height: 40px;
+}
+
+
+.mySwiper .swiper-pagination-bullet {
+    border: 2px solid #828282;
+    width: 20px;
+    height: 20px;
+    display: block;
+    cursor: pointer;
+  }
+.mySwiper .swiper-pagination-bullet-active{
+    border: none;
+    background-color: black;
+    width: 30px;
+    height: 30px;
+    transition: 0.4s ease ;
+}
+
+@media screen and (max-width:1024px) {
+    .mySwiper .swiper-pagination {
+        left:0;
+        justify-content: center !important;
+        width: 100% !important;
+      }
+}
+
+.paypal-button-container{
+  margin: auto !important;
+}
+
+/* Animation */
+
+#check-group {
+  animation: 0.32s ease-in-out 1.03s check-group;
+  transform-origin: center;
+}
+
+#check-group #check {
+  animation: 0.34s cubic-bezier(0.65, 0, 1, 1) 0.8s forwards check;
+  stroke-dasharray: 0, 75px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#check-group #outline {
+  animation: 0.38s ease-in outline;
+  transform: rotate(0deg);
+  transform-origin: center;
+}
+
+#check-group #white-circle {
+  animation: 0.35s ease-in 0.35s forwards circle;
+  transform: none;
+  transform-origin: center;
+}
+
+.recharts-wrapper , .recharts-surface{
+  width: 100% !important;
+  height: 100% !important;
+}
+
+@keyframes outline {
+from {
+  stroke-dasharray: 0, 345.576px;
+}
+to {
+  stroke-dasharray: 345.576px, 345.576px;
+}
+}
+@keyframes circle {
+from {
+  transform: scale(1);
+}
+to {
+  transform: scale(0);
+}
+}
+@keyframes check {
+from {
+  stroke-dasharray: 0, 75px;
+}
+to {
+  stroke-dasharray: 75px, 75px;
+}
+}
+@keyframes check-group {
+from {
+  transform: scale(1);
+}
+50% {
+  transform: scale(1.09);
+}
+to {
+  transform: scale(1);
+}
+}
