@@ -1,7 +1,0 @@
-export {FacebookIcon} from './FacebookIcon'
-export {InstagramIcon} from './InstagramIcon'
-export {TwitterIcon} from './TwitterIcon'
-export {LinkedinIcon} from './LinkedinIcon'
-export {FacebookBlackIcon} from './FacebookBlackIcon'
-export {InstagramBlackIcon} from './InstagramBlackIcon'
-export {TwitterBlackIcon} from './TwitterBlackIcon'
