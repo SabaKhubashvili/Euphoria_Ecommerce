@@ -151,264 +151,179 @@ export interface productInterface{
     description:string,
     name:string,
     image:string
+    category:number;
 }
+
 export const products: productInterface[] = [
   {
     _id: 1,
     price: '10,00',
     description: "This is a great product.",
     name: "Product 1",
-    image: "Product"
+    image: "Product",
+    category: 1, // Category ID for Electronics
   },
   {
     _id: 2,
     price: '25,00',
     description: "An amazing product for your needs.",
     name: "Product 2",
-    image: "Product"
+    image: "Product",
+    category: 2, // Category ID for Clothing
   },
   {
     _id: 3,
     price: '50,00',
     description: "A must-have item for every home.",
     name: "Product 3",
-    image: "Product"
+    image: "Product",
+    category: 3, // Category ID for Home Decor
   },
   {
     _id: 4,
     price: '15,00',
     description: "High-quality and durable product.",
     name: "Product 4",
-    image: "Product"
+    image: "Product",
+    category: 8, // Category ID for Furniture
   },
   {
     _id: 5,
     price: '30,00',
     description: "Get the best value with this product.",
     name: "Product 5",
-    image: "Product"
+    image: "Product",
+    category: 7, // Category ID for Beauty Products
   },
   {
     _id: 6,
     price: '18,50',
     description: "An affordable and reliable option.",
     name: "Product 6",
-    image: "Product"
+    image: "Product",
+    category: 13, // Category ID for Health and Wellness
   },
   {
     _id: 7,
     price: '40,00',
     description: "Elegant and stylish design for your home.",
     name: "Product 7",
-    image: "Product"
+    image: "Product",
+    category: 3, // Category ID for Home Decor
   },
   {
     _id: 8,
     price: '12,99',
     description: "Experience the latest technology with this product.",
     name: "Product 8",
-    image: "Product"
+    image: "Product",
+    category: 1, // Category ID for Electronics
   },
   {
     _id: 9,
     price: '35,00',
     description: "Perfect for outdoor adventures and activities.",
     name: "Product 9",
-    image: "Product"
+    image: "Product",
+    category: 6, // Category ID for Sports Equipment
   },
   {
     _id: 10,
     price: '22,75',
     description: "Enhance your productivity with this amazing product.",
     name: "Product 10",
-    image: "Product"
+    image: "Product",
+    category: 17, // Category ID for Office Supplies
   },
-  // ... (remaining products)
   {
     _id: 11,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 19",
-    image: "Product"
+    name: "Product 11",
+    image: "Product",
+    category: 11, // Category ID for Automotive
   },
   {
     _id: 12,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 20",
-    image: "Product"
+    name: "Product 12",
+    image: "Product",
+    category: 3, // Category ID for Home Decor
   },
   {
     _id: 13,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 21",
-    image: "Product"
+    name: "Product 13",
+    image: "Product",
+    category: 11, // Category ID for Automotive
   },
   {
     _id: 14,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 24",
-    image: "Product"
+    name: "Product 14",
+    image: "Product",
+    category: 2, // Category ID for Clothing
   },
   {
     _id: 15,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 19",
-    image: "Product"
+    name: "Product 15",
+    image: "Product",
+    category: 11, // Category ID for Automotive
   },
   {
     _id: 16,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 22",
-    image: "Product"
+    name: "Product 16",
+    image: "Product",
+    category: 1, // Category ID for Electronics
   },
   {
     _id: 17,
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 195",
-    image: "Product"
+    name: "Product 17",
+    image: "Product",
+    category: 8, // Category ID for Furniture
   },
   {
     _id: 18,
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 20",
-    image: "Product"
+    name: "Product 18",
+    image: "Product",
+    category: 1, // Category ID for Electronics
   },
   {
     _id: 19,
     price: '10,00',
     description: "This is a great product.",
-    name: "Product 1",
-    image: "Product"
+    name: "Product 19",
+    image: "Product",
+    category: 2, // Category ID for Clothing
   },
   {
     _id: 20,
     price: '25,00',
     description: "An amazing product for your needs.",
-    name: "Product 2",
-    image: "Product"
+    name: "Product 20",
+    image: "Product",
+    category: 7, // Category ID for Beauty Products
   },
   {
-    _id: 28761,
+    _id: 21,
     price: '50,00',
     description: "A must-have item for every home.",
-    name: "Product 3",
-    image: "Product"
-  },
-  {
-    _id: 212212789,
-    price: '15,00',
-    description: "High-quality and durable product.",
-    name: "Product 4",
-    image: "Product"
-  },
-  {
-    _id: 25521211,
-    price: '30,00',
-    description: "Get the best value with this product.",
-    name: "Product 5",
-    image: "Product"
-  },
-  {
-    _id: 212122241,
-    price: '18,50',
-    description: "An affordable and reliable option.",
-    name: "Product 6",
-    image: "Product"
-  },
-  {
-    _id: 512211,
-    price: '40,00',
-    description: "Elegant and stylish design for your home.",
-    name: "Product 7",
-    image: "Product"
-  },
-  {
-    _id: 832121,
-    price: '12,99',
-    description: "Experience the latest technology with this product.",
-    name: "Product 8",
-    image: "Product"
-  },
-  {
-    _id: 926111,
-    price: '35,00',
-    description: "Perfect for outdoor adventures and activities.",
-    name: "Product 9",
-    image: "Product"
-  },
-  {
-    _id: 121051,
-    price: '22,75',
-    description: "Enhance your productivity with this amazing product.",
-    name: "Product 16",
-    image: "Product"
-  },
-  // ... (remaining products)
-  {
-    _id: 12112121,
-    price: '38,00',
-    description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 17",
-    image: "Product"
-  },
-  {
-    _id: 1212,
-    price: '80,00',
-    description: "Experience luxury and comfort with this premium product.",
-    name: "Product 18",
-    image: "Product"
-  },
-  {
-    _id: 12121213,
-    price: '38,00',
-    description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 19",
-    image: "Product"
-  },
-  {
-    _id: 12141212,
-    price: '80,00',
-    description: "Experience luxury and comfort with this premium product.",
     name: "Product 21",
-    image: "Product"
-  },
-  {
-    _id: 122415,
-    price: '38,00',
-    description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 22",
-    image: "Product"
-  },
-  {
-    _id: 165121,
-    price: '80,00',
-    description: "Experience luxury and comfort with this premium product.",
-    name: "Product 23",
-    image: "Product"
-  },
-  {
-    _id: 211317,
-    price: '38,00',
-    description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 24",
-    image: "Product"
-  },
-  {
-    _id: 1218,
-    price: '80,00',
-    description: "Experience luxury and comfort with this premium product.",
-    name: "Product 25",
-    image: "Product"
-  },
-];
-
+    image: "Product",
+    category:19
+  }];
+  
 export const orders: ordersInterface[] = [
   {
       id: 1,
@@ -826,25 +741,25 @@ export const TransactionsData: Array<{ id: number, customer: string, date: strin
 ];
 
 
-export const categoryData: { category: string, products: number, sales: number, profit: string }[] = [
-  { category: "Electronics", products: 100, sales: 5000, profit: "$2000" },
-  { category: "Clothing", products: 200, sales: 8000, profit: "$3000" },
-  { category: "Home Decor", products: 50, sales: 2500, profit: "$1000" },
-  { category: "Toys", products: 75, sales: 3000, profit: "$1200" },
-  { category: "Books", products: 120, sales: 6000, profit: "$2400" },
-  { category: "Sports Equipment", products: 90, sales: 4500, profit: "$1800" },
-  { category: "Beauty Products", products: 150, sales: 7500, profit: "$3000" },
-  { category: "Furniture", products: 80, sales: 4000, profit: "$1600" },
-  { category: "Jewelry", products: 60, sales: 3000, profit: "$1200" },
-  { category: "Food and Beverages", products: 250, sales: 12500, profit: "$5000" },
-  { category: "Automotive", products: 70, sales: 3500, profit: "$1400" },
-  { category: "Garden Supplies", products: 40, sales: 2000, profit: "$800" },
-  { category: "Health and Wellness", products: 110, sales: 5500, profit: "$2200" },
-  { category: "Pet Supplies", products: 45, sales: 2250, profit: "$900" },
-  { category: "Music Instruments", products: 30, sales: 1500, profit: "$600" },
-  { category: "Art and Crafts", products: 65, sales: 3250, profit: "$1300" },
-  { category: "Office Supplies", products: 85, sales: 4250, profit: "$1700" },
-  { category: "Travel Accessories", products: 25, sales: 1250, profit: "$500" },
-  { category: "Fitness Equipment", products: 55, sales: 2750, profit: "$1100" },
-  { category: "Baby Products", products: 70, sales: 3500, profit: "$1400" }
+export const categoryData: { id: number; category: string; products: number; sales: number; profit: string }[] = [
+  { id: 1, category: "Electronics", products: 100, sales: 5000, profit: "$2000" },
+  { id: 2, category: "Clothing", products: 200, sales: 8000, profit: "$3000" },
+  { id: 3, category: "Home Decor", products: 50, sales: 2500, profit: "$1000" },
+  { id: 4, category: "Toys", products: 75, sales: 3000, profit: "$1200" },
+  { id: 5, category: "Books", products: 120, sales: 6000, profit: "$2400" },
+  { id: 6, category: "Sports Equipment", products: 90, sales: 4500, profit: "$1800" },
+  { id: 7, category: "Beauty Products", products: 150, sales: 7500, profit: "$3000" },
+  { id: 8, category: "Furniture", products: 80, sales: 4000, profit: "$1600" },
+  { id: 9, category: "Jewelry", products: 60, sales: 3000, profit: "$1200" },
+  { id: 10, category: "Food and Beverages", products: 250, sales: 12500, profit: "$5000" },
+  { id: 11, category: "Automotive", products: 70, sales: 3500, profit: "$1400" },
+  { id: 12, category: "Garden Supplies", products: 40, sales: 2000, profit: "$800" },
+  { id: 13, category: "Health and Wellness", products: 110, sales: 5500, profit: "$2200" },
+  { id: 14, category: "Pet Supplies", products: 45, sales: 2250, profit: "$900" },
+  { id: 15, category: "Music Instruments", products: 30, sales: 1500, profit: "$600" },
+  { id: 16, category: "Art and Crafts", products: 65, sales: 3250, profit: "$1300" },
+  { id: 17, category: "Office Supplies", products: 85, sales: 4250, profit: "$1700" },
+  { id: 18, category: "Travel Accessories", products: 25, sales: 1250, profit: "$500" },
+  { id: 19, category: "Fitness Equipment", products: 55, sales: 2750, profit: "$1100" },
+  { id: 20, category: "Baby Products", products: 70, sales: 3500, profit: "$1400" },
 ];

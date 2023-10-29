@@ -23,6 +23,12 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
       closed: { width: "fit-content"},
     };
   }, []);
+  const mainVariants = useMemo(() => {
+    return {
+      open: { width: "70%" },
+      closed: { width: "80%"},
+    };
+  }, []);
 
   const toggleSidebar = () => {
     setIsSidebarOpen((prev) => !prev);
@@ -52,6 +58,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
       )}
       <motion.div
         initial="closed"
+        variants={mainVariants}
         animate={controls}
         exit={{ width: "15%" }}
         transition={{ duration: 0.3 }}

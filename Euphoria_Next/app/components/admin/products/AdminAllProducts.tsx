@@ -1,6 +1,6 @@
 'use client'
 
-import React from "react";
+import React, { useMemo, useState } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
@@ -20,14 +20,34 @@ const Product = ({name,description,image}:productInterface) => {
                     height={400}
                     className="w-full h-full"
                 />
+                <div className="absolute top-2 right-2 flex gap-[5px]">
+                    <div className="p-1 bg-white rounded-full">
+                      <Icon className="fill-red-400 cursor-pointer" svg={WebsiteIcons['redDelete']}/>
+                    </div>
+                    <div className="p-1 bg-white rounded-full">
+                      <Icon className="fill-red-400 cursor-pointer" svg={WebsiteIcons['edit']}/>
+                    </div>
+
+                </div>
             </div>
             <div className="">
-                <h3 className="font-bold text-[16px]">{name}</h3>
+                <h3 className="font-semibold text-[16px]">{name}</h3>
+                <p className="text-secondaryGray">{description}</p>
             </div>
         </div>
 )}
 
 export const AdminAllProducts = () => {
+  const [choosedCategory,setChoosedCategory] = useState<undefined | number>()
+
+  const displayableProducts = useMemo(()=>{
+    if(choosedCategory){
+      return products.filter(product=>product.category === choosedCategory)
+    }else{
+      return products
+    }
+  },[choosedCategory])
+
   return (
     <section className="pt-[44px]">
       <div className="flex gap-[10px]">
@@ -50,14 +70,15 @@ export const AdminAllProducts = () => {
       </div>
       <Swiper
       slidesPerView={'auto'}
-      className="mt-[15px]"
+      className="mt-[15px] w-full"
       spaceBetween={15}
       >
         {
           categoryData.map(category=>(
             <SwiperSlide className={`px-2 py-1 border-[1px] w-fit border-solid select-none rounded-sm cursor-pointer
-            ${false ? 'border-black text-black' : 'border-secondaryGray  text-secondaryGray'}
-            `}>
+            ${choosedCategory === category.id ? 'border-black text-black' : 'border-secondaryGray  text-secondaryGray'}`}
+            onClick={()=>{ choosedCategory === category.id ? setChoosedCategory(undefined) : setChoosedCategory(category.id)}}
+            >
               {category.category}
             </SwiperSlide>
           ))
@@ -66,7 +87,7 @@ export const AdminAllProducts = () => {
       {/* All prodcuts goes here */}
       <div className="mt-[25.5px] flex flex-wrap items-start justify-start  ">
         {
-            products.map(product=>(
+            displayableProducts.map(product=>(
                 <Product {...product} />
             ))
         }
