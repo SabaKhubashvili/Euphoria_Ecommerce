@@ -87,7 +87,7 @@ export const Sidebar = ({
         )}
         <div className="px-[14px] flex flex-col gap-[8px]">
           <Link
-            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
+            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/dashboard") &&
               "SidebarActiveComponent"
             } `}
@@ -105,14 +105,14 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-                    xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+                    xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Dashboard
               </p>
             )}
           </Link>
           <Link
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2]  ${
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2]  ${
               pathname.startsWith("/admin/orders") && "SidebarActiveComponent"
             } `}
             href={"/admin/orders"}
@@ -127,7 +127,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Order Managment
               </p>
@@ -135,7 +135,7 @@ export const Sidebar = ({
           </Link>
           <Link
             href={"/admin/customers"}
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/customers") &&
               "SidebarActiveComponent"
             } `}
@@ -150,7 +150,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Customers
               </p>
@@ -158,14 +158,14 @@ export const Sidebar = ({
           </Link>
           <div
             onClick={onOpen}
-            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] `}
+            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] `}
           >
             <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
               <Coupon isActive={false} />
             </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={` xl:text-[13px] 2xl:text-[17px] text-[14px] text-[#8B909A] `}
+                className={` xl:text-[13px] 2xl:text-[15px] text-[14px] text-[#8B909A] `}
               >
                 Coupon Code
               </p>
@@ -173,7 +173,7 @@ export const Sidebar = ({
           </div>
           <Link
             href={"/admin/categories"}
-            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
+            className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/categories") &&
               "SidebarActiveComponent"
             } `}
@@ -188,7 +188,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Categories
               </p>
@@ -196,7 +196,7 @@ export const Sidebar = ({
           </Link>
           <Link
             href={"/admin/transactions"}
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/transactions") &&
               "SidebarActiveComponent"
             } `}
@@ -213,7 +213,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Transaction
               </p>
@@ -230,7 +230,7 @@ export const Sidebar = ({
         <div className="px-[14px] flex flex-col gap-[8px]">
           <div
             onClick={addProductModalOnOpen}
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] `}
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] `}
           >
             <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
               <CirclePlus isActive={false} />
@@ -241,7 +241,7 @@ export const Sidebar = ({
           </div>
           <Link
             href={"/admin/products"}
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/products") && "SidebarActiveComponent"
             } `}
           >
@@ -255,7 +255,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Product List
               </p>
@@ -271,7 +271,7 @@ export const Sidebar = ({
         )}
         <div className="px-[14px] flex flex-col gap-[8px]">
           <div
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/managment") &&
               "SidebarActiveComponent"
             } `}
@@ -286,14 +286,14 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Manage Admins
               </p>
             )}
           </div>
           <div
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative z-[2] ${
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/roles") && "SidebarActiveComponent"
             } `}
           >
@@ -307,7 +307,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-                    xl:text-[13px] 2xl:text-[17px] text-[14px]`}
+                    xl:text-[13px] 2xl:text-[15px] text-[14px]`}
               >
                 Admin Roles
               </p>

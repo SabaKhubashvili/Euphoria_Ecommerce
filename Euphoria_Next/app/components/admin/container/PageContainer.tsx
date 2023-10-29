@@ -5,10 +5,10 @@ import { Sidebar } from "../sidebar/Sidebar";
 import { motion, useAnimation } from "framer-motion";
 import { extraLargeScreens, smallScreens } from "@/app/Screens/Screens";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
-import { Modal } from "../../modals/Modal";
 import { PublicSans } from "../../assets/Fonts";
 import { CouponModal } from "../modals/CouponModal";
 import { AddProductModal } from "../modals/AddProductModal";
+import 'swiper/css'
 
 export const PageContainer = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -55,7 +55,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
         animate={controls}
         exit={{ width: "15%" }}
         transition={{ duration: 0.3 }}
-        className="bg-[#FAFAFA] pl-[20px] flex-grow pr-[26px] max-w-[2268px]"
+        className="bg-[#FAFAFA] pl-[20px] flex-grow pr-[26px] max-w-[2268px] w-full"
       >
         {children}
       </motion.div>
