@@ -105,7 +105,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-                    xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+                    xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Dashboard
               </p>
@@ -127,7 +127,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Order Managment
               </p>
@@ -150,7 +150,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Customers
               </p>
@@ -165,13 +165,13 @@ export const Sidebar = ({
             </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={` xl:text-[13px] 2xl:text-[15px] text-[14px] text-[#8B909A] `}
+                className={` xl:text-[13px] 2xl:text-[15px] text-[14px] select-none text-[#8B909A] `}
               >
                 Coupon Code
               </p>
             )}
           </div>
-          <Link
+          {/* <Link
             href={"/admin/categories"}
             className={`flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/categories") &&
@@ -188,12 +188,12 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Categories
               </p>
             )}
-          </Link>
+          </Link> */}
           <Link
             href={"/admin/transactions"}
             className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
@@ -213,7 +213,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Transaction
               </p>
@@ -236,7 +236,7 @@ export const Sidebar = ({
               <CirclePlus isActive={false} />
             </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
-              <p className={"text-[#8B909A]"}>Add Products</p>
+              <p className={"text-[#8B909A] select-none"}>Add Products</p>
             )}
           </div>
           <Link
@@ -255,7 +255,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Product List
               </p>
@@ -286,7 +286,7 @@ export const Sidebar = ({
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-              xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+              xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Manage Admins
               </p>
@@ -303,11 +303,11 @@ export const Sidebar = ({
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
                 className={` ${
-                  pathname.startsWith("/admin/dashboard")
+                  pathname.startsWith("/admin/roles")
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
-                    xl:text-[13px] 2xl:text-[15px] text-[14px]`}
+                    xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Admin Roles
               </p>

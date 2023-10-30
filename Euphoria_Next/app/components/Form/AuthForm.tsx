@@ -53,7 +53,9 @@ export const AuthForm = () => {
     },
     onSubmit: async (values) => {
         try{
-          const res =  await RestClient.postRequest(BaseUrl.register,values)
+          // const res =  await RestClient.postRequest(BaseUrl.register,values)
+          await RestClient.postRequest(BaseUrl.confirmEmail,{email:values.email});
+
           toast.success('Sucesfully registered', {
             position: "top-center",
             autoClose: 2500,

@@ -28,6 +28,7 @@
     "jwt-decode": "^3.1.2",
     "next": "^13.4.7",
     "next-cloudinary": "^4.22.0",
+    "nodemailer": "^6.9.7",
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-cropper": "^2.3.3",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@paypal/checkout-server-sdk": "^1.0.3",
     "@types/jsonwebtoken": "^9.0.3",
+    "@types/nodemailer": "^6.4.13",
     "@types/paypal__checkout-server-sdk": "^1.0.5",
     "@types/react-google-recaptcha": "^2.1.5",
     "react-google-recaptcha": "^3.1.0",
