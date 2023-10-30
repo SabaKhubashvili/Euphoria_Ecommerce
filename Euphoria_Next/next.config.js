@@ -3,6 +3,10 @@ const nextConfig = {
     images:{
         domains: ['res.cloudinary.com']
     },
+    experimental:{
+        esmExternals: "loose", 
+        serverComponentsExternalPackages: ["mongoose"]
+    }
 }
 
 module.exports = nextConfig

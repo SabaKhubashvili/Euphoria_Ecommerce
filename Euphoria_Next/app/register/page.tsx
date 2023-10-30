@@ -11,7 +11,7 @@ const page = () => {
           <p className="text-gray text-[14px]  text-center">
             Home / Create New Customer Account
           </p>
-          <h1 className="text-[48px] leading-[68px] pt-[13px]  text-center ">
+          <h1 className="md:text-[48px] text-[24px] leading-[68px] pt-[13px]  text-center ">
             Create New Customer Account
           </h1>
 
@@ -20,9 +20,6 @@ const page = () => {
           
            ">
             <div className="flex flex-col items-start justify-start  sm:w-[600px] w-full px-[20px]">
-              <h2 className="text-[24px] leading-[68px]">
-                Personal Information
-              </h2>
               <AuthForm/>
             </div>
           </div>
