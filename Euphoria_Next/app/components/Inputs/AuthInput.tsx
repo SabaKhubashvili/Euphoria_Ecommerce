@@ -25,11 +25,12 @@ export const AuthInput = ({
   onChange,
   feedback,
   required,
-  type = "text",
+  type,
   defaultValue,
   disabled
 }: Props) => {
-  const [insideType, setInsideType] = useState(type);
+  const [insideType, setInsideType] = useState(type || 'text');
+ 
   return (
     <div
       className={`flex justify-between items-start sm:flex-row flex-col w-full `}
@@ -59,25 +60,25 @@ export const AuthInput = ({
             transition-all duration-200
             `}
           />
-          {type === "password" && (
+          {type && type === "password" && (
             <div className="absolute right-2 flex items-center top-0 bottom-0 cursor-pointer">
-              {insideType === "password" ? (
+              {insideType === "text" ? (
                 <div
                   onClick={() => {
-                   !disabled  && setInsideType("text");
-                  }}
-                  className="w-5"
-                >
-                  <EyeHidden />
-                </div>
-              ) : (
-                <div
-                  onClick={() => {
-                    !disabled  && setInsideType("password");
+                   !disabled  && setInsideType("password");
                   }}
                   className="w-5"
                 >
                   <EyeShown />
+                </div>
+              ) : (
+                <div
+                  onClick={() => {
+                    !disabled  && setInsideType("text");
+                  }}
+                  className="w-5"
+                >
+                  <EyeHidden />
                 </div>
               )}
             </div>
