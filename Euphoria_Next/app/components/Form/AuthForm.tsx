@@ -34,7 +34,7 @@ export const AuthForm = () => {
     validate: (values) => {
       const errors:any = {};
 
-      const riskyCharactersPattern = /['"\\/]/; // Add any other risky characters as needed
+      const riskyCharactersPattern = /['"\\/]/; 
     
       if (!values.firstname) {
         errors.firstname = "Firstname is required";

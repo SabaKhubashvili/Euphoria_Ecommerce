@@ -41,6 +41,7 @@ export const CustomersTable = () => {
     >
       <Icon svg={WebsiteIcons["edit"]} />
       <Icon svg={WebsiteIcons["delete"]} />
+      <span className=" cursor-pointer select-none pl-[10px] text-purple">Make admin</span>
     </div>
   );
 

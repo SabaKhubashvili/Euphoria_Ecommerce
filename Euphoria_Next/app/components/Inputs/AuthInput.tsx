@@ -25,12 +25,18 @@ export const AuthInput = ({
   onChange,
   feedback,
   required,
-  type,
+  type = 'text',
   defaultValue,
   disabled
 }: Props) => {
-  const [insideType, setInsideType] = useState(type || 'text');
+  const [currentType,setCurrentType] = useState<string>(type)
  
+
+  const handleToggleVisibility = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setCurrentType(currentType === 'password' ? 'text' : 'password');
+  };
+
   return (
     <div
       className={`flex justify-between items-start sm:flex-row flex-col w-full `}
@@ -50,7 +56,7 @@ export const AuthInput = ({
             name={name}
             placeholder={placeholder}
             onChange={onChange}
-            type={insideType}
+            type={currentType}
             defaultValue={defaultValue}
             disabled={disabled}
             className={`
@@ -61,25 +67,11 @@ export const AuthInput = ({
             `}
           />
           {type && type === "password" && (
-            <div className="absolute right-2 flex items-center top-0 bottom-0 cursor-pointer">
-              {insideType === "text" ? (
-                <div
-                  onClick={() => {
-                   !disabled  && setInsideType("password");
-                  }}
-                  className="w-5"
-                >
+            <div className="absolute right-2 flex items-center top-0 bottom-0 cursor-pointer" onClick={handleToggleVisibility}>
+              {currentType === "text" ? (
                   <EyeShown />
-                </div>
               ) : (
-                <div
-                  onClick={() => {
-                    !disabled  && setInsideType("text");
-                  }}
-                  className="w-5"
-                >
                   <EyeHidden />
-                </div>
               )}
             </div>
           )}

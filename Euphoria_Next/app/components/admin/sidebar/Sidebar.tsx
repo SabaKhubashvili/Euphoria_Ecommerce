@@ -270,7 +270,7 @@ export const Sidebar = ({
           </h1>
         )}
         <div className="px-[14px] flex flex-col gap-[8px]">
-          <div
+          {/* <div
             className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/managment") &&
               "SidebarActiveComponent"
@@ -291,19 +291,20 @@ export const Sidebar = ({
                 Manage Admins
               </p>
             )}
-          </div>
-          <div
+          </div> */}
+          <Link
+            href={'/admin/admins'}
             className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
-              pathname.startsWith("/admin/roles") && "SidebarActiveComponent"
+              pathname.startsWith("/admin/admins") && "SidebarActiveComponent"
             } `}
           >
             <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
-              <Settings isActive={pathname.startsWith("/admin/roles")} />
+              <Settings isActive={pathname.startsWith("/admin/admins")} />
             </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
                 className={` ${
-                  pathname.startsWith("/admin/roles")
+                  pathname.startsWith("/admin/admins")
                     ? "text-black"
                     : " text-[#8B909A]"
                 }
@@ -312,7 +313,7 @@ export const Sidebar = ({
                 Admin Roles
               </p>
             )}
-          </div>
+          </Link>
         </div>
       </div>
     </div>

@@ -35,7 +35,7 @@ export const LoginForm = () => {
     onSubmit: async (values) => {
       setIsLoading(true)
       try {
-        const res = await RestClient.postRequest(BaseUrl.login, values);
+        const res = await RestClient.postRequest(BaseUrl.login, values).finally(()=>{setIsLoading(false)});
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 3);
         const { firstname, email } = res.data;
