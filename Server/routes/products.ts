@@ -3,16 +3,17 @@ const {
   verifyTokenAuthorization,
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
-const Product = require("../models/Product");
+const ProductSchema = require("../models/Product");
 const mongoose = require('mongoose')
 
 // getAllProducts
 router.get("/getall", async (req: any, res: any) => {
   try {
-    const products = await Product.find();
+    const products = await ProductSchema.find();
 
     return res.status(200).json(products);
   } catch (error) {
+    console.log(error)
     return res.status(500).json({ message: "Something wrong happened" });
   }
 });
@@ -25,7 +26,7 @@ router.get('/:id', async (req: any, res: any) => {
     return res.status(400).json({ message: 'Invalid product ID' });
   }
   try {
-    const product = await Product.findById(productId);
+    const product = await ProductSchema.findById(productId);
 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });
@@ -63,7 +64,7 @@ router.put(
         return res.status(400).json({ error: "All fields are required" });
       }
 
-      const newProduct = new Product({
+      const newProduct = new ProductSchema({
         title,
         description,
         img,
@@ -93,7 +94,7 @@ router.delete(
     const { id } = req.params;
 
     try {
-      const product = Product.findOne(id);
+      const product = ProductSchema.findOne(id);
       if(!product){
         res.status(400).json({ message: "Product not found", success: false });
       }

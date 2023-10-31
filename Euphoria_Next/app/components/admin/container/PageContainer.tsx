@@ -9,6 +9,7 @@ import { PublicSans } from "../../assets/Fonts";
 import { CouponModal } from "../modals/CouponModal";
 import { AddProductModal } from "../modals/AddProductModal";
 import 'swiper/css'
+import { CategoriesModal } from "../modals/CategoriesModal";
 
 export const PageContainer = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
@@ -41,6 +42,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
     >
       <CouponModal/>
       <AddProductModal/>
+      <CategoriesModal/>
       {isAboveSmallScreens && (
         <motion.div
           initial="closed"
