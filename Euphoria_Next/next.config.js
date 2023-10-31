@@ -6,7 +6,10 @@ const nextConfig = {
     experimental:{
         esmExternals: "loose", 
         serverComponentsExternalPackages: ["mongoose"]
-    }
+    },
+    plugins: {
+        autoprefixer: {},
+    },
 }
 
 module.exports = nextConfig

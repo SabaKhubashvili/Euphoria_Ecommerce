@@ -7,6 +7,7 @@ import { Dropdown_Down } from "@/public/Svg/Icons";
 import { Roboto } from "../assets/Fonts";
 import { MainButton } from "../buttons/MainButton";
 import { SmallCartInfo } from "./SmallCartInfo";
+import { toast } from "react-toastify";
 
 interface Props {
   setStep: () => void;
@@ -20,8 +21,17 @@ const paypalCreateOrder = async () => {
       order_price: 150,
     });
     return response.data.data.order.id;
-  } catch (error) {
-    console.log(error);
+  } catch (error:any) {
+    toast.error(error.response.data.message, {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
   }
 };
 const paypalCaptureOrder = async (orderID: string) => {
@@ -32,8 +42,17 @@ const paypalCaptureOrder = async (orderID: string) => {
     if (response.data.success) {
       return true;
     }
-  } catch (err) {
-    console.log(err);
+  } catch (err:any) {
+   toast.error(err.response.data.message, {
+      position: "top-center",
+      autoClose: 2500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
     return false;
   }
 };

@@ -63,29 +63,30 @@ export const AuthForm = () => {
     onSubmit: async (values) => {
       try {
         if (activeStep === STEPS.registration) {
-          console.log('sending')
-          await RestClient.postRequest(BaseUrl.confirmEmail,{email:values.email});
+          // await RestClient.postRequest(BaseUrl.confirmEmail,{email:values.email});
           setActiveStep(STEPS.confirmation);
         } else {
           if(!isSubmitting){
             setIsSubmiting(true)
-            const res = await RestClient.postRequest(BaseUrl.register, values);
+            // await RestClient.postRequest(BaseUrl.register, values).finally(()=>{
+            //   setIsSubmiting(false)
+            // });
             toast.success("Sucesfully registered", {
-            position: "top-center",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-          setIsSubmiting(false)
-          router.push("/login");
+              position: "top-center",
+              autoClose: 2500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            router.push("/login");
           window.scrollTo(0, 0);
         }
         }
       } catch (err: any) {
+        setIsSubmiting(false)
         toast.error(err.response.data.message, {
           position: "top-center",
           autoClose: 2500,
@@ -119,6 +120,7 @@ export const AuthForm = () => {
             required
             feedback={formik.errors.firstname}
             onChange={formik.handleChange}
+            disabled={isSubmitting}
           />
           <AuthInput
             id={"lastname"}
@@ -129,6 +131,7 @@ export const AuthForm = () => {
             required
             feedback={formik.errors.lastname}
             onChange={formik.handleChange}
+            disabled={isSubmitting}
           />
           <AuthInput
             id={"email"}
@@ -139,6 +142,7 @@ export const AuthForm = () => {
             required
             feedback={formik.errors.email}
             onChange={formik.handleChange}
+            disabled={isSubmitting}
           />
           <AuthInput
             id={"password"}
@@ -149,6 +153,7 @@ export const AuthForm = () => {
             required
             feedback={formik.errors.password}
             onChange={formik.handleChange}
+            disabled={isSubmitting}
           />
           <AuthInput
             id={"confirmPassword"}
@@ -159,14 +164,15 @@ export const AuthForm = () => {
             required
             feedback={formik.errors.confirmPassword}
             onChange={formik.handleChange}
+            disabled={isSubmitting}
           />
           <div className="flex justify-between items-center w-full xs:flex-nowrap flex-wrap">
             <button
               className={`w-fit  font-medium select-none
-          tracking-[0.5px] uppercase bg-black
-          lg:hover:bg-secondary text-white transition-colors duration-200
-          px-[3rem] py-2
-          `}
+              tracking-[0.5px] uppercase bg-black
+              lg:hover:bg-secondary text-white transition-colors duration-200
+              px-[3rem] py-2
+              `}
               type="submit"
             >
               Submit
@@ -174,6 +180,7 @@ export const AuthForm = () => {
             <Link
               className=" text-gray font-medium text-[14px] tracking-[0.5px] uppercase"
               href={"/"}
+              aria-disabled={isSubmitting}
             >
               Back
             </Link>
@@ -186,8 +193,8 @@ export const AuthForm = () => {
             </h2>
             <div className="flex w-full flex-col  gap-[15px]">
             <AuthInput
-              id={"ConfirmationCode"}
-              name={"ConfirmationCode"}
+              id={"confirmationCode"}
+              name={"confirmationCode"}
               placeholder={"Confirmation code"}
               // label="Confirmation code"
               type={"text"}
@@ -195,7 +202,7 @@ export const AuthForm = () => {
               feedback={formik.errors.confirmationCode}
               onChange={formik.handleChange}
               />
-              <MainButton type="submit" label="Submit" onClick={()=>{}}/>
+              <MainButton type="submit" label="Submit"/>
             </div>
         </React.Fragment>
       }

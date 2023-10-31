@@ -36,7 +36,7 @@ export const PageTop = ({pageTitle}:{pageTitle:string}) => {
         {pageTitle}
       </h1>
       <div className="flex gap-[24px] items-center">
-          <IconDropdown
+          {/* <IconDropdown
             Row={Row}
             svg={
               <div className="relative cursor-pointer">
@@ -106,7 +106,7 @@ export const PageTop = ({pageTitle}:{pageTitle:string}) => {
                 },
               ]              
             }
-          />
+          /> */}
         <div>
           <Image
             src={"/Images/User/Avatar_Placeholder.png"}

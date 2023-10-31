@@ -1,7 +1,7 @@
 'use client'
 
 interface Props{
-    onClick:  (e:any)=>void
+    onClick?:  (e:any)=>void
     label:string,
     small?:boolean
     full?:boolean

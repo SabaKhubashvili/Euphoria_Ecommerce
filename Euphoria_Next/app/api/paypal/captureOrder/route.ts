@@ -21,9 +21,6 @@ export async function POST(req:Request) {
   }
   
   
-  // Your Custom Code to Update Order Status
-  // And Other stuff that is related to that order, like wallet
-  // Here I am updateing the wallet and sending it back to frontend to update it on frontend
   const wallet = {}
   return NextResponse.json({success: true, message: "sucess"},{status:200})
 }
