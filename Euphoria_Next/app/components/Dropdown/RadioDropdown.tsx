@@ -12,6 +12,7 @@ interface Props {
   }[];
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   full?: boolean;
+  feedback?:any
 }
 
 export const RadioDropdown = ({
@@ -20,6 +21,7 @@ export const RadioDropdown = ({
   content,
   size = "md",
   full,
+  feedback
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -109,6 +111,7 @@ export const RadioDropdown = ({
           ))}
         </div>
       )}
+      {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>}
     </div>
   );
 };

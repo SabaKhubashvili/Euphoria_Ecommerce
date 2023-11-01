@@ -11,6 +11,8 @@ interface Props {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit?: (e: React.FormEvent) => void;
   value?: string;
+  feedback?: string;
+  required?: boolean;
 }
 
 export const SecondaryInput = ({
@@ -22,6 +24,7 @@ export const SecondaryInput = ({
   onChange,
   onSubmit,
   value,
+  feedback
 }: Props) => {
   return (
     <div className="w-full">
@@ -82,6 +85,7 @@ export const SecondaryInput = ({
           )}
         </div>
       )}
+      {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>}
     </div>
   );
 };

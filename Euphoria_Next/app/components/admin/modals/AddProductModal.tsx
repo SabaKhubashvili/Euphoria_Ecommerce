@@ -53,14 +53,17 @@ export const AddProductModal = () => {
      } ,
      validate:(values)=>{
       let errors:any = {}
+      const pattern = /[a-zA-Z]/;
 
       if(!values.name){
         errors.name = "Name  is required"
       }
       if(!values.price){
         errors.price = 'Price  is required'
+      }else if(pattern.test(values.price)){
+        errors.price = 'Invalid value'
       }
-      if(Object.entries(values.avaiableSizes).some(size => size[1] !== false)){
+      if(!Object.values(values.avaiableSizes).some((size) => size === true)){
         errors.avaiableSizes = 'Minimum 1 size is required'
       }
       if(values.description.length < 30){
@@ -115,7 +118,10 @@ export const AddProductModal = () => {
           name="name"
           placeholder="Product name" 
           type="third"
-          onChange={formik.handleChange} />
+          onChange={formik.handleChange}
+          feedback={formik.errors.name}
+          value={formik.values.name}
+          />
         <SecondaryInput
           id="price"
           name="price"
@@ -123,6 +129,8 @@ export const AddProductModal = () => {
           type="third"
           rightSvg={<Icon svg={WebsiteIcons["Price"]} />}
           onChange={formik.handleChange}
+          feedback={formik.errors.price}
+          value={formik.values.price}
           />
       </div>
       <div className="flex gap-[10px]">
@@ -162,6 +170,7 @@ export const AddProductModal = () => {
               checked: formik.values.avaiableSizes.xxl,
             },
           ]}
+          feedback={formik.errors.avaiableSizes}
         />
       </div>
       <div className="flex flex-col gap-[5px]">
@@ -174,8 +183,8 @@ export const AddProductModal = () => {
             use <span>/</span> to start from new paragraph
           </div>
         </div>
-        <div className="h-[200px]">
-          <Textarea />
+        <div className="">
+          <Textarea name='description' id='description' onChange={formik.handleChange} feedback={formik.errors.description} value={formik.values.description} />
         </div>
       </div>
     </Form>
