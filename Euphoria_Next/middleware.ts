@@ -23,7 +23,7 @@ async function verifyToken(token: string | null) {
 async function checkIfIsAdmin(request:NextRequest) {
   try {
     const accessToken = request.cookies.get("accessToken")?.value;
-
+    
     if (!accessToken) {
       return false;
     }

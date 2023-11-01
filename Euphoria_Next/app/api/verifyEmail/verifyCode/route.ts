@@ -1,4 +1,4 @@
-import connectDB from "@/app/Libs/MongoDb";
+import connectDB from "@/app/Lib/MongoDb";
 import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {

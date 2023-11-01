@@ -13,6 +13,9 @@ import { ImageUpload } from "../../Upload/ImageUpload";
 import Image from "next/image";
 import { Form } from "../../Form/Form";
 import { useFormik } from "formik";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { toast } from "react-toastify";
 
 enum STEPS {
   productInformation = 0,
@@ -21,17 +24,8 @@ enum STEPS {
 
 export const AddProductModal = () => {
   const [activeStep, setActiveStep] = useState<STEPS>(STEPS.productInformation);
-  const { isOpen, onOpen, onClose } = UseAddProductModal();
-  const [avaiableSizes, setAvaiableSizes] = useState({
-    xsm: false,
-    sm: false,
-    md: false,
-    lg: false,
-    xl: false,
-    xxl: false,
-  });
-  const [productImages, setProductImages] = useState<string[]>([]);
-
+  const { isOpen, onClose } = UseAddProductModal();
+  const [isSubmitting,setisSubmitting] = useState<boolean>(false)
 
   const formik = useFormik(
     {
@@ -49,7 +43,7 @@ export const AddProductModal = () => {
         xxl: false,
       },
       description:'',
-      image:'',
+      images:[],
      } ,
      validate:(values)=>{
       let errors:any = {}
@@ -71,11 +65,25 @@ export const AddProductModal = () => {
       }
       return errors;
     },
-     onSubmit:()=>{
+     onSubmit:async(values)=>{
       if (activeStep === STEPS.productInformation) {
         setActiveStep(STEPS.image);
-      } else {
-        console.log("submit");
+      } else if(!isSubmitting) {
+        setisSubmitting(true)
+        try{
+          RestClient.postRequest(BaseUrl.addProduct,values).finally(()=>{setisSubmitting(true)})
+        }catch(err:any){
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
       }
      }
     }
@@ -97,18 +105,6 @@ export const AddProductModal = () => {
     },
     [activeStep]
   );
-  const mainButtonOnClick = useCallback(
-    (e: any) => {
-      e.stopPropagation();
-      if (activeStep === STEPS.productInformation) {
-        formik.handleSubmit()
-        setActiveStep(STEPS.image);
-      } else {
-        console.log("submit");
-      }
-    },
-    [activeStep]
-  );
 
   let modalBody = (
     <Form onSubmit={formik.handleSubmit} className="flex flex-col gap-[10px]">
@@ -121,6 +117,7 @@ export const AddProductModal = () => {
           onChange={formik.handleChange}
           feedback={formik.errors.name}
           value={formik.values.name}
+          disabled={isSubmitting}
           />
         <SecondaryInput
           id="price"
@@ -131,6 +128,7 @@ export const AddProductModal = () => {
           onChange={formik.handleChange}
           feedback={formik.errors.price}
           value={formik.values.price}
+          disabled={isSubmitting}
           />
       </div>
       <div className="flex gap-[10px]">
@@ -184,7 +182,7 @@ export const AddProductModal = () => {
           </div>
         </div>
         <div className="">
-          <Textarea name='description' id='description' onChange={formik.handleChange} feedback={formik.errors.description} value={formik.values.description} />
+          <Textarea name='description' id='description' onChange={formik.handleChange} feedback={formik.errors.description} value={formik.values.description}  disabled={isSubmitting}/>
         </div>
       </div>
     </Form>
@@ -207,15 +205,15 @@ export const AddProductModal = () => {
 
   if (activeStep === STEPS.image) {
     modalBody = (
-      <div className={`flex flex-col ${productImages.length > 0 && 'gap-[30px]'} `}>
+      <div className={`flex flex-col ${formik.values.images.length > 0 && 'gap-[30px]'} `}>
         <div className="h-fit">
           <ImageUpload
-            onChange={(image)=>{setProductImages(prevImages => [...prevImages, image]);}}
+            onChange={(image)=>{formik.setFieldValue('images',[...formik.values.images, image]);}}
             label="Upload Product image"
           />
         </div>
         <div className="flex gap-[5px] flex-wrap">{
-          productImages.map((image,key)=>(
+          formik.values.images.map((image,key)=>(
             <div className="w-[49%]" key={key}>
               <Image
                 src={image}

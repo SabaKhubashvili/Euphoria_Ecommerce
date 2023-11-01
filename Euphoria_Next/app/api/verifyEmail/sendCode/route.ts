@@ -1,4 +1,4 @@
-import connectDB from "@/app/Libs/MongoDb";
+import connectDB from "@/app/Lib/MongoDb";
 import { transporter } from "@/app/config/nodemailer";
 import { NextResponse } from "next/server";
 

@@ -13,6 +13,7 @@ interface Props {
   value?: string;
   feedback?: string;
   required?: boolean;
+  disabled?:boolean
 }
 
 export const SecondaryInput = ({
@@ -24,7 +25,8 @@ export const SecondaryInput = ({
   onChange,
   onSubmit,
   value,
-  feedback
+  feedback,
+  disabled
 }: Props) => {
   return (
     <div className="w-full">
@@ -34,8 +36,9 @@ export const SecondaryInput = ({
             type="text"
             value={value}
             onChange={onChange && onChange}
+            disabled={disabled}
             className={`w-full  outline-none bg-transparent 
-     
+            ${disabled && 'opacity-75'}
       ${rightSvg && "pr-[28px]"}
       ${
         type === "primary"
@@ -63,8 +66,9 @@ export const SecondaryInput = ({
             type="text"
             onChange={onChange && onChange}
             value={value}
+            disabled={disabled}
             className={`w-full  outline-none bg-transparent 
-            
+            ${disabled && 'opacity-75'}
             ${rightSvg && "pr-[28px]"}
       ${
         type === "primary"

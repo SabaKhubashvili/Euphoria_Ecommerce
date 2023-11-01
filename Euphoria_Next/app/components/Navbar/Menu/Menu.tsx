@@ -7,7 +7,7 @@ import { CartIcon, HeartIcon, SearchIcon } from "@/public/Svg/Icons";
 import { Roboto } from "../../assets/Fonts";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import Link from "next/link";
-import { isAuthenticated } from "@/app/Libs/IsAuthenticated";
+import { isAuthenticated } from "@/app/Lib/IsAuthenticated";
 import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
 
