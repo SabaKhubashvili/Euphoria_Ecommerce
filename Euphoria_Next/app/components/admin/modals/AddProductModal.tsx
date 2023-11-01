@@ -11,6 +11,8 @@ import { GrayButton } from "../../buttons/GrayButton";
 import { MainButton } from "../../buttons/MainButton";
 import { ImageUpload } from "../../Upload/ImageUpload";
 import Image from "next/image";
+import { Form } from "../../Form/Form";
+import { useFormik } from "formik";
 
 enum STEPS {
   productInformation = 0,
@@ -29,6 +31,52 @@ export const AddProductModal = () => {
     xxl: false,
   });
   const [productImages, setProductImages] = useState<string[]>([]);
+
+
+  const formik = useFormik(
+    {
+     validateOnBlur:false,
+     validateOnChange:false,
+     initialValues:{
+      name:'',
+      price:'',
+      avaiableSizes:{
+        xsm: false,
+        sm: false,
+        md: false,
+        lg: false,
+        xl: false,
+        xxl: false,
+      },
+      description:'',
+      image:'',
+     } ,
+     validate:(values)=>{
+      let errors:any = {}
+
+      if(!values.name){
+        errors.name = "Name  is required"
+      }
+      if(!values.price){
+        errors.price = 'Price  is required'
+      }
+      if(Object.entries(values.avaiableSizes).some(size => size[1] !== false)){
+        errors.avaiableSizes = 'Minimum 1 size is required'
+      }
+      if(values.description.length < 30){
+          errors.description = 'Description must be minimum 30 characters'
+      }
+      return errors;
+    },
+     onSubmit:()=>{
+      if (activeStep === STEPS.productInformation) {
+        setActiveStep(STEPS.image);
+      } else {
+        console.log("submit");
+      }
+     }
+    }
+  )
   
   const MainButtonCont = useMemo(() => {
     if (activeStep === STEPS.image) {
@@ -50,6 +98,7 @@ export const AddProductModal = () => {
     (e: any) => {
       e.stopPropagation();
       if (activeStep === STEPS.productInformation) {
+        formik.handleSubmit()
         setActiveStep(STEPS.image);
       } else {
         console.log("submit");
@@ -59,14 +108,22 @@ export const AddProductModal = () => {
   );
 
   let modalBody = (
-    <div className="flex flex-col gap-[10px]">
+    <Form onSubmit={formik.handleSubmit} className="flex flex-col gap-[10px]">
       <div className="flex justify-between gap-[10px]">
-        <SecondaryInput placeholder="Product name" type="third" />
+        <SecondaryInput 
+          id="name"
+          name="name"
+          placeholder="Product name" 
+          type="third"
+          onChange={formik.handleChange} />
         <SecondaryInput
+          id="price"
+          name="price"
           placeholder="Price"
           type="third"
           rightSvg={<Icon svg={WebsiteIcons["Price"]} />}
-        />
+          onChange={formik.handleChange}
+          />
       </div>
       <div className="flex gap-[10px]">
         <RadioDropdown
@@ -76,33 +133,33 @@ export const AddProductModal = () => {
           content={[
             {
               label: "xsm",
-              onClick: (e) => setAvaiableSizes((prev) => ({ ...prev, xsm: e })),
-              checked: avaiableSizes.xsm,
+              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, xsm: e })),
+              checked: formik.values.avaiableSizes.xsm,
             },
             {
               label: "sm",
-              onClick: (e) => setAvaiableSizes((prev) => ({ ...prev, sm: e })),
-              checked: avaiableSizes.sm,
+              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, sm: e })),
+              checked: formik.values.avaiableSizes.sm,
             },
             {
               label: "md",
-              onClick: (e) => setAvaiableSizes((prev) => ({ ...prev, md: e })),
-              checked: avaiableSizes.md,
+              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, md: e })),
+              checked: formik.values.avaiableSizes.md,
             },
             {
               label: "lg",
-              onClick: (e) => setAvaiableSizes((prev) => ({ ...prev, lg: e })),
-              checked: avaiableSizes.lg,
+              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, lg: e })),
+              checked: formik.values.avaiableSizes.lg,
             },
             {
               label: "xl",
-              onClick: (e) => setAvaiableSizes((prev) => ({ ...prev, xl: e })),
-              checked: avaiableSizes.xl,
+              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, xl: e })),
+              checked: formik.values.avaiableSizes.xl,
             },
             {
               label: "xxl",
-              onClick: (e) => setAvaiableSizes((prev) => ({ ...prev, xxl: e })),
-              checked: avaiableSizes.xxl,
+              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes,  xxl: e })),
+              checked: formik.values.avaiableSizes.xxl,
             },
           ]}
         />
@@ -121,7 +178,7 @@ export const AddProductModal = () => {
           <Textarea />
         </div>
       </div>
-    </div>
+    </Form>
   );
 
   const footerContent = (
@@ -132,7 +189,8 @@ export const AddProductModal = () => {
       <GrayButton
         small={false}
         label={MainButtonCont}
-        onClick={mainButtonOnClick}
+        onClick={formik.handleSubmit}
+        type="submit"
         full
       />
     </div>

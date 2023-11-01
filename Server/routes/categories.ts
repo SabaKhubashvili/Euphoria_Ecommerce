@@ -26,7 +26,7 @@ router.put(
   "/add",
   verifyTokenAndAdminAuthorization,
   async (req: any, res: any) => {
-    // try {
+    try {
       const { name } = req.body;
 
       if (!name) {
@@ -40,11 +40,11 @@ router.put(
       return res
         .status(200)
         .json({ message: "Category sucesfully placed"});
-    // } catch (err) {
-    //     return res.status(500).json({
-    //         message: "Something went wrong adding product",
-    //       });
-    // }
+    } catch (err) {
+        return res.status(500).json({
+            message: "Something went wrong adding product",
+          });
+    }
   }
 );
 

@@ -3,6 +3,8 @@
 import React from "react";
 
 interface Props {
+  id?:string,
+  name?:string,
   placeholder: string;
   type: "primary" | "secondary" | "third";
   rightSvg?: React.ReactElement;
@@ -12,6 +14,8 @@ interface Props {
 }
 
 export const SecondaryInput = ({
+  id,
+  name,
   placeholder,
   type,
   rightSvg,
@@ -51,6 +55,8 @@ export const SecondaryInput = ({
       ) : (
         <div className="relative w-full">
           <input
+            id={id}
+            name={name}
             type="text"
             onChange={onChange && onChange}
             value={value}
