@@ -13,6 +13,15 @@ class RestClient{
             }
         })
     }
+    static putRequest = (getUrl:string,Data:any,token?:any)=>{
+        return axios.put(getUrl,Data,{
+            headers:{
+                'Content-Type':"application/json",
+                'Accept':"application/json",
+                'token':token
+            }
+        })
+    }
 }
 
 export default RestClient

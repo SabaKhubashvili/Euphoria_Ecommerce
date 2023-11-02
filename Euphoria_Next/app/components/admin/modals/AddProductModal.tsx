@@ -16,6 +16,8 @@ import { useFormik } from "formik";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { toast } from "react-toastify";
+import { getCookie } from "cookies-next";
+import { cookies } from "next/dist/client/components/headers";
 
 enum STEPS {
   productInformation = 0,
@@ -32,8 +34,9 @@ export const AddProductModal = () => {
      validateOnBlur:false,
      validateOnChange:false,
      initialValues:{
-      name:'',
+      title:'',
       price:'',
+      description:'',
       avaiableSizes:{
         xsm: false,
         sm: false,
@@ -42,15 +45,15 @@ export const AddProductModal = () => {
         xl: false,
         xxl: false,
       },
-      description:'',
       images:[],
+      category:'65411417880b4cbf8653d9d5',
      } ,
      validate:(values)=>{
       let errors:any = {}
       const pattern = /[a-zA-Z]/;
 
-      if(!values.name){
-        errors.name = "Name  is required"
+      if(!values.title){
+        errors.title = "Name  is required"
       }
       if(!values.price){
         errors.price = 'Price  is required'
@@ -71,7 +74,7 @@ export const AddProductModal = () => {
       } else if(!isSubmitting) {
         setisSubmitting(true)
         try{
-          RestClient.postRequest(BaseUrl.addProduct,values).finally(()=>{setisSubmitting(true)})
+          RestClient.putRequest(BaseUrl.addProduct,{...values,avaiableSizes:JSON.stringify(values.avaiableSizes)},getCookie('accessToken')).finally(()=>{setisSubmitting(false)})
         }catch(err:any){
           toast.error(err.response.data.message, {
             position: "top-center",
@@ -110,13 +113,13 @@ export const AddProductModal = () => {
     <Form onSubmit={formik.handleSubmit} className="flex flex-col gap-[10px]">
       <div className="flex justify-between gap-[10px]">
         <SecondaryInput 
-          id="name"
-          name="name"
+          id="title"
+          name="title"
           placeholder="Product name" 
           type="third"
           onChange={formik.handleChange}
-          feedback={formik.errors.name}
-          value={formik.values.name}
+          feedback={formik.errors.title}
+          value={formik.values.title}
           disabled={isSubmitting}
           />
         <SecondaryInput

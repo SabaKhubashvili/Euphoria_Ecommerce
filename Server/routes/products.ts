@@ -47,19 +47,19 @@ router.put(
       const {
         title,
         description,
-        img,
-        availableSizes,
-        availableColors,
+        images,
+        avaiableSizes,
         price,
+        category  
       } = req.body;
 
       if (
         !title ||
         !description ||
-        !img ||
-        !availableSizes ||
-        !availableColors ||
-        !price
+        !images ||
+        !avaiableSizes ||
+        !price ||
+        !category
       ) {
         return res.status(400).json({ error: "All fields are required" });
       }
@@ -67,10 +67,10 @@ router.put(
       const newProduct = new ProductSchema({
         title,
         description,
-        img,
-        availableColors,
-        availableSizes,
-        price,
+        images,
+        avaiableSizes,
+        price:parseInt(price),
+        category
       });
 
       await newProduct.save();
