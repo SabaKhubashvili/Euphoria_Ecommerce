@@ -18,6 +18,17 @@ router.get("/getall", async (req: any, res: any) => {
   }
 });
 
+router.get('/getLimited/:quantity',async(req:any,res:any)=>{
+  const quantity = req.params.quantity;
+  
+  try {
+    const products = await ProductSchema.find().limit(quantity);
+    return res.status(200).json(products);
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({ message: "Something wrong happened" });
+  }
+})
 
 router.get('/:id', async (req: any, res: any) => {
   const productId = req.params.id;

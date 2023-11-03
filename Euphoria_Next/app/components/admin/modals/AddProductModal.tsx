@@ -74,7 +74,21 @@ export const AddProductModal = () => {
       } else if(!isSubmitting) {
         setisSubmitting(true)
         try{
-          RestClient.putRequest(BaseUrl.addProduct,{...values,avaiableSizes:JSON.stringify(values.avaiableSizes)},getCookie('accessToken')).finally(()=>{setisSubmitting(false)})
+          RestClient.putRequest(BaseUrl.addProduct,{...values,avaiableSizes:JSON.stringify(values.avaiableSizes)},getCookie('accessToken')).then((res)=>{
+            toast.success(res.data.message, {
+              position: "top-center",
+              autoClose: 2500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }).finally(()=>{setisSubmitting(false)})
+          setActiveStep(STEPS.productInformation);
+          formik.resetForm();
+          onClose();
         }catch(err:any){
           toast.error(err.response.data.message, {
             position: "top-center",

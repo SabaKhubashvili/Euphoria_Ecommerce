@@ -10,16 +10,16 @@ import { Pagination } from "../Pagination";
 import { useFilter } from "@/app/hooks/UseFilter";
 import { useGetAllProducts } from "@/app/actions/getAllProducts";
 
-export const ShopProducts = () => {
+interface Props{
+  products: productInterface[]
+}
+
+export const ShopProducts = ({products}:Props) => {
 
   const { nextPage, previousPage, manualPage, currentPage, productPerPage } = usePagination();
   const { priceFrom } = useFilter();
-  const { 
-    data: products, 
-    isLoading: isProductsLoading 
-  } =   useGetAllProducts() ;
   const currentProducts: productInterface[] | undefined = useMemo(() => {
-    if (!isProductsLoading && products) {
+    if (products) {
       let currentProducts = products;
       if (priceFrom) {
         if (priceFrom === "high") {
@@ -45,7 +45,7 @@ export const ShopProducts = () => {
         ) || null;
       }
     }
-  }, [priceFrom, currentPage, productPerPage, isProductsLoading, products]);
+  }, [priceFrom, currentPage, productPerPage, products]);
  
   return (
     <section className="w-full pb-[30px]">

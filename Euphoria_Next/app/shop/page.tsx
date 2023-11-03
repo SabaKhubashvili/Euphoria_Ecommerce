@@ -2,6 +2,8 @@ import React from 'react'
 import { SmallBanner } from '../components/Banners/SmallBanner'
 import { ShopProducts } from '../components/Shop/ShopProducts'
 import { Container } from '../components/Container'
+import RestClient from '../RestClient/RequestTypes'
+import BaseUrl from '../RestClient/ApiUrls'
 
 
 export const metadata = {
@@ -10,7 +12,9 @@ export const metadata = {
     // metadataBase: new URL("https://next-dashboard.pinkjelly.org/"),
 }
 
-const Page = () => {
+const ShopPage = async() => {
+  const {data:allProducts} = await RestClient.GetRequest(BaseUrl.getProducts);
+
   return (
     <main>
         <div className='lg:mt-[120px] mt-[108px] px-[10px]'>
@@ -23,11 +27,11 @@ const Page = () => {
             />
         </div>
         <Container>
-          <ShopProducts/>
+          <ShopProducts products={allProducts}/>
         </Container>
 
     </main>
   )
 }
 
-export default Page
+export default ShopPage

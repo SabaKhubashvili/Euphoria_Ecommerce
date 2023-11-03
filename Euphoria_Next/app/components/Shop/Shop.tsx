@@ -82,7 +82,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
         />
         <div className="lg:basis-3/4 w-full grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1  gap-[26px]">
           {currentProducts?.slice(4).map((product) => (
-            <ProductComponent key={product._id} {...product} />
+            <ProductComponent key={product._id} {...product} usingCol />
           ))}
         </div>
       </div>

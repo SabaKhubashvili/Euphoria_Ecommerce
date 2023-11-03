@@ -88,7 +88,16 @@ export const FooterContact = [
         title:'MON - SUN / 9:00AM - 8:00PM',
     },
 ]
-
+export const orders:ordersInterface[] = [
+  {
+    id:1,
+    created_at:"2022-12-02",
+    customer:"Saba",
+    total_price:250,
+    profit:152,
+    status:'Delivered'
+  } 
+]
 export const FooterSocial: SingleFooterComponentRowType[] = [
     {
       title: 'Facebook',
@@ -147,282 +156,340 @@ export const FilterConstant = {
 
 export interface productInterface{
     _id:number
-    price:string,
+    title:string;
+    price:string;
     description:string,
     name:string,
-    image:string
-    category:number;
+    images:string,
+    avaiableSizes:{
+      xs:boolean,
+      sm:boolean,
+      md:boolean,
+      lg:boolean,
+      xl:boolean
+    }
+    category:string;
 }
-
 export const products: productInterface[] = [
   {
     _id: 1,
+    title: "Product Title 1",
     price: '10,00',
     description: "This is a great product.",
     name: "Product 1",
-    image: "Product",
-    category: 1, // Category ID for Electronics
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "1",
   },
   {
     _id: 2,
+    title: "Product Title 2",
     price: '25,00',
     description: "An amazing product for your needs.",
     name: "Product 2",
-    image: "Product",
-    category: 2, // Category ID for Clothing
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "2",
   },
   {
     _id: 3,
+    title: "Product Title 3",
     price: '50,00',
     description: "A must-have item for every home.",
     name: "Product 3",
-    image: "Product",
-    category: 3, // Category ID for Home Decor
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "3",
   },
   {
     _id: 4,
+    title: "Product Title 4",
     price: '15,00',
     description: "High-quality and durable product.",
     name: "Product 4",
-    image: "Product",
-    category: 8, // Category ID for Furniture
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "8",
   },
   {
     _id: 5,
+    title: "Product Title 5",
     price: '30,00',
     description: "Get the best value with this product.",
     name: "Product 5",
-    image: "Product",
-    category: 7, // Category ID for Beauty Products
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "7",
   },
   {
     _id: 6,
+    title: "Product Title 6",
     price: '18,50',
     description: "An affordable and reliable option.",
     name: "Product 6",
-    image: "Product",
-    category: 13, // Category ID for Health and Wellness
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "13",
   },
   {
     _id: 7,
+    title: "Product Title 7",
     price: '40,00',
     description: "Elegant and stylish design for your home.",
     name: "Product 7",
-    image: "Product",
-    category: 3, // Category ID for Home Decor
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "3",
   },
   {
     _id: 8,
+    title: "Product Title 8",
     price: '12,99',
     description: "Experience the latest technology with this product.",
     name: "Product 8",
-    image: "Product",
-    category: 1, // Category ID for Electronics
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "1",
   },
   {
     _id: 9,
+    title: "Product Title 9",
     price: '35,00',
     description: "Perfect for outdoor adventures and activities.",
     name: "Product 9",
-    image: "Product",
-    category: 6, // Category ID for Sports Equipment
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "6",
   },
   {
     _id: 10,
+    title: "Product Title 10",
     price: '22,75',
     description: "Enhance your productivity with this amazing product.",
     name: "Product 10",
-    image: "Product",
-    category: 17, // Category ID for Office Supplies
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "17",
   },
   {
     _id: 11,
+    title: "Product Title 11",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 11",
-    image: "Product",
-    category: 11, // Category ID for Automotive
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "11",
   },
   {
     _id: 12,
+    title: "Product Title 12",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 12",
-    image: "Product",
-    category: 3, // Category ID for Home Decor
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "3",
   },
   {
     _id: 13,
+    title: "Product Title 13",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 13",
-    image: "Product",
-    category: 11, // Category ID for Automotive
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "11",
   },
   {
     _id: 14,
+    title: "Product Title 14",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 14",
-    image: "Product",
-    category: 2, // Category ID for Clothing
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "2",
   },
   {
     _id: 15,
+    title: "Product Title 15",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 15",
-    image: "Product",
-    category: 11, // Category ID for Automotive
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "11",
   },
   {
     _id: 16,
+    title: "Product Title 16",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 16",
-    image: "Product",
-    category: 1, // Category ID for Electronics
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "1",
   },
   {
     _id: 17,
+    title: "Product Title 17",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
     name: "Product 17",
-    image: "Product",
-    category: 8, // Category ID for Furniture
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "8",
   },
   {
     _id: 18,
+    title: "Product Title 18",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
     name: "Product 18",
-    image: "Product",
-    category: 1, // Category ID for Electronics
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "1",
   },
   {
     _id: 19,
+    title: "Product Title 19",
     price: '10,00',
     description: "This is a great product.",
     name: "Product 19",
-    image: "Product",
-    category: 2, // Category ID for Clothing
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "2",
   },
   {
     _id: 20,
+    title: "Product Title 20",
     price: '25,00',
     description: "An amazing product for your needs.",
     name: "Product 20",
-    image: "Product",
-    category: 7, // Category ID for Beauty Products
-  },
-  {
-    _id: 21,
-    price: '50,00',
-    description: "A must-have item for every home.",
-    name: "Product 21",
-    image: "Product",
-    category:19
-  }];
-  
-export const orders: ordersInterface[] = [
-  {
-      id: 1,
-      created_at: "2023-10-09 08:00:00",
-      customer: "Customer A",
-      total_price: 100.00,
-      profit: 25.00,
-      status: "Pending",
-      
-  },
-  {
-      id: 2,
-      created_at: "2023-10-09 09:30:00",
-      customer: "Customer B",
-      total_price: 75.50,
-      profit: 15.25,
-      status: "Confirmed",
-      
-  },
-  {
-      id: 3,
-      created_at: "2023-10-09 11:15:00",
-      customer: "Customer C",
-      total_price: 200.00,
-      profit: 40.00,
-      status: "Pending",
-      
-  },
-  {
-      id: 4,
-      created_at: "2023-10-09 09:30:00",
-      customer: "Customer B",
-      total_price: 75.50,
-      profit: 15.25,
-      status: "Confirmed",
-      
-  },
-  {
-      id: 5,
-      created_at: "2023-10-09 11:15:00",
-      customer: "Customer C",
-      total_price: 200.00,
-      profit: 40.00,
-      status: "Pending",
-      
-  },
-  {
-      id: 6,
-      created_at: "2023-10-09 09:30:00",
-      customer: "Customer B",
-      total_price: 75.50,
-      profit: 15.25,
-      status: "Confirmed",
-      
-  },
-  {
-      id: 7,
-      created_at: "2023-10-09 11:15:00",
-      customer: "Customer C",
-      total_price: 200.00,
-      profit: 40.00,
-      status: "Pending",
-      
-  },
-  {
-      id: 8,
-      created_at: "2023-10-09 09:30:00",
-      customer: "Customer B",
-      total_price: 75.50,
-      profit: 15.25,
-      status: "Confirmed",
-      
-  },
-  {
-      id: 9,
-      created_at: "2023-10-09 11:15:00",
-      customer: "Customer C",
-      total_price: 200.00,
-      profit: 40.00,
-      status: "Delivered",
-      
-  },
-  {
-      id: 10,
-      created_at: "2023-10-09 09:30:00",
-      customer: "Customer B",
-      total_price: 75.50,
-      profit: 15.25,
-      status: "Pending",
-      
-  },
-  {
-      id: 11,
-      created_at: "2023-10-09 11:15:00",
-      customer: "Customer C",
-      total_price: 200.00,
-      profit: 40.00,
-      status: "Pending",
-      
+    images: "Product",
+    avaiableSizes: {
+      xs: false,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: false,
+    },
+    category: "7",
   },
 ];
 

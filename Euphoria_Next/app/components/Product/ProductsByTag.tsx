@@ -3,19 +3,22 @@
 import React from 'react'
 import { ProductComponent } from './ProductComponent'
 import { GrayButton } from '../buttons/GrayButton'
-import { products } from '@/app/constants'
+import { productInterface, products } from '@/app/constants'
+import { getProductByLimit } from '@/app/actions/getProductsByLimit'
 
 interface Props{
     title?:string
+    data:productInterface[]
 }
 
-export const ProductsByTag = ({title}:Props) => {
+export const ProductsByTag = ({title,data}:Props) => {
+  
   return (
     <section className='flex flex-col gap-[34px] pt-[30px]'>
         {title && <h1 className='text-[24px] leading-[68px]'>{title}</h1>}
         <div className='grid xl:grid-cols-6 lg:grid-cols-5 sm:grid-cols-4 xs:grid-cols-2 grid-cols-1 lg:gap-[26px] gap-[6px]'>
           {
-            products.slice(0,12).map(product=>(
+            data.map(product=>(
               <ProductComponent {...product} key={product._id}/>
             ))
           }
