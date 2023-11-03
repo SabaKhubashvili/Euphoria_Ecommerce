@@ -7,5 +7,6 @@ export default class BaseUrl{
   static confirmEmail = '/api/verifyEmail/sendCode'
   static addProduct = this.baseUrl + '/api/product/addProduct'
   static getProducts = this.baseUrl + '/api/product/getAll'
+  static getProductById = this.baseUrl + '/api/product'
   static getLimitedProducts = this.baseUrl + '/api/product/getLimited/'
 }

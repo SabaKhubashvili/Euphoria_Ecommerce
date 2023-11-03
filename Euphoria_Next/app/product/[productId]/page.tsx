@@ -11,20 +11,25 @@ import {
   SingleProductInformation,
 } from "@/app/components/Product/SingleProductPageUi";
 import { ProductsByTagSlider } from "@/app/components/Product/ProductsByTagSlider";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
 
 interface params {
   productId: string;
 }
 
-const page = ({ params }: { params: params }) => {
+const page = async({ params }: { params: params }) => {
+  const {data:product} = await RestClient.GetRequest(BaseUrl.getProductById + '/' + params.productId);
+
+  
   return (
     <main className=" lg:pt-[200px] pt-[150px]">
       <Container>
         <div className="2xl:mx-[238px] xl:mx-[150px] lg:mx-[100px] md:mx-[50px] sm:mx-[20px] ">
           <div className="grid lg:grid-cols-2 lg:gap-[69px] gap-[20px] ">
-            <div className="col-span-1  w-full lg:h-fit h-[400px]">
+            <div className="col-span-1 w-full lg:h-fit  lg:max-h-[900px] h-[400px]">
               <Image
-                src={"/Images/Product/Product.webp"}
+                src={product.images[0]}
                 alt="Product_Image"
                 width={624}
                 height={790}
@@ -47,6 +52,7 @@ const page = ({ params }: { params: params }) => {
           <ProductsByTagSlider
             title="You might also like"
             sliderName="Recomendations"
+            data={[]}
           />
         </div>
       </Container>
