@@ -18,6 +18,7 @@ import BaseUrl from "@/app/RestClient/ApiUrls";
 import { toast } from "react-toastify";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/dist/client/components/headers";
+import { ToolTip } from "../../ToolTip";
 
 enum STEPS {
   productInformation = 0,
@@ -297,11 +298,14 @@ export const AddProductModal = () => {
 
         <div className="flex flex-col gap-[7px]">
           <div className="flex justify-between items-center">
-            <h3 className="font-medium text-[14px]">Enter product advantages</h3>
-
-            <div className="w-[20px] h-[20px] cursor-pointer">
-              <Icon svg={WebsiteIcons['Dot']}/>
-            </div>
+            <h3 className="font-medium text-[14px]">
+              Enter product advantages
+            </h3>
+            <ToolTip tooltipText="Format text">
+              <div className="w-[20px] h-[20px] cursor-pointer">
+                <Icon svg={WebsiteIcons["Dot"]} />
+              </div>
+            </ToolTip>
           </div>
           <div className="">
             <Textarea
