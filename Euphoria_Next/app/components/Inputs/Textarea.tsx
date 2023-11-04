@@ -8,20 +8,21 @@ interface Props{
     feedback?:string
     name:string,
     id:string,
-    disabled?:boolean
+    disabled?:boolean,
+    height?:string
 }
 
-export const Textarea = ({onChange,value,feedback,name,id,disabled}:Props) => {
+export const Textarea = ({onChange,value,feedback,name,id,disabled,height}:Props) => {
   return (
-    <div className='h-full'>
+    <div className='h-full w-full'>
       <textarea 
       id={id}
       name={name}
       onChange={onChange} 
       disabled={disabled}
-      className={`w-full h-full outline-none border-[1px] border-solid
+      className={`w-full h-[${height}px] outline-none border-[1px] border-solid
       border-secondaryGray p-2 rounded-lg text-secondaryGray
-      transition-all duration-300
+       transition-opacity duration-300
       ${disabled && 'opacity-75'}
       `}
       placeholder='Description' value={value} />

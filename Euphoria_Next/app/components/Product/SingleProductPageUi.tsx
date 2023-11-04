@@ -206,23 +206,20 @@ export const SingleProductDetails = ({description}:{description:string}) => {
   return (
     <div className="flex flex-col gap-[10px] mt-[41px]">
       <div
-        className="bg-[#F8F9FB] px-[27px] py-[25px] cursor-pointer"
-        onClick={() =>
-          setOpenCategories((prev) => ({
-            ...prev,
-            Details: !prev.Details,
-          }))
-        }
-      >
-        <div className="flex items-center justify-between">
+        className="bg-[#F8F9FB] px-[27px] py-[25px] "  >
+        <div className="flex items-center justify-between cursor-pointer"
+            onClick={() =>
+              setOpenCategories((prev) => ({
+                ...prev,
+                Details: !prev.Details,
+              }))
+            }
+        >
           <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px] select-none">
             Details
           </h1>
           <div
-            className="cursor-pointer transition-all duration-300"
-            onClick={() =>
-              setOpenCategories((prev) => ({ ...prev, Details: !prev.Details }))
-            }
+            className="transition-all duration-300"
           >
             <div className="w-[20px] h-[3px] bg-divider" />
             <div

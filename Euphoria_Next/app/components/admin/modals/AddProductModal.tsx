@@ -21,23 +21,24 @@ import { cookies } from "next/dist/client/components/headers";
 
 enum STEPS {
   productInformation = 0,
-  image = 1,
+  productDescription = 1,
+  image = 2,
 }
 
 export const AddProductModal = () => {
-  const [activeStep, setActiveStep] = useState<STEPS>(STEPS.productInformation);
+  const [activeStep, setActiveStep] = useState<STEPS>(STEPS.productDescription);
   const { isOpen, onClose } = UseAddProductModal();
-  const [isSubmitting,setisSubmitting] = useState<boolean>(false)
+  const [isSubmitting, setisSubmitting] = useState<boolean>(false);
 
-  const formik = useFormik(
-    {
-     validateOnBlur:false,
-     validateOnChange:false,
-     initialValues:{
-      title:'',
-      price:'',
-      description:'',
-      avaiableSizes:{
+  const formik = useFormik({
+    validateOnBlur: false,
+    validateOnChange: false,
+    initialValues: {
+      title: "",
+      price: "",
+      otherInformation: "",
+      aboutProduct: "",
+      avaiableSizes: {
         xsm: false,
         sm: false,
         md: false,
@@ -45,51 +46,60 @@ export const AddProductModal = () => {
         xl: false,
         xxl: false,
       },
-      images:[],
-      category:'65411417880b4cbf8653d9d5',
-     } ,
-     validate:(values)=>{
-      let errors:any = {}
+      images: [],
+      category: "65411417880b4cbf8653d9d5",
+      advantages: "",
+    },
+    validate: (values) => {
+      let errors: any = {};
       const pattern = /[a-zA-Z]/;
 
-      if(!values.title){
-        errors.title = "Name  is required"
+      if (!values.title) {
+        errors.title = "Name  is required";
       }
-      if(!values.price){
-        errors.price = 'Price  is required'
-      }else if(pattern.test(values.price)){
-        errors.price = 'Invalid value'
+      if (!values.price) {
+        errors.price = "Price  is required";
+      } else if (pattern.test(values.price)) {
+        errors.price = "Invalid value";
       }
-      if(!Object.values(values.avaiableSizes).some((size) => size === true)){
-        errors.avaiableSizes = 'Minimum 1 size is required'
+      if (!Object.values(values.avaiableSizes).some((size) => size === true)) {
+        errors.avaiableSizes = "Minimum 1 size is required";
       }
-      if(values.description.length < 30){
-          errors.description = 'Description must be minimum 30 characters'
+      if (values.otherInformation.length < 30) {
+        errors.otherInformation = "Description must be minimum 30 characters";
       }
       return errors;
     },
-     onSubmit:async(values)=>{
+    onSubmit: async (values) => {
       if (activeStep === STEPS.productInformation) {
-        setActiveStep(STEPS.image);
-      } else if(!isSubmitting) {
-        setisSubmitting(true)
-        try{
-          RestClient.putRequest(BaseUrl.addProduct,{...values,avaiableSizes:JSON.stringify(values.avaiableSizes)},getCookie('accessToken')).then((res)=>{
-            toast.success(res.data.message, {
-              position: "top-center",
-              autoClose: 2500,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
+        setActiveStep((prev) => prev + 1);
+      } else if (!isSubmitting) {
+        setisSubmitting(true);
+        try {
+          RestClient.putRequest(
+            BaseUrl.addProduct,
+            { ...values, avaiableSizes: JSON.stringify(values.avaiableSizes) },
+            getCookie("accessToken")
+          )
+            .then((res) => {
+              toast.success(res.data.message, {
+                position: "top-center",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+              });
+            })
+            .finally(() => {
+              setisSubmitting(false);
             });
-          }).finally(()=>{setisSubmitting(false)})
           setActiveStep(STEPS.productInformation);
           formik.resetForm();
           onClose();
-        }catch(err:any){
+        } catch (err: any) {
           toast.error(err.response.data.message, {
             position: "top-center",
             autoClose: 2500,
@@ -102,10 +112,9 @@ export const AddProductModal = () => {
           });
         }
       }
-     }
-    }
-  )
-  
+    },
+  });
+
   const MainButtonCont = useMemo(() => {
     if (activeStep === STEPS.image) {
       return "Add";
@@ -116,26 +125,27 @@ export const AddProductModal = () => {
   const secondaryButtonOnClick = useCallback(
     (e: any) => {
       e.stopPropagation();
-      if (activeStep === STEPS.image) {
+      if (activeStep !== STEPS.productInformation) {
         setActiveStep((prev) => prev - 1);
       }
     },
     [activeStep]
   );
+  console.log(formik.errors);
 
   let modalBody = (
     <Form onSubmit={formik.handleSubmit} className="flex flex-col gap-[10px]">
       <div className="flex justify-between gap-[10px]">
-        <SecondaryInput 
+        <SecondaryInput
           id="title"
           name="title"
-          placeholder="Product name" 
+          placeholder="Product name"
           type="third"
           onChange={formik.handleChange}
           feedback={formik.errors.title}
           value={formik.values.title}
           disabled={isSubmitting}
-          />
+        />
         <SecondaryInput
           id="price"
           name="price"
@@ -146,7 +156,7 @@ export const AddProductModal = () => {
           feedback={formik.errors.price}
           value={formik.values.price}
           disabled={isSubmitting}
-          />
+        />
       </div>
       <div className="flex gap-[10px]">
         <RadioDropdown
@@ -156,32 +166,56 @@ export const AddProductModal = () => {
           content={[
             {
               label: "xsm",
-              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, xsm: e })),
+              onClick: (e) =>
+                formik.setFieldValue("avaiableSizes", {
+                  ...formik.values.avaiableSizes,
+                  xsm: e,
+                }),
               checked: formik.values.avaiableSizes.xsm,
             },
             {
               label: "sm",
-              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, sm: e })),
+              onClick: (e) =>
+                formik.setFieldValue("avaiableSizes", {
+                  ...formik.values.avaiableSizes,
+                  sm: e,
+                }),
               checked: formik.values.avaiableSizes.sm,
             },
             {
               label: "md",
-              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, md: e })),
+              onClick: (e) =>
+                formik.setFieldValue("avaiableSizes", {
+                  ...formik.values.avaiableSizes,
+                  md: e,
+                }),
               checked: formik.values.avaiableSizes.md,
             },
             {
               label: "lg",
-              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, lg: e })),
+              onClick: (e) =>
+                formik.setFieldValue("avaiableSizes", {
+                  ...formik.values.avaiableSizes,
+                  lg: e,
+                }),
               checked: formik.values.avaiableSizes.lg,
             },
             {
               label: "xl",
-              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes, xl: e })),
+              onClick: (e) =>
+                formik.setFieldValue("avaiableSizes", {
+                  ...formik.values.avaiableSizes,
+                  xl: e,
+                }),
               checked: formik.values.avaiableSizes.xl,
             },
             {
               label: "xxl",
-              onClick: (e) => formik.setFieldValue('avaiableSizes',({ ...formik.values.avaiableSizes,  xxl: e })),
+              onClick: (e) =>
+                formik.setFieldValue("avaiableSizes", {
+                  ...formik.values.avaiableSizes,
+                  xxl: e,
+                }),
               checked: formik.values.avaiableSizes.xxl,
             },
           ]}
@@ -198,8 +232,16 @@ export const AddProductModal = () => {
             use <span>/</span> to start from new paragraph
           </div>
         </div>
-        <div className="">
-          <Textarea name='description' id='description' onChange={formik.handleChange} feedback={formik.errors.description} value={formik.values.description}  disabled={isSubmitting}/>
+        <div className="min-h-[150px]">
+          <Textarea
+            name="otherInformation"
+            id="otherInformation"
+            onChange={formik.handleChange}
+            feedback={formik.errors.otherInformation}
+            value={formik.values.otherInformation}
+            disabled={isSubmitting}
+            height="150"
+          />
         </div>
       </div>
     </Form>
@@ -220,17 +262,80 @@ export const AddProductModal = () => {
     </div>
   );
 
+  if (activeStep === STEPS.productDescription) {
+    modalBody = (
+      <div className="flex flex-col gap-[15px]">
+        <div className="flex flex-col gap-[7px]">
+          <div className="flex justify-between items-center relative">
+            <h3 className="font-medium text-[14px]">Enter About product</h3>
+            <div className="flex gap-[7px]">
+              <span className="text-secondaryGray">Recommended</span>
+              <div
+                className={
+                  formik.values.aboutProduct.length <= 200
+                    ? "text-green"
+                    : " text-rose-500"
+                }
+              >
+                {formik.values.aboutProduct.length}
+                <span>/200</span>
+              </div>
+            </div>
+          </div>
+          <div className="min-h-[150px]">
+            <Textarea
+              name="aboutProduct"
+              id="aboutProduct"
+              onChange={formik.handleChange}
+              feedback={formik.errors.aboutProduct}
+              value={formik.values.otherInformation}
+              disabled={isSubmitting}
+              height="150"
+            />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-[7px]">
+          <div className="flex justify-between items-center">
+            <h3 className="font-medium text-[14px]">Enter product advantages</h3>
+
+            <div className="w-[20px] h-[20px] cursor-pointer">
+              <Icon svg={WebsiteIcons['Dot']}/>
+            </div>
+          </div>
+          <div className="">
+            <Textarea
+              name="advantages"
+              id="advantages"
+              onChange={formik.handleChange}
+              feedback={formik.errors.advantages}
+              value={formik.values.advantages}
+              disabled={isSubmitting}
+              height="150"
+            />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   if (activeStep === STEPS.image) {
     modalBody = (
-      <div className={`flex flex-col ${formik.values.images.length > 0 && 'gap-[30px]'} `}>
+      <div
+        className={`flex flex-col ${
+          formik.values.images.length > 0 && "gap-[30px]"
+        } `}
+      >
         <div className="h-fit">
           <ImageUpload
-            onChange={(image)=>{formik.setFieldValue('images',[...formik.values.images, image]);}}
+            onChange={(image) => {
+              formik.setFieldValue("images", [...formik.values.images, image]);
+            }}
             label="Upload Product image"
           />
         </div>
-        <div className="flex gap-[5px] flex-wrap">{
-          formik.values.images.map((image,key)=>(
+        <div className="flex gap-[5px] flex-wrap">
+          {formik.values.images.map((image, key) => (
             <div className="w-[49%]" key={key}>
               <Image
                 src={image}
@@ -240,8 +345,8 @@ export const AddProductModal = () => {
                 className="w-full h-[444px]  object-cover rounded-sm"
               />
             </div>
-          ))
-        }</div>
+          ))}
+        </div>
       </div>
     );
   }
