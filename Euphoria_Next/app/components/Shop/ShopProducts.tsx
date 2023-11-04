@@ -10,43 +10,54 @@ import { Pagination } from "../Pagination";
 import { useFilter } from "@/app/hooks/UseFilter";
 import { useGetAllProducts } from "@/app/actions/getAllProducts";
 
-interface Props{
-  products: productInterface[]
+interface Props {
+  products: productInterface[];
 }
 
-export const ShopProducts = ({products}:Props) => {
-
-  const { nextPage, previousPage, manualPage, currentPage, productPerPage } = usePagination();
-  const { priceFrom } = useFilter();
+export const ShopProducts = ({ products }: Props) => {
+  const { nextPage, previousPage, manualPage, currentPage, productPerPage } =
+    usePagination();
+  const { priceFrom, filter } = useFilter();
   const currentProducts: productInterface[] | undefined = useMemo(() => {
     if (products) {
       let currentProducts = products;
+
+      if (filter.price[0]) {
+        currentProducts = currentProducts.filter(
+          (product) =>
+            product.price > filter.price[0].split(",")[0] &&
+            product.price < filter.price[0].split(",")[1]
+        );
+      }
       if (priceFrom) {
         if (priceFrom === "high") {
-          currentProducts = products
+          currentProducts
             .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
             .slice(
               (currentPage - 1) * productPerPage,
               currentPage * productPerPage
             );
         } else if (priceFrom === "low") {
-          currentProducts = products
+          currentProducts
             .sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
             .slice(
               (currentPage - 1) * productPerPage,
               currentPage * productPerPage
             );
         }
-        return currentProducts || null;
-      } else {
-        return products.slice(
-          (currentPage - 1) * productPerPage,
-          currentPage * productPerPage
-        ) || null;
       }
+      if (!filter) {
+        return (
+          products.slice(
+            (currentPage - 1) * productPerPage,
+            currentPage * productPerPage
+          ) || null
+        );
+      }
+      return currentProducts || null;
     }
-  }, [priceFrom, currentPage, productPerPage, products]);
- 
+  }, [priceFrom, currentPage, productPerPage, products, filter]);
+
   return (
     <section className="w-full pb-[30px]">
       <p
@@ -62,13 +73,13 @@ export const ShopProducts = ({products}:Props) => {
             currentProducts={currentProducts || null}
           />
           {products?.length && productPerPage < products?.length && (
-            <Pagination 
-              currentPage={currentPage} 
+            <Pagination
+              currentPage={currentPage}
               nextPage={nextPage}
               productPerPage={productPerPage}
-              manualPage={manualPage} 
+              manualPage={manualPage}
               previousPage={previousPage}
-              productsLength={products.length} 
+              productsLength={products.length}
             />
           )}
         </div>

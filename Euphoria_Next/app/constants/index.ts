@@ -159,7 +159,6 @@ export interface productInterface{
     title:string;
     price:string;
     description:string,
-    name:string,
     images:string,
     avaiableSizes:{
       xs:boolean,
@@ -176,7 +175,6 @@ export const products: productInterface[] = [
     title: "Product Title 1",
     price: '10,00',
     description: "This is a great product.",
-    name: "Product 1",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -192,7 +190,6 @@ export const products: productInterface[] = [
     title: "Product Title 2",
     price: '25,00',
     description: "An amazing product for your needs.",
-    name: "Product 2",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -208,7 +205,6 @@ export const products: productInterface[] = [
     title: "Product Title 3",
     price: '50,00',
     description: "A must-have item for every home.",
-    name: "Product 3",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -224,7 +220,6 @@ export const products: productInterface[] = [
     title: "Product Title 4",
     price: '15,00',
     description: "High-quality and durable product.",
-    name: "Product 4",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -240,7 +235,6 @@ export const products: productInterface[] = [
     title: "Product Title 5",
     price: '30,00',
     description: "Get the best value with this product.",
-    name: "Product 5",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -256,7 +250,6 @@ export const products: productInterface[] = [
     title: "Product Title 6",
     price: '18,50',
     description: "An affordable and reliable option.",
-    name: "Product 6",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -272,7 +265,6 @@ export const products: productInterface[] = [
     title: "Product Title 7",
     price: '40,00',
     description: "Elegant and stylish design for your home.",
-    name: "Product 7",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -288,7 +280,6 @@ export const products: productInterface[] = [
     title: "Product Title 8",
     price: '12,99',
     description: "Experience the latest technology with this product.",
-    name: "Product 8",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -304,7 +295,6 @@ export const products: productInterface[] = [
     title: "Product Title 9",
     price: '35,00',
     description: "Perfect for outdoor adventures and activities.",
-    name: "Product 9",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -320,7 +310,6 @@ export const products: productInterface[] = [
     title: "Product Title 10",
     price: '22,75',
     description: "Enhance your productivity with this amazing product.",
-    name: "Product 10",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -336,7 +325,6 @@ export const products: productInterface[] = [
     title: "Product Title 11",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 11",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -352,7 +340,6 @@ export const products: productInterface[] = [
     title: "Product Title 12",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 12",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -368,7 +355,6 @@ export const products: productInterface[] = [
     title: "Product Title 13",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 13",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -384,7 +370,6 @@ export const products: productInterface[] = [
     title: "Product Title 14",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 14",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -400,7 +385,6 @@ export const products: productInterface[] = [
     title: "Product Title 15",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 15",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -416,7 +400,6 @@ export const products: productInterface[] = [
     title: "Product Title 16",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 16",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -432,7 +415,6 @@ export const products: productInterface[] = [
     title: "Product Title 17",
     price: '38,00',
     description: "The ultimate tool for DIY enthusiasts.",
-    name: "Product 17",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -448,7 +430,6 @@ export const products: productInterface[] = [
     title: "Product Title 18",
     price: '80,00',
     description: "Experience luxury and comfort with this premium product.",
-    name: "Product 18",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -464,7 +445,6 @@ export const products: productInterface[] = [
     title: "Product Title 19",
     price: '10,00',
     description: "This is a great product.",
-    name: "Product 19",
     images: "Product",
     avaiableSizes: {
       xs: false,
@@ -480,7 +460,6 @@ export const products: productInterface[] = [
     title: "Product Title 20",
     price: '25,00',
     description: "An amazing product for your needs.",
-    name: "Product 20",
     images: "Product",
     avaiableSizes: {
       xs: false,

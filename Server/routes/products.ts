@@ -37,7 +37,7 @@ router.get('/:id', async (req: any, res: any) => {
     return res.status(400).json({ message: 'Invalid product ID' });
   }
   try {
-    const product = await ProductSchema.findById(productId);
+    const product = await ProductSchema.findById(productId).populate('category');
 
     if (!product) {
       return res.status(404).json({ message: 'Product not found' });

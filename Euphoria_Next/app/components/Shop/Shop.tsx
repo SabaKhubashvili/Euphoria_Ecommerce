@@ -25,7 +25,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
     manualPage,
   } = usePagination();
   const maxNumber = Math.ceil(productsLength / productPerPage);
-  const isAboveLargeScreens = useMediaQuery(largeScreens)
+  const isAboveLargeScreens = useMediaQuery(largeScreens);
   const { setPriceSort, priceFrom } = useFilter();
   const handleNextPage = useCallback(() => {
     if (currentPage < maxNumber) {
@@ -92,18 +92,16 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
         </div>
       </div>
       <div className="flex flex-col gap-[44px]">
-        { isAboveLargeScreens &&
-
+        {isAboveLargeScreens && (
           <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {currentProducts?.slice(0,5).map((product,key) => (
-            <React.Fragment>
-              <ProductComponent key={product._id} {...product} />
-            </React.Fragment>
-          ))}
-        </div>
-        }
+            {currentProducts?.slice(0, 5).map((product, key) => (
+                <ProductComponent key={product._id} {...product} />
+            ))}
+          </div>
+        )}
 
-         {isAboveLargeScreens &&   <SmallBanner
+        {isAboveLargeScreens && (
+          <SmallBanner
             image="ShopBanner-2"
             title="shoping without limits."
             subTitle="You can choose the best option for you, and it does not matter whether you are in Prague or San Francisco. We will deliver your purchase anywhere!"
@@ -111,12 +109,14 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
             gradient="black"
             textColor="white"
             small
-            />}
-          
+          />
+        )}
 
         <div className="w-full grid md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 grid-cols-1  gap-[26px]">
-            {currentProducts?.slice( isAboveLargeScreens ? 6 : 0).map((product) => (
-              <ProductComponent key={product._id} {...product}  />
+          {currentProducts
+            ?.slice(isAboveLargeScreens ? 6 : 0)
+            .map((product) => (
+              <ProductComponent key={product._id}  {...product} />
             ))}
         </div>
       </div>

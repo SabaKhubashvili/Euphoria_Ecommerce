@@ -4,30 +4,48 @@ import Counter from "../buttons/Counter";
 import { MainButton } from "../buttons/MainButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
 import { CheckedIcon, GrayHeartIcon } from "@/public/Svg/Icons";
+import { productInterface } from "@/app/constants";
 
-export const SingleProductInformation = () => {
+interface Props {
+  _id: number;
+  title: string;
+  price: number;
+  avaiableSizes: string;
+  category: {
+    name: string;
+    _id: string;
+  };
+}
+
+export const SingleProductInformation = ({
+  title,
+  price,
+  avaiableSizes,
+  category,
+}: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
-  const [clothingVariant,setClothingVariant] = useState({
-    color:'',
-    size:'',
-  })
+  const [clothingVariant, setClothingVariant] = useState({
+    color: "",
+    size: "",
+  });
+
   return (
     <React.Fragment>
       <h4 className=" text-gray text-[14px] leading-[48px]">
         Home / Womens Dress / Angels malu
       </h4>
-      <div className=" bg-lightBlue font-bold px-2 py-1 inline ">
+      <div className=" bg-lightBlue font-bold px-2 py-1 inline uppercase ">
         {/* Brand */}
-        FENDI
+        {category.name}
       </div>
       <h1
         className="max-w-[493px] 2xl:text-[48px] xl:text-[40px] text-[30px] font-medium 
                 2xl:leading-[56px] xl:leading-[50px] md:leading-[35px] lg:mt-0 mt-[10px]"
       >
         {/* Title */}
-        Women Black Checked Fit and Flare Dress
+        {title}
       </h1>
-      <div className="mt-[28px]">
+      {/* <div className="mt-[28px]">
         <p className="text-[14px] uppercase ">Select Color</p>
         <div className="flex gap-[5px] mt-[10px]">
           <div
@@ -55,73 +73,23 @@ export const SingleProductInformation = () => {
             <div className={`w-[15px] h-[15px] bg-blue-400`} />
           </div>
         </div>
-      </div>
+      </div> */}
       <div className="mt-[28px]">
-        <p className="text-[14px] uppercase ">Select size (Inches)</p>
+        <p className="text-[14px] uppercase ">Select size</p>
         <div className="flex gap-[5px] mt-[10px] flex-wrap">
-          <div
-               onClick={()=>setClothingVariant(prev=>({...prev,size:'W21'}))}
-            className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
-                     py-[10px] px-[10px] 
-                    ${clothingVariant.size === 'W21' && "!text-black !border-black"}
-                    `}
-          >
-            W21
-          </div>
-          <div
-               onClick={()=>setClothingVariant(prev=>({...prev,size:'W22'}))}
-            className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
-                     py-[10px] px-[10px] 
-                    ${clothingVariant.size === 'W22' && "!text-black !border-black"}
-                    `}
-          >
-            W22
-          </div>
-          <div
-               onClick={()=>setClothingVariant(prev=>({...prev,size:'W23'}))}
-            className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
-                     py-[10px] px-[10px] 
-                    ${clothingVariant.size === 'W23' && "!text-black !border-black"}
-                    `}
-          >
-            W23
-          </div>
-          <div
-               onClick={()=>setClothingVariant(prev=>({...prev,size:'W24'}))}
-            className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
-                     py-[10px] px-[10px] 
-                    ${clothingVariant.size === 'W24' && "!text-black !border-black"}
-                    `}
-          >
-            W24
-          </div>
-          <div
-               onClick={()=>setClothingVariant(prev=>({...prev,size:'W25'}))}
-            className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
-                     py-[10px] px-[10px] 
-                    ${clothingVariant.size === 'W25' && "!text-black !border-black"}
-                    `}
-          >
-            W25
-          </div>
-          <div
-               onClick={()=>setClothingVariant(prev=>({...prev,size:'W26'}))}
-            className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
-                     py-[10px] px-[10px] 
-                    ${clothingVariant.size === 'W26' && "!text-black !border-black"}
-                    `}
-          >
-            W26
-          </div>
-          <div
-               onClick={()=>setClothingVariant(prev=>({...prev,size:'W27'}))}
-            className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider 
-                     py-[10px] px-[10px] 
-                    ${clothingVariant.size === 'W27' && "!text-black !border-black"}
-                    `}
-          >
-            W27
-          </div>
+          {Object.keys(JSON.parse(avaiableSizes)).map((size) => (
+            <div
+              key={size}
+              onClick={() =>
+                setClothingVariant((prev) => ({ ...prev, size: size }))
+              }
+              className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider py-[10px] px-[10px] ${
+                clothingVariant.size === size ? "!text-black !border-black" : ""
+              }`}
+            >
+              {size}
+            </div>
+          ))}
         </div>
       </div>
       <div className="flex gap-[24px] mt-[36px] xs:flex-nowrap flex-wrap">
@@ -134,9 +102,11 @@ export const SingleProductInformation = () => {
           />
         </div>
         <div>
-          <h3 className="uppercase text-[14px] font-medium select-none">Price total</h3>
+          <h3 className="uppercase text-[14px] font-medium select-none">
+            Price total
+          </h3>
           <h2 className="text-[26px] font-bold uppercase select-none">
-            {quantity * 90} ,00 EUR
+            {quantity * price} GEL
           </h2>
         </div>
       </div>
@@ -219,44 +189,20 @@ const Details = () => {
   );
 };
 
-const OtherInformation = () => {
+const OtherInformation = ({description}:{description:string}) => {
   return (
     <div className="font-light border-t-[1px] border-t-divider mt-[25px] pt-[32px]">
-      Clothing is not just a practical necessity; it&#39;s a means of expressing
-      identity, culture, and style. The world of fashion is vast and
-      ever-evolving, offering a myriad of choices that cater to individual
-      preferences and societal trends. From the timeless elegance of a tailored
-      suit to the carefree comfort of a casual t-shirt and jeans, clothing plays
-      a pivotal role in how we present ourselves to the world. Historical
-      Significance: From Loincloths to Haute Couture Throughout history,
-      clothing has served various purposes beyond just covering the body. In
-      ancient civilizations, garments were crafted using materials like animal
-      hides and plant fibers. Clothing indicated social status, with luxurious
-      fabrics and intricate designs reserved for the elite. Over time, clothing
-      styles evolved, influenced by cultural exchanges, technological
-      advancements, and changing social norms. The 20th century witnessed a
-      fashion revolution with the advent of haute couture and ready-to-wear
-      collections. Designers like Coco Chanel and Christian Dior revolutionized
-      how people approached fashion, blending traditional craftsmanship with
-      innovation. Today, fashion conglomerates, independent designers, and
-      sustainable fashion movements continue to reshape the industry. Cultural
-      Diversity: The Global Tapestry of Fashion Clothing is a powerful cultural
-      marker, reflecting the heritage and beliefs of diverse communities around
-      the world. Traditional clothing, such as the vibrant saris of India, the
-      intricate kimonos of Japan, and the bold patterns of African textiles,
-      showcase the beauty of cultural expression. Globalization and
-      multiculturalism have led to cross-cultural fashion influences, resulting
-      in fusion styles that celebrate diversity.
+      {description}
     </div>
   );
 };
 
-export const SingleProductDetails = () => {
+export const SingleProductDetails = ({description}:{description:string}) => {
   const [openCategories, setOpenCategories] = useState({
     Details: true,
     OtherInformation: false,
   });
-  
+
   return (
     <div className="flex flex-col gap-[10px] mt-[41px]">
       <div
@@ -314,7 +260,7 @@ export const SingleProductDetails = () => {
             />
           </div>
         </div>
-        {openCategories.OtherInformation && <OtherInformation />}
+        {openCategories.OtherInformation && <OtherInformation description={description} />}
       </div>
     </div>
   );
