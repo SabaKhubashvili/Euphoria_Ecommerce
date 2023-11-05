@@ -157,19 +157,16 @@ export const FilterConstant = {
 export interface productInterface{
     _id:number
     title:string;
-    price:string;
+    price:number;
     aboutProduct:string,
     otherInformation:string,
     advantages:string,
     images:string,
-    avaiableSizes:{
-      xs:boolean,
-      sm:boolean,
-      md:boolean,
-      lg:boolean,
-      xl:boolean
-    }
-    category:string;
+    avaiableSizes:string
+    category: {
+      name: string;
+      _id: string;
+    };
 }
 export const products: productInterface[] = [
   {

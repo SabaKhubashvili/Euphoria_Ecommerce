@@ -142,7 +142,13 @@ export const SingleProductInformation = ({
   );
 };
 
-const Details = () => {
+const Details = ({
+  aboutProduct,
+  advantages
+}:{
+  aboutProduct:string,
+  advantages:string
+}) => {
   return (
     <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col mt-[25px]">
       <div className="flex lg:flex-row flex-col lg:justify-between lg:gap-[52px] gap-[15px]">
@@ -150,28 +156,19 @@ const Details = () => {
           <div className="flex flex-col gap-[10px]">
             <h2 className="uppercase font-medium">ABOUT PRODUCT</h2>
             <p>
-              Cool off this summer in the Mini Ruffle Smocked Tank Top from our
-              very own LA Hearts. This tank features a smocked body, adjustable
-              straps, scoop neckline, ruffled hems, and a cropped fit.
+              {aboutProduct}
             </p>
           </div>
-          <ul className="list-disc list-inside ">
-            <h2 className="uppercase font-medium mb-[10px]">ABOUT PRODUCT</h2>
-            <li className=" font-light">Smocked Body</li>
-            <li className=" font-light">Adjustabe straps</li>
-            <li className=" font-light">Scoop necklice</li>
-            <li className=" font-light">Rufled hems</li>
-            <li className=" font-light">Croped length</li>
-            <li className=" font-light">Model wearing a small</li>
-            <li className=" font-light">100% ryaon</li>
-            <li className=" font-light">Machine washable</li>
-          </ul>
-          <ul className="list-disc list-inside ">
-            <h2 className="uppercase font-medium mb-[10px]">Advantages</h2>
-            <li className=" font-light">Model wearing a small</li>
-            <li className=" font-light">100% ryaon</li>
-            <li className=" font-light">Machine washable</li>
-          </ul>
+          <div className="flex flex-col gap-[10px]">
+          <h2 className="uppercase font-medium">Advantages</h2>
+            <ul className="flex flex-col gap-[5px]">
+            {advantages.split('\n').map(advantage=>(
+              <li className="font-light">
+                {'\n' +advantage}
+              </li>
+            ))}
+            </ul>
+          </div>
         </div>
         <div className="flex flex-col gap-[10px] lg:max-w-[50%]">
           <h2 className="uppercase font-medium">Shipping</h2>
@@ -197,7 +194,7 @@ const OtherInformation = ({description}:{description:string}) => {
   );
 };
 
-export const SingleProductDetails = ({description}:{description:string}) => {
+export const SingleProductDetails = ({otherInformation,aboutProduct,advantages}:{otherInformation:string,aboutProduct:string,advantages:string}) => {
   const [openCategories, setOpenCategories] = useState({
     Details: true,
     OtherInformation: false,
@@ -231,7 +228,7 @@ export const SingleProductDetails = ({description}:{description:string}) => {
             />
           </div>
         </div>
-        {openCategories.Details && <Details />}
+        {openCategories.Details && <Details advantages={advantages} aboutProduct={aboutProduct} />}
       </div>
       <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
         <div
@@ -257,7 +254,7 @@ export const SingleProductDetails = ({description}:{description:string}) => {
             />
           </div>
         </div>
-        {openCategories.OtherInformation && <OtherInformation description={description} />}
+        {openCategories.OtherInformation && <OtherInformation description={otherInformation} />}
       </div>
     </div>
   );

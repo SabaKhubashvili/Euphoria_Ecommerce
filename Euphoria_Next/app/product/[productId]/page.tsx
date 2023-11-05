@@ -13,13 +13,14 @@ import {
 import { ProductsByTagSlider } from "@/app/components/Product/ProductsByTagSlider";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
+import { productInterface } from "@/app/constants";
 
 interface params {
   productId: string;
 }
 
 const page = async({ params }: { params: params }) => {
-  const {data:product} = await RestClient.GetRequest(BaseUrl.getProductById + '/' + params.productId);
+  const {data:product}:{data:productInterface} = await RestClient.GetRequest(BaseUrl.getProductById + '/' + params.productId);
 
   
   return (
@@ -43,10 +44,10 @@ const page = async({ params }: { params: params }) => {
               </div>
             </div>
             <div className="col-span-1">
-              <SingleProductInformation title={product.title} avaiableSizes= {product.avaiableSizes} price={product.price} _id={product._id} category={product.category} />
+              <SingleProductInformation title={product.title} avaiableSizes={product.avaiableSizes} price={product.price} _id={product._id} category={product.category} />
             </div>
           </div>
-          <SingleProductDetails description={product.description} />
+          <SingleProductDetails advantages={product.advantages} aboutProduct={product.aboutProduct} otherInformation={product.otherInformation} />
         </div>
         <div className="pt-[66px] pb-[42px]">
           <ProductsByTagSlider
