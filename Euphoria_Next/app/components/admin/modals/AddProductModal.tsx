@@ -49,7 +49,7 @@ export const AddProductModal = () => {
       },
       images: [],
       category: "65411417880b4cbf8653d9d5",
-      advantages: "",
+      advantages: "◯ ",
     },
     validate: (values) => {
       let errors: any = {};
@@ -115,6 +115,7 @@ export const AddProductModal = () => {
       }
     },
   });
+  console.log(formik.values.advantages);
 
   const MainButtonCont = useMemo(() => {
     if (activeStep === STEPS.image) {
@@ -132,7 +133,22 @@ export const AddProductModal = () => {
     },
     [activeStep]
   );
-  console.log(formik.errors);
+
+  // const handleProductAdvantagesChange = (
+  //   e: React.ChangeEvent<HTMLTextAreaElement>
+  // ) => {
+  //   const newText = e.target.value;
+  //   const lines = newText.split("\n");
+
+  //   formik.handleChange(e);
+
+  //   if (newText.endsWith("\n") || newText.endsWith("\r\n")) {
+  //     formik.setFieldValue(
+  //       "advantages",
+  //       newText + "◯ " + lines[lines.length - 1]
+  //     );
+  //   }
+  // };
 
   let modalBody = (
     <Form onSubmit={formik.handleSubmit} className="flex flex-col gap-[10px]">
@@ -289,7 +305,7 @@ export const AddProductModal = () => {
               id="aboutProduct"
               onChange={formik.handleChange}
               feedback={formik.errors.aboutProduct}
-              value={formik.values.otherInformation}
+              value={formik.values.aboutProduct}
               disabled={isSubmitting}
               height="150"
             />
@@ -303,7 +319,19 @@ export const AddProductModal = () => {
             </h3>
             <ToolTip tooltipText="Format text">
               <div className="w-[20px] h-[20px] cursor-pointer">
-                <Icon svg={WebsiteIcons["Dot"]} />
+                <Icon
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    // console.log("click");
+                    const lines = formik.values.advantages.split("\n");
+                    let newText = "";
+                    lines.map((line) => {
+                      newText += "◯ " + line + '\n';
+                    });
+                    formik.setFieldValue("advantages", newText);
+                  }}
+                  svg={WebsiteIcons["Dot"]}
+                />
               </div>
             </ToolTip>
           </div>

@@ -3,7 +3,7 @@ import React from "react";
 interface Props {
   svg: any;
   className?: string;
-  onClick?: () => void;
+  onClick?: (e?:any) => void;
   id?: string;
 }
 

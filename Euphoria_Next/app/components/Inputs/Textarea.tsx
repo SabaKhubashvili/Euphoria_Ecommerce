@@ -20,7 +20,8 @@ export const Textarea = ({onChange,value,feedback,name,id,disabled,height}:Props
       name={name}
       onChange={onChange} 
       disabled={disabled}
-      className={`w-full h-[${height}px] outline-none border-[1px] border-solid
+      style={{height:`${height}px`}}
+      className={`w-full outline-none border-[1px] border-solid
       border-secondaryGray p-2 rounded-lg text-secondaryGray
        transition-opacity duration-300
       ${disabled && 'opacity-75'}

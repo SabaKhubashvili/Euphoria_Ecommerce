@@ -162,8 +162,8 @@ const Page = () => {
                   <Icon svg={WebsiteIcons["Verticaldots"]} />
                 </div>
                 <div className="flex flex-col gap-[18px] mt-[20px] h-[566px] overflow-y-auto">
-                  { MostSaledProducts.map(product=>(
-                    <div className="flex  items-center justify-between" key={product.name}>
+                  { MostSaledProducts.map((product,index)=>(
+                    <div className="flex  items-center justify-between" key={index}>
                     <div className="flex gap-[16px]">
                       <div className="w-[46px] h-[46px]">
                         {/* Here must be image */} img
