@@ -13,9 +13,9 @@ interface Props extends productInterface{
 
 export const ProductComponent = ({
   _id,
-  name,
+  title,
   images,
-  description,
+  aboutProduct,
   price,
   usingCol
 }:Props) => {
@@ -40,8 +40,8 @@ export const ProductComponent = ({
       </div>
       <div className='flex flex-col justify-between w-full'>
           <div>
-            <p className='uppercase text-gray font-semibold xl:text-[12px] md:text-[10px] sm:text-[9px] text-[7px]'>{name}</p>
-            <h1 className='xl:text-[18px] md:text-[16px] sm:text-[14px] text-[12px] font-light'>{description.slice(0,70)}...</h1>
+            <p className='uppercase text-gray font-semibold xl:text-[12px] md:text-[10px] sm:text-[9px] text-[7px]'>{title}</p>
+            <h1 className='xl:text-[18px] md:text-[16px] sm:text-[14px] text-[12px] font-light'>{aboutProduct.slice(0,70)}...</h1>
           </div>
           <h3 className='uppercase 2xl:text-[22px] xl:text-[20px] md:text-[18px] sm:text-[14px] text-[12px] font-medium'>{price} GEL</h3>
       </div>

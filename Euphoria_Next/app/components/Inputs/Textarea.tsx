@@ -23,7 +23,7 @@ export const Textarea = ({onChange,value,feedback,name,id,disabled,height}:Props
       style={{height:`${height}px`}}
       className={`w-full outline-none border-[1px] border-solid
       border-secondaryGray p-2 rounded-lg text-secondaryGray
-       transition-opacity duration-300
+       transition-opacity duration-300 placeholder:select-none
       ${disabled && 'opacity-75'}
       `}
       placeholder='Description' value={value} />

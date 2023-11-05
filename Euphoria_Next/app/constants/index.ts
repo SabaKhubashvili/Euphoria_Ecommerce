@@ -158,7 +158,9 @@ export interface productInterface{
     _id:number
     title:string;
     price:string;
-    description:string,
+    aboutProduct:string,
+    otherInformation:string,
+    advantages:string,
     images:string,
     avaiableSizes:{
       xs:boolean,

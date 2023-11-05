@@ -57,7 +57,9 @@ router.put(
     try {
       const {
         title,
-        description,
+        aboutProduct,
+        advantages,
+        otherInformation,
         images,
         avaiableSizes,
         price,
@@ -66,7 +68,9 @@ router.put(
 
       if (
         !title ||
-        !description ||
+        !aboutProduct ||
+        !advantages ||
+        !otherInformation ||
         !images ||
         !avaiableSizes ||
         !price ||
@@ -77,8 +81,10 @@ router.put(
 
       const newProduct = new ProductSchema({
         title,
-        description,
+        aboutProduct,
+        otherInformation,
         images,
+        advantages,
         avaiableSizes,
         price:parseInt(price),
         category

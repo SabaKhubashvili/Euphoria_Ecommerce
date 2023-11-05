@@ -27,7 +27,7 @@ enum STEPS {
 }
 
 export const AddProductModal = () => {
-  const [activeStep, setActiveStep] = useState<STEPS>(STEPS.productDescription);
+  const [activeStep, setActiveStep] = useState<STEPS>(STEPS.productInformation);
   const { isOpen, onClose } = UseAddProductModal();
   const [isSubmitting, setisSubmitting] = useState<boolean>(false);
 
@@ -36,9 +36,9 @@ export const AddProductModal = () => {
     validateOnChange: false,
     initialValues: {
       title: "",
-      price: "",
-      otherInformation: "",
       aboutProduct: "",
+      otherInformation: "",
+      price: "",
       avaiableSizes: {
         xsm: false,
         sm: false,
@@ -49,7 +49,7 @@ export const AddProductModal = () => {
       },
       images: [],
       category: "65411417880b4cbf8653d9d5",
-      advantages: "◯ ",
+      advantages: "",
     },
     validate: (values) => {
       let errors: any = {};
@@ -72,51 +72,49 @@ export const AddProductModal = () => {
       return errors;
     },
     onSubmit: async (values) => {
-      if (activeStep === STEPS.productInformation) {
+      if (activeStep != STEPS.image) {
         setActiveStep((prev) => prev + 1);
       } else if (!isSubmitting) {
         setisSubmitting(true);
-        try {
-          RestClient.putRequest(
-            BaseUrl.addProduct,
-            { ...values, avaiableSizes: JSON.stringify(values.avaiableSizes) },
-            getCookie("accessToken")
-          )
-            .then((res) => {
-              toast.success(res.data.message, {
-                position: "top-center",
-                autoClose: 2500,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-              });
-            })
-            .finally(() => {
-              setisSubmitting(false);
+
+        RestClient.putRequest(
+          BaseUrl.addProduct,
+          { ...values, avaiableSizes: JSON.stringify(values.avaiableSizes) },
+          getCookie("accessToken")
+        )
+          .then((res) => {
+            toast.success(res.data.message, {
+              position: "top-center",
+              autoClose: 2500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
             });
-          setActiveStep(STEPS.productInformation);
-          formik.resetForm();
-          onClose();
-        } catch (err: any) {
-          toast.error(err.response.data.message, {
-            position: "top-center",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
+            setActiveStep(STEPS.productInformation);
+            formik.resetForm();
+            onClose();
+          })
+          .catch((err: any) => {
+            toast.error(err.response.data.message, {
+              position: "top-center",
+              autoClose: 2500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          })
+          .finally(() => {
+            setisSubmitting(false);
           });
-        }
       }
     },
   });
-  console.log(formik.values.advantages);
-
   const MainButtonCont = useMemo(() => {
     if (activeStep === STEPS.image) {
       return "Add";
@@ -321,14 +319,15 @@ export const AddProductModal = () => {
               <div className="w-[20px] h-[20px] cursor-pointer">
                 <Icon
                   onClick={(e) => {
-                    e.stopPropagation()
-                    // console.log("click");
-                    const lines = formik.values.advantages.split("\n");
-                    let newText = "";
-                    lines.map((line) => {
-                      newText += "◯ " + line + '\n';
-                    });
-                    formik.setFieldValue("advantages", newText);
+                    if (formik.values.advantages.length > 0) {
+                      e.stopPropagation();
+                      const lines = formik.values.advantages.split("\n");
+                      let newText = "";
+                      lines.map((line) => {
+                        newText += "◯ " + line + "\n";
+                      });
+                      formik.setFieldValue("advantages", newText);
+                    }
                   }}
                   svg={WebsiteIcons["Dot"]}
                 />
