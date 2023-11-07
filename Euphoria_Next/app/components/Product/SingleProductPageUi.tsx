@@ -5,6 +5,10 @@ import { MainButton } from "../buttons/MainButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
 import { CheckedIcon, GrayHeartIcon } from "@/public/Svg/Icons";
 import { productInterface } from "@/app/constants";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { getCookies } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 interface Props {
   _id: number;
@@ -18,6 +22,7 @@ interface Props {
 }
 
 export const SingleProductInformation = ({
+  _id,
   title,
   price,
   avaiableSizes,
@@ -28,6 +33,19 @@ export const SingleProductInformation = ({
     color: "",
     size: "",
   });
+  const router = useRouter()
+  const cookies = getCookies()
+  const addToCart = async() => {
+      await RestClient.putRequest(BaseUrl.addToCart,{
+        productId:_id,
+        quantity:quantity
+      },
+      cookies.accessToken).then((res)=>{
+            console.log(res);
+      }).catch((err)=>{
+        router.push('/login');
+      })
+  }
 
   return (
     <React.Fragment>
@@ -112,7 +130,7 @@ export const SingleProductInformation = ({
       </div>
       <div className="mt-[38px] flex gap-[15px] xs:flex-nowrap flex-wrap">
         <div className="w-full max-w-[221px] h-[50px]">
-          <MainButton label="Add to bag" onClick={() => {}} small full />
+          <MainButton label="Add to bag" onClick={addToCart} small full />
         </div>
         <div className="w-full max-w-[221px] h-[50px]">
           <SecondaryButton
@@ -163,7 +181,7 @@ const Details = ({
           <h2 className="uppercase font-medium">Advantages</h2>
             <ul className="flex flex-col gap-[5px]">
             {advantages.split('\n').map(advantage=>(
-              <li className="font-light">
+              <li className="font-light" key={advantage}>
                 {'\n' +advantage}
               </li>
             ))}

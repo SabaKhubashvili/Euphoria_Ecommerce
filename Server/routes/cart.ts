@@ -25,7 +25,7 @@ router.put("/add", verifyTokenAuthorization, async (req: any, res: any) => {
     const { productId, quantity } = req.body;
 
     if(!productId){
-        return res.status(401).json({message:'ProductId is required'})
+        return res.status(400).json({message:'ProductId is required'})
     } 
       try {
     let cart = await Cart.findOne({ userId: req.user.id });

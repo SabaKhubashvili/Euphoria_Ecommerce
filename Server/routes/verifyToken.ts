@@ -17,9 +17,7 @@ const verifyToken = (req:any,res:any,next:any)=>{
 const verifyTokenAuthorization = (req:any,res:any,next:any)=>{
     
     verifyToken(req,res,()=>{        
-        if(req.user.id === req.params.id || req.user.isAdmin){
-            console.log(req.user.isAdmin);
-            
+        if(req.user.id === req.params.id || req.user.isAdmin){            
             next()
         }else{
             res.status(403).json({message:"You are not allowed to do that!"})
@@ -32,7 +30,6 @@ const verifyTokenAndAdminAuthorization = (req:any,res:any,next:any)=>{
         if(req.user.isAdmin){
             next()
         }else{
-            
             res.status(403).json({message:"You are not allowed to do that!"})
         }
     })
