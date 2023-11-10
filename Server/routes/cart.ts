@@ -2,6 +2,8 @@ const router = require("express").Router();
 const { verifyTokenAuthorization } = require("./verifyToken");
 const Cart = require("../models/Cart");
 const Product = require('../models/Product')
+
+
 router.get("/getAll", verifyTokenAuthorization, async (req: any, res: any) => {
   try {
     const cartData = await Cart.findOne({ userId: req.user.id }).populate({

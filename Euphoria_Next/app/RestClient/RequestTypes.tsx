@@ -2,8 +2,12 @@ import axios from "axios"
 
 
 class RestClient{
-    static GetRequest = (getUrl:string)=>{
-        return axios.get(getUrl)
+    static GetRequest = (getUrl:string,accessToken?:string)=>{
+        return axios.get(getUrl,{
+            headers:{
+                "token":accessToken
+            }
+        })
     }
     static postRequest = (getUrl:string,Data:any)=>{
         return axios.post(getUrl,Data,{

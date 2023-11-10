@@ -10,6 +10,7 @@ import { useFormik } from "formik";
 import { CartAdressInfo } from "./CartAdressInfo";
 import { CartPay } from "./CartPay";
 import { CartDone } from "./CartDone";
+import { CartInterface } from "@/app/types";
 
 export enum Steps {
   Cart = 0,
@@ -24,9 +25,13 @@ export interface InfoType {
   zip: string;
 }
 
-export const CartPage = () => {
-  const [step, setStep] = useState<Steps>(Steps.Cart);
+interface Props{
+  data: CartInterface
+}
 
+export const CartPage = ({data}:Props) => {
+  const [step, setStep] = useState<Steps>(Steps.Cart);
+ 
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -90,6 +95,7 @@ export const CartPage = () => {
                 setStep(value);
               }}
               zipOnchange={formik.handleChange}
+              data={data}
             />
           </div>
         </div>

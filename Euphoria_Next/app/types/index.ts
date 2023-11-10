@@ -1,3 +1,5 @@
+import { productInterface } from "../constants";
+
 export interface footerComponentsType{
     title: string;
     content: SingleFooterComponentRowType[];
@@ -29,3 +31,13 @@ export interface Customer {
     phone: string;
     createdAt: string;
   }
+
+export interface CartInterface{
+    products:{
+        productId:productInterface,
+        quantity:number;
+
+    }[]
+    userId:string,
+    _id:string,    
+}
