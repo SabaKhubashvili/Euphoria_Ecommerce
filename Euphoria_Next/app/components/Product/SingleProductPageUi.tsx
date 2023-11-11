@@ -226,14 +226,14 @@ const OtherInformation = ({description}:{description:string}) => {
   );
 };
 
-export const SingleProductDetails = ({otherInformation,aboutProduct,advantages}:{otherInformation:string,aboutProduct:string,advantages:string}) => {
+export const SingleProductDetails = ({aboutProduct,advantages}:{aboutProduct:string,advantages:string}) => {
   const [openCategories, setOpenCategories] = useState({
     Details: true,
     OtherInformation: false,
   });
 
   return (
-    <div className="flex flex-col gap-[10px] mt-[41px]">
+    <div className="flex flex-col gap-[10px] mt-[81px]">
       <div
         className="bg-[#F8F9FB] px-[27px] py-[25px] "  >
         <div className="flex items-center justify-between cursor-pointer"

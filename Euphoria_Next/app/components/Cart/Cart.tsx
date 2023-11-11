@@ -1,15 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import React, { useState } from "react";
-import Counter from "../buttons/Counter";
+import React, { useMemo, useState } from "react";
 import { SearchInput } from "../Inputs/SearchInput";
 import { GrayButton } from "../buttons/GrayButton";
 import { MainButton } from "../buttons/MainButton";
 import { Steps } from "./CartPage";
 import { CartInterface } from "@/app/types";
 import { CartTableRow } from "./CartTableRow";
-import { MainTable } from "../tables/MainTable";
 
 export const Cart = ({
   setStep,
@@ -20,11 +17,26 @@ export const Cart = ({
   zipOnchange: (e: any) => void;
   data: CartInterface;
 }) => {
+  const [cartData,setCartData] = useState<CartInterface>(data)
+
   const [totalPrice, setTotalPrice] = useState(() => {
     return data.products.reduce((sum, product) => {
       return sum + product.quantity * product.product.price;
     }, 0);
   });
+
+    const filterCartData = (id: string) => {
+      setCartData((prev) => {
+        return {
+          ...prev,
+          products: prev.products.filter((product) => product._id !== id)
+        };
+      });
+    };
+    
+  
+
+  
 
   
   return (
@@ -51,8 +63,8 @@ export const Cart = ({
             </tr>
           </thead>
           <tbody className="border-b-[1px]  border-b-divider border-solid">
-            {data.products.map((product) => (
-                <CartTableRow totalPriceOnChange={(num:number)=>setTotalPrice(num)} key={product._id} {...product}/>
+            {cartData.products.map((product) => (
+                <CartTableRow filterCart={filterCartData} totalPriceOnChange={(num:number)=>setTotalPrice(num)} key={product._id} {...product}/>
             ))}
           </tbody>
         </table>

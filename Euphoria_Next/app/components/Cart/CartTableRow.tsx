@@ -6,19 +6,45 @@ import React, { useState } from "react";
 import Counter from "../buttons/Counter";
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { getCookie } from "cookies-next";
+import { toast } from "react-toastify";
 
 interface Props extends CartRowInterface {
   totalPriceOnChange: any;
+  filterCart:(id:string)=>void
 }
 
 export const CartTableRow = ({
+  _id,
   product,
   quantity,
   size,
   totalPriceOnChange,
+  filterCart
 }: Props) => {
   const [innerQuantity, setInnerQuantity] = useState<number>(quantity);
   const [totalPrice, setTotalPrice] = useState(innerQuantity * product.price);
+
+
+  const onDelete = async() =>{
+    RestClient.deleteRequest(BaseUrl.deleteCartRow + _id,getCookie('accessToken')).then((res)=>{
+      filterCart(_id);
+      toast.success("Succesfully deleted", {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    }).catch(err=>{
+      console.log(err);
+    });
+  }
 
   return (
     <tr className="w-full !py-[24px]" key={product._id}>
@@ -64,7 +90,7 @@ export const CartTableRow = ({
       <td className="uppercase text-black text-[14px] items-center select-none  text-center xl:min-w-[0px] min-w-[200px] ">
         {product.price * innerQuantity} GEL
       </td>
-      <td className="cursor-pointer">
+      <td className="cursor-pointer" onClick={onDelete}>
         <Icon svg={WebsiteIcons["redDelete"]} />
       </td>
     </tr>

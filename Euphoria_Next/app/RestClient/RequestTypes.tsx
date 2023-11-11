@@ -26,6 +26,15 @@ class RestClient{
             }
         })
     }
+    static deleteRequest = (getUrl:string,token?:any)=>{
+        return axios.delete(getUrl,{
+            headers:{
+                'Content-Type':"application/json",
+                'Accept':"application/json",
+                'token':token
+            }
+        })
+    }
 }
 
 export default RestClient

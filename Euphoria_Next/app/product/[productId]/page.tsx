@@ -47,7 +47,7 @@ const page = async({ params }: { params: params }) => {
               <SingleProductInformation title={product.title} avaiableSizes={product.avaiableSizes} price={product.price} _id={product._id} category={product.category} description={product.otherInformation} />
             </div>
           </div>
-          <SingleProductDetails advantages={product.advantages} aboutProduct={product.aboutProduct} otherInformation={product.otherInformation} />
+          <SingleProductDetails advantages={product.advantages} aboutProduct={product.aboutProduct} />
         </div>
         <div className="pt-[66px] pb-[42px]">
           <ProductsByTagSlider
