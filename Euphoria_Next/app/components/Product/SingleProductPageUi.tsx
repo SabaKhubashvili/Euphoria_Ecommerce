@@ -20,6 +20,7 @@ interface Props {
     name: string;
     _id: string;
   };
+  description:string
 }
 
 export const SingleProductInformation = ({
@@ -28,6 +29,7 @@ export const SingleProductInformation = ({
   price,
   avaiableSizes,
   category,
+  description
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [clothingVariant, setClothingVariant] = useState({
@@ -154,18 +156,19 @@ export const SingleProductInformation = ({
         </div>
       </div>
       <div className="flex flex-wrap gap-[15px] mt-[15px] w-full">
-        <div className="flex gap-[10gpx] uppercase text-[12px] items-center">
+        <div className="flex gap-[10px] uppercase text-[12px] items-center">
           <CheckedIcon />
           <p className="text-gray">Free Shipping</p>
-        </div>
-        <div className="flex gap-[4px] uppercase text-[12px]">
-          <p className="text-gray font-bold">Product code:</p>
-          <p className="text-gray"> RFKK1024</p>
         </div>
         <div className="flex gap-[4px] uppercase text-[12px]">
           <p className="text-gray font-bold ">Tags</p>
           <p className="text-gray"> NEW arrivals, Top women</p>
         </div>
+      </div>
+      <div className="lg:pt-[20px] pt-[40px] lg:pb-[0] pb-[20px]">
+        <p className="text-gray">
+          {description}
+        </p>
       </div>
     </React.Fragment>
   );
@@ -259,7 +262,7 @@ export const SingleProductDetails = ({otherInformation,aboutProduct,advantages}:
         </div>
         {openCategories.Details && <Details advantages={advantages} aboutProduct={aboutProduct} />}
       </div>
-      <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
+      {/* <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
         <div
           className="flex items-center justify-between cursor-pointer"
           onClick={() =>
@@ -284,7 +287,7 @@ export const SingleProductDetails = ({otherInformation,aboutProduct,advantages}:
           </div>
         </div>
         {openCategories.OtherInformation && <OtherInformation description={otherInformation} />}
-      </div>
+      </div> */}
     </div>
   );
 };

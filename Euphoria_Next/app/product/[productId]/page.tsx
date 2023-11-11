@@ -43,8 +43,8 @@ const page = async({ params }: { params: params }) => {
                 <InstagramBlackIcon />
               </div>
             </div>
-            <div className="col-span-1">
-              <SingleProductInformation title={product.title} avaiableSizes={product.avaiableSizes} price={product.price} _id={product._id} category={product.category} />
+            <div className="col-span-1 select-none">
+              <SingleProductInformation title={product.title} avaiableSizes={product.avaiableSizes} price={product.price} _id={product._id} category={product.category} description={product.otherInformation} />
             </div>
           </div>
           <SingleProductDetails advantages={product.advantages} aboutProduct={product.aboutProduct} otherInformation={product.otherInformation} />
