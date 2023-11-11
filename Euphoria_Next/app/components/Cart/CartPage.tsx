@@ -39,10 +39,12 @@ export const CartPage = ({data}:Props) => {
       lastName: "",
       streetAdress: "",
       city: "",
-      zip: "",
+      phone: "",
     },
     validate: (values) => {
       const errors: any = {};
+      const georgianPhoneNumberRegex = /^(5|5{2})\d{8}$/;
+
       if (values.email.length === 0) {
         errors.email = "Email is required";
       } else if (
@@ -59,8 +61,10 @@ export const CartPage = ({data}:Props) => {
       if (values.city.length === 0) {
         errors.city = "City is required";
       }
-      if (values.zip.length === 0) {
-        errors.zip = "Zip code is required";
+      if (values.phone.length === 0) {
+        errors.phone = "Phone number is required";
+      }else if(!georgianPhoneNumberRegex.test(values.phone)){
+        errors.phone = "Invalid phone format"
       }
       return errors;
     },
@@ -114,7 +118,7 @@ export const CartPage = ({data}:Props) => {
           <div className="pt-[26px] mx-auto flex justify-center items-center relative lg:w-[388px] sm:w-[300px] w-[80%]">
             <div
               className={`h-[9px] w-full absolute 
-                bg-divider`}
+                bg-divider rounded-l-[5px] rounded-r-[5px]`}
             >
               {step === Steps.Payment || step === Steps.Done ? (
                 <motion.div
@@ -130,7 +134,7 @@ export const CartPage = ({data}:Props) => {
                   }}
                   exit={{ opacity: 0, width: "0%" }}
                   transition={{ duration: 0.3 }}
-                  className="h-[9px] bg-advanced"
+                  className="h-[9px] bg-advanced rounded-l-[5px] rounded-r-[5px]"
                 />
               ) : (
                 ""

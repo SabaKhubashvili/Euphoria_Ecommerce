@@ -69,7 +69,7 @@ export const CartPay = ({ setStep, info }: Props) => {
                 <span className="text-black">Email:</span> {info.email}
               </li>
               <li className="text-gray text-[16px]">
-                <span className="text-black">Firstname:</span> {info.firstname}
+                <span className="text-black">Firstname:</span> {info.firstName}
               </li>
               <li className="text-gray text-[16px]">
                 <span className="text-black">StreetAdress:</span>{" "}

@@ -17,6 +17,9 @@ export const CartAdressInfo = ({
   values,
   setFieldValue,
 }: Props) => {
+
+
+
   return (
     <div className="flex justify-between lg:flex-row flex-col pt-[57px] gap-[20px]">
       <div className="flex flex-col gap-[40px] w-full lg:basis-3/5">
@@ -33,17 +36,18 @@ export const CartAdressInfo = ({
                 placeholder="Email"
                 onChange={handleChange}
                 feedback={errors.email}
+                value={values.email}
               />
               <AuthInput
-                label="Zip/Postal Code"
+                label="Phone number"
                 required
-                id="zip"
-                name="zip"
-                type="zip"
+                id="phone"
+                name="phone"
+                type="text"
                 placeholder=""
-                defaultValue={values.zip}
+                value={values.phone}
                 onChange={handleChange}
-                feedback={errors.zip}
+                feedback={errors.phone}
               />
             </div>
           </div>
@@ -57,6 +61,7 @@ export const CartAdressInfo = ({
               placeholder=""
               onChange={handleChange}
               feedback={errors.firstName}
+              value={values.firstName}
             />
             <AuthInput
               label="Last Name"
@@ -66,6 +71,7 @@ export const CartAdressInfo = ({
               type="text"
               placeholder=""
               onChange={handleChange}
+              value={values.lastName}
             />
             <AuthInput
               label="Street Adress"
@@ -76,6 +82,7 @@ export const CartAdressInfo = ({
               placeholder=""
               onChange={handleChange}
               feedback={errors.streetAdress}
+              value={values.streetAdress}
             />
 
             <div className="flex full gap-[10px] justify-between xl:flex-row flex-col xl:items-center">

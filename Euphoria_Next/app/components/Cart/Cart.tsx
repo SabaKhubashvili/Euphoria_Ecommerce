@@ -63,9 +63,9 @@ export const Cart = ({
             <h1 className="lg:text-[24px] text-[18px]  leading-[68px]">
               Apply Discount Code
             </h1>
-            <div className="flex">
+            <div className="flex sm:flex-row flex-col">
               <SearchInput placeholder="Enter discount code" />
-              <div className="w-[170px]">
+              <div className="sm:w-1/3 w-full">
                 <GrayButton
                   onClick={() => {}}
                   label="Apply Discount"
@@ -75,7 +75,7 @@ export const Cart = ({
               </div>
             </div>
           </div>
-          <div className="flex flex-col gap-[15px] pt-[20px]">
+          {/* <div className="flex flex-col gap-[15px] pt-[20px]">
             <div className="flex flex-col gap-[8px]">
               <h1 className=" xl:text-[24px] lg:text-[19px] leading-[28px]">
                 Estimate Shipping and Tax
@@ -144,7 +144,7 @@ export const Cart = ({
                     },
                   ]}
                 />
-              </div> */}
+              </div> 
               <div className="flex full gap-[10px] xl:flex-row flex-col xl:items-center">
                 <h2 className="flex basis-2/5">
                   Zip/Postal Code <span className="text-rose-700">*</span>
@@ -157,7 +157,7 @@ export const Cart = ({
                 />
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
         <div
           className="border-[2px] border-solid border-divider bg-lightBlue 

@@ -14,7 +14,8 @@ interface Props {
   required?: boolean;
   type?: string;
   defaultValue?:string,
-  disabled?:boolean
+  disabled?:boolean,
+  value:string
 }
 
 export const AuthInput = ({
@@ -27,7 +28,8 @@ export const AuthInput = ({
   required,
   type = 'text',
   defaultValue,
-  disabled
+  disabled,
+  value
 }: Props) => {
   const [currentType,setCurrentType] = useState<string>(type)
  
@@ -55,6 +57,7 @@ export const AuthInput = ({
             id={id}
             name={name}
             placeholder={placeholder}
+            value={value}
             onChange={onChange}
             type={currentType}
             defaultValue={defaultValue}

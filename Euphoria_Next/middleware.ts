@@ -42,7 +42,7 @@ async function checkIfIsAdmin(request:NextRequest) {
 async function isAuthorized(request:NextRequest){
   const accessToken = request.cookies.get("accessToken")?.value;
   const test = await verifyToken(accessToken || "");
-  
+    
   if(test){
     return true
   }else{
