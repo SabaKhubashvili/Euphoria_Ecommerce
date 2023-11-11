@@ -9,6 +9,7 @@ import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { getCookies } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 interface Props {
   _id: number;
@@ -41,12 +42,21 @@ export const SingleProductInformation = ({
         size:clothingVariant.size || Object.keys(JSON.parse(avaiableSizes))[0]
       },
       cookies.accessToken).then((res)=>{
-            console.log(res);
+        toast.success("Sucesfully placed in cart", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+          router.push('/cart')
       }).catch((err)=>{
         router.push('/login');
       })
   }
-console.log(Object.keys(JSON.parse(avaiableSizes))[0]);
 
   return (
     <React.Fragment>

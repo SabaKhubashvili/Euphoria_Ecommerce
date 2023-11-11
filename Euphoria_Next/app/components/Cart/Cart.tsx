@@ -9,6 +9,7 @@ import { MainButton } from "../buttons/MainButton";
 import { Steps } from "./CartPage";
 import { CartInterface } from "@/app/types";
 import { CartTableRow } from "./CartTableRow";
+import { MainTable } from "../tables/MainTable";
 
 export const Cart = ({
   setStep,
@@ -28,11 +29,11 @@ export const Cart = ({
   
   return (
     <div className="grid grid-cols-3 gap-[20px] mb-[40px]">
-      <div className="lg:col-span-2 col-span-3   max-h-[750px] overflow-y-auto overflow-x-auto">
-        <table className="w-full  p-6 " cellPadding={10}>
+      <div className="xl:col-span-2 col-span-3   max-h-[750px] overflow-y-auto overflow-x-auto">
+        <table className="w-full  p-6 select-none " cellPadding={10}>
           <thead className="w-full pb-[10px] ">
-            <tr className="w-full border-b-[1px] border-b-divider border-solid pb-[10px]  justify-between  ">
-              <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center w-[30%] ">
+            <tr className="w-full border-b-[1px] border-b-divider border-solid pb-[10px]">
+              <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-start w-[30%] ">
                 PRODUCT
               </th>
               <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center">
@@ -56,7 +57,7 @@ export const Cart = ({
           </tbody>
         </table>
       </div>
-      <div className="lg:col-span-1 col-span-3 flex flex-col gap-[24px]">
+      <div className="xl:col-span-1 col-span-3 flex flex-col gap-[24px]">
         <div className="w-full border-[2px] border-solid border-divider bg-lightBlue pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">
           <div>
             <h1 className="lg:text-[24px] text-[18px]  leading-[68px]">
@@ -165,7 +166,7 @@ export const Cart = ({
           <div className=" flex flex-col gap-[10px] pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">
             <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] ">
               <p>Subtotal</p>
-              <p>120.00 EUR</p>
+              <p>{totalPrice} GEL</p>
             </div>
             <div className="flex justify-between font-medium xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] text-gray">
               <p>Delivering</p>
@@ -173,7 +174,7 @@ export const Cart = ({
             </div>
             <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] pt-[10px]">
               <p>Order total</p>
-              <p>{totalPrice} EUR</p>
+              <p>{totalPrice} GEL</p>
             </div>
           </div>
           <div className="border-t-[1px]   mt-[18px] h-[60px]">
