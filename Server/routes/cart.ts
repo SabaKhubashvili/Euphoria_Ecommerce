@@ -7,11 +7,11 @@ const Product = require('../models/Product')
 router.get("/getAll", verifyTokenAuthorization, async (req: any, res: any) => {
   try {
     const cartData = await Cart.findOne({ userId: req.user.id }).populate({
-        path: 'products.productId',
+        path: 'products.product',
         model: Product,
       });
 
-
+      
     if (!cartData) {
       return res.status(404).json({ message: "Cart not found" });
     }
@@ -24,7 +24,7 @@ router.get("/getAll", verifyTokenAuthorization, async (req: any, res: any) => {
 
 router.put("/add", verifyTokenAuthorization, async (req: any, res: any) => {
     const userId = req.user.id;
-    const { productId, quantity } = req.body;
+    const { productId, quantity, size } = req.body;
 
     if(!productId){
         return res.status(400).json({message:'ProductId is required'})
@@ -39,18 +39,12 @@ router.put("/add", verifyTokenAuthorization, async (req: any, res: any) => {
       });
     }
 
-    const existingProductIndex = cart.products.findIndex(
-      (product:any) => product.productId.toString() === productId
-    );
 
-    if (existingProductIndex !== -1) {
-      cart.products[existingProductIndex].quantity += quantity || 1;
-    } else {
       cart.products.push({
-        productId,
+        product:productId,
         quantity: quantity || 1,
-      });
-    }  
+        size
+      }); 
 
   
     await cart.save();

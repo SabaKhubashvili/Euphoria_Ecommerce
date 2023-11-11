@@ -30,7 +30,6 @@ export const SingleProductInformation = ({
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [clothingVariant, setClothingVariant] = useState({
-    color: "",
     size: "",
   });
   const router = useRouter()
@@ -38,7 +37,8 @@ export const SingleProductInformation = ({
   const addToCart = async() => {
       await RestClient.putRequest(BaseUrl.addToCart,{
         productId:_id,
-        quantity:quantity
+        quantity:quantity,
+        size:clothingVariant.size || Object.keys(JSON.parse(avaiableSizes))[0]
       },
       cookies.accessToken).then((res)=>{
             console.log(res);
@@ -46,6 +46,7 @@ export const SingleProductInformation = ({
         router.push('/login');
       })
   }
+console.log(Object.keys(JSON.parse(avaiableSizes))[0]);
 
   return (
     <React.Fragment>

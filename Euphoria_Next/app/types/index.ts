@@ -33,11 +33,13 @@ export interface Customer {
   }
 
 export interface CartInterface{
-    products:{
-        productId:productInterface,
-        quantity:number;
-
-    }[]
+    products:CartRowInterface[]
     userId:string,
     _id:string,    
+}
+export interface CartRowInterface{
+    product:productInterface,
+    quantity:number;
+    size?:string
+    _id:string
 }

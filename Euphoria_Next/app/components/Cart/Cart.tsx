@@ -8,6 +8,7 @@ import { GrayButton } from "../buttons/GrayButton";
 import { MainButton } from "../buttons/MainButton";
 import { Steps } from "./CartPage";
 import { CartInterface } from "@/app/types";
+import { CartTableRow } from "./CartTableRow";
 
 export const Cart = ({
   setStep,
@@ -18,8 +19,11 @@ export const Cart = ({
   zipOnchange: (e: any) => void;
   data: CartInterface;
 }) => {
-  const [quantity, setQuantity] = useState<number>(1);
-  const [totalPrice, setTotalPrice] = useState(120.0);
+  const [totalPrice, setTotalPrice] = useState(() => {
+    return data.products.reduce((sum, product) => {
+      return sum + product.quantity * product.product.price;
+    }, 0);
+  });
 
   
   return (
@@ -47,46 +51,7 @@ export const Cart = ({
           </thead>
           <tbody className="border-b-[1px]  border-b-divider border-solid">
             {data.products.map((product) => (
-              <tr className="w-full !py-[24px]">
-                <td className="inline-flex w-fit mr-[20px] gap-[10px] ">
-                  <Image
-                    src={product.productId.images[0]}
-                    alt="Product"
-                    width={90}
-                    height={110}
-                    className="object-cover w-[83px] h-[103px]"
-                  />
-                  <div className=" -col gap-[13px] xl:min-w-[0px] min-w-[200px] ">
-                    {" "}
-                    {/* Adjusted gap value */}
-                    <h2 className="md:text-[18px] text-[15px] font-medium tracking-[0.5px] uppercase">
-                      {product.productId.title}
-                    </h2>
-                    <div className="p-[2px] border-[1px] border-divider w-[20px] h-[20px]">
-                      <div className="h-full w-full bg-blue-400 m-auto p-auto" />
-                    </div>
-                  </div>
-                </td>
-                <td className="uppercase text-black text-[14px]   items-center ml-[15px]  text-center xl:min-w-[0px] min-w-[200px] ">
-                  {product.productId.price} GEL
-                </td>
-                <td className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] min-w-[200px] ">
-                  W32
-                </td>
-                <td className="uppercase text-black text-[14px]  items-center ml-[15px] mx-auto flex justify-center xl:min-w-[0px] min-w-[200px] ">
-                  <Counter
-                    value={quantity}
-                    setValue={(value: number) => {
-                      setQuantity(value);
-                      setTotalPrice(value * 120);
-                    }}
-                    max={20}
-                  />
-                </td>
-                <td className="uppercase text-black text-[14px] items-center select-none  text-center xl:min-w-[0px] min-w-[200px] ">
-                  {product.productId.price * quantity},00 EURO
-                </td>
-              </tr>
+                <CartTableRow totalPriceOnChange={(num:number)=>setTotalPrice(num)} key={product._id} {...product}/>
             ))}
           </tbody>
         </table>
