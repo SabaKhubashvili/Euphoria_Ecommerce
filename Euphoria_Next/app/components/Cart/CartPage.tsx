@@ -25,13 +25,24 @@ export interface InfoType {
   zip: string;
 }
 
-interface Props{
-  data: CartInterface
+interface Props {
+  data: CartInterface;
 }
 
-export const CartPage = ({data}:Props) => {
+export const CartPage = ({ data }: Props) => {
   const [step, setStep] = useState<Steps>(Steps.Cart);
- 
+  const [totalPrice, setTotalPrice] = useState(() => {
+    return data.products.reduce((sum, product) => {
+      return sum + product.quantity * product.product.price;
+    }, 0);
+  });
+  const [coupon, setCoupon] = useState({
+    code: "",
+    percentage: 0,
+    isDisabled: false,
+    success: false,
+  });
+
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -63,8 +74,8 @@ export const CartPage = ({data}:Props) => {
       }
       if (values.phone.length === 0) {
         errors.phone = "Phone number is required";
-      }else if(!georgianPhoneNumberRegex.test(values.phone)){
-        errors.phone = "Invalid phone format"
+      } else if (!georgianPhoneNumberRegex.test(values.phone)) {
+        errors.phone = "Invalid phone format";
       }
       return errors;
     },
@@ -98,8 +109,13 @@ export const CartPage = ({data}:Props) => {
               setStep={(value) => {
                 setStep(value);
               }}
-              zipOnchange={formik.handleChange}
               data={data}
+              totalPrice={totalPrice}
+              setTotalPrice={(value: number) => {
+                setTotalPrice(value);
+              }}
+              coupon={coupon}
+              setCoupon={setCoupon}
             />
           </div>
         </div>

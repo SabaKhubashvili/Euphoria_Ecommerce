@@ -74,6 +74,7 @@ export const LoginForm = () => {
         feedback={formik.errors.email}
         required
         disabled={isLoading}
+        value={formik.values.email}
       />
       <AuthInput
         name="password"
@@ -85,6 +86,7 @@ export const LoginForm = () => {
         feedback={formik.errors.password}
         required
         disabled={isLoading}
+        value={formik.values.password}
       />
       <div className="flex justify-between items-center w-full xs:flex-nowrap flex-wrap">
         <button

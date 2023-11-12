@@ -9,11 +9,12 @@ class RestClient{
             }
         })
     }
-    static postRequest = (getUrl:string,Data:any)=>{
+    static postRequest = (getUrl:string,Data:any,token?:string)=>{
         return axios.post(getUrl,Data,{
             headers:{
                 'Content-Type':"application/json",
                 'Accept':"application/json",
+                'token':token
             }
         })
     }

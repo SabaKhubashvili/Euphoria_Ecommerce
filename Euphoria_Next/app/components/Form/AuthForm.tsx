@@ -139,6 +139,7 @@ export const AuthForm = () => {
             feedback={formik.errors.firstname}
             onChange={formik.handleChange}
             disabled={isSubmitting}
+            value={formik.values.firstname}
           />
           <AuthInput
             id={"lastname"}
@@ -150,6 +151,7 @@ export const AuthForm = () => {
             feedback={formik.errors.lastname}
             onChange={formik.handleChange}
             disabled={isSubmitting}
+            value={formik.values.lastname}
           />
           <AuthInput
             id={"email"}
@@ -161,6 +163,7 @@ export const AuthForm = () => {
             feedback={formik.errors.email}
             onChange={formik.handleChange}
             disabled={isSubmitting}
+            value={formik.values.email}
           />
           <AuthInput
             id={"password"}
@@ -172,6 +175,7 @@ export const AuthForm = () => {
             feedback={formik.errors.password}
             onChange={formik.handleChange}
             disabled={isSubmitting}
+            value={formik.values.password}
           />
           <AuthInput
             id={"confirmPassword"}
@@ -183,6 +187,7 @@ export const AuthForm = () => {
             feedback={formik.errors.confirmPassword}
             onChange={formik.handleChange}
             disabled={isSubmitting}
+            value={formik.values.confirmPassword}
           />
           <div className="flex justify-between items-center w-full xs:flex-nowrap flex-wrap">
             <button
@@ -221,6 +226,7 @@ export const AuthForm = () => {
               feedback={formik.errors.confirmationCode}
               onChange={formik.handleChange}
               disabled={isSubmitting}
+              value={formik.values.confirmationCode}
               />
               <MainButton type="submit" label="Submit"/>
             </div>

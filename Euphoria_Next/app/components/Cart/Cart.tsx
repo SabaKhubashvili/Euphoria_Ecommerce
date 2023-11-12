@@ -7,34 +7,84 @@ import { MainButton } from "../buttons/MainButton";
 import { Steps } from "./CartPage";
 import { CartInterface } from "@/app/types";
 import { CartTableRow } from "./CartTableRow";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { getCookie } from "cookies-next";
+import { toast } from "react-toastify";
 
 export const Cart = ({
   setStep,
-  zipOnchange,
   data,
+  totalPrice,
+  setTotalPrice,
+  coupon,
+  setCoupon
 }: {
   setStep: (value: Steps) => void;
-  zipOnchange: (e: any) => void;
   data: CartInterface;
+  totalPrice: number;
+  setTotalPrice: (value: number) => void;
+  coupon:{
+    code: string,
+    percentage: number,
+    isDisabled: boolean,
+    success: boolean,
+  },
+  setCoupon:(prev:any)=>void
 }) => {
-  const [cartData,setCartData] = useState<CartInterface>(data)
+  const [cartData, setCartData] = useState<CartInterface>(data);
 
-  const [totalPrice, setTotalPrice] = useState(() => {
-    return data.products.reduce((sum, product) => {
-      return sum + product.quantity * product.product.price;
-    }, 0);
-  });
 
-    const filterCartData = (id: string) => {
-      setCartData((prev) => {
-        return {
-          ...prev,
-          products: prev.products.filter((product) => product._id !== id)
-        };
+  const filterCartData = (id: string) => {
+    setCartData((prev) => {
+      return {
+        ...prev,
+        products: prev.products.filter((product) => product._id !== id),
+      };
+    });
+  };
+
+  const checkCoupon = async () => {
+    await RestClient.postRequest(
+      BaseUrl.checkCoupon,
+      { code: coupon.code },
+      getCookie("accessToken")
+    )
+      .then((res) => {
+        if (res.data.success) {
+          setCoupon((prev:any) => ({
+            ...prev,
+            percentage: res.data.coupon.percentage,
+            isDisabled: true,
+            success: true,
+          }));
+        } else {
+          toast.error(res.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      })
+      .catch((err) => {
+        toast.success("Something went wrong", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       });
-    };
-  
-  
+  };
+
   return (
     <div className="grid grid-cols-3 gap-[20px] mb-[40px]">
       <div className="xl:col-span-2 col-span-3   max-h-[750px] overflow-y-auto overflow-x-auto">
@@ -61,7 +111,12 @@ export const Cart = ({
           </div>
           <div className="border-b-[1px]  border-b-divider border-solid">
             {cartData.products.map((product) => (
-                <CartTableRow filterCart={filterCartData} totalPriceOnChange={(num:number)=>setTotalPrice(num)} key={product._id} {...product}/>
+              <CartTableRow
+                filterCart={filterCartData}
+                totalPriceOnChange={(num: number) => setTotalPrice(num)}
+                key={product._id}
+                {...product}
+              />
             ))}
           </div>
         </div>
@@ -72,16 +127,35 @@ export const Cart = ({
             <h1 className="lg:text-[24px] text-[18px]  leading-[68px]">
               Apply Discount Code
             </h1>
-            <div className="flex sm:flex-row flex-col">
-              <SearchInput placeholder="Enter discount code" />
-              <div className="sm:w-1/3 w-full">
-                <GrayButton
-                  onClick={() => {}}
-                  label="Apply Discount"
-                  small
-                  full
+            <div>
+              <div className="flex sm:flex-row flex-col">
+                <SearchInput
+                  placeholder="Enter discount code"
+                  value={coupon.code}
+                  disabled={coupon.isDisabled}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setCoupon((prev:any) => ({
+                      ...prev,
+                      code: e.target.value,
+                    }))
+                  }
                 />
+                <div className="sm:w-1/3 w-full">
+                  <GrayButton
+                    onClick={checkCoupon}
+                    label="Apply Discount"
+                    small
+                    full
+                    disabled={coupon.isDisabled}
+                  />
+                </div>
               </div>
+              {coupon.success && (
+                <div className="text-green pt-[10px]">
+                  Coupon applied successfully! You've saved {coupon.percentage}% on
+                  your purchase.
+                </div>
+              )}
             </div>
           </div>
           {/* <div className="flex flex-col gap-[15px] pt-[20px]">
@@ -178,12 +252,12 @@ export const Cart = ({
               <p>{totalPrice} GEL</p>
             </div>
             <div className="flex justify-between font-medium xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] text-gray">
-              <p>Delivering</p>
-              <p>0.00 EUR</p>
+              <p>Coupon</p>
+              <p>{coupon.success ? (totalPrice * coupon.percentage) / 100 : 0} GEL</p>
             </div>
             <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] pt-[10px]">
               <p>Order total</p>
-              <p>{totalPrice} GEL</p>
+              <p>{coupon.success ? totalPrice - (totalPrice * coupon.percentage) / 100 :totalPrice} GEL</p>
             </div>
           </div>
           <div className="border-t-[1px]   mt-[18px] h-[60px]">
