@@ -8,7 +8,7 @@ import { productInterface, products } from '@/app/constants'
 import Link from 'next/link'
 
 interface Props extends productInterface{
-  usingCol?:boolean
+  usingCol?:boolean,
 }
 
 export const ProductComponent = ({
@@ -17,7 +17,7 @@ export const ProductComponent = ({
   images,
   aboutProduct,
   price,
-  usingCol
+  usingCol,
 }:Props) => {
   
   return (

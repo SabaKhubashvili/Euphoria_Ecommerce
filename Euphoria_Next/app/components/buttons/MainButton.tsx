@@ -8,7 +8,7 @@ interface Props{
     type?:'button' | 'submit' | 'reset'
 }
 
-export const MainButton = ({onClick,label,small,full,type = 'button'}:Props) => {
+export const  MainButton = ({onClick,label,small,full,type = 'button'}:Props) => {
   return (
     <button 
     type={type}

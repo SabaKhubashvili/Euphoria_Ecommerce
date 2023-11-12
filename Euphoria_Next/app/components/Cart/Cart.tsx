@@ -33,41 +33,38 @@ export const Cart = ({
         };
       });
     };
-    
   
-
-  
-
   
   return (
     <div className="grid grid-cols-3 gap-[20px] mb-[40px]">
       <div className="xl:col-span-2 col-span-3   max-h-[750px] overflow-y-auto overflow-x-auto">
-        <table className="w-full  p-6 select-none " cellPadding={10}>
-          <thead className="w-full pb-[10px] ">
-            <tr className="w-full border-b-[1px] border-b-divider border-solid pb-[10px]">
-              <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-start w-[30%] ">
+        <div className="w-full  p-6 select-none min-w-[860px]">
+          <div className="w-full pb-[10px] ">
+            <div className="w-full border-b-[1px] border-b-divider border-solid pb-[10px] flex items-cente justify-between">
+              <h1 className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-start basis-1/6 ">
                 PRODUCT
-              </th>
-              <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center">
+              </h1>
+              <h1 className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center basis-1/6">
                 Price
-              </th>
-              <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center">
+              </h1>
+              <h1 className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center basis-1/6">
                 Size
-              </th>
-              <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center">
+              </h1>
+              <h1 className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center basis-1/6">
                 Quantity
-              </th>
-              <th className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center">
+              </h1>
+              <h1 className="uppercase text-gray font-medium tracking-[0.5px] text-[18px] text-center basis-1/6">
                 Total
-              </th>
-            </tr>
-          </thead>
-          <tbody className="border-b-[1px]  border-b-divider border-solid">
+              </h1>
+              <h1 className="basis-1/6"></h1>
+            </div>
+          </div>
+          <div className="border-b-[1px]  border-b-divider border-solid">
             {cartData.products.map((product) => (
                 <CartTableRow filterCart={filterCartData} totalPriceOnChange={(num:number)=>setTotalPrice(num)} key={product._id} {...product}/>
             ))}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </div>
       <div className="xl:col-span-1 col-span-3 flex flex-col gap-[24px]">
         <div className="w-full border-[2px] border-solid border-divider bg-lightBlue pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">
@@ -104,7 +101,7 @@ export const Cart = ({
                 <MainDropdown
                   full
                   label={
-                    info.country.length > 0 ? info.country : "Choose country"
+                    info.country.lengh1 > 0 ? info.country : "Choose country"
                   }
                   content={[
                     {
@@ -134,7 +131,7 @@ export const Cart = ({
                 </h2>
                 <MainDropdown
                   full
-                  label={info.state.length > 0 ? info.state : "Choose City"}
+                  label={info.state.lengh1 > 0 ? info.state : "Choose City"}
                   content={[
                     {
                       onClick: (value) => {

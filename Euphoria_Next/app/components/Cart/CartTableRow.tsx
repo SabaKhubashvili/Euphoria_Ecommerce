@@ -42,13 +42,22 @@ export const CartTableRow = ({
         theme: "light",
         });
     }).catch(err=>{
-      console.log(err);
+      toast.success(err.response.data.message , {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
     });
   }
 
   return (
-    <tr className="w-full !py-[24px]" key={product._id}>
-      <td className="inline-flex w-fit mr-[20px] gap-[10px] ">
+    <div className="w-full !py-[24px] flex items-center gap-[34px]" >
+      <div className="inline-flex w-fit gap-[10px] basis-1/6 ">
         <Image
           src={product.images[0]}
           alt="Product"
@@ -56,24 +65,19 @@ export const CartTableRow = ({
           height={110}
           className="object-cover w-[83px] h-[103px] select-none"
         />
-        <div className=" -col gap-[13px] xl:min-w-[0px] min-w-[200px] ">
-          {" "}
+
           {/* Adjusted gap value */}
           <h2 className="md:text-[18px] text-[15px] font-medium tracking-[0.5px] uppercase">
             {product.title}
           </h2>
-          {/* <div className="p-[2px] border-[1px] border-divider w-[20px] h-[20px]">
-          <div className="h-full w-full bg-blue-400 m-auto p-auto" />
-        </div> */}
-        </div>
-      </td>
-      <td className="uppercase text-black text-[14px]   items-center ml-[15px]  text-center xl:min-w-[0px] min-w-[200px] ">
+      </div>
+      <h1 className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] basis-1/6 ">
         {product.price} GEL
-      </td>
-      <td className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] min-w-[200px] ">
+      </h1>
+      <h1 className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] basis-1/6 ">
         {size}
-      </td>
-      <td className="uppercase text-black text-[14px]  items-center ml-[15px] mx-auto flex justify-center xl:min-w-[0px] min-w-[200px] ">
+      </h1>
+      <h1 className="uppercase text-black text-[14px]  items-center mx-auto flex justify-center xl:min-w-[0px] basis-1/6 ">
         <Counter
           value={innerQuantity}
           setValue={(value: number) => {
@@ -86,13 +90,13 @@ export const CartTableRow = ({
           }}
           max={20}
         />
-      </td>
-      <td className="uppercase text-black text-[14px] items-center select-none  text-center xl:min-w-[0px] min-w-[200px] ">
+      </h1>
+      <h1 className="uppercase text-black text-[14px] items-center select-none  text-center xl:min-w-[0px] basis-1/6 ">
         {product.price * innerQuantity} GEL
-      </td>
-      <td className="cursor-pointer" onClick={onDelete}>
+      </h1>
+      <h1 className="cursor-pointer basis-1/6 " onClick={onDelete}>
         <Icon svg={WebsiteIcons["redDelete"]} />
-      </td>
-    </tr>
+      </h1>
+    </div>
   );
 };
