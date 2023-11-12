@@ -38,7 +38,6 @@ export const ImageUpload = ({
   const uploadFileToCloudinary = async (files: FileList | File | null) => {
 
     if (files) {
-      console.log('upload');
       const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
       const uploadPreset =
         process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "";

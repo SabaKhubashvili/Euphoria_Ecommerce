@@ -9,7 +9,7 @@ export const transporter = nodemailer.createTransport({
         pass: process.env.NEXT_PUBLIC_EMAIL_PASS,
     }
 })
-console.log(process.env.NEXT_PUBLIC_EMAIL_PASS)
+
 
 export const mailOptions = {
     from: email,

@@ -257,7 +257,7 @@ export const Cart = ({
             </div>
             <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] pt-[10px]">
               <p>Order total</p>
-              <p>{coupon.success ? totalPrice - (totalPrice * coupon.percentage) / 100 :totalPrice} GEL</p>
+              <p>{coupon.success ? totalPrice - (totalPrice * coupon.percentage) / 100 : totalPrice} GEL</p>
             </div>
           </div>
           <div className="border-t-[1px]   mt-[18px] h-[60px]">

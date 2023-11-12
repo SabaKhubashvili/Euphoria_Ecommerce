@@ -73,16 +73,16 @@ export const AuthForm = () => {
       } else if (riskyCharactersPattern.test(values.confirmPassword)) {
         errors.confirmPassword = "Invalid characters in Confirm Password";
       }
-      console.log(errors);
+
       
       return errors;
     },
     onSubmit: async (values) => {
       try {
         if (activeStep === STEPS.registration) {
-            // setIsSubmiting(true)
-            // await RestClient.postRequest(BaseUrl.confirmEmail,{email:values.email}).finally(()=>setIsSubmiting(false));
-            // setActiveStep(STEPS.confirmation);
+            setIsSubmiting(true)
+            await RestClient.postRequest(BaseUrl.confirmEmail,{email:values.email}).finally(()=>setIsSubmiting(false));
+            setActiveStep(STEPS.confirmation);
         } else {
           if(!isSubmitting){
             setIsSubmiting(true)

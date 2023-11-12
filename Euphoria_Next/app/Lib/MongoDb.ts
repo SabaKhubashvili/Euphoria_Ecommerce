@@ -5,12 +5,12 @@ const uri = process.env.NEXT_PUBLIC_DATABASE_URL;
 const client = new MongoClient(uri || '', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-} as MongoClientOptions); // Specify the MongoClientOptions type
+} as MongoClientOptions); 
 
 async function connectDB() {
   try {
     await client.connect();
-    return client; // Return the client instance
+    return client;
   } catch (error) {
     console.error('Error connecting to MongoDB:', error);
     throw error;

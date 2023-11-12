@@ -1,9 +1,11 @@
 const OrderSchema = new mongoose.Schema({
-    userId: { type: String, required: true, unique:true },
+    userId: {  type: mongoose.Schema.Types.ObjectId, required: true,  ref: 'user', },
     products: [
         {
             ProductId:{
-                type:String
+                type: mongoose.Schema.Types.ObjectId,
+                required:true,
+                ref:'Product'
             },
             quantity:{
                 type:Number,
@@ -12,12 +14,14 @@ const OrderSchema = new mongoose.Schema({
         }
     ],
     adressInfo:{
-        amount:{type:Number,required:true},
-        adress:{type:String,required:true},
+        streetAdress:{type:Number,required:true},
         city:{type:String,required:true},
-        zipCode:{type:String,required:true},
+        phone:{type:String,required:true},
+        email:{type:String,required:true},
+        firstname:{type:String,required:true},
+        lastname:{type:String},
     },
-    status:{type:String,required:true,default:"pending"}
+    status:{type: "Pending" || "Paid" || "Delivered" ,required:true,default:"pending"}
   });
   
-  module.exports = mongoose.model('order',OrderSchema)
+  module.exports = mongoose.model('Order',OrderSchema)

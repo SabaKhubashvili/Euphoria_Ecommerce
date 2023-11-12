@@ -210,6 +210,21 @@ export const CartPage = ({ data }: Props) => {
                 setStep(Steps.Done);
               }}
               info={formik.values}
+              paymentAmount={coupon.success ? totalPrice - (totalPrice * coupon.percentage) / 100  : totalPrice}
+              products={data.products.map(product => ({
+                id: product._id,  
+                quantity: product.quantity, 
+              }))}
+              adressInfo={
+                {
+                  email:formik.values.email,
+                  city:formik.values.city,
+                  phone:formik.values.phone,
+                  streetAdress:formik.values.streetAdress,
+                  firstName:formik.values.firstName,
+                  lastname:formik.values.lastName
+                }
+              }
             />
           ) : step === Steps.Done ? (
             <CartDone />

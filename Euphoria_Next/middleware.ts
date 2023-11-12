@@ -10,10 +10,10 @@ async function verifyToken(token: string | null) {
       return false;
     }
 
-    const { payload } = await jwtVerify(
-      token,
-      new TextEncoder().encode(process.env.JWT_SECRET)
-    );
+      const { payload } = await jwtVerify(
+        token,
+        new TextEncoder().encode(process.env.JWT_SECRET)
+      );
     
     return payload !== undefined;
   } catch (error) {

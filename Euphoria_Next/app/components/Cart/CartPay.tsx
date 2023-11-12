@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
 import Image from "next/image";
@@ -8,56 +8,69 @@ import { Roboto } from "../assets/Fonts";
 import { MainButton } from "../buttons/MainButton";
 import { SmallCartInfo } from "./SmallCartInfo";
 import { toast } from "react-toastify";
+import jwtDecode from "jwt-decode";
+import { getCookie } from "cookies-next";
 
 interface Props {
   setStep: () => void;
   info: any;
+  paymentAmount: number;
+  products:any,
+  adressInfo:any
 }
 
-const paypalCreateOrder = async () => {
-  try {
-    let response = await axios.post("/api/paypal/createOrder", {
-      user_id: "dsadas",
-      order_price: 150,
-    });
-    return response.data.data.order.id;
-  } catch (error:any) {
-    toast.error(error.response.data.message, {
-      position: "top-center",
-      autoClose: 2500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-  }
-};
-const paypalCaptureOrder = async (orderID: string) => {
-  try {
-    let response = await axios.post("/api/paypal/captureOrder", {
-      orderID,
-    });
-    if (response.data.success) {
-      return true;
-    }
-  } catch (err:any) {
-   toast.error(err.response.data.message, {
-      position: "top-center",
-      autoClose: 2500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-    return false;
-  }
-};
 
-export const CartPay = ({ setStep, info }: Props) => {
+export const CartPay = ({ setStep, info, paymentAmount, products,adressInfo }: Props) => {
+  const jwt:any = jwtDecode(getCookie('accessToken') || '');
+  const [orderId,setOrderId] = useState('')
+  const paypalCreateOrder = async () => {
+    try {
+      let response = await axios.post("/api/paypal/createOrder", {
+        user_id: jwt.id,
+        order_price: paymentAmount,
+        products,
+        adressInfo
+      });
+      setOrderId(response.data.id)
+      return response.data.data.order.id;
+    } catch (error:any) {
+      toast.error(error.response.data.message, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    }
+  };
+  
+  
+  const paypalCaptureOrder = async (orderID:string) => {
+ 
+    try {
+      let response = await axios.post("/api/paypal/captureOrder", {
+        orderID
+      });
+      if (response.data.success) {
+        return true;
+      }
+    } catch (err:any) {
+     toast.error(err.response.data.message, {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return false;
+    }
+  };
   return (
     <div>
       <div className="pt-[70px] flex justify-between gap-[15px] lg:flex-row flex-col">
@@ -103,12 +116,10 @@ export const CartPay = ({ setStep, info }: Props) => {
                   let order_id = await paypalCreateOrder();
                   return order_id + "";
                 }}
-                onApprove={async (data, actions) => {
+                onApprove={async (data, actions) => {                  
                   let response = await paypalCaptureOrder(data.orderID);
                   if (response) {
                     setStep();
-                  } else {
-                    throw new Error("Capture order failed");
                   }
                 }}
               />

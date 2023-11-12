@@ -18,8 +18,7 @@ router.post("/register", async (req: any, res: any) => {
     // }
 
     const confCode_DB = await Confirmations.findOne({email:req.body.email}).sort({createdAt: -1}).exec()
-    console.log(confCode_DB)
-    if(confCode_DB.passCode !== req.body.confirmationCode){
+      if(confCode_DB.passCode !== req.body.confirmationCode){
       return res.status(401).json({message:"Incorrect verification code"})
     }
 

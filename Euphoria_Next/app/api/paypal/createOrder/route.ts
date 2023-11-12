@@ -1,4 +1,5 @@
 
+import connectDB from '@/app/Lib/MongoDb';
 import client from '@/app/utils/paypal';
 import paypal from '@paypal/checkout-server-sdk';
 import { NextResponse } from 'next/server';
@@ -6,9 +7,9 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    const { order_price, user_id } = await req.json();
+    const { order_price, user_id, products, adressInfo  } = await req.json();
 
-    if (!order_price || !user_id) {
+    if (!order_price || !user_id || !products) {
       return NextResponse.json({ success: false, message: "Please provide order_price and User ID" }, { status: 400 });
     }
 
@@ -33,11 +34,27 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: false, message: "Some error occurred at the backend" }, { status: 500 });
     }
 
-    const order = {};
+    const mongoClient = await connectDB();
+    const db = mongoClient.db("test");
+    const orders = db.collection("orders");
+  
+    
+    const order = {
+      _id:response.result.id,
+      userId:user_id,
+      products:products,
+      adressInfo,
+      status:"Pending"
+    }
 
-    return NextResponse.json({ success: true, data: { order:{
-      id: response.result.id
-    } } }, { status: 200 });
+    const newOrder = await orders.insertOne(order);
+    
+    return NextResponse.json({ 
+      success: true,
+      data: { order:{
+      id: response.result.id}},
+      id: newOrder.insertedId.toString()
+      }, { status: 200 });
   } catch (err) {
     return NextResponse.json({ success: false, message: "Could not find the user" }, { status: 500 });
   }
