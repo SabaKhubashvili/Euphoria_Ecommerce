@@ -18,7 +18,7 @@ import BaseUrl from "@/app/RestClient/ApiUrls";
 import { toast } from "react-toastify";
 import { getCookie } from "cookies-next";
 import { cookies } from "next/dist/client/components/headers";
-import { ToolTip } from "../../ToolTip";
+import { ToolTip } from "../../Tooltip";
 
 enum STEPS {
   productInformation = 0,
