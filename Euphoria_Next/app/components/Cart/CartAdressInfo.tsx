@@ -3,12 +3,14 @@ import { AuthInput } from "../Inputs/AuthInput";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { Roboto } from "../assets/Fonts";
 import { SmallCartInfo } from "./SmallCartInfo";
+import { CartRowInterface } from "@/app/types";
 
 interface Props {
   errors: any;
   handleChange: (e: any) => void;
   values: any;
   setFieldValue: (field: string, value: string) => void;
+  products:CartRowInterface[]
 }
 
 export const CartAdressInfo = ({
@@ -16,6 +18,7 @@ export const CartAdressInfo = ({
   handleChange,
   values,
   setFieldValue,
+  products
 }: Props) => {
 
 
@@ -117,7 +120,7 @@ export const CartAdressInfo = ({
           </div>
         </div>
       </div>
-                <SmallCartInfo/>
+          <SmallCartInfo data={products}/>
     </div>
   );
 };

@@ -10,28 +10,30 @@ import { SmallCartInfo } from "./SmallCartInfo";
 import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
 import { getCookie } from "cookies-next";
+import { CartRowInterface } from "@/app/types";
 
 interface Props {
   setStep: () => void;
-  info: any;
   paymentAmount: number;
-  products:any,
+  products:CartRowInterface[],
   adressInfo:any
 }
 
 
-export const CartPay = ({ setStep, info, paymentAmount, products,adressInfo }: Props) => {
+export const CartPay = ({ setStep,  paymentAmount, products,adressInfo }: Props) => {
   const jwt:any = jwtDecode(getCookie('accessToken') || '');
-  const [orderId,setOrderId] = useState('')
+
   const paypalCreateOrder = async () => {
     try {
       let response = await axios.post("/api/paypal/createOrder", {
         user_id: jwt.id,
         order_price: paymentAmount,
-        products,
+        products:products.map((product:any) => ({
+          id: product.product._id,    
+          quantity: product.quantity, 
+        })),
         adressInfo
       });
-      setOrderId(response.data.id)
       return response.data.data.order.id;
     } catch (error:any) {
       toast.error(error.response.data.message, {
@@ -79,20 +81,20 @@ export const CartPay = ({ setStep, info, paymentAmount, products,adressInfo }: P
             <h1 className="text-[24px]">Shipping info</h1>
             <ul className="pt-[7px] flex flex-col gap-[6px]">
               <li className="text-gray text-[16px]">
-                <span className="text-black">Email:</span> {info.email}
+                <span className="text-black">Firstname:</span> {adressInfo.firstname}
               </li>
               <li className="text-gray text-[16px]">
-                <span className="text-black">Firstname:</span> {info.firstName}
+                <span className="text-black">Email: </span> {adressInfo.email}
               </li>
               <li className="text-gray text-[16px]">
-                <span className="text-black">StreetAdress:</span>{" "}
-                {info.streetAdress}
+                <span className="text-black">Phone: </span> {adressInfo.phone}
               </li>
               <li className="text-gray text-[16px]">
-                <span className="text-black">city:</span> {info.city}
+                <span className="text-black">StreetAdress: </span>
+                {adressInfo.streetAdress}
               </li>
               <li className="text-gray text-[16px]">
-                <span className="text-black">Zip:</span> {info.zip}
+                <span className="text-black">city: </span> {adressInfo.city}
               </li>
             </ul>
           </div>
@@ -126,7 +128,7 @@ export const CartPay = ({ setStep, info, paymentAmount, products,adressInfo }: P
             </div>
           </PayPalScriptProvider>
         </div>
-        <SmallCartInfo />
+        <SmallCartInfo data={products} />
       </div>
     </div>
   );

@@ -44,6 +44,7 @@ export const CartPage = ({ data }: Props) => {
   });
 
   const formik = useFormik({
+    validateOnChange:false,
     initialValues: {
       email: "",
       firstName: "",
@@ -83,6 +84,7 @@ export const CartPage = ({ data }: Props) => {
       setStep(Steps.Payment);
     },
   });
+  
   const handleNextButton = useCallback(() => {
     window.scrollTo({
       top: 0,
@@ -203,25 +205,22 @@ export const CartPage = ({ data }: Props) => {
               setFieldValue={(field: string, value: string) =>
                 formik.setFieldValue(field, value)
               }
+              products={data.products}
             />
           ) : step === Steps.Payment ? (
             <CartPay
               setStep={() => {
                 setStep(Steps.Done);
               }}
-              info={formik.values}
               paymentAmount={coupon.success ? totalPrice - (totalPrice * coupon.percentage) / 100  : totalPrice}
-              products={data.products.map(product => ({
-                id: product._id,  
-                quantity: product.quantity, 
-              }))}
+              products={data.products}
               adressInfo={
                 {
                   email:formik.values.email,
                   city:formik.values.city,
                   phone:formik.values.phone,
                   streetAdress:formik.values.streetAdress,
-                  firstName:formik.values.firstName,
+                  firstname:formik.values.firstName,
                   lastname:formik.values.lastName
                 }
               }
