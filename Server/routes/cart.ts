@@ -76,4 +76,32 @@ router.delete(
   }
 );
 
+router.post("/updateQuantity",verifyTokenAuthorization, async(req:any,res:any)=>{
+  const { cartRowId, updatedQuantity } = req.body;
+  const userId = req.user.id;
+  
+  if(!cartRowId || !updatedQuantity){
+    return res.status(400).json({ message: "Something went wrong, Try again later" });
+  }
+
+  if(updatedQuantity > 20){
+    return res.status(401).json({ message: "Maxium quantity is 20" });
+  }
+
+  try {
+    const result = await Cart.updateOne(
+      { userId, 'products._id': cartRowId },
+      {$set : {'products.$.quantity' : updatedQuantity}},
+      { 'products.$': 1 }
+    );      
+      if (result.modifiedCount === 1) {
+        res.status(200).json({ message: 'Sucesfully modified' });
+    } else {
+      res.status(404).json({ message: 'Cart item not found' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Internal server error' });
+  }
+})
+
 module.exports = router;

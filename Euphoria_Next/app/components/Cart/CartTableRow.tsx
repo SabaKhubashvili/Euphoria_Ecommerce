@@ -24,9 +24,8 @@ export const CartTableRow = ({
   totalPriceOnChange,
   filterCart
 }: Props) => {
+  const [productQuantity,setProductQuantity] = useState(quantity)
   const [innerQuantity, setInnerQuantity] = useState<number>(quantity);
-  const [totalPrice, setTotalPrice] = useState(innerQuantity * product.price);
-
 
   const onDelete = async() =>{
     RestClient.deleteRequest(BaseUrl.deleteCartRow + _id,getCookie('accessToken')).then((res)=>{
@@ -42,7 +41,7 @@ export const CartTableRow = ({
         theme: "light",
         });
     }).catch(err=>{
-      toast.success(err.response.data.message , {
+      toast.error(err.response.data.message , {
         position: "top-center",
         autoClose: 2500,
         hideProgressBar: false,
@@ -54,6 +53,37 @@ export const CartTableRow = ({
         });
     });
   }
+
+  const changeQuantity = () => {
+    RestClient.postRequest('http://localhost:3500/api/cart/updateQuantity',{
+      cartRowId:_id,
+      updatedQuantity:innerQuantity
+    },getCookie('accessToken')).then((res)=>{
+      toast.success(res.data.message , {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+        setProductQuantity(innerQuantity)
+    }).catch((err)=>{
+      toast.error(err.response.data.message , {
+        position: "top-center",
+        autoClose: 2500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
+    })
+  }
+console.log('productQ: ' + productQuantity +  ' ' + "Innerquantity " + innerQuantity );
 
   return (
     <div className="w-full !py-[24px] flex items-center gap-[34px]" >
@@ -77,7 +107,12 @@ export const CartTableRow = ({
       <h1 className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] basis-1/6 ">
         {size}
       </h1>
-      <h1 className="uppercase text-black text-[14px]  items-center mx-auto flex justify-center xl:min-w-[0px] basis-1/6 ">
+      <div className="uppercase text-black text-[14px]  items-center mx-auto flex justify-center xl:min-w-[0px] basis-1/6 relative">
+        { productQuantity !== innerQuantity &&
+          <div className="absolute top-[30px] bg-secondary w-full text-center text-white py-[6px] cursor-pointer" onClick={changeQuantity}>
+              Change
+          </div>
+        }
         <Counter
           value={innerQuantity}
           setValue={(value: number) => {
@@ -90,7 +125,7 @@ export const CartTableRow = ({
           }}
           max={20}
         />
-      </h1>
+      </div>
       <h1 className="uppercase text-black text-[14px] items-center select-none  text-center xl:min-w-[0px] basis-1/6 ">
         {product.price * innerQuantity} GEL
       </h1>
