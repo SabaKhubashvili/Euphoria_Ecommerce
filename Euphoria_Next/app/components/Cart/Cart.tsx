@@ -11,6 +11,8 @@ import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
+import { Icon } from "../Icon";
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
 
 export const Cart = ({
   setStep,
@@ -111,14 +113,25 @@ export const Cart = ({
             </div>
           </div>
           <div className="border-b-[1px]  border-b-divider border-solid">
-            {cartData.products.map((product) => (
+            {cartData.products.length > 0 ? cartData.products.map((product) => (
               <CartTableRow
                 filterCart={filterCartData}
                 totalPriceOnChange={(num: number) => setTotalPrice(num)}
                 key={product._id}
                 {...product}
               />
-            ))}
+            ))
+          :
+          <div className="py-[50px] flex justify-center items-center flex-col">
+            <div className="w-[200px] h-[100px]">
+              <Icon
+                svg={WebsiteIcons['disabledCart']}
+                className=""
+                />
+            </div>
+              <h1 className="text-[25px] text-secondaryGray">There is nothing in cart</h1>
+          </div>
+          }
           </div>
         </div>
       </div>
