@@ -10,12 +10,12 @@ interface Props {
   placeholder: string;
   onChange?: (e: React.ChangeEvent) => void;
   feedback?: string;
-  required?: boolean;
   defaultValue?:string,
   disabled?:boolean,
   value:string,
   fontSize?:string,
-  type?:string
+  type?:string,
+  variant?: 'primary' | 'secondary'
 }
 
 export const AddProductInput = ({
@@ -24,21 +24,20 @@ export const AddProductInput = ({
   placeholder,
   onChange,
   feedback,
-  required,
   defaultValue,
   disabled,
   value,
   fontSize,
-  type = 'text'
+  type = 'text',
+  variant = 'primary'
 }: Props) => {
 
 
   return (
     <div
-      className={`flex justify-between items-start sm:flex-row flex-col w-full `}
+      className={`flex justify-between items-start sm:flex-row flex-col w-fit `}
     >
-      <div className="xs:basis-2/3 w-full">
-        <div className="relative w-full">
+        <div className="relative  w-fit ">
           <input
             id={id}
             name={name}
@@ -48,17 +47,17 @@ export const AddProductInput = ({
             type={type}
             defaultValue={defaultValue}
             disabled={disabled}
-            style={{fontSize:fontSize}}
+            style={{fontSize:fontSize, width: variant === 'secondary' ? `${value.length < 14 ? 130 : value.length * 10}px` : 'auto'  }}
             className={`
-            w-full   border-none outline-none bg-transparent text-black
+            border-none outline-none bg-transparent text-black  w-fit 
             ${feedback && "border-rose-500 text-rose-500"}
             ${disabled && 'opacity-75'}
-            transition-all duration-200
+            ${variant !== 'secondary' && "transition-all duration-200"}
+            ${variant === 'secondary' && '!bg-lightBlue font-bold px-2 py-1 inline uppercase w-fit max-w-[300px]'}
             `}
           />
         </div>
         {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>}
-      </div>
     </div>
   );
 };

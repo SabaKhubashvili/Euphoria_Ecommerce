@@ -14,13 +14,14 @@ import { SecondaryInput } from "../Inputs/SecondaryInput";
 import { AuthInput } from "../Inputs/AuthInput";
 import { Textarea } from "../Inputs/Textarea";
 import { AddProductInput } from "../Inputs/AddProductInput";
+import { MainDropdown } from "../Dropdown/MainDropdown";
 
 interface Props {
   _id: number;
   title: string;
   price: number;
   avaiableSizes: string;
-  avaiableSizesOnChange?:(size: any)=>void
+  avaiableSizesOnChange?: (size: any) => void;
   category: {
     name: string;
     _id: string;
@@ -28,6 +29,8 @@ interface Props {
   description: string;
   isEditable?: boolean;
   onChange?: (e: React.ChangeEvent) => void;
+  brand: string;
+  categoryOnChange:(val:string)=>void
 }
 
 export const SingleProductInformation = ({
@@ -40,6 +43,8 @@ export const SingleProductInformation = ({
   description,
   isEditable,
   onChange,
+  brand,
+  categoryOnChange
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [clothingVariant, setClothingVariant] = useState({
@@ -75,15 +80,49 @@ export const SingleProductInformation = ({
       });
   };
 
+
+
   return (
     <React.Fragment>
-      <h4 className=" text-gray text-[14px] leading-[48px]">
-        Home / {category.name} / {title}
-      </h4>
-      <div className=" bg-lightBlue font-bold px-2 py-1 inline uppercase ">
-        {/* Brand */}
-        {category.name}
+      <div className=" text-gray text-[14px] leading-[48px] flex items-center">
+        Home /
+        {isEditable ? (
+          <MainDropdown
+            type="secondary"
+            label={category.name}
+            content={[
+              {
+                label:"Dress",
+                onClick:()=>categoryOnChange('Dress')
+              },
+            ]}
+            bodyHeight="200px"
+            bodyFontSize="15px"
+            paddings="0px 4px"
+            fontSize="10px"
+            gap="11px"
+            bodyWidth="200px"
+          />
+        ) : (
+          category.name
+        )}
+        / {title}
       </div>
+      {/* Brand */}
+      {isEditable ? (
+        <AddProductInput
+          id={"brand"}
+          name="brand"
+          onChange={onChange ? onChange : (e: React.ChangeEvent) => {}}
+          value={brand}
+          placeholder="Brand"
+          variant="secondary"
+        />
+      ) : (
+        <div className=" bg-lightBlue font-bold px-2 py-1 inline uppercase ">
+          {category.name}
+        </div>
+      )}
       {isEditable ? (
         <div className="mt-[10px]">
           <AddProductInput
@@ -105,25 +144,26 @@ export const SingleProductInformation = ({
         </h1>
       )}
       <div className="mt-[28px]">
-        <p className="text-[14px] uppercase ">{isEditable ? 'Select avaiable sizes' :  'Select size'}</p>
+        <p className="text-[14px] uppercase ">
+          {isEditable ? "Select avaiable sizes" : "Select size"}
+        </p>
         <div className="flex gap-[5px] mt-[10px] flex-wrap">
           {Object.keys(JSON.parse(avaiableSizes)).map((size) => (
             <div
               key={size}
               onClick={() =>
-                avaiableSizesOnChange ?
-                avaiableSizesOnChange(size)
-                :
-                setClothingVariant((prev) => ({ ...prev, size: size }))
+                avaiableSizesOnChange
+                  ? avaiableSizesOnChange(size)
+                  : setClothingVariant((prev) => ({ ...prev, size: size }))
               }
               className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider py-[10px] px-[10px] ${
                 isEditable
-                ? JSON.parse(avaiableSizes)[size]
+                  ? JSON.parse(avaiableSizes)[size]
+                    ? "!text-black !border-black"
+                    : ""
+                  : clothingVariant.size === size
                   ? "!text-black !border-black"
                   : ""
-                : clothingVariant.size === size
-                ? "!text-black !border-black"
-                : ""
               }`}
             >
               {size}
@@ -145,14 +185,14 @@ export const SingleProductInformation = ({
             Price total
           </h3>
           {isEditable ? (
-              <AddProductInput
-                id={"price"}
-                name="price"
-                onChange={onChange ? onChange : undefined}
-                value={price.toString()}
-                placeholder="Price"
-                fontSize="26px"
-                type={'number'}
+            <AddProductInput
+              id={"price"}
+              name="price"
+              onChange={onChange ? onChange : undefined}
+              value={price.toString()}
+              placeholder="Price"
+              fontSize="26px"
+              type={"number"}
             />
           ) : (
             <h2 className="text-[26px] font-bold uppercase select-none">
@@ -188,14 +228,14 @@ export const SingleProductInformation = ({
       <div className="lg:pt-[20px] pt-[40px] lg:pb-[0] pb-[20px] !text-[15px]">
         {isEditable ? (
           <div className="max-w-[550px] h-[300px]">
-          <Textarea
-            id={"description"}
-            name="description"
-            onChange={onChange ? onChange : undefined}
-            value={description}
-            placeholder="Description"
-            paddings="5px 10px"
-            type={'borderless'}
+            <Textarea
+              id={"description"}
+              name="description"
+              onChange={onChange ? onChange : undefined}
+              value={description}
+              placeholder="Description"
+              paddings="5px 10px"
+              type={"borderless"}
             />
           </div>
         ) : (

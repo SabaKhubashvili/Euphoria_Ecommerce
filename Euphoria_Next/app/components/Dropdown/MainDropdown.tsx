@@ -11,6 +11,12 @@ interface Props {
   }[];
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   full?:boolean,
+  paddings?:string,
+  fontSize?:string,
+  bodyFontSize?:string
+  gap?:string,
+  bodyWidth?:string,
+  bodyHeight?:string
 }
 
 export const MainDropdown = ({
@@ -18,7 +24,13 @@ export const MainDropdown = ({
   type,
   content,
   size = 'md',
-  full
+  full,
+  fontSize,
+  paddings,
+  bodyFontSize,
+  gap,
+  bodyWidth,
+  bodyHeight
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -36,14 +48,21 @@ export const MainDropdown = ({
     }
   },[isOpen])
 
+
+
   return (
-    <div className={`relative ${full ? 'w-full' : 'w-fit'}`} ref={ref}>
+    <div className={`relative ${full ? 'w-full' : 'w-fit'}`} ref={ref} style={{fontSize}}>
       <div
+      style={{padding:paddings,gap:gap}}
         className={`flex justify-between items-center cursor-pointer  p-[11px]
         ${
           type === 'primary' 
           ?
           'border-[1px] border-solid border-divider'
+          :
+          type === 'secondary'
+          ?
+          'bg-none'
           :
           'rounded-[6px] bg-white'
         }
@@ -66,20 +85,20 @@ export const MainDropdown = ({
           setIsOpen((prev) => !prev);
         }}
       >
-        <p className={`select-none md:text-[16px] text-[14px] 
+        <p className={`select-none md:text-[16px] text-[14px]  flex text-center items-center
         ${type === 'primary' ? 'text-black' : type === 'secondary' ? 'text-secondaryGray' : ''}`}>{label}</p>
         <div
           className={`${
             isOpen ? "rotate-180" : "rotate-0"
           } transition-transform duration-300`}
         >
-          <Dropdown_Down />
+          <Dropdown_Down isGray={type === 'secondary'} />
         </div>
       </div>
       {isOpen && (
-        <div className="absolute z-10 top-[48px] bg-white w-full left-0 select-none p-[11px] flex flex-col gap-[5px] ">
+        <div className="absolute z-10 top-[48px] bg-white w-full left-0 select-none p-[11px] flex flex-col gap-[5px] leading-5 overflow-y-auto" style={{width:bodyWidth,height:bodyHeight}}>
           {content.map((cont) => (
-            <div className="cursor-pointer" onClick={()=>{
+            <div className="cursor-pointer" style={{fontSize:bodyFontSize}} onClick={()=>{
               cont.onClick(cont.label)
               setIsOpen(false)
             }} key={cont.label}>{cont.label}</div>

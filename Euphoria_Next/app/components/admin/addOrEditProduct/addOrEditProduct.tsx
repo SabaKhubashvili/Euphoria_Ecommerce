@@ -33,6 +33,7 @@ export const AddOrEditProduct = () => {
       images: [],
       category: "65411417880b4cbf8653d9d5",
       advantages: "",
+      brand:'',
     },
     validate:()=>{
 
@@ -78,7 +79,9 @@ export const AddOrEditProduct = () => {
               onChange={formik.handleChange}
               avaiableSizes={JSON.stringify(formik.values.avaiableSizes)}
               avaiableSizesOnChange={avaiableSizesOnChange}
-              category={{ _id: "15", name: "s" }}
+              brand={formik.values.brand}
+              category={{ _id: "15", name: formik.values.category }}
+              categoryOnChange={(val:string)=>formik.setFieldValue('category',val)}
             />
           </div>
         </div>
