@@ -166,7 +166,7 @@ export const AddProductModal = () => {
           name="price"
           placeholder="Price"
           type="third"
-          rightSvg={<Icon svg={WebsiteIcons["Price"]} />}
+          rightSvg={<Icon svg={WebsiteIcons["Price"]} className="flex items-center" />}
           onChange={formik.handleChange}
           feedback={formik.errors.price}
           value={formik.values.price}

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
@@ -16,7 +16,7 @@ const manageAdminActions = (
     </div>
 )
 
-const Product = ({ name, description, image }: productInterface) => {
+const Product = ({ name, description, image }: any) => {
   return (
     <div className="px-2 py-1 flex flex-col gap-[10px] 2xl:w-1/6 xl:w-1/5 md:w-1/4 sm:w-1/3 xs:w-1/2 w-full">
       <div className="relative w-full h-full ">

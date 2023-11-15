@@ -1,12 +1,13 @@
 'use client'
 
 import React, { useState } from 'react'
-import { AboutDresses, BrandFilter, ColorFilter, LengthFilter, PriceSlider, SizeFilter } from './ShopUi'
+import { AboutDresses, BrandFilter, FilterWithCheckboxs,  PriceSlider, SizeFilter } from './ShopUi'
 import { FilterInterface } from '@/app/types'
 import { useFilter } from '@/app/hooks/UseFilter'
 import { FilteredBy } from './FilteredBy'
 import { useMediaQuery } from '@mui/material'
 import { Dropdown_Down } from '@/public/Svg/Icons'
+import { FilterConstant } from '@/app/constants'
 
 export const Filter = () => {
   const {filter,addFilter,deleteFilter,handlePriceChange} = useFilter()
@@ -23,6 +24,12 @@ export const Filter = () => {
   const filterSection = (
         <React.Fragment>
             <FilteredBy />
+              <FilterWithCheckboxs 
+                title={'Category'}
+                values={filter.brand}        
+                onChange={(e)=>handleFilterChange(e,'brand')}
+                data={FilterConstant['length']}
+                />
               <BrandFilter 
                 values={filter.brand}        
                 onChange={(e)=>handleFilterChange(e,'brand')}/>
@@ -30,14 +37,14 @@ export const Filter = () => {
               values={filter.size}        
               onChange={(e)=>handleFilterChange(e,'size')}
               />
-              <LengthFilter
+              {/* <LengthFilter
               values={filter.length}        
               onChange={(e)=>handleFilterChange(e,'length')}
-              />
-              <ColorFilter
+              /> */}
+              {/* <ColorFilter
               values={filter.color}        
               onChange={(e)=>handleFilterChange(e,'color')}
-              />
+              /> */}
               <PriceSlider
               values={['10','500']}        
               onChange={(e)=>handlePriceChange(e)}
@@ -47,7 +54,7 @@ export const Filter = () => {
   );
   
   return (
-    <div className='lg:col-span-2  flex flex-col mb-[30px] gap-[30px] lg:sticky top-[150px] lg:h-[750px] lg:overflow-x-auto lg:pr-[15px]'>
+    <div className='lg:col-span-2  flex flex-col mb-[30px] gap-[30px] lg:sticky top-[150px] lg:h-[750px] lg:overflow-x-auto lg:pr-[15px] select-none'>
       {isAboveLargeScreens ?
       filterSection
         :

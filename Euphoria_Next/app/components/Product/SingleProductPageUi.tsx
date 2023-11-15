@@ -10,17 +10,24 @@ import BaseUrl from "@/app/RestClient/ApiUrls";
 import { getCookies } from "cookies-next";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import { SecondaryInput } from "../Inputs/SecondaryInput";
+import { AuthInput } from "../Inputs/AuthInput";
+import { Textarea } from "../Inputs/Textarea";
+import { AddProductInput } from "../Inputs/AddProductInput";
 
 interface Props {
   _id: number;
   title: string;
   price: number;
   avaiableSizes: string;
+  avaiableSizesOnChange?:(size: any)=>void
   category: {
     name: string;
     _id: string;
   };
-  description:string
+  description: string;
+  isEditable?: boolean;
+  onChange?: (e: React.ChangeEvent) => void;
 }
 
 export const SingleProductInformation = ({
@@ -28,22 +35,29 @@ export const SingleProductInformation = ({
   title,
   price,
   avaiableSizes,
+  avaiableSizesOnChange,
   category,
-  description
+  description,
+  isEditable,
+  onChange,
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [clothingVariant, setClothingVariant] = useState({
     size: "",
   });
-  const router = useRouter()
-  const cookies = getCookies()
-  const addToCart = async() => {
-      await RestClient.putRequest(BaseUrl.addToCart,{
-        productId:_id,
-        quantity:quantity,
-        size:clothingVariant.size || Object.keys(JSON.parse(avaiableSizes))[0]
+  const router = useRouter();
+  const cookies = getCookies();
+  const addToCart = async () => {
+    await RestClient.putRequest(
+      BaseUrl.addToCart,
+      {
+        productId: _id,
+        quantity: quantity,
+        size: clothingVariant.size || Object.keys(JSON.parse(avaiableSizes))[0],
       },
-      cookies.accessToken).then((res)=>{
+      cookies.accessToken
+    )
+      .then((res) => {
         toast.success("Sucesfully placed in cart", {
           position: "top-center",
           autoClose: 2500,
@@ -53,69 +67,63 @@ export const SingleProductInformation = ({
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
-          router.push('/cart')
-      }).catch((err)=>{
-        router.push('/login');
+        });
+        router.push("/cart");
       })
-  }
+      .catch((err) => {
+        router.push("/login");
+      });
+  };
 
   return (
     <React.Fragment>
       <h4 className=" text-gray text-[14px] leading-[48px]">
-        Home / Womens Dress / Angels malu
+        Home / {category.name} / {title}
       </h4>
       <div className=" bg-lightBlue font-bold px-2 py-1 inline uppercase ">
         {/* Brand */}
         {category.name}
       </div>
-      <h1
-        className="max-w-[493px] 2xl:text-[48px] xl:text-[40px] text-[30px] font-medium 
-                2xl:leading-[56px] xl:leading-[50px] md:leading-[35px] lg:mt-0 mt-[10px]"
-      >
-        {/* Title */}
-        {title}
-      </h1>
-      {/* <div className="mt-[28px]">
-        <p className="text-[14px] uppercase ">Select Color</p>
-        <div className="flex gap-[5px] mt-[10px]">
-          <div
-             onClick={()=>setClothingVariant(prev=>({...prev,color:'red'}))}
-            className={`p-[2px]  cursor-pointer ${
-              clothingVariant.color === 'red' && "border-[1px] border-black"
-            }`}
-          >
-            <div className={`w-[15px] h-[15px] bg-red-400`} />
-          </div>
-          <div
-             onClick={()=>setClothingVariant(prev=>({...prev,color:'green'}))}
-            className={`p-[2px]  cursor-pointer ${
-              clothingVariant.color === 'green' && "border-[1px] border-black"
-            }`}
-          >
-            <div className={`w-[15px] h-[15px] bg-green-400`} />
-          </div>
-          <div
-            onClick={()=>setClothingVariant(prev=>({...prev,color:'blue'}))}
-            className={`p-[2px]  cursor-pointer ${
-              clothingVariant.color === 'blue' && "border-[1px] border-black"
-            }`}
-          >
-            <div className={`w-[15px] h-[15px] bg-blue-400`} />
-          </div>
+      {isEditable ? (
+        <div className="mt-[10px]">
+          <AddProductInput
+            id={"title"}
+            name="title"
+            onChange={onChange ? onChange : (e: React.ChangeEvent) => {}}
+            value={title}
+            placeholder="Title"
+            fontSize="48px"
+          />
         </div>
-      </div> */}
+      ) : (
+        <h1
+          className="max-w-[493px] 2xl:text-[48px] xl:text-[40px] text-[30px] font-medium 
+        2xl:leading-[56px] xl:leading-[50px] md:leading-[35px] lg:mt-0 mt-[10px]"
+        >
+          {/* Title */}
+          {title}
+        </h1>
+      )}
       <div className="mt-[28px]">
-        <p className="text-[14px] uppercase ">Select size</p>
+        <p className="text-[14px] uppercase ">{isEditable ? 'Select avaiable sizes' :  'Select size'}</p>
         <div className="flex gap-[5px] mt-[10px] flex-wrap">
           {Object.keys(JSON.parse(avaiableSizes)).map((size) => (
             <div
               key={size}
               onClick={() =>
+                avaiableSizesOnChange ?
+                avaiableSizesOnChange(size)
+                :
                 setClothingVariant((prev) => ({ ...prev, size: size }))
               }
               className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider py-[10px] px-[10px] ${
-                clothingVariant.size === size ? "!text-black !border-black" : ""
+                isEditable
+                ? JSON.parse(avaiableSizes)[size]
+                  ? "!text-black !border-black"
+                  : ""
+                : clothingVariant.size === size
+                ? "!text-black !border-black"
+                : ""
               }`}
             >
               {size}
@@ -132,13 +140,25 @@ export const SingleProductInformation = ({
             max={10}
           />
         </div>
-        <div>
+        <div className={isEditable ? "flex flex-col justify-between" : ""}>
           <h3 className="uppercase text-[14px] font-medium select-none">
             Price total
           </h3>
-          <h2 className="text-[26px] font-bold uppercase select-none">
-            {quantity * price} GEL
-          </h2>
+          {isEditable ? (
+              <AddProductInput
+                id={"price"}
+                name="price"
+                onChange={onChange ? onChange : undefined}
+                value={price.toString()}
+                placeholder="Price"
+                fontSize="26px"
+                type={'number'}
+            />
+          ) : (
+            <h2 className="text-[26px] font-bold uppercase select-none">
+              {quantity * price} GEL
+            </h2>
+          )}
         </div>
       </div>
       <div className="mt-[38px] flex gap-[15px] xs:flex-nowrap flex-wrap">
@@ -165,10 +185,22 @@ export const SingleProductInformation = ({
           <p className="text-gray"> NEW arrivals, Top women</p>
         </div>
       </div>
-      <div className="lg:pt-[20px] pt-[40px] lg:pb-[0] pb-[20px]">
-        <p className="text-gray">
-          {description}
-        </p>
+      <div className="lg:pt-[20px] pt-[40px] lg:pb-[0] pb-[20px] !text-[15px]">
+        {isEditable ? (
+          <div className="max-w-[550px] h-[300px]">
+          <Textarea
+            id={"description"}
+            name="description"
+            onChange={onChange ? onChange : undefined}
+            value={description}
+            placeholder="Description"
+            paddings="5px 10px"
+            type={'borderless'}
+            />
+          </div>
+        ) : (
+          <p className="text-gray">{description}</p>
+        )}
       </div>
     </React.Fragment>
   );
@@ -176,10 +208,10 @@ export const SingleProductInformation = ({
 
 const Details = ({
   aboutProduct,
-  advantages
-}:{
-  aboutProduct:string,
-  advantages:string
+  advantages,
+}: {
+  aboutProduct: string;
+  advantages: string;
 }) => {
   return (
     <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col mt-[25px]">
@@ -187,18 +219,16 @@ const Details = ({
         <div className="flex flex-col gap-[15px]">
           <div className="flex flex-col gap-[10px]">
             <h2 className="uppercase font-medium">ABOUT PRODUCT</h2>
-            <p>
-              {aboutProduct}
-            </p>
+            <p>{aboutProduct}</p>
           </div>
           <div className="flex flex-col gap-[10px]">
-          <h2 className="uppercase font-medium">Advantages</h2>
+            <h2 className="uppercase font-medium">Advantages</h2>
             <ul className="flex flex-col gap-[5px]">
-            {advantages.split('\n').map(advantage=>(
-              <li className="font-light" key={advantage}>
-                {'\n' +advantage}
-              </li>
-            ))}
+              {advantages.split("\n").map((advantage) => (
+                <li className="font-light" key={advantage}>
+                  {"\n" + advantage}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -218,7 +248,7 @@ const Details = ({
   );
 };
 
-const OtherInformation = ({description}:{description:string}) => {
+const OtherInformation = ({ description }: { description: string }) => {
   return (
     <div className="font-light border-t-[1px] border-t-divider mt-[25px] pt-[32px]">
       {description}
@@ -226,7 +256,13 @@ const OtherInformation = ({description}:{description:string}) => {
   );
 };
 
-export const SingleProductDetails = ({aboutProduct,advantages}:{aboutProduct:string,advantages:string}) => {
+export const SingleProductDetails = ({
+  aboutProduct,
+  advantages,
+}: {
+  aboutProduct: string;
+  advantages: string;
+}) => {
   const [openCategories, setOpenCategories] = useState({
     Details: true,
     OtherInformation: false,
@@ -234,22 +270,20 @@ export const SingleProductDetails = ({aboutProduct,advantages}:{aboutProduct:str
 
   return (
     <div className="flex flex-col gap-[10px] mt-[81px]">
-      <div
-        className="bg-[#F8F9FB] px-[27px] py-[25px] "  >
-        <div className="flex items-center justify-between cursor-pointer"
-            onClick={() =>
-              setOpenCategories((prev) => ({
-                ...prev,
-                Details: !prev.Details,
-              }))
-            }
+      <div className="bg-[#F8F9FB] px-[27px] py-[25px] ">
+        <div
+          className="flex items-center justify-between cursor-pointer"
+          onClick={() =>
+            setOpenCategories((prev) => ({
+              ...prev,
+              Details: !prev.Details,
+            }))
+          }
         >
           <h1 className="2xl:text-[24px] xl:text-[22px] lg:text-[20px] select-none">
             Details
           </h1>
-          <div
-            className="transition-all duration-300"
-          >
+          <div className="transition-all duration-300">
             <div className="w-[20px] h-[3px] bg-divider" />
             <div
               className={`w-[20px] h-[3px] bg-divider transition-all duration-300 ${
@@ -260,7 +294,9 @@ export const SingleProductDetails = ({aboutProduct,advantages}:{aboutProduct:str
             />
           </div>
         </div>
-        {openCategories.Details && <Details advantages={advantages} aboutProduct={aboutProduct} />}
+        {openCategories.Details && (
+          <Details advantages={advantages} aboutProduct={aboutProduct} />
+        )}
       </div>
       {/* <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
         <div

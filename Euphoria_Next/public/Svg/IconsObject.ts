@@ -164,7 +164,7 @@ export const WebsiteIcons = {
 </svg>`,
   disabledCart:`  <svg
   xmlns="http://www.w3.org/2000/svg"
-  fill="#000"
+  fill="#8B909A"
   version="1.1"
   viewBox="0 0 91.691 91.691"
   xmlSpace="preserve"

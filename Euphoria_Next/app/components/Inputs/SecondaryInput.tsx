@@ -53,7 +53,7 @@ export const SecondaryInput = ({
             placeholder={placeholder}
           />
           {rightSvg && (
-            <div className="absolute right-1 top-0 bottom-0 flex items-center">
+            <div className="absolute right-1 top-0 bottom-0 ">
               {rightSvg}
             </div>
           )}
@@ -83,7 +83,7 @@ export const SecondaryInput = ({
             placeholder={placeholder}
           />
           {rightSvg && (
-            <div className="absolute right-1 top-0 bottom-0 flex items-center">
+            <div className="absolute right-1 top-0 bottom-0 ">
               {rightSvg}
             </div>
           )}

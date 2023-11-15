@@ -230,8 +230,8 @@ export const Sidebar = ({
           </h1>
         )}
         <div className="px-[14px] flex flex-col gap-[8px]">
-          <div
-            onClick={addProductModalOnOpen}
+          <Link
+            href={'/admin/addProduct'}
             className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] `}
           >
             <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
@@ -240,7 +240,7 @@ export const Sidebar = ({
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p className={"text-[#8B909A] select-none"}>Add Products</p>
             )}
-          </div>
+          </Link>
           <Link
             href={"/admin/products"}
             className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${

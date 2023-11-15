@@ -10,9 +10,12 @@ interface Props{
     id:string,
     disabled?:boolean,
     height?:string
+    paddings?:string
+    placeholder?:string,
+    type?: 'primary' | 'borderless'
 }
 
-export const Textarea = ({onChange,value,feedback,name,id,disabled,height}:Props) => {
+export const Textarea = ({onChange,value,feedback,name,id,disabled,height,paddings,placeholder,type = 'primary'}:Props) => {
   return (
     <div className='h-full w-full'>
       <textarea 
@@ -20,13 +23,14 @@ export const Textarea = ({onChange,value,feedback,name,id,disabled,height}:Props
       name={name}
       onChange={onChange} 
       disabled={disabled}
-      style={{height:`${height}px`}}
+      style={{height:`${height}px`,padding:paddings}}
       className={`w-full outline-none border-[1px] border-solid
       border-secondaryGray p-2 rounded-lg text-secondaryGray
-       transition-opacity duration-300 placeholder:select-none
+       transition-opacity duration-300 placeholder:select-none h-full
       ${disabled && 'opacity-75'}
+      ${type === 'borderless' && '!border-none !bg-transparent'}
       `}
-      placeholder='Description' value={value} />
+      placeholder={placeholder} value={value} />
       {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>}
      </div>
   )

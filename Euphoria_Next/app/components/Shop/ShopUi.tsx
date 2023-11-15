@@ -8,11 +8,62 @@ import { FilterConstant } from "@/app/constants";
 interface Props {
   onChange: (e: string) => void;
   values: string[];
+  data?:any
+  title?:string
 }
 interface PriceProps {
   onChange: (e: number[]) => void;
   values: string[];
 }
+
+export const FilterWithCheckboxs = ({ title,onChange, values , data}: Props) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  return (
+    <div className="flex flex-col gap-[31px]">
+      <div
+        className="flex justify-between items-center cursor-pointer"
+        onClick={() => {
+          setIsOpen((prev) => !prev);
+        }}
+      >
+        <h1 className="2xl:text-[24px] xl:text-[22px]   text-[20px] font-medium">{title}</h1>
+        {isOpen ? (
+          <div className="w-5 cursor-pointer">
+            <MinusIcon />
+          </div>
+        ) : (
+          <div className="w-5 cursor-pointer">
+            <PlusIcon />
+          </div>
+        )}
+      </div>
+      {isOpen && (
+        <div className="flex flex-col gap-[15px]">
+          {data.map((filter:string) => (
+            <div className="flex items-center gap-[9px] cursor-pointer" key={filter} onClick={()=>onChange(filter)}>
+              <input
+                type="checkbox"
+                name=""
+                id=""
+                checked={values.includes(filter)}
+                onChange={() => {
+                  onChange(filter);
+                }}
+              />
+              <p
+                className={`${Roboto.className} text-secondaryBlack text-[14px] uppercase font-medium`}
+              >
+                {filter}
+              </p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
 
 export const BrandFilter = ({ onChange, values }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

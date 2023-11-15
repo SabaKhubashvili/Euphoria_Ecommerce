@@ -15,7 +15,8 @@ interface Props {
   type?: string;
   defaultValue?:string,
   disabled?:boolean,
-  value:string
+  value:string,
+  paddings?:string
 }
 
 export const AuthInput = ({
@@ -29,7 +30,8 @@ export const AuthInput = ({
   type = 'text',
   defaultValue,
   disabled,
-  value
+  value,
+  paddings
 }: Props) => {
   const [currentType,setCurrentType] = useState<string>(type)
  
@@ -62,8 +64,9 @@ export const AuthInput = ({
             type={currentType}
             defaultValue={defaultValue}
             disabled={disabled}
+            style={paddings ? {padding:paddings} : {}}
             className={`
-            w-full px-[16px] py-[10px] border-[1px] border-solid border-divider outline-none
+            w-full  ${ !paddings && 'px-[16px] py-[10px]'} border-[1px] border-solid border-divider outline-none
             ${feedback && "border-rose-500 text-rose-500"}
             ${disabled && 'opacity-75'}
             transition-all duration-200

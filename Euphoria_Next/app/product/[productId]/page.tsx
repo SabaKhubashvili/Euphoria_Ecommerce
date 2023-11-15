@@ -24,7 +24,7 @@ const page = async({ params }: { params: params }) => {
 
   
   return (
-    <main className=" lg:pt-[200px] pt-[150px]">
+    <main className="lg:pt-[200px] pt-[150px]">
       <Container>
         <div className="2xl:mx-[238px] xl:mx-[150px] lg:mx-[100px] md:mx-[50px] sm:mx-[20px] ">
           <div className="grid lg:grid-cols-2 lg:gap-[69px] gap-[20px] ">
