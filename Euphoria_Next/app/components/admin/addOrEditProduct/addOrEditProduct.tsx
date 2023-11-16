@@ -14,7 +14,15 @@ import Image from "next/image";
 import { PageTop } from "../pageTop/PageTop";
 import { Oswald } from "../../assets/Fonts";
 import { useFormik } from "formik";
-export const AddOrEditProduct = () => {
+import { CategoryInterface } from "@/app/types";
+
+interface Props{
+  categories?:CategoryInterface[]
+}
+
+export const AddOrEditProduct = ({categories}:Props) => {
+  
+  
   const formik = useFormik({
     validateOnChange:false,
     initialValues: {
@@ -31,15 +39,15 @@ export const AddOrEditProduct = () => {
         xxl: false,
       },
       images: [],
-      category: "65411417880b4cbf8653d9d5",
+      category: {id:'',name:''},
       advantages: "",
       brand:'',
     },
     validate:()=>{
-
+      
     },
     onSubmit:()=>{
-
+      
     }
   })
   const avaiableSizesOnChange = (size: keyof typeof formik.values.avaiableSizes) => {  
@@ -80,8 +88,9 @@ export const AddOrEditProduct = () => {
               avaiableSizes={JSON.stringify(formik.values.avaiableSizes)}
               avaiableSizesOnChange={avaiableSizesOnChange}
               brand={formik.values.brand}
-              category={{ _id: "15", name: formik.values.category }}
-              categoryOnChange={(val:string)=>formik.setFieldValue('category',val)}
+              category={{ _id: formik.values.category.id, name: formik.values.category.name }}
+              categoryOnChange={(val: {id:string,name:string})=>formik.setFieldValue('category',val)}
+              categories={categories}
             />
           </div>
         </div>

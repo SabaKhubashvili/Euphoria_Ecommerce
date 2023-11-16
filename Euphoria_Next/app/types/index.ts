@@ -16,7 +16,12 @@ export interface FilterInterface{
     color:string[];
     price:string[]
 }
-  
+
+export interface CategoryInterface{
+    _id:string,
+    name:string
+}
+
 export interface ordersInterface{
     id: number;
   created_at: string;

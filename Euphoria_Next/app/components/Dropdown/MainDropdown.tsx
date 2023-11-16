@@ -8,7 +8,7 @@ interface Props {
   content: {
     onClick:(value:string | null | undefined)=>void,
     label:string
-  }[];
+  }[] | null;
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   full?:boolean,
   paddings?:string,
@@ -16,7 +16,9 @@ interface Props {
   bodyFontSize?:string
   gap?:string,
   bodyWidth?:string,
-  bodyHeight?:string
+  bodyHeight?:string,
+  maxHeight?:string
+  top?:string
 }
 
 export const MainDropdown = ({
@@ -30,7 +32,9 @@ export const MainDropdown = ({
   bodyFontSize,
   gap,
   bodyWidth,
-  bodyHeight
+  bodyHeight,
+  maxHeight,
+  top
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -96,8 +100,9 @@ export const MainDropdown = ({
         </div>
       </div>
       {isOpen && (
-        <div className="absolute z-10 top-[48px] bg-white w-full left-0 select-none p-[11px] flex flex-col gap-[5px] leading-5 overflow-y-auto" style={{width:bodyWidth,height:bodyHeight}}>
-          {content.map((cont) => (
+        <div className="absolute z-10 top-[48px] bg-white w-full left-0 select-none p-[11px] flex flex-col gap-[5px] leading-5 overflow-y-auto"
+         style={{width:bodyWidth,height:bodyHeight,maxHeight,top}}>
+          {content?.map((cont) => (
             <div className="cursor-pointer" style={{fontSize:bodyFontSize}} onClick={()=>{
               cont.onClick(cont.label)
               setIsOpen(false)

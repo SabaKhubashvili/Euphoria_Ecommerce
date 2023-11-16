@@ -15,6 +15,7 @@ import { AuthInput } from "../Inputs/AuthInput";
 import { Textarea } from "../Inputs/Textarea";
 import { AddProductInput } from "../Inputs/AddProductInput";
 import { MainDropdown } from "../Dropdown/MainDropdown";
+import { CategoryInterface } from "@/app/types";
 
 interface Props {
   _id: number;
@@ -30,7 +31,11 @@ interface Props {
   isEditable?: boolean;
   onChange?: (e: React.ChangeEvent) => void;
   brand: string;
-  categoryOnChange:(val:string)=>void
+  categoryOnChange:(val:{
+    id:string,
+    name:string
+  })=>void,
+  categories?:CategoryInterface[]
 }
 
 export const SingleProductInformation = ({
@@ -44,7 +49,8 @@ export const SingleProductInformation = ({
   isEditable,
   onChange,
   brand,
-  categoryOnChange
+  categoryOnChange,
+  categories
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [clothingVariant, setClothingVariant] = useState({
@@ -89,19 +95,25 @@ export const SingleProductInformation = ({
         {isEditable ? (
           <MainDropdown
             type="secondary"
-            label={category.name}
-            content={[
-              {
-                label:"Dress",
-                onClick:()=>categoryOnChange('Dress')
-              },
-            ]}
-            bodyHeight="200px"
+            label={category.name} 
+            content={
+             categories ?  categories?.map(category=>(
+                {
+                  label:category.name,
+                  onClick:()=> categoryOnChange({id:category._id,name:category.name})
+                }
+              ))
+              :
+              null
+            }
             bodyFontSize="15px"
             paddings="0px 4px"
             fontSize="10px"
             gap="11px"
+            bodyHeight="fit-content"
+            maxHeight="200px"
             bodyWidth="200px"
+            top='28px'
           />
         ) : (
           category.name

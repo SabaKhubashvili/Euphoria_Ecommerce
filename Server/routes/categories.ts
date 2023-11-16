@@ -8,12 +8,11 @@ const mongoose = require("mongoose");
 
 router.get(
   "/getAll",
-  verifyTokenAndAdminAuthorization,
   async (req: any, res: any) => {
     try {
       const allCategories = await categorySchema.find();
 
-      return res.status(200).json({ allCategories });
+      return res.status(200).json(allCategories);
     } catch (err) {
       return res
         .status(500)
