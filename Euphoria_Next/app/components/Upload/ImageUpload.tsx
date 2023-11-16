@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import Image from "next/image";
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import axios from "axios";
@@ -19,24 +18,24 @@ interface Props {
   disabled?: boolean;
   label: string;
   type?: "main" | "secondary" | "third";
+  styles:any,
 }
 
 export const ImageUpload = ({
   onChange,
-  value,
   disabled,
   label,
   type = "main",
+  styles
 }: Props) => {
   const [isDragging, setIsDragging] = useState(false);
   const [enterCount, setEnterCount] = useState(0);
   const [croppingImage, setCroppingImage] = useState<boolean>(false);
   const [previewImage, setPreviewImage] = useState<any>();
-  const [crop, setCrop] = useState();
   const cropperRef = useRef<ReactCropperElement>(null);
 
   const uploadFileToCloudinary = async (files: FileList | File | null) => {
-
+    if(disabled) return null
     if (files) {
       const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
       const uploadPreset =
@@ -180,8 +179,8 @@ export const ImageUpload = ({
             guides={false}
             src={previewImage}
             ref={cropperRef}
-            initialAspectRatio={9 / 16}
-            aspectRatio={9 / 16}
+            initialAspectRatio={12 / 16}
+            // aspectRatio={12 / 16}
           />
         </div>
         <div
@@ -204,6 +203,7 @@ export const ImageUpload = ({
           />
           {type === "main" ? (
             <label
+            style={styles}
               htmlFor="UploadImage"
               className={`w-full cursor-pointer h-full border-[1px] border-secondaryGray border-solid py-[3rem] px-4 rouned-md flex justify-center items-center
         ${isDragging && " opacity-50  "}

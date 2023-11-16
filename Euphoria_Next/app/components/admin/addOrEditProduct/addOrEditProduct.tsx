@@ -15,6 +15,7 @@ import { PageTop } from "../pageTop/PageTop";
 import { Oswald } from "../../assets/Fonts";
 import { useFormik } from "formik";
 import { CategoryInterface } from "@/app/types";
+import { ImageUpload } from "../../Upload/ImageUpload";
 
 interface Props{
   categories?:CategoryInterface[]
@@ -60,16 +61,33 @@ export const AddOrEditProduct = ({categories}:Props) => {
   return (
     <div>
       <PageTop pageTitle="Add a product" />
-      <div className={`w-full mt-[40px] ${Oswald.className}`}>
+      <div className={`w-full my-[40px] ${Oswald.className}`}>
         <div className="grid lg:grid-cols-2 lg:gap-[69px] gap-[20px] ">
-        <div className="col-span-1 w-full lg:h-[900px]   h-[400px]">
-              <Image
-               src={"/Images/Product/Black_Placeholder.webp"}
-                alt="Product_Image"
-                width={624}
-                height={790}
-                className="w-full object-cover h-full"
-              />
+        <div className="col-span-1 w-full">
+          <div className="h-fit">
+
+          { 
+          formik.values.images.length <= 0
+          ?
+            <ImageUpload
+              label="Upload image"
+              onChange={(val)=>formik.setFieldValue('images',[...formik.values.images,val])}
+              styles={
+                {
+                  minHeight:'800px'
+                }
+              }
+            />
+            :
+            <Image
+            src={formik.values.images[0]}
+            alt="Product_Image"
+            width={624}
+            height={790}
+            className="w-full object-cover h-full"
+            />
+          }
+          </div>
               <div className="flex justify-center items-center gap-[10px] mt-[15px] text-[12px] font-medium">
                 SHARE:
                 <FacebookBlackIcon />
@@ -95,8 +113,10 @@ export const AddOrEditProduct = ({categories}:Props) => {
           </div>
         </div>
         <SingleProductDetails
-          advantages={"product.advantages"}
-          aboutProduct={"product.aboutProduct"}
+          isEditable
+          onChange={formik.handleChange}
+          advantages={formik.values.advantages}
+          aboutProduct={formik.values.aboutProduct}
         />
       </div>
     </div>

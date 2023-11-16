@@ -215,7 +215,7 @@ export const SingleProductInformation = ({
       </div>
       <div className="mt-[38px] flex gap-[15px] xs:flex-nowrap flex-wrap">
         <div className="w-full max-w-[221px] h-[50px]">
-          <MainButton label="Add to bag" onClick={addToCart} small full />
+          <MainButton label="Add to bag" onClick={!isEditable ? addToCart : undefined} small full />
         </div>
         <div className="w-full max-w-[221px] h-[50px]">
           <SecondaryButton
@@ -261,27 +261,60 @@ export const SingleProductInformation = ({
 const Details = ({
   aboutProduct,
   advantages,
+  isEditable,
+  onChange
 }: {
   aboutProduct: string;
   advantages: string;
+  isEditable?:boolean
+  onChange?:(e:React.ChangeEvent)=>void
 }) => {
   return (
     <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col mt-[25px]">
       <div className="flex lg:flex-row flex-col lg:justify-between lg:gap-[52px] gap-[15px]">
-        <div className="flex flex-col gap-[15px]">
+        <div className="flex flex-col gap-[15px] basis-1/2">
           <div className="flex flex-col gap-[10px]">
             <h2 className="uppercase font-medium">ABOUT PRODUCT</h2>
-            <p>{aboutProduct}</p>
+            {
+              isEditable
+              ?
+              <Textarea
+                id="aboutProduct"
+                name="aboutProduct"
+                onChange={onChange}
+                value={aboutProduct}
+                full
+                height={'300'}
+                type='borderless'
+                placeholder="About product"
+              />
+              :
+              <p>{aboutProduct}</p>
+            }
           </div>
           <div className="flex flex-col gap-[10px]">
             <h2 className="uppercase font-medium">Advantages</h2>
-            <ul className="flex flex-col gap-[5px]">
+            { isEditable ?
+              <Textarea
+                id="advantages"
+                name="advantages"
+                onChange={onChange}
+                value={advantages}
+                full
+                height={'300'}
+                type='borderless'
+                placeholder="Advantages"
+              />
+            :
+
+              <ul className="flex flex-col gap-[5px]">
               {advantages.split("\n").map((advantage) => (
                 <li className="font-light" key={advantage}>
                   {"\n" + advantage}
                 </li>
               ))}
             </ul>
+            }
           </div>
         </div>
         <div className="flex flex-col gap-[10px] lg:max-w-[50%]">
@@ -311,9 +344,13 @@ const OtherInformation = ({ description }: { description: string }) => {
 export const SingleProductDetails = ({
   aboutProduct,
   advantages,
+  isEditable,
+  onChange
 }: {
   aboutProduct: string;
   advantages: string;
+  isEditable?:boolean
+  onChange?:(e:React.ChangeEvent)=>void
 }) => {
   const [openCategories, setOpenCategories] = useState({
     Details: true,
@@ -347,7 +384,7 @@ export const SingleProductDetails = ({
           </div>
         </div>
         {openCategories.Details && (
-          <Details advantages={advantages} aboutProduct={aboutProduct} />
+          <Details isEditable onChange={onChange} advantages={advantages} aboutProduct={aboutProduct} />
         )}
       </div>
       {/* <div className="bg-[#F8F9FB] px-[27px] py-[25px]">
