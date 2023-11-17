@@ -16,7 +16,7 @@ interface Props {
   value?: string;
   isAboveSmallScreens?: boolean;
   disabled?: boolean;
-  label: string;
+  label?: string;
   type?: "main" | "secondary" | "third";
   styles:any,
 }
@@ -170,7 +170,7 @@ export const ImageUpload = ({
       onDragEnter={handleDragEnter}
       onDrop={handleDrop}
       onDragLeave={handleDragLeave}
-      className="h-full w-full cursor-pointer"
+      className="cursor-pointer"
     >
       <div className={`${croppingImage ? "inline" : "hidden"} my-[10px] `}>
         <div className="h-full">
@@ -210,12 +210,15 @@ export const ImageUpload = ({
         `}
             >
               <div className="flex flex-col gap-[10px] items-center justify-center">
-                <div className="w-[50px] h-[50px]">
+                <div className="w-[50px]  h-[50px]">
                   <Icon svg={WebsiteIcons["Camera"]} />
                 </div>
-                <h3 className="text-secondaryGray font-bold text-[16px]">
+                {label &&
+
+                  <h3 className="text-secondaryGray font-bold text-[16px]">
                   {isDragging ? "Drop" : label}
                 </h3>
+                }
               </div>
             </label>
           ) : (
