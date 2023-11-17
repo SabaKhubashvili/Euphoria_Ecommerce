@@ -18,7 +18,8 @@ interface Props {
   bodyWidth?:string,
   bodyHeight?:string,
   maxHeight?:string
-  top?:string
+  top?:string,
+  errors?:boolean
 }
 
 export const MainDropdown = ({
@@ -34,7 +35,8 @@ export const MainDropdown = ({
   bodyWidth,
   bodyHeight,
   maxHeight,
-  top
+  top,
+  errors
 }: Props) => {
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -84,19 +86,22 @@ export const MainDropdown = ({
             ? "gap-[80px] "
             : ""
         }
+  
         `}
         onClick={() => {
           setIsOpen((prev) => !prev);
         }}
       >
         <p className={`select-none md:text-[16px] text-[14px]  flex text-center items-center
-        ${type === 'primary' ? 'text-black' : type === 'secondary' ? 'text-secondaryGray' : ''}`}>{label}</p>
+        ${type === 'primary' ? 'text-black' : type === 'secondary' ? 'text-secondaryGray' : ''}
+        ${errors && '!text-rose-500'}
+        `}>{label}</p>
         <div
           className={`${
             isOpen ? "rotate-180" : "rotate-0"
           } transition-transform duration-300`}
         >
-          <Dropdown_Down isGray={type === 'secondary'} />
+          <Dropdown_Down color={errors ? 'red' : 'gray'}  />
         </div>
       </div>
       {isOpen && (

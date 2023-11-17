@@ -54,27 +54,28 @@ router.put(
   "/addProduct",
   verifyTokenAndAdminAuthorization,
   async (req: any, res: any) => {
-    try {
+    // try {
       const {
         title,
         aboutProduct,
         advantages,
-        otherInformation,
+        description,
         images,
-        avaiableSizes,
+        availableSizes,
         price,
-        category  
+        category,
+        brand
       } = req.body;
-
+      
       if (
         !title ||
         !aboutProduct ||
         !advantages ||
-        !otherInformation ||
+        !description ||
         !images ||
-        !avaiableSizes ||
+        !availableSizes ||
         !price ||
-        !category
+        !category || !brand
       ) {
         return res.status(400).json({ error: "All fields are required" });
       }
@@ -82,12 +83,13 @@ router.put(
       const newProduct = new ProductSchema({
         title,
         aboutProduct,
-        otherInformation,
+        description,
         images,
         advantages,
-        avaiableSizes,
-        price:parseInt(price),
-        category
+        availableSizes,
+        price,
+        category,
+        brand
       });
 
       await newProduct.save();
@@ -95,12 +97,12 @@ router.put(
       return res
         .status(200)
         .json({ message: "Product sucesfully placed", success: true });
-    } catch (error) {
+    // } catch (error) {
       return res.status(500).json({
         message: "Something went wrong adding product",
         success: false,
       });
-    }
+    // }
   }
 );          
 

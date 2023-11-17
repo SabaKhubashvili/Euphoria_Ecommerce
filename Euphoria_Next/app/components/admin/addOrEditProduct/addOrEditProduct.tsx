@@ -18,6 +18,10 @@ import { CategoryInterface } from "@/app/types";
 import { ImageUpload } from "../../Upload/ImageUpload";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
+import RestClient from "@/app/RestClient/RequestTypes";
+import { getCookie } from "cookies-next";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { toast } from "react-toastify";
 
 interface Props {
   categories?: CategoryInterface[];
@@ -26,6 +30,8 @@ interface Props {
 export const AddOrEditProduct = ({ categories }: Props) => {
   const [activeImage, setActiveImage] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const formik = useFormik({
     validateOnChange: false,
     initialValues: {
@@ -33,7 +39,7 @@ export const AddOrEditProduct = ({ categories }: Props) => {
       aboutProduct: "",
       description: "",
       price: 0,
-      avaiableSizes: {
+      availableSizes: {
         xs: false,
         sm: false,
         md: false,
@@ -46,22 +52,91 @@ export const AddOrEditProduct = ({ categories }: Props) => {
       advantages: "",
       brand: "",
     },
-    validate: () => {},
-    onSubmit: () => {},
+    validate: (values) => {
+      let errors: any = {};
+      if (!values.title) {
+        errors.title = "Title  is required";
+      }
+      if (!values.price) {
+        errors.price = "Price  is required";
+      }
+      if (!values.category.id) {
+        errors.category = "Category is required";
+      }
+      if (!values.brand) {
+        errors.brand = "Brand  is required";
+      }
+      if (!Object.values(values.availableSizes).some(size => size === true)) {
+        errors.availableSizes = 'Minimum 1 size is required';
+      }
+      if (values.aboutProduct.length < 10) {
+        errors.aboutProduct = " ";
+      }
+      if (values.description.length < 10) {
+        errors.description = " ";
+      }
+      if (values.advantages.length < 10) {
+        errors.advantages = " ";
+      }      
+      if (values.images.length === 0) {
+        errors.images = " ";
+      }      
+      return errors;
+    },
+    onSubmit: (values) => {
+      if(!isSubmitting){
+        console.log(values);
+        
+        setIsSubmitting(true);
+        RestClient.putRequest(
+          BaseUrl.addProduct,
+        { ...values, availableSizes: JSON.stringify(values.availableSizes), category: values.category.id },
+        getCookie("accessToken")
+        )
+        .then((res) => {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+          formik.resetForm();
+        })
+        .catch((err: any) => {
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        })
+        .finally(() => {
+          setIsSubmitting(false);
+        });
+      }
+      },
   });
-  const avaiableSizesOnChange = (
-    size: keyof typeof formik.values.avaiableSizes
+  const availableSizesOnChange = (
+    size: keyof typeof formik.values.availableSizes
   ) => {
-    formik.setFieldValue("avaiableSizes", {
-      ...formik.values.avaiableSizes,
-      [size]: !formik.values.avaiableSizes[size],
+    formik.setFieldValue("availableSizes", {
+      ...formik.values.availableSizes,
+      [size]: !formik.values.availableSizes[size],
     });
   };
 
   return (
     <div>
       <PageTop pageTitle="Add a product" />
-      <div className={`w-full my-[40px] ${Oswald.className}`}>
+      <div className={`w-full my-[40px] ${Oswald.className} ${isSubmitting && 'opacity-75'} transition-opacity duration-300`}>
         <div className="grid lg:grid-cols-2 lg:gap-[69px] gap-[20px] ">
           <div className="col-span-1 w-full">
             <div className="h-fit">
@@ -75,9 +150,16 @@ export const AddOrEditProduct = ({ categories }: Props) => {
                     ]);
                     setIsUploading(false);
                   }}
-                  styles={{
-                    minHeight: "800px",
+                  styles={{ 
+                    height:"900px",
                     width: "100%",
+                    maxWidth:"700px"
+                  }}
+                  errors={formik.errors.images}
+                  parentStyles={{
+                    display:'flex',
+                    justifyContent:'center',
+
                   }}
                 />
               )}
@@ -88,7 +170,7 @@ export const AddOrEditProduct = ({ categories }: Props) => {
                     alt="Product_Image"
                     width={624}
                     height={790}
-                    className="w-full object-cover h-full"
+                    className="w-full object-cover h-[900px] max-w-[700px]"
                   />
                 )}
                 {formik.values.images.length > 0 && (
@@ -135,18 +217,21 @@ export const AddOrEditProduct = ({ categories }: Props) => {
               title={formik.values.title}
               price={formik.values.price}
               description={formik.values.description}
-              onChange={formik.handleChange}
-              avaiableSizes={JSON.stringify(formik.values.avaiableSizes)}
-              avaiableSizesOnChange={avaiableSizesOnChange}
-              brand={formik.values.brand}
+              availableSizes={JSON.stringify(formik.values.availableSizes)}
               category={{
                 _id: formik.values.category.id,
                 name: formik.values.category.name,
               }}
+              brand={formik.values.brand}
+              onChange={formik.handleChange}
+              availableSizesOnChange={availableSizesOnChange}
+              categories={categories}
               categoryOnChange={(val: { id: string; name: string }) =>
                 formik.setFieldValue("category", val)
               }
-              categories={categories}
+              onSubmit={formik.handleSubmit}
+              errors={formik.errors}
+              mainButtonLabel="Place product"
             />
           </div>
         </div>
@@ -155,6 +240,7 @@ export const AddOrEditProduct = ({ categories }: Props) => {
           onChange={formik.handleChange}
           advantages={formik.values.advantages}
           aboutProduct={formik.values.aboutProduct}
+          errors={formik.errors}
         />
       </div>
     </div>

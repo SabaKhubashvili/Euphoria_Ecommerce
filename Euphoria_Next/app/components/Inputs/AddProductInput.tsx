@@ -50,14 +50,14 @@ export const AddProductInput = ({
             style={{fontSize:fontSize, width: variant === 'secondary' ? `${value.length < 14 ? 130 : value.length * 10}px` : 'auto'  }}
             className={`
             border-none outline-none bg-transparent text-black  w-fit 
-            ${feedback && "border-rose-500 text-rose-500"}
+            ${feedback && "text-rose-500 placeholder:text-rose-500"}
             ${disabled && 'opacity-75'}
             ${variant !== 'secondary' && "transition-all duration-200"}
             ${variant === 'secondary' && '!bg-lightBlue font-bold px-2 py-1 inline uppercase w-fit max-w-[300px]'}
             `}
           />
         </div>
-        {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>}
+        {/* {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>} */}
     </div>
   );
 };

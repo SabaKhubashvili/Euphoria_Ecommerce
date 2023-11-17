@@ -18,7 +18,9 @@ interface Props {
   disabled?: boolean;
   label?: string;
   type?: "main" | "secondary" | "third";
-  styles:any,
+  styles: any;
+  errors?: any;
+  parentStyles?:any
 }
 
 export const ImageUpload = ({
@@ -26,7 +28,9 @@ export const ImageUpload = ({
   disabled,
   label,
   type = "main",
-  styles
+  styles,
+  errors,
+  parentStyles
 }: Props) => {
   const [isDragging, setIsDragging] = useState(false);
   const [enterCount, setEnterCount] = useState(0);
@@ -35,12 +39,12 @@ export const ImageUpload = ({
   const cropperRef = useRef<ReactCropperElement>(null);
 
   const uploadFileToCloudinary = async (files: FileList | File | null) => {
-    if(disabled) return null
+    if (disabled) return null;
     if (files) {
       const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
       const uploadPreset =
         process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET || "";
-        
+
       const formData = new FormData();
       if (files instanceof FileList) {
         for (let i = 0; i < files.length; i++) {
@@ -105,44 +109,44 @@ export const ImageUpload = ({
   };
 
   function handleImageFile(imageFile: File) {
-    if (imageFile.type.startsWith('image/')) {
+    if (imageFile.type.startsWith("image/")) {
       const imageUrl = URL.createObjectURL(imageFile);
-  
+
       if (cropperRef && cropperRef.current) {
         setPreviewImage(imageUrl);
         setCroppingImage(true);
       }
     } else {
-      toast.error('Please upload an image', {
-        position: 'top-center',
+      toast.error("Please upload an image", {
+        position: "top-center",
         autoClose: 2500,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: 'light',
+        theme: "light",
       });
     }
   }
-  
+
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
     setEnterCount(0);
-  
+
     if (e.dataTransfer.files.length > 0) {
       handleImageFile(e.dataTransfer.files[0]);
     }
   };
-  
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     e.stopPropagation();
     setIsDragging(false);
     setEnterCount(0);
-  
+
     if (e.target.files && e.target.files.length > 0) {
       handleImageFile(e.target.files[0]);
     }
@@ -157,7 +161,7 @@ export const ImageUpload = ({
             type: "image/jpeg",
           });
           setCroppingImage(false);
-          
+
           uploadFileToCloudinary(croppedFile);
         }
       }, "image/jpeg");
@@ -171,11 +175,13 @@ export const ImageUpload = ({
       onDrop={handleDrop}
       onDragLeave={handleDragLeave}
       className="cursor-pointer"
+      style={parentStyles}
+     
     >
-      <div className={`${croppingImage ? "inline" : "hidden"} my-[10px] `}>
+      <div className={`${croppingImage ? "inline" : "hidden"} my-[10px] flex justify-center items-center flex-col `} >
         <div className="h-full">
           <Cropper
-            style={{ height: "100%", width: "100%" }}
+            style={styles}
             guides={false}
             src={previewImage}
             ref={cropperRef}
@@ -203,22 +209,22 @@ export const ImageUpload = ({
           />
           {type === "main" ? (
             <label
-            style={styles}
+              style={styles}
               htmlFor="UploadImage"
               className={`w-full cursor-pointer h-full border-[1px] border-secondaryGray border-solid py-[3rem] px-4 rouned-md flex justify-center items-center
-        ${isDragging && " opacity-50  "}
+            ${isDragging && " opacity-50"}
+            ${errors && "!border-rose-500 !text-rose-500"}
         `}
             >
               <div className="flex flex-col gap-[10px] items-center justify-center">
                 <div className="w-[50px]  h-[50px]">
                   <Icon svg={WebsiteIcons["Camera"]} />
                 </div>
-                {label &&
-
+                {label && (
                   <h3 className="text-secondaryGray font-bold text-[16px]">
-                  {isDragging ? "Drop" : label}
-                </h3>
-                }
+                    {isDragging ? "Drop" : label}
+                  </h3>
+                )}
               </div>
             </label>
           ) : (

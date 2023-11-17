@@ -16,7 +16,7 @@ interface Props{
     full?:boolean
 }
 
-export const Textarea = ({onChange,value,feedback,name,id,disabled,height,paddings,placeholder,type = 'primary',full}:Props) => {
+export const Textarea = ({onChange,value,feedback,name,id,disabled,height,paddings,placeholder,type = 'primary',full}:Props) => {  
   return (
     <div className='h-full w-full'>
       <textarea 
@@ -31,6 +31,7 @@ export const Textarea = ({onChange,value,feedback,name,id,disabled,height,paddin
       ${disabled && 'opacity-75'}
       ${type === 'borderless' && '!border-none !bg-transparent'}
       ${full && 'w-full h-full'}
+      ${feedback && '!text-rose-500 placeholder:text-rose-500'}
       `}
       placeholder={placeholder} value={value} />
       {feedback && <div className="text-rose-500 mt-[4px]">{feedback}</div>}

@@ -162,11 +162,12 @@ export interface productInterface{
     otherInformation:string,
     advantages:string,
     images:string,
-    avaiableSizes:string
+    availableSizes:string
     category: {
       name: string;
       _id: string;
     };
+    brand:string
 }
 export const products: productInterface[] = [
   {

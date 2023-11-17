@@ -21,8 +21,8 @@ interface Props {
   _id: number;
   title: string;
   price: number;
-  avaiableSizes: string;
-  avaiableSizesOnChange?: (size: any) => void;
+  availableSizes: string;
+  availableSizesOnChange?: (size: any) => void;
   category: {
     name: string;
     _id: string;
@@ -31,26 +31,29 @@ interface Props {
   isEditable?: boolean;
   onChange?: (e: React.ChangeEvent) => void;
   brand: string;
-  categoryOnChange:(val:{
-    id:string,
-    name:string
-  })=>void,
-  categories?:CategoryInterface[]
+  categoryOnChange?: (val: { id: string; name: string }) => void;
+  categories?: CategoryInterface[];
+  onSubmit?: () => void;
+  mainButtonLabel?: string;
+  errors?:any
 }
 
 export const SingleProductInformation = ({
   _id,
   title,
   price,
-  avaiableSizes,
-  avaiableSizesOnChange,
+  availableSizes,
+  availableSizesOnChange,
   category,
   description,
   isEditable,
   onChange,
   brand,
   categoryOnChange,
-  categories
+  categories,
+  onSubmit,
+  mainButtonLabel,
+  errors
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [clothingVariant, setClothingVariant] = useState({
@@ -64,7 +67,7 @@ export const SingleProductInformation = ({
       {
         productId: _id,
         quantity: quantity,
-        size: clothingVariant.size || Object.keys(JSON.parse(avaiableSizes))[0],
+        size: clothingVariant.size || Object.keys(JSON.parse(availableSizes))[0],
       },
       cookies.accessToken
     )
@@ -85,9 +88,7 @@ export const SingleProductInformation = ({
         router.push("/login");
       });
   };
-
-
-
+  
   return (
     <React.Fragment>
       <div className=" text-gray text-[14px] leading-[48px] flex items-center">
@@ -95,16 +96,18 @@ export const SingleProductInformation = ({
         {isEditable ? (
           <MainDropdown
             type="secondary"
-            label={category.name} 
+            label={category.name}
             content={
-             categories ?  categories?.map(category=>(
-                {
-                  label:category.name,
-                  onClick:()=> categoryOnChange({id:category._id,name:category.name})
-                }
-              ))
-              :
-              null
+              categories
+                ? categories?.map((category) => ({
+                    label: category.name,
+                    onClick: () =>
+                     categoryOnChange && categoryOnChange({
+                        id: category._id,
+                        name: category.name,
+                      }),
+                  }))
+                : null
             }
             bodyFontSize="15px"
             paddings="0px 4px"
@@ -113,7 +116,8 @@ export const SingleProductInformation = ({
             bodyHeight="fit-content"
             maxHeight="200px"
             bodyWidth="200px"
-            top='28px'
+            top="28px"
+            errors={errors.category && !category.name}
           />
         ) : (
           category.name
@@ -129,6 +133,7 @@ export const SingleProductInformation = ({
           value={brand}
           placeholder="Brand"
           variant="secondary"
+          feedback={errors?.brand}
         />
       ) : (
         <div className=" bg-lightBlue font-bold px-2 py-1 inline uppercase ">
@@ -144,6 +149,7 @@ export const SingleProductInformation = ({
             value={title}
             placeholder="Title"
             fontSize="48px"
+            feedback={errors?.title}
           />
         </div>
       ) : (
@@ -160,23 +166,25 @@ export const SingleProductInformation = ({
           {isEditable ? "Select avaiable sizes" : "Select size"}
         </p>
         <div className="flex gap-[5px] mt-[10px] flex-wrap">
-          {Object.keys(JSON.parse(avaiableSizes)).map((size) => (
+          {Object.keys(JSON.parse(availableSizes)).map((size) => (
             <div
               key={size}
               onClick={() =>
-                avaiableSizesOnChange
-                  ? avaiableSizesOnChange(size)
+                availableSizesOnChange
+                  ? availableSizesOnChange(size)
                   : setClothingVariant((prev) => ({ ...prev, size: size }))
               }
               className={`cursor-pointer uppercase text-gray text-center border-[1px] border-solid border-divider py-[10px] px-[10px] ${
                 isEditable
-                  ? JSON.parse(avaiableSizes)[size]
+                  ? JSON.parse(availableSizes)[size]
                     ? "!text-black !border-black"
                     : ""
                   : clothingVariant.size === size
                   ? "!text-black !border-black"
                   : ""
-              }`}
+              }
+              ${( errors.availableSizes && !Object.values(JSON.parse(availableSizes)).some(size => size === true)) ? 'border-rose-500 text-rose-500' : ''}
+              `}
             >
               {size}
             </div>
@@ -205,6 +213,7 @@ export const SingleProductInformation = ({
               placeholder="Price"
               fontSize="26px"
               type={"number"}
+              feedback={errors?.price}
             />
           ) : (
             <h2 className="text-[26px] font-bold uppercase select-none">
@@ -215,17 +224,26 @@ export const SingleProductInformation = ({
       </div>
       <div className="mt-[38px] flex gap-[15px] xs:flex-nowrap flex-wrap">
         <div className="w-full max-w-[221px] h-[50px]">
-          <MainButton label="Add to bag" onClick={!isEditable ? addToCart : undefined} small full />
-        </div>
-        <div className="w-full max-w-[221px] h-[50px]">
-          <SecondaryButton
-            label="Save"
-            onClick={() => {}}
+          <MainButton
+            label={
+              isEditable && mainButtonLabel ? mainButtonLabel : "Add to bag"
+            }
+            onClick={!isEditable ? addToCart : onSubmit}
             small
             full
-            leftSvg={<GrayHeartIcon />}
           />
         </div>
+        {!isEditable && (
+          <div className="w-full max-w-[221px] h-[50px]">
+            <SecondaryButton
+              label="Save"
+              onClick={() => {}}
+              small
+              full
+              leftSvg={<GrayHeartIcon />}
+            />
+          </div>
+        )}
       </div>
       <div className="flex flex-wrap gap-[15px] mt-[15px] w-full">
         <div className="flex gap-[10px] uppercase text-[12px] items-center">
@@ -248,6 +266,7 @@ export const SingleProductInformation = ({
               placeholder="Description"
               paddings="5px 10px"
               type={"borderless"}
+              feedback={errors?.description}
             />
           </div>
         ) : (
@@ -262,12 +281,14 @@ const Details = ({
   aboutProduct,
   advantages,
   isEditable,
-  onChange
+  onChange,
+  errors
 }: {
   aboutProduct: string;
   advantages: string;
-  isEditable?:boolean
-  onChange?:(e:React.ChangeEvent)=>void
+  isEditable?: boolean;
+  onChange?: (e: React.ChangeEvent) => void;
+  errors?:any
 }) => {
   return (
     <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col mt-[25px]">
@@ -275,46 +296,45 @@ const Details = ({
         <div className="flex flex-col gap-[15px] basis-1/2">
           <div className="flex flex-col gap-[10px]">
             <h2 className="uppercase font-medium">ABOUT PRODUCT</h2>
-            {
-              isEditable
-              ?
+            {isEditable ? (
               <Textarea
                 id="aboutProduct"
                 name="aboutProduct"
                 onChange={onChange}
                 value={aboutProduct}
                 full
-                height={'300'}
-                type='borderless'
+                height={"300"}
+                type="borderless"
                 placeholder="About product"
+                feedback={errors?.aboutProduct}
               />
-              :
+            ) : (
               <p>{aboutProduct}</p>
-            }
+            )}
           </div>
           <div className="flex flex-col gap-[10px]">
             <h2 className="uppercase font-medium">Advantages</h2>
-            { isEditable ?
+            {isEditable ? (
               <Textarea
                 id="advantages"
                 name="advantages"
                 onChange={onChange}
                 value={advantages}
                 full
-                height={'300'}
-                type='borderless'
+                height={"300"}
+                type="borderless"
                 placeholder="Advantages"
+                feedback={errors?.advantages}
               />
-            :
-
+            ) : (
               <ul className="flex flex-col gap-[5px]">
-              {advantages.split("\n").map((advantage) => (
-                <li className="font-light" key={advantage}>
-                  {"\n" + advantage}
-                </li>
-              ))}
-            </ul>
-            }
+                {advantages.split("\n").map((advantage) => (
+                  <li className="font-light" key={advantage}>
+                    {"\n" + advantage}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-[10px] lg:max-w-[50%]">
@@ -333,24 +353,19 @@ const Details = ({
   );
 };
 
-const OtherInformation = ({ description }: { description: string }) => {
-  return (
-    <div className="font-light border-t-[1px] border-t-divider mt-[25px] pt-[32px]">
-      {description}
-    </div>
-  );
-};
 
 export const SingleProductDetails = ({
   aboutProduct,
   advantages,
   isEditable,
-  onChange
+  onChange,
+  errors
 }: {
   aboutProduct: string;
   advantages: string;
-  isEditable?:boolean
-  onChange?:(e:React.ChangeEvent)=>void
+  isEditable?: boolean;
+  onChange?: (e: React.ChangeEvent) => void;
+  errors?:any
 }) => {
   const [openCategories, setOpenCategories] = useState({
     Details: true,
@@ -384,7 +399,13 @@ export const SingleProductDetails = ({
           </div>
         </div>
         {openCategories.Details && (
-          <Details isEditable onChange={onChange} advantages={advantages} aboutProduct={aboutProduct} />
+          <Details
+            isEditable={isEditable}
+            onChange={onChange}
+            advantages={advantages}
+            aboutProduct={aboutProduct}
+            errors={errors}
+          />
         )}
       </div>
       {/* <div className="bg-[#F8F9FB] px-[27px] py-[25px]">

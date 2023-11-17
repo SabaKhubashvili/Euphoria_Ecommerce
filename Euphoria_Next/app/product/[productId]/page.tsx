@@ -28,7 +28,7 @@ const page = async({ params }: { params: params }) => {
       <Container>
         <div className="2xl:mx-[238px] xl:mx-[150px] lg:mx-[100px] md:mx-[50px] sm:mx-[20px] ">
           <div className="grid lg:grid-cols-2 lg:gap-[69px] gap-[20px] ">
-            <div className="col-span-1 w-full lg:h-[900px]   h-[400px]">
+            <div className="col-span-1 w-full lg:h-[900px]  h-[400px]">
               <Image
                 src={product.images[0]}
                 alt="Product_Image"
@@ -44,7 +44,7 @@ const page = async({ params }: { params: params }) => {
               </div>
             </div>
             <div className="col-span-1 select-none">
-              <SingleProductInformation title={product.title} avaiableSizes={product.avaiableSizes} price={product.price} _id={product._id} category={product.category} description={product.otherInformation} />
+              <SingleProductInformation brand={product.brand} title={product.title} availableSizes={product.availableSizes} price={product.price} _id={product._id} category={product.category} description={product.otherInformation} />
             </div>
           </div>
           <SingleProductDetails advantages={product.advantages} aboutProduct={product.aboutProduct} />
