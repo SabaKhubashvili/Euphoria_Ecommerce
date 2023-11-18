@@ -20,25 +20,25 @@ export const Cart = ({
   totalPrice,
   setTotalPrice,
   coupon,
-  setCoupon
+  setCoupon,
 }: {
   setStep: (value: Steps) => void;
   data: CartInterface;
   totalPrice: number;
   setTotalPrice: (value: number) => void;
-  coupon:{
-    code: string,
-    percentage: number,
-    isDisabled: boolean,
-    success: boolean,
-  },
-  setCoupon:(prev:any)=>void
+  coupon: {
+    code: string;
+    percentage: number;
+    isDisabled: boolean;
+    success: boolean;
+  };
+  setCoupon: (prev: any) => void;
 }) => {
-  const [cartData, setCartData] = useState<CartInterface | any>(data);
-
+  const [cartData, setCartData] = useState<CartInterface>(data);
+  const [isSending, setIsSending] = useState(false);
 
   const filterCartData = (id: string) => {
-    setCartData((prev : CartInterface) => {
+    setCartData((prev: CartInterface) => {
       return {
         ...prev,
         products: prev.products.filter((product) => product._id !== id),
@@ -46,8 +46,9 @@ export const Cart = ({
     });
   };
 
-
   const checkCoupon = async () => {
+    if (isSending) return null;
+    setIsSending(true);
     await RestClient.postRequest(
       BaseUrl.checkCoupon,
       { code: coupon.code },
@@ -55,7 +56,7 @@ export const Cart = ({
     )
       .then((res) => {
         if (res.data.success) {
-          setCoupon((prev:any) => ({
+          setCoupon((prev: any) => ({
             ...prev,
             percentage: res.data.coupon.percentage,
             isDisabled: true,
@@ -85,16 +86,21 @@ export const Cart = ({
           progress: undefined,
           theme: "light",
         });
+      })
+      .finally(() => {
+        setIsSending(false);
       });
   };
 
   const clearCart = async () => {
-    await RestClient.deleteRequest(
-      BaseUrl.clearCart,
-      getCookie("accessToken"),
-    )
+    if (isSending || cartData.products?.length <= 0) return null;
+    setIsSending(true);
+    await RestClient.deleteRequest(BaseUrl.clearCart, getCookie("accessToken"))
       .then((res) => {
-       setCartData(undefined)
+        setCartData((prev) => ({
+          ...prev,
+          products: [],
+        }));
       })
       .catch((err) => {
         toast.error("Something went wrong", {
@@ -107,6 +113,9 @@ export const Cart = ({
           progress: undefined,
           theme: "light",
         });
+      })
+      .finally(() => {
+        setIsSending(false);
       });
   };
 
@@ -135,29 +144,29 @@ export const Cart = ({
             </div>
           </div>
           <div className="border-b-[1px]  border-b-divider border-solid">
-            {cartData?.products.length > 0 ? cartData.products.map((product: CartRowInterface) => (
-              <CartTableRow
-                filterCart={filterCartData}
-                totalPriceOnChange={(num: number) => setTotalPrice(num)}
-                key={product._id}
-                {...product}
-              />
-            ))
-          :
-          <div className="py-[50px] flex justify-center items-center flex-col">
-            <div className="w-[200px] h-[100px]">
-              <Icon
-                svg={WebsiteIcons['disabledCart']}
-                className=""
+            {cartData?.products.length > 0 ? (
+              cartData.products.map((product: CartRowInterface) => (
+                <CartTableRow
+                  filterCart={filterCartData}
+                  totalPriceOnChange={(num: number) => setTotalPrice(num)}
+                  key={product._id}
+                  {...product}
                 />
-            </div>
-              <h1 className="text-[25px] text-secondaryGray">There is nothing in cart</h1>
-          </div>
-          }
+              ))
+            ) : (
+              <div className="py-[50px] flex justify-center items-center flex-col">
+                <div className="w-[200px] h-[100px]">
+                  <Icon svg={WebsiteIcons["disabledCart"]} className="" />
+                </div>
+                <h1 className="text-[25px] text-secondaryGray">
+                  There is nothing in cart
+                </h1>
+              </div>
+            )}
           </div>
         </div>
         <div className="flex justify-end items-center">
-            <GrayButton onClick={clearCart} label="Clear cart" small />
+          <GrayButton onClick={clearCart} label="Clear cart" small />
         </div>
       </div>
       <div className="xl:col-span-1 col-span-3 flex flex-col gap-[24px]">
@@ -173,7 +182,7 @@ export const Cart = ({
                   value={coupon.code}
                   disabled={coupon.isDisabled}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                    setCoupon((prev:any) => ({
+                    setCoupon((prev: any) => ({
                       ...prev,
                       code: e.target.value,
                     }))
@@ -191,8 +200,8 @@ export const Cart = ({
               </div>
               {coupon.success && (
                 <div className="text-green pt-[10px]">
-                  Coupon applied successfully! You've saved {coupon.percentage}% on
-                  your purchase.
+                  Coupon applied successfully! You've saved {coupon.percentage}%
+                  on your purchase.
                 </div>
               )}
             </div>
@@ -292,11 +301,19 @@ export const Cart = ({
             </div>
             <div className="flex justify-between font-medium xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] text-gray">
               <p>Coupon</p>
-              <p>{coupon.success ? (totalPrice * coupon.percentage) / 100 : 0} GEL</p>
+              <p>
+                {coupon.success ? (totalPrice * coupon.percentage) / 100 : 0}{" "}
+                GEL
+              </p>
             </div>
             <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] pt-[10px]">
               <p>Order total</p>
-              <p>{coupon.success ? totalPrice - (totalPrice * coupon.percentage) / 100 : totalPrice} GEL</p>
+              <p>
+                {coupon.success
+                  ? totalPrice - (totalPrice * coupon.percentage) / 100
+                  : totalPrice}{" "}
+                GEL
+              </p>
             </div>
           </div>
           <div className="border-t-[1px]   mt-[18px] h-[60px]">

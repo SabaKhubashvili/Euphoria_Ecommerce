@@ -109,7 +109,9 @@ export const CartPage = ({ data }: Props) => {
           <div className="mt-[55px] max-w-[1600px] mx-auto">
             <Cart
               setStep={(value) => {
-                setStep(value);
+                if(data.products.length > 0){
+                  setStep(value);
+                }
               }}
               data={data}
               totalPrice={totalPrice}
