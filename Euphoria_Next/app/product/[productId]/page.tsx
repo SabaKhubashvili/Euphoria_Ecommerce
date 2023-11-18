@@ -44,10 +44,21 @@ const page = async({ params }: { params: params }) => {
               </div>
             </div>
             <div className="col-span-1 select-none">
-              <SingleProductInformation brand={product.brand} title={product.title} availableSizes={product.availableSizes} price={product.price} _id={product._id} category={product.category} description={product.otherInformation} />
+              <SingleProductInformation
+               _id={product._id} 
+               brand={product.brand} 
+               title={product.title} 
+               availableSizes={product.availableSizes} 
+               price={product.price} 
+               category={product.category}
+               description={product.description} 
+               />
             </div>
           </div>
-          <SingleProductDetails advantages={product.advantages} aboutProduct={product.aboutProduct} />
+          <SingleProductDetails 
+            advantages={product.advantages} 
+            aboutProduct={product.aboutProduct}
+           />
         </div>
         <div className="pt-[66px] pb-[42px]">
           <ProductsByTagSlider

@@ -7,7 +7,7 @@ import { extraLargeScreens, smallScreens } from "@/app/Screens/Screens";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { PublicSans } from "../../assets/Fonts";
 import { CouponModal } from "../modals/CouponModal";
-import { AddProductModal } from "../modals/AddProductModal";
+// import { AddProductModal } from "../modals/AddProductModal";
 import 'swiper/css'
 import { CategoriesModal } from "../modals/CategoriesModal";
 
@@ -41,7 +41,7 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
       className={` ${PublicSans.className} flex gap-[26px] w-full 2xl:justify-start justify-between`}
     >
       <CouponModal/>
-      <AddProductModal/>
+      {/* <AddProductModal/> */}
       <CategoriesModal/>
       {isAboveSmallScreens && (
         <motion.div

@@ -33,7 +33,7 @@ export const CartPage = ({ data }: Props) => {
   const [step, setStep] = useState<Steps>(Steps.Cart);
   const [totalPrice, setTotalPrice] = useState(() => {
     return data.products.reduce((sum, product) => {
-      return sum + product.quantity * product.product.price;
+      return sum + product.quantity * product?.product.price;
     }, 0);
   });
   const [coupon, setCoupon] = useState({

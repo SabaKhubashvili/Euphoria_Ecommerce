@@ -22,7 +22,7 @@ export const ProductComponent = ({
   
   return (
     <Link href={`/product/${_id}`} className={`flex flex-col gap-[14px]  ${usingCol ? 'col-span-1' : 'w-full h-full'}`}>
-      <div className='relative w-full h-full '>
+      <div className='relative w-full h-[425px] '>
         <Image
           width={300}
           height={400}

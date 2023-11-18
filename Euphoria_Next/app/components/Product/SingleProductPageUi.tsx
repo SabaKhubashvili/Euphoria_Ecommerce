@@ -16,6 +16,10 @@ import { Textarea } from "../Inputs/Textarea";
 import { AddProductInput } from "../Inputs/AddProductInput";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { CategoryInterface } from "@/app/types";
+import { ToolTip } from "../Tooltip";
+import { Icon } from "../Icon";
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
+import { Formik, FormikProps } from "formik";
 
 interface Props {
   _id: number;
@@ -35,7 +39,8 @@ interface Props {
   categories?: CategoryInterface[];
   onSubmit?: () => void;
   mainButtonLabel?: string;
-  errors?:any
+  errors?: any;
+  formik?: FormikProps<any>;
 }
 
 export const SingleProductInformation = ({
@@ -53,7 +58,8 @@ export const SingleProductInformation = ({
   categories,
   onSubmit,
   mainButtonLabel,
-  errors
+  errors,
+  formik,
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [clothingVariant, setClothingVariant] = useState({
@@ -67,7 +73,8 @@ export const SingleProductInformation = ({
       {
         productId: _id,
         quantity: quantity,
-        size: clothingVariant.size || Object.keys(JSON.parse(availableSizes))[0],
+        size:
+          clothingVariant.size || Object.keys(JSON.parse(availableSizes))[0],
       },
       cookies.accessToken
     )
@@ -88,7 +95,7 @@ export const SingleProductInformation = ({
         router.push("/login");
       });
   };
-  
+
   return (
     <React.Fragment>
       <div className=" text-gray text-[14px] leading-[48px] flex items-center">
@@ -102,7 +109,8 @@ export const SingleProductInformation = ({
                 ? categories?.map((category) => ({
                     label: category.name,
                     onClick: () =>
-                     categoryOnChange && categoryOnChange({
+                      categoryOnChange &&
+                      categoryOnChange({
                         id: category._id,
                         name: category.name,
                       }),
@@ -117,10 +125,10 @@ export const SingleProductInformation = ({
             maxHeight="200px"
             bodyWidth="200px"
             top="28px"
-            errors={errors.category && !category.name}
+            errors={errors?.category && !category.name}
           />
         ) : (
-          category.name
+          " " + category.name + " "
         )}
         / {title}
       </div>
@@ -183,7 +191,14 @@ export const SingleProductInformation = ({
                   ? "!text-black !border-black"
                   : ""
               }
-              ${( errors.availableSizes && !Object.values(JSON.parse(availableSizes)).some(size => size === true)) ? 'border-rose-500 text-rose-500' : ''}
+              ${
+                errors?.availableSizes &&
+                !Object.values(JSON.parse(availableSizes)).some(
+                  (size) => size === true
+                )
+                  ? "border-rose-500 text-rose-500"
+                  : ""
+              }
               `}
             >
               {size}
@@ -282,13 +297,15 @@ const Details = ({
   advantages,
   isEditable,
   onChange,
-  errors
+  errors,
+  formik,
 }: {
   aboutProduct: string;
   advantages: string;
   isEditable?: boolean;
   onChange?: (e: React.ChangeEvent) => void;
-  errors?:any
+  errors?: any;
+  formik?: FormikProps<any>;
 }) => {
   return (
     <div className=" border-t-[1px] border-t-divider pt-[32px] flex flex-wrap  flex-col mt-[25px]">
@@ -313,7 +330,27 @@ const Details = ({
             )}
           </div>
           <div className="flex flex-col gap-[10px]">
-            <h2 className="uppercase font-medium">Advantages</h2>
+            <div className="flex justify-between">
+              <h2 className="uppercase font-medium">Advantages</h2>
+              <ToolTip tooltipText="Format text">
+                <div className="w-[20px] h-[20px] cursor-pointer">
+                  <Icon
+                    onClick={(e) => {
+                      if (formik?.values.advantages.length > 0) {
+                        e.stopPropagation();
+                        const lines = advantages.split("\n");
+                        let newText = "";
+                        lines.map((line) => {
+                          newText += "◯ " + line + "\n";
+                        });
+                        formik?.setFieldValue("advantages", newText);
+                      }
+                    }}
+                    svg={WebsiteIcons["Dot"]}
+                  />
+                </div>
+              </ToolTip>
+            </div>
             {isEditable ? (
               <Textarea
                 id="advantages"
@@ -353,19 +390,20 @@ const Details = ({
   );
 };
 
-
 export const SingleProductDetails = ({
   aboutProduct,
   advantages,
   isEditable,
   onChange,
-  errors
+  errors,
+  formik,
 }: {
   aboutProduct: string;
   advantages: string;
   isEditable?: boolean;
   onChange?: (e: React.ChangeEvent) => void;
-  errors?:any
+  errors?: any;
+  formik?: FormikProps<any>;
 }) => {
   const [openCategories, setOpenCategories] = useState({
     Details: true,
@@ -405,6 +443,7 @@ export const SingleProductDetails = ({
             advantages={advantages}
             aboutProduct={aboutProduct}
             errors={errors}
+            formik={formik}
           />
         )}
       </div>

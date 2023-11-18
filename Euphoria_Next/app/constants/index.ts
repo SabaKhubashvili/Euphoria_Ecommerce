@@ -158,8 +158,8 @@ export interface productInterface{
     _id:number
     title:string;
     price:number;
+    description:string,
     aboutProduct:string,
-    otherInformation:string,
     advantages:string,
     images:string,
     availableSizes:string

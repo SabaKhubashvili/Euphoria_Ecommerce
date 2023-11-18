@@ -83,7 +83,6 @@ export const CartTableRow = ({
         });
     })
   }
-console.log('productQ: ' + productQuantity +  ' ' + "Innerquantity " + innerQuantity );
 
   return (
     <div className="w-full !py-[24px] flex items-center gap-[34px]" >

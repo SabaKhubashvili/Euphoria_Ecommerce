@@ -19,7 +19,7 @@ import { useMediaQuery } from "@mui/material";
 import { extraLargeScreens } from "@/app/Screens/Screens";
 import Link from "next/link";
 import { useCouponModal } from "@/app/hooks/UseCouponModal";
-import { UseAddProductModal } from "@/app/hooks/UseAddProductModal";
+// import { UseAddProductModal } from "@/app/hooks/UseAddProductModal";
 import { useCategoriesModal } from "@/app/hooks/useCategoriesModal";
 
 export const Sidebar = ({
@@ -33,7 +33,7 @@ export const Sidebar = ({
   const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
   const { onOpen } = useCouponModal();
   const { onOpen:categoriesModalOnOpen } = useCategoriesModal();
-  const { onOpen: addProductModalOnOpen } = UseAddProductModal();
+  // const { onOpen: addProductModalOnOpen } = UseAddProductModal();
 
   const bgRef = useRef<HTMLDivElement>(null);
 

@@ -159,7 +159,6 @@ export const AddOrEditProduct = ({ categories }: Props) => {
                   parentStyles={{
                     display:'flex',
                     justifyContent:'center',
-
                   }}
                 />
               )}
@@ -241,6 +240,7 @@ export const AddOrEditProduct = ({ categories }: Props) => {
           advantages={formik.values.advantages}
           aboutProduct={formik.values.aboutProduct}
           errors={formik.errors}
+          formik={formik}
         />
       </div>
     </div>
