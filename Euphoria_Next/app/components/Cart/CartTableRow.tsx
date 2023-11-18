@@ -85,7 +85,7 @@ export const CartTableRow = ({
   }
 
   return (
-    <div className="w-full !py-[24px] flex items-center gap-[34px]" >
+    <div className="w-full !py-[24px] flex items-center " >
       <div className="inline-flex w-fit gap-[10px] basis-1/6 ">
         <Image
           src={product.images[0]}
@@ -129,7 +129,7 @@ export const CartTableRow = ({
         {product.price * innerQuantity} GEL
       </h1>
       <h1 className="cursor-pointer basis-1/6 " onClick={onDelete}>
-        <Icon svg={WebsiteIcons["redDelete"]} />
+        <Icon svg={WebsiteIcons['GrayBgClose']} />
       </h1>
     </div>
   );

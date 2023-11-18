@@ -14,5 +14,6 @@ export default class BaseUrl{
   static getCart = this.baseUrl + '/api/cart/getAll'
   static deleteCartRow = this.baseUrl + '/api/cart/remove/'
   static updateQuantity = this.baseUrl + '/api/cart/updateQuantity'
+  static clearCart = this.baseUrl + '/api/cart/clear'
   static checkCoupon = this.baseUrl + '/api/coupon/check'
 }

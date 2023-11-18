@@ -76,6 +76,22 @@ router.delete(
   }
 );
 
+router.delete('/clear', verifyTokenAuthorization, async (req:any, res:any) => {
+  const userId = req.user.id;
+
+  try {
+    let cart = await Cart.findOne({ userId });
+    if (!cart) {
+      return res.status(200).json({ message: 'Cart not found', success: false });
+    }
+    cart.products = [];
+    await cart.save();
+    return res.status(200).json({ message: 'Successfully cleared', success: true });
+  } catch (err) {
+    return res.status(500).json({ message: 'Something went wrong', success: false });
+  }
+});
+
 router.post("/updateQuantity",verifyTokenAuthorization, async(req:any,res:any)=>{
   const { cartRowId, updatedQuantity } = req.body;
   const userId = req.user.id;

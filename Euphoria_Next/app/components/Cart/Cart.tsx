@@ -5,7 +5,7 @@ import { SearchInput } from "../Inputs/SearchInput";
 import { GrayButton } from "../buttons/GrayButton";
 import { MainButton } from "../buttons/MainButton";
 import { Steps } from "./CartPage";
-import { CartInterface } from "@/app/types";
+import { CartInterface, CartRowInterface } from "@/app/types";
 import { CartTableRow } from "./CartTableRow";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
@@ -34,11 +34,11 @@ export const Cart = ({
   },
   setCoupon:(prev:any)=>void
 }) => {
-  const [cartData, setCartData] = useState<CartInterface>(data);
+  const [cartData, setCartData] = useState<CartInterface | any>(data);
 
 
   const filterCartData = (id: string) => {
-    setCartData((prev) => {
+    setCartData((prev : CartInterface) => {
       return {
         ...prev,
         products: prev.products.filter((product) => product._id !== id),
@@ -75,7 +75,29 @@ export const Cart = ({
         }
       })
       .catch((err) => {
-        toast.success("Something went wrong", {
+        toast.error("Something went wrong", {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
+      });
+  };
+
+  const clearCart = async () => {
+    await RestClient.deleteRequest(
+      BaseUrl.clearCart,
+      getCookie("accessToken"),
+    )
+      .then((res) => {
+       setCartData(undefined)
+      })
+      .catch((err) => {
+        toast.error("Something went wrong", {
           position: "top-center",
           autoClose: 2500,
           hideProgressBar: false,
@@ -113,7 +135,7 @@ export const Cart = ({
             </div>
           </div>
           <div className="border-b-[1px]  border-b-divider border-solid">
-            {cartData.products.length > 0 ? cartData.products.map((product) => (
+            {cartData?.products.length > 0 ? cartData.products.map((product: CartRowInterface) => (
               <CartTableRow
                 filterCart={filterCartData}
                 totalPriceOnChange={(num: number) => setTotalPrice(num)}
@@ -133,6 +155,9 @@ export const Cart = ({
           </div>
           }
           </div>
+        </div>
+        <div className="flex justify-end items-center">
+            <GrayButton onClick={clearCart} label="Clear cart" small />
         </div>
       </div>
       <div className="xl:col-span-1 col-span-3 flex flex-col gap-[24px]">
