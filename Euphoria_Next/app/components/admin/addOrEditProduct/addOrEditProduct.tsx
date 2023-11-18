@@ -66,8 +66,8 @@ export const AddOrEditProduct = ({ categories }: Props) => {
       if (!values.brand) {
         errors.brand = "Brand  is required";
       }
-      if (!Object.values(values.availableSizes).some(size => size === true)) {
-        errors.availableSizes = 'Minimum 1 size is required';
+      if (!Object.values(values.availableSizes).some((size) => size === true)) {
+        errors.availableSizes = "Minimum 1 size is required";
       }
       if (values.aboutProduct.length < 10) {
         errors.aboutProduct = " ";
@@ -77,52 +77,56 @@ export const AddOrEditProduct = ({ categories }: Props) => {
       }
       if (values.advantages.length < 10) {
         errors.advantages = " ";
-      }      
+      }
       if (values.images.length === 0) {
         errors.images = " ";
-      }      
+      }
       return errors;
     },
     onSubmit: (values) => {
-      if(!isSubmitting){
+      if (!isSubmitting) {
         console.log(values);
-        
+
         setIsSubmitting(true);
         RestClient.putRequest(
           BaseUrl.addProduct,
-        { ...values, availableSizes: JSON.stringify(values.availableSizes), category: values.category.id },
-        getCookie("accessToken")
+          {
+            ...values,
+            availableSizes: JSON.stringify(values.availableSizes),
+            category: values.category.id,
+          },
+          getCookie("accessToken")
         )
-        .then((res) => {
-          toast.success(res.data.message, {
-            position: "top-center",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
+          .then((res) => {
+            toast.success(res.data.message, {
+              position: "top-center",
+              autoClose: 2500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+            formik.resetForm();
+          })
+          .catch((err: any) => {
+            toast.error(err.response.data.message, {
+              position: "top-center",
+              autoClose: 2500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          })
+          .finally(() => {
+            setIsSubmitting(false);
           });
-          formik.resetForm();
-        })
-        .catch((err: any) => {
-          toast.error(err.response.data.message, {
-            position: "top-center",
-            autoClose: 2500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        })
-        .finally(() => {
-          setIsSubmitting(false);
-        });
       }
-      },
+    },
   });
   const availableSizesOnChange = (
     size: keyof typeof formik.values.availableSizes
@@ -132,11 +136,14 @@ export const AddOrEditProduct = ({ categories }: Props) => {
       [size]: !formik.values.availableSizes[size],
     });
   };
-
   return (
     <div>
       <PageTop pageTitle="Add a product" />
-      <div className={`w-full my-[40px] ${Oswald.className} ${isSubmitting && 'opacity-75'} transition-opacity duration-300`}>
+      <div
+        className={`w-full my-[40px] ${Oswald.className} ${
+          isSubmitting && "opacity-75"
+        } transition-opacity duration-300`}
+      >
         <div className="grid lg:grid-cols-2 lg:gap-[69px] gap-[20px] ">
           <div className="col-span-1 w-full">
             <div className="h-fit">
@@ -150,15 +157,15 @@ export const AddOrEditProduct = ({ categories }: Props) => {
                     ]);
                     setIsUploading(false);
                   }}
-                  styles={{ 
-                    height:"900px",
+                  styles={{
+                    height: "900px",
                     width: "100%",
-                    maxWidth:"700px"
+                    maxWidth: "700px",
                   }}
                   errors={formik.errors.images}
                   parentStyles={{
-                    display:'flex',
-                    justifyContent:'center',
+                    display: "flex",
+                    justifyContent: "center",
                   }}
                 />
               )}
@@ -222,24 +229,20 @@ export const AddOrEditProduct = ({ categories }: Props) => {
                 name: formik.values.category.name,
               }}
               brand={formik.values.brand}
-              onChange={formik.handleChange}
               availableSizesOnChange={availableSizesOnChange}
               categories={categories}
               categoryOnChange={(val: { id: string; name: string }) =>
                 formik.setFieldValue("category", val)
               }
-              onSubmit={formik.handleSubmit}
-              errors={formik.errors}
               mainButtonLabel="Place product"
+              formik={formik}
             />
           </div>
         </div>
         <SingleProductDetails
           isEditable
-          onChange={formik.handleChange}
           advantages={formik.values.advantages}
           aboutProduct={formik.values.aboutProduct}
-          errors={formik.errors}
           formik={formik}
         />
       </div>

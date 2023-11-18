@@ -1,11 +1,12 @@
 'use client'
 
+import { FormikErrors } from 'formik'
 import React from 'react'
 
 interface Props{
     onChange?:(e:React.ChangeEvent<HTMLTextAreaElement>)=>void,
     value?:string,
-    feedback?:string
+    feedback?: any
     name:string,
     id:string,
     disabled?:boolean,

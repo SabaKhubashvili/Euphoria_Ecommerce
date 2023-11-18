@@ -9,7 +9,7 @@ interface Props {
   name: string;
   placeholder: string;
   onChange?: (e: React.ChangeEvent) => void;
-  feedback?: string;
+  feedback?: any;
   defaultValue?:string,
   disabled?:boolean,
   value:string,

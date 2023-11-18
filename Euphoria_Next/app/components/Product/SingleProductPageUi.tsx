@@ -33,13 +33,10 @@ interface Props {
   };
   description: string;
   isEditable?: boolean;
-  onChange?: (e: React.ChangeEvent) => void;
   brand: string;
   categoryOnChange?: (val: { id: string; name: string }) => void;
   categories?: CategoryInterface[];
-  onSubmit?: () => void;
   mainButtonLabel?: string;
-  errors?: any;
   formik?: FormikProps<any>;
 }
 
@@ -52,13 +49,10 @@ export const SingleProductInformation = ({
   category,
   description,
   isEditable,
-  onChange,
   brand,
   categoryOnChange,
   categories,
-  onSubmit,
   mainButtonLabel,
-  errors,
   formik,
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
@@ -125,7 +119,7 @@ export const SingleProductInformation = ({
             maxHeight="200px"
             bodyWidth="200px"
             top="28px"
-            errors={errors?.category && !category.name}
+            errors={!!(formik && formik.errors.category && !category.name)}
           />
         ) : (
           " " + category.name + " "
@@ -137,11 +131,11 @@ export const SingleProductInformation = ({
         <AddProductInput
           id={"brand"}
           name="brand"
-          onChange={onChange ? onChange : (e: React.ChangeEvent) => {}}
+          onChange={formik?.handleChange }
           value={brand}
           placeholder="Brand"
           variant="secondary"
-          feedback={errors?.brand}
+          feedback={formik?.errors.brand}
         />
       ) : (
         <div className=" bg-lightBlue font-bold px-2 py-1 inline uppercase ">
@@ -153,11 +147,11 @@ export const SingleProductInformation = ({
           <AddProductInput
             id={"title"}
             name="title"
-            onChange={onChange ? onChange : (e: React.ChangeEvent) => {}}
+            onChange={formik?.handleChange}
             value={title}
             placeholder="Title"
             fontSize="48px"
-            feedback={errors?.title}
+            feedback={formik?.errors.title}
           />
         </div>
       ) : (
@@ -192,7 +186,7 @@ export const SingleProductInformation = ({
                   : ""
               }
               ${
-                errors?.availableSizes &&
+                formik?.errors.availableSizes &&
                 !Object.values(JSON.parse(availableSizes)).some(
                   (size) => size === true
                 )
@@ -223,12 +217,12 @@ export const SingleProductInformation = ({
             <AddProductInput
               id={"price"}
               name="price"
-              onChange={onChange ? onChange : undefined}
+              onChange={formik?.handleChange}
               value={price.toString()}
               placeholder="Price"
               fontSize="26px"
               type={"number"}
-              feedback={errors?.price}
+              feedback={formik?.errors.price}
             />
           ) : (
             <h2 className="text-[26px] font-bold uppercase select-none">
@@ -243,7 +237,7 @@ export const SingleProductInformation = ({
             label={
               isEditable && mainButtonLabel ? mainButtonLabel : "Add to bag"
             }
-            onClick={!isEditable ? addToCart : onSubmit}
+            onClick={!isEditable ? addToCart : formik?.handleSubmit}
             small
             full
           />
@@ -276,12 +270,12 @@ export const SingleProductInformation = ({
             <Textarea
               id={"description"}
               name="description"
-              onChange={onChange ? onChange : undefined}
+              onChange={formik?.handleChange}
               value={description}
               placeholder="Description"
               paddings="5px 10px"
               type={"borderless"}
-              feedback={errors?.description}
+              feedback={formik?.errors.description}
             />
           </div>
         ) : (
@@ -296,15 +290,11 @@ const Details = ({
   aboutProduct,
   advantages,
   isEditable,
-  onChange,
-  errors,
   formik,
 }: {
   aboutProduct: string;
   advantages: string;
   isEditable?: boolean;
-  onChange?: (e: React.ChangeEvent) => void;
-  errors?: any;
   formik?: FormikProps<any>;
 }) => {
   return (
@@ -317,13 +307,13 @@ const Details = ({
               <Textarea
                 id="aboutProduct"
                 name="aboutProduct"
-                onChange={onChange}
+                onChange={formik?.handleChange}
                 value={aboutProduct}
                 full
                 height={"300"}
                 type="borderless"
                 placeholder="About product"
-                feedback={errors?.aboutProduct}
+                feedback={formik?.errors.aboutProduct}
               />
             ) : (
               <p>{aboutProduct}</p>
@@ -355,13 +345,13 @@ const Details = ({
               <Textarea
                 id="advantages"
                 name="advantages"
-                onChange={onChange}
+                onChange={formik?.handleChange}
                 value={advantages}
                 full
                 height={"300"}
                 type="borderless"
                 placeholder="Advantages"
-                feedback={errors?.advantages}
+                feedback={formik?.errors.advantages}
               />
             ) : (
               <ul className="flex flex-col gap-[5px]">
@@ -394,15 +384,11 @@ export const SingleProductDetails = ({
   aboutProduct,
   advantages,
   isEditable,
-  onChange,
-  errors,
   formik,
 }: {
   aboutProduct: string;
   advantages: string;
   isEditable?: boolean;
-  onChange?: (e: React.ChangeEvent) => void;
-  errors?: any;
   formik?: FormikProps<any>;
 }) => {
   const [openCategories, setOpenCategories] = useState({
@@ -439,10 +425,8 @@ export const SingleProductDetails = ({
         {openCategories.Details && (
           <Details
             isEditable={isEditable}
-            onChange={onChange}
             advantages={advantages}
             aboutProduct={aboutProduct}
-            errors={errors}
             formik={formik}
           />
         )}
