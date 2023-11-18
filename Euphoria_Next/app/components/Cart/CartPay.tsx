@@ -11,17 +11,18 @@ import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
 import { getCookie } from "cookies-next";
 import { CartRowInterface } from "@/app/types";
+import { useCartStore } from "@/app/hooks/useCartData";
 
 interface Props {
   setStep: () => void;
   paymentAmount: number;
-  products:CartRowInterface[],
   adressInfo:any
 }
 
 
-export const CartPay = ({ setStep,  paymentAmount, products,adressInfo }: Props) => {
+export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
   const jwt:any = jwtDecode(getCookie('accessToken') || '');
+  const { cartData: { products } } = useCartStore();
 
   const paypalCreateOrder = async () => {
     try {

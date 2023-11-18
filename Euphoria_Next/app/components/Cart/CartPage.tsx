@@ -11,6 +11,7 @@ import { CartAdressInfo } from "./CartAdressInfo";
 import { CartPay } from "./CartPay";
 import { CartDone } from "./CartDone";
 import { CartInterface } from "@/app/types";
+import { useCartStore } from "@/app/hooks/useCartData";
 
 export enum Steps {
   Cart = 0,
@@ -30,6 +31,7 @@ interface Props {
 }
 
 export const CartPage = ({ data }: Props) => {
+  const { setCartData } = useCartStore();
   const [step, setStep] = useState<Steps>(Steps.Cart);
   const [totalPrice, setTotalPrice] = useState(() => {
     return data.products.reduce((sum, product) => {
@@ -56,35 +58,38 @@ export const CartPage = ({ data }: Props) => {
     validate: (values) => {
       const errors: any = {};
       const georgianPhoneNumberRegex = /^(5|5{2})\d{8}$/;
-
+      
       if (values.email.length === 0) {
         errors.email = "Email is required";
       } else if (
         !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      ) {
-        errors.email = "Invalid email address";
-      }
-      if (values.firstName.length === 0) {
-        errors.firstName = "First name is required";
-      }
-      if (values.streetAdress.length === 0) {
-        errors.streetAdress = "Street address is required";
-      }
-      if (values.city.length === 0) {
-        errors.city = "City is required";
-      }
-      if (values.phone.length === 0) {
-        errors.phone = "Phone number is required";
-      } else if (!georgianPhoneNumberRegex.test(values.phone)) {
-        errors.phone = "Invalid phone format";
-      }
-      return errors;
-    },
-    onSubmit: (values) => {
-      setStep(Steps.Payment);
+        ) {
+          errors.email = "Invalid email address";
+        }
+        if (values.firstName.length === 0) {
+          errors.firstName = "First name is required";
+        }
+        if (values.streetAdress.length === 0) {
+          errors.streetAdress = "Street address is required";
+        }
+        if (values.city.length === 0) {
+          errors.city = "City is required";
+        }
+        if (values.phone.length === 0) {
+          errors.phone = "Phone number is required";
+        } else if (!georgianPhoneNumberRegex.test(values.phone)) {
+          errors.phone = "Invalid phone format";
+        }
+        return errors;
+      },
+      onSubmit: (values) => {
+        setStep(Steps.Payment);
     },
   });
   
+  React.useEffect(()=>{
+    setCartData({...data})
+  },[data])
   const handleNextButton = useCallback(() => {
     window.scrollTo({
       top: 0,
@@ -95,6 +100,7 @@ export const CartPage = ({ data }: Props) => {
       setStep((prev) => prev + 1);
     }
   }, [step, formik]);
+
 
   return (
     <div className="max-w-[1400px] mx-auto mb-[150px]">
@@ -113,13 +119,13 @@ export const CartPage = ({ data }: Props) => {
                   setStep(value);
                 }
               }}
-              data={data}
               totalPrice={totalPrice}
               setTotalPrice={(value: number) => {
                 setTotalPrice(value);
               }}
               coupon={coupon}
               setCoupon={setCoupon}
+              data={data}
             />
           </div>
         </div>
@@ -207,7 +213,6 @@ export const CartPage = ({ data }: Props) => {
               setFieldValue={(field: string, value: string) =>
                 formik.setFieldValue(field, value)
               }
-              products={data.products}
             />
           ) : step === Steps.Payment ? (
             <CartPay
@@ -215,7 +220,6 @@ export const CartPage = ({ data }: Props) => {
                 setStep(Steps.Done);
               }}
               paymentAmount={coupon.success ? totalPrice - (totalPrice * coupon.percentage) / 100  : totalPrice}
-              products={data.products}
               adressInfo={
                 {
                   email:formik.values.email,

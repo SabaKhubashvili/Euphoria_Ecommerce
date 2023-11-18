@@ -5,6 +5,8 @@ import RestClient from "../RestClient/RequestTypes";
 import BaseUrl from "../RestClient/ApiUrls";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { useCartStore } from "../hooks/useCartData";
+import { CartInterface } from "../types";
 
 export const metadata = {
   title: "Cart",
@@ -13,7 +15,7 @@ export const metadata = {
 
 const Page = async () => {
   try {
-    const cartData = await RestClient.GetRequest(
+    const { data }: { data: CartInterface } = await RestClient.GetRequest(
       BaseUrl.getCart,
       cookies().get("accessToken")?.value
     );
@@ -21,7 +23,7 @@ const Page = async () => {
     return (
       <main className=" pt-[129px]">
         <Container>
-          <CartPage data={cartData.data} />
+          <CartPage data={data} />
         </Container>
       </main>
     );

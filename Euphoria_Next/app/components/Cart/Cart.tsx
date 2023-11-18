@@ -13,17 +13,17 @@ import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
+import { useCartStore } from "@/app/hooks/useCartData";
 
 export const Cart = ({
   setStep,
-  data,
   totalPrice,
   setTotalPrice,
   coupon,
   setCoupon,
+  data
 }: {
   setStep: (value: Steps) => void;
-  data: CartInterface;
   totalPrice: number;
   setTotalPrice: (value: number) => void;
   coupon: {
@@ -33,7 +33,9 @@ export const Cart = ({
     success: boolean;
   };
   setCoupon: (prev: any) => void;
+  data:CartInterface
 }) => {
+
   const [cartData, setCartData] = useState<CartInterface>(data);
   const [isSending, setIsSending] = useState(false);
 
@@ -101,6 +103,7 @@ export const Cart = ({
           ...prev,
           products: [],
         }));
+        setTotalPrice(0)
       })
       .catch((err) => {
         toast.error("Something went wrong", {
