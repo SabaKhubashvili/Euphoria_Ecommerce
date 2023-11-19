@@ -11,7 +11,9 @@ interface FilterStore {
   handlePriceChange: (e:number[]) => void,
   resetFilter:()=>void
   priceFrom:'low' | 'high' | null,
-  setPriceSort:(value: 'low' | 'high')=> void
+  setPriceSort:(value: 'low' | 'high')=> void,
+  title:string,
+  setTitle:(val:string)=>void
 }
 
 export const useFilter = create<FilterStore>((set) => ({
@@ -22,6 +24,7 @@ export const useFilter = create<FilterStore>((set) => ({
     color: [],
     price:[]
   },
+  title:'',
   priceFrom:null,
   addFilter: (key, value) => {
     set((state) => ({
@@ -62,5 +65,10 @@ export const useFilter = create<FilterStore>((set) => ({
     set(({
         priceFrom:price
     }))
-}
+},
+  setTitle:(val:string)=>{
+    set(({
+      title:val
+    }))
+  }
 }));

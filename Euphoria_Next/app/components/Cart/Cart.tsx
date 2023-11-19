@@ -168,9 +168,12 @@ export const Cart = ({
             )}
           </div>
         </div>
-        <div className="flex justify-end items-center">
+        {data.products.length > 0 &&
+
+          <div className="flex justify-end items-center">
           <GrayButton onClick={clearCart} label="Clear cart" small />
         </div>
+        }
       </div>
       <div className="xl:col-span-1 col-span-3 flex flex-col gap-[24px]">
         <div className="w-full border-[2px] border-solid border-divider bg-lightBlue pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">

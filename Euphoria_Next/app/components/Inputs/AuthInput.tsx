@@ -9,14 +9,15 @@ interface Props {
   label?: string;
   name: string;
   placeholder: string;
-  onChange: (e: React.ChangeEvent) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   feedback?: string;
   required?: boolean;
   type?: string;
   defaultValue?:string,
   disabled?:boolean,
   value:string,
-  paddings?:string
+  paddings?:string,
+  style?:any
 }
 
 export const AuthInput = ({
@@ -31,7 +32,8 @@ export const AuthInput = ({
   defaultValue,
   disabled,
   value,
-  paddings
+  paddings,
+  style
 }: Props) => {
   const [currentType,setCurrentType] = useState<string>(type)
  
@@ -43,11 +45,12 @@ export const AuthInput = ({
 
   return (
     <div
-      className={`flex justify-between items-start sm:flex-row flex-col w-full `}
+      className={`${label && 'flex justify-between items-start sm:flex-row flex-col'} w-full`}
+      style={style}
     >
       {label && (
         <p
-          className={`text-[16px] mt-[2px] text-secondaryBlack leading-[20px] xs:mb-0 mb-2 ${Roboto.className} `}
+          className={`text-[16px] mt-[2px] text-secondaryBlack leading-[20px] xs:mb-0 mb-2 font-medium ${Roboto.className} `}
         >
           {label}
           {required && <span className="text-red-500 ml-[10px]">*</span>}

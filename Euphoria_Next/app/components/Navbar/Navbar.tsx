@@ -32,10 +32,8 @@ export const Navbar = () => {
               >
                 <Logo />
               </Link>
-              <div className="2xl:basis-[65%] xl:basis-[75%] lg:basis-[85%] flex justify-between ">
                 {isAboveLargeScreens && <BigScreenNavLinks />}
                 <Menu />
-              </div>
             </div>
           </Container>
         </div>

@@ -10,6 +10,8 @@ import { usePagination } from "@/app/hooks/UsePagination";
 import { useFilter } from "@/app/hooks/UseFilter";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { largeScreens } from "@/app/Screens/Screens";
+import { AuthInput } from "../Inputs/AuthInput";
+import { GrayButton } from "../buttons/GrayButton";
 
 interface Props {
   currentProducts: typeof products | null;
@@ -26,7 +28,7 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
   } = usePagination();
   const maxNumber = Math.ceil(productsLength / productPerPage);
   const isAboveLargeScreens = useMediaQuery(largeScreens);
-  const { setPriceSort, priceFrom } = useFilter();
+  const { setPriceSort, priceFrom, setTitle,title } = useFilter();
   const handleNextPage = useCallback(() => {
     if (currentPage < maxNumber) {
       nextPage();
@@ -47,6 +49,17 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
 
   return (
     <section className="flex flex-col gap-[20px] w-full pl-[15px] ">
+      <div className="w-full flex">
+       <AuthInput 
+       label="search" 
+       name="" 
+       placeholder="" 
+       id="" 
+       onChange={(e)=>{setTitle(e.target.value)}} value={title} style={{
+        flexDirection:'column',
+        gap:'5px',
+       }}/>
+      </div>
       <div className="flex justify-between  sm:flex-row flex-col sm:items-center items-start gap-[10px]">
         <div className="flex gap-[5px] items-center">
           <div className="cursor-pointer" onClick={handlePrevPage}>

@@ -61,7 +61,10 @@ export const SingleProductInformation = ({
   });
   const router = useRouter();
   const cookies = getCookies();
+  const [isLoading, setIsLoading] = useState(false);
   const addToCart = async () => {
+    if (isLoading) return null;
+    setIsLoading(true);
     await RestClient.putRequest(
       BaseUrl.addToCart,
       {
@@ -87,6 +90,9 @@ export const SingleProductInformation = ({
       })
       .catch((err) => {
         router.push("/login");
+      })
+      .finally(() => {
+        setIsLoading(true);
       });
   };
 
@@ -131,7 +137,7 @@ export const SingleProductInformation = ({
         <AddProductInput
           id={"brand"}
           name="brand"
-          onChange={formik?.handleChange }
+          onChange={formik?.handleChange}
           value={brand}
           placeholder="Brand"
           variant="secondary"
@@ -322,24 +328,26 @@ const Details = ({
           <div className="flex flex-col gap-[10px]">
             <div className="flex justify-between">
               <h2 className="uppercase font-medium">Advantages</h2>
-              <ToolTip tooltipText="Format text">
-                <div className="w-[20px] h-[20px] cursor-pointer">
-                  <Icon
-                    onClick={(e) => {
-                      if (formik?.values.advantages.length > 0) {
-                        e.stopPropagation();
-                        const lines = advantages.split("\n");
-                        let newText = "";
-                        lines.map((line) => {
-                          newText += "◯ " + line + "\n";
-                        });
-                        formik?.setFieldValue("advantages", newText);
-                      }
-                    }}
-                    svg={WebsiteIcons["Dot"]}
-                  />
-                </div>
-              </ToolTip>
+              {isEditable && (
+                <ToolTip tooltipText="Format text">
+                  <div className="w-[20px] h-[20px] cursor-pointer">
+                    <Icon
+                      onClick={(e) => {
+                        if (formik?.values.advantages.length > 0) {
+                          e.stopPropagation();
+                          const lines = advantages.split("\n");
+                          let newText = "";
+                          lines.map((line) => {
+                            newText += "◯ " + line + "\n";
+                          });
+                          formik?.setFieldValue("advantages", newText);
+                        }
+                      }}
+                      svg={WebsiteIcons["Dot"]}
+                    />
+                  </div>
+                </ToolTip>
+              )}
             </div>
             {isEditable ? (
               <Textarea

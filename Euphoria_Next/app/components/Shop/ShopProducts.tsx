@@ -17,38 +17,42 @@ interface Props {
 export const ShopProducts = ({ products }: Props) => {
   const { nextPage, previousPage, manualPage, currentPage, productPerPage } =
     usePagination();
-  const { priceFrom, filter } = useFilter();
+  const { priceFrom, filter,title } = useFilter();
   const currentProducts: productInterface[] | undefined = useMemo(() => {
     if (products) {
       let currentProducts = products;
-
+      if(title.length > 0){
+       currentProducts = currentProducts.filter(product => product.title.includes(title))
+      }
       if (filter.price[0]) {
         currentProducts = currentProducts.filter(
           (product) =>
-            product.price > filter.price[0].split(",")[0] &&
-            product.price < filter.price[0].split(",")[1]
+            product.price > parseInt(filter.price[0].split(",")[0]) &&
+            product.price < parseInt(filter.price[0].split(",")[1])
         );
       }
       if (priceFrom) {
         if (priceFrom === "high") {
           currentProducts
-            .sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+            .sort((a, b) => a.price - b.price)
             .slice(
               (currentPage - 1) * productPerPage,
               currentPage * productPerPage
             );
         } else if (priceFrom === "low") {
           currentProducts
-            .sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+            .sort((a, b) => b.price - a.price)
             .slice(
               (currentPage - 1) * productPerPage,
               currentPage * productPerPage
             );
         }
       }
+      console.log(title);
+      
       if (!filter) {
         return (
-          products.slice(
+          currentProducts.slice(
             (currentPage - 1) * productPerPage,
             currentPage * productPerPage
           ) || null
@@ -56,7 +60,7 @@ export const ShopProducts = ({ products }: Props) => {
       }
       return currentProducts || null;
     }
-  }, [priceFrom, currentPage, productPerPage, products, filter]);
+  }, [priceFrom, currentPage, productPerPage, products, filter,title]);
 
   return (
     <section className="w-full pb-[30px]">
