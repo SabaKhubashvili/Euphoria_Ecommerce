@@ -51,14 +51,14 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
     <section className="flex flex-col gap-[20px] w-full pl-[15px] ">
       <div className="w-full flex">
        <AuthInput 
-       label="search" 
-       name="" 
-       placeholder="" 
-       id="" 
-       onChange={(e)=>{setTitle(e.target.value)}} value={title} style={{
-        flexDirection:'column',
-        gap:'5px',
-       }}/>
+      //  label="search" 
+        id="search" 
+        name="search" 
+        placeholder="Search" 
+        onChange={(e)=>{setTitle(e.target.value)}} value={title} style={{
+          flexDirection:'column',
+          gap:'5px',
+        }}/>
       </div>
       <div className="flex justify-between  sm:flex-row flex-col sm:items-center items-start gap-[10px]">
         <div className="flex gap-[5px] items-center">

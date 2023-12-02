@@ -14,7 +14,7 @@ export const metadata = {
 
 const ShopPage = async() => {
   const {data:allProducts} = await RestClient.GetRequest(BaseUrl.getProducts);
-
+  const {data:categories} = await RestClient.GetRequest(BaseUrl.getCategories);
   return (
     <main>
         <div className='lg:mt-[120px] mt-[108px] px-[10px]'>
@@ -27,7 +27,7 @@ const ShopPage = async() => {
             />
         </div>
         <Container>
-          <ShopProducts products={allProducts}/>
+          <ShopProducts products={allProducts} categories={categories}/>
         </Container>
 
     </main>

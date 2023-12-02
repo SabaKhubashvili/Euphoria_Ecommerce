@@ -23,6 +23,7 @@ const page = async({ params }: { params: params }) => {
   const {data:product}:{data:productInterface} = await RestClient.GetRequest(BaseUrl.getProductById + '/' + params.productId);
 
   
+  
   return (
     <main className="lg:pt-[200px] pt-[150px]">
       <Container>

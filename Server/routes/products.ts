@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 // getAllProducts
 router.get("/getall", async (req: any, res: any) => {
   try {
-    const products = await ProductSchema.find();
+    const products = await ProductSchema.find().populate('category');
 
     return res.status(200).json(products);
   } catch (error) {

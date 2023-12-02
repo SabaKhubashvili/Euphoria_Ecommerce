@@ -9,20 +9,31 @@ import { usePagination } from "@/app/hooks/UsePagination";
 import { Pagination } from "../Pagination";
 import { useFilter } from "@/app/hooks/UseFilter";
 import { useGetAllProducts } from "@/app/actions/getAllProducts";
+import { CategoryInterface } from "@/app/types";
 
 interface Props {
   products: productInterface[];
+  categories:CategoryInterface[]
 }
 
-export const ShopProducts = ({ products }: Props) => {
+export const ShopProducts = ({ products,categories }: Props) => {
+  
   const { nextPage, previousPage, manualPage, currentPage, productPerPage } =
     usePagination();
   const { priceFrom, filter,title } = useFilter();
+
   const currentProducts: productInterface[] | undefined = useMemo(() => {
     if (products) {
       let currentProducts = products;
       if(title.length > 0){
        currentProducts = currentProducts.filter(product => product.title.includes(title))
+      }
+      if(filter.category.length > 0){
+        
+        currentProducts = currentProducts.filter(product => (
+          
+          filter.category.includes(product.category.name)
+        ))
       }
       if (filter.price[0]) {
         currentProducts = currentProducts.filter(
@@ -48,8 +59,7 @@ export const ShopProducts = ({ products }: Props) => {
             );
         }
       }
-      console.log(title);
-      
+
       if (!filter) {
         return (
           currentProducts.slice(
@@ -70,7 +80,7 @@ export const ShopProducts = ({ products }: Props) => {
         Home/Shop
       </p>
       <div className="grid items-start mt-[18px] lg:grid-cols-10">
-        <Filter />
+        <Filter categories={categories} />
         <div className="flex flex-col items-center gap-[30px] lg:col-span-8">
           <Shop
             productsLength={products?.length || 0}

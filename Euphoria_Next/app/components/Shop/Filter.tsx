@@ -2,14 +2,18 @@
 
 import React, { useState } from 'react'
 import { AboutDresses, BrandFilter, FilterWithCheckboxs,  PriceSlider, SizeFilter } from './ShopUi'
-import { FilterInterface } from '@/app/types'
+import { CategoryInterface, FilterInterface } from '@/app/types'
 import { useFilter } from '@/app/hooks/UseFilter'
 import { FilteredBy } from './FilteredBy'
 import { useMediaQuery } from '@mui/material'
 import { Dropdown_Down } from '@/public/Svg/Icons'
 import { FilterConstant } from '@/app/constants'
 
-export const Filter = () => {
+export const Filter = ({
+  categories,
+}:{
+  categories:CategoryInterface[]
+}) => {
   const {filter,addFilter,deleteFilter,handlePriceChange} = useFilter()
   const isAboveLargeScreens = useMediaQuery('(min-width:1024px)')
   const [isOpen,setIsOpen] = useState<boolean>(false)
@@ -26,16 +30,16 @@ export const Filter = () => {
             <FilteredBy />
               <FilterWithCheckboxs 
                 title={'Category'}
-                values={filter.brand}        
-                onChange={(e)=>handleFilterChange(e,'brand')}
-                data={FilterConstant['length']}
+                values={filter.category}        
+                onChange={(e)=>handleFilterChange(e,'category')}
+                data={categories.map(category=>category.name)}
                 />
               <BrandFilter 
                 values={filter.brand}        
                 onChange={(e)=>handleFilterChange(e,'brand')}/>
               <SizeFilter
-              values={filter.size}        
-              onChange={(e)=>handleFilterChange(e,'size')}
+                values={filter.size}        
+                onChange={(e)=>handleFilterChange(e,'size')}
               />
               {/* <LengthFilter
               values={filter.length}        

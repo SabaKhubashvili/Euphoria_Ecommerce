@@ -123,22 +123,12 @@ export const FilterConstant = {
         'Donna Ricco'
     ],
     size:[
-        'osfa',
-        'W26',
-        'W27',
-        'W28',
-        'W29',
-        'W30',
-        'W31',
-        'W32',
-        'W33',
-        'W34',
-        'W35',
-        'W36',
-        'W37',
-        'W38',
-        'W39',
-        'W40',
+       "XS",
+       "SM",
+       "MD",
+       "LG",
+       "XL",
+
     ],
     length:[
         'Short',

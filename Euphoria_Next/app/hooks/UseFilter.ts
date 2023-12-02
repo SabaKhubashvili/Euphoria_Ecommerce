@@ -20,9 +20,8 @@ export const useFilter = create<FilterStore>((set) => ({
   filter: {
     brand: [],
     size: [],
-    length: [],
-    color: [],
-    price:[]
+    price:[],
+    category:[]
   },
   title:'',
   priceFrom:null,
@@ -54,10 +53,9 @@ export const useFilter = create<FilterStore>((set) => ({
     set((state)=>({
       filter:{
         brand: [],
-        size: [],
-        length: [],
-        color: [],
-        price:[]
+      size: [],
+      price:[],
+      category:[]
       }
     }))
   },

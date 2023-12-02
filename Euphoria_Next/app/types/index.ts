@@ -10,10 +10,9 @@ export interface SingleFooterComponentRowType {
     to?: string;
 }
 export interface FilterInterface{
+    category:string[]
     brand:string[];
     size:string[];
-    length:string[];
-    color:string[];
     price:string[]
 }
 
