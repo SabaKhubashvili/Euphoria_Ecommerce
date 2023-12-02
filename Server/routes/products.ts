@@ -4,7 +4,10 @@ const {
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
 const ProductSchema = require("../models/Product");
+const UserSchema = require("../models/User");
 const mongoose = require('mongoose')
+import { Request, Response } from "express";
+
 
 // getAllProducts
 router.get("/getall", async (req: any, res: any) => {
@@ -129,5 +132,37 @@ router.delete(
     }
   }
 );
+
+router.get('/toggleFavorites/:id', verifyTokenAuthorization, async (req: Request & {user:any}, res:Response) => {
+  const productId = req.params.id;
+
+  try {
+    const user = await UserSchema.findById(req.user.id);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    const product = await ProductSchema.findOne({_id:productId});
+    
+    if(!product){
+      return res.status(404).json({message:"Product not found!"})
+    }
+
+    const isProductInFavorites = user.favorites.includes(productId);
+
+    if (isProductInFavorites) {
+      user.favorites = user.favorites.filter((fav:any) => fav === productId);
+    } else {
+      user.favorites.push(productId);
+    }
+
+    await user.save();
+
+    return res.status(200).json({ user });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 module.exports = router;

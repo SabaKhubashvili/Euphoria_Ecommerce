@@ -34,9 +34,9 @@ export const Filter = ({
                 onChange={(e)=>handleFilterChange(e,'category')}
                 data={categories.map(category=>category.name)}
                 />
-              <BrandFilter 
+              {/* <BrandFilter 
                 values={filter.brand}        
-                onChange={(e)=>handleFilterChange(e,'brand')}/>
+                onChange={(e)=>handleFilterChange(e,'brand')}/> */}
               <SizeFilter
                 values={filter.size}        
                 onChange={(e)=>handleFilterChange(e,'size')}

@@ -124,7 +124,7 @@ export const SizeFilter = ({ onChange, values }: Props) => {
           setIsOpen((prev) => !prev);
         }}
       >
-        <h1 className="2xl:text-[24px] xl:text-[22px] text-[20px]  font-medium">Size (Inches)</h1>
+        <h1 className="2xl:text-[24px] xl:text-[22px] text-[20px]  font-medium">Size</h1>
         {isOpen ? (
           <div className="w-5 cursor-pointer">
             <MinusIcon />

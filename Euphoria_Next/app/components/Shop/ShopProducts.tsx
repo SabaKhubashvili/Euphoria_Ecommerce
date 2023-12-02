@@ -21,7 +21,7 @@ export const ShopProducts = ({ products,categories }: Props) => {
   const { nextPage, previousPage, manualPage, currentPage, productPerPage } =
     usePagination();
   const { priceFrom, filter,title } = useFilter();
-
+  
   const currentProducts: productInterface[] | undefined = useMemo(() => {
     if (products) {
       let currentProducts = products;

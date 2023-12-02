@@ -4,7 +4,7 @@ import Image from 'next/image'
 import React from 'react'
 import { MainButton } from '../buttons/MainButton'
 import { GrayButton } from '../buttons/GrayButton'
-import { productInterface, products } from '@/app/constants'
+import { productInterface } from '@/app/constants'
 import Link from 'next/link'
 
 interface Props extends productInterface{
@@ -28,7 +28,7 @@ export const ProductComponent = ({
           height={400}
           alt='Product'
           src={`${images[0]}`}
-          className='object-cover peer w-full h-full'
+          className='object-cover peer w-full h-full select-none'
         />
         <div className="absolute bottom-[-4px] w-full  transition-all duration-200 bg-white left-0 right-0 
          lg:hover:opacity-100 peer-hover:opacity-100  opacity-0 py-[20px]  flex px-[10px] gap-[5px]
