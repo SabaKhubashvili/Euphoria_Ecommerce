@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -13,26 +12,34 @@ import { useRouter } from "next/navigation";
 
 export const Menu = () => {
   const isAboveLargeScreens = useMediaQuery("(min-width:1024px)");
-  const router = useRouter()
-  const handleSignout = () =>{
-    if(isAuthenticated()){
-      deleteCookie('userInfo')
-      deleteCookie('accessToken')
-      router.refresh()
+  const router = useRouter();
+  const handleSignout = () => {
+    if (isAuthenticated()) {
+      deleteCookie("userInfo");
+      deleteCookie("accessToken");
+      router.refresh();
     }
-  }
+  };
   return (
     <div className="flex gap-[31px] basis-auto justify-end">
-      {isAboveLargeScreens && 
-      !isAuthenticated() ? (
+      {isAboveLargeScreens && !isAuthenticated() ? (
         <AuthButtons />
       ) : (
-        <div onClick={handleSignout} className="cursor-pointer uppercase font-semibold xl:text-[15px] text-[13px] text-white whitespace-nowrap flex items-center">
+        <div
+          onClick={handleSignout}
+          className="cursor-pointer uppercase font-semibold xl:text-[15px] text-[13px] text-white whitespace-nowrap flex items-center"
+        >
           Sign out
         </div>
       )}
       <div className="flex gap-[20px] items-center">
-        {isAboveLargeScreens ? <HeartIcon /> : <SearchIcon />}
+        {isAboveLargeScreens ? (
+          <Link href={"/favorites"}>
+            <HeartIcon />
+          </Link>
+        ) : (
+          <SearchIcon />
+        )}
         <Link href={"/cart"} className="flex gap-[11px] items-center">
           <div className="relative">
             <CartIcon />

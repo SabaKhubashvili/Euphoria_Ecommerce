@@ -37,7 +37,7 @@ export const ProductComponent = ({
   let userData: {
     firstname: string;
     email: string;
-    favorites: string[];
+    favorites?: string[];
   } | null = null;
   if (infoCookie) {
     userData = JSON.parse(infoCookie);
@@ -46,9 +46,10 @@ export const ProductComponent = ({
   }
 
   const [isFavorited, setIsFavorited] = useState(
-    userData?.favorites.some((favorite) => favorite === _id.toString())
+    userData?.favorites?.some((favorite) => favorite === _id.toString())
   );
-
+    console.log(isFavorited);
+    
 
   const addToCart = () => {
     RestClient.putRequest(
@@ -60,7 +61,6 @@ export const ProductComponent = ({
       token
     )
       .then((res) => {
-        console.log(res);
         router.push("/cart");
       })
       .catch((err) => {
@@ -79,11 +79,10 @@ export const ProductComponent = ({
       });
   };
 
-
   const addToFavorites = () => {
     RestClient.putRequest(BaseUrl.addToFavorites + `/${_id}`, {}, token)
       .then((res) => {
-        if (userData) {
+        if (userData && userData.favorites) {
           if (res.data.add) {
             userData.favorites.push(_id.toString());
             setIsFavorited(true)
@@ -95,7 +94,6 @@ export const ProductComponent = ({
             setIsFavorited(false)
           }
         }
-        console.log(userData);
         setCookie(
           "userInfo",
           JSON.stringify({
@@ -104,8 +102,6 @@ export const ProductComponent = ({
         );
       })
       .catch((err) => {
-        console.log(err);
-
         if ((err.status = 403)) {
           toast.error(err?.response?.data?.message, {
             position: "top-center",

@@ -20,7 +20,7 @@ export const HomeBanner = () => {
   return (
     <Container stop={!isAboveLargeScreens}>
 
-    <section className='pt-[130px] relative w-full h-[800px] '>
+    <section className='relative w-full h-[800px] '>
 
         <div className='absolute bottom-0 right-0 z-[3] lg:w-fit w-full p-4 '>
            <SliderController NextEl={'HomeBanner_Next'} PrevEl={'HomeBanner_Prev'} />

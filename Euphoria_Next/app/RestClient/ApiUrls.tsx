@@ -8,7 +8,7 @@ export default class BaseUrl{
 
   static addProduct = this.baseUrl + '/api/product/addProduct'
   static getProducts = this.baseUrl + '/api/product/getAll'
-  static getProductById = this.baseUrl + '/api/product'
+  static getProductById = this.baseUrl + '/api/product/get'
   static getLimitedProducts = this.baseUrl + '/api/product/getLimited/'
   static addToFavorites = this.baseUrl + '/api/product/toggleFavorites'
 

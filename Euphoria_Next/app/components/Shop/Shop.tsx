@@ -11,7 +11,6 @@ import { useFilter } from "@/app/hooks/UseFilter";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { largeScreens } from "@/app/Screens/Screens";
 import { AuthInput } from "../Inputs/AuthInput";
-import { GrayButton } from "../buttons/GrayButton";
 
 interface Props {
   currentProducts: typeof products | null;

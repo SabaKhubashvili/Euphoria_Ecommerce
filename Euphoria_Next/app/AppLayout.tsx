@@ -4,7 +4,7 @@ import React from "react";
 import { Navbar } from "./components/Navbar/Navbar";
 import { Footer } from "./components/Footer/Footer";
 import { usePathname } from "next/navigation";
-import { PageContainer } from "./components/admin/container/PageContainer";
+import { AdminPageContainer } from "./components/admin/container/adminPageContainer";
 import { Oswald } from "./components/assets/Fonts";
 
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
@@ -13,7 +13,7 @@ const AppLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <React.Fragment>
       {pathname.startsWith('/admin') ? (
-        <PageContainer>{children}</PageContainer>
+        <AdminPageContainer>{children}</AdminPageContainer>
       ) : (
         <div className={Oswald.className}>
           <Navbar />

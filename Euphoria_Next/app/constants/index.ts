@@ -151,7 +151,7 @@ export interface productInterface{
     description:string,
     aboutProduct:string,
     advantages:string,
-    images:string,
+    images:string[],
     availableSizes:string
     category: {
       name: string;
@@ -163,17 +163,17 @@ export const products: productInterface[] = [
   {
     _id: 1,
     title: "Product Title 1",
-    price: '10,00',
+    price: 40,
     description: "This is a great product.",
-    images: "Product",
-    avaiableSizes: {
-      xs: false,
-      sm: true,
-      md: true,
-      lg: true,
-      xl: false,
+    images: ["/Product.jpg"],
+    availableSizes: '',
+    advantages:'',
+    category:{
+      name:'',
+      _id:''
     },
-    category: "1",
+    brand:'',
+    aboutProduct: "1",
   },
   {
     _id: 2,

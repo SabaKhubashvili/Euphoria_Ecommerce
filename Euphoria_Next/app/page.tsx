@@ -16,7 +16,7 @@ export default async function Home() {
   const {data:FeaturedProductsData}:{data:productInterface[]} =  await RestClient.GetRequest(BaseUrl.getLimitedProducts + 27)
     
   return (
-    <main>
+    <main className='pt-[130px] '>
         <HomeBanner/>
           <Container>
             <Brands/>

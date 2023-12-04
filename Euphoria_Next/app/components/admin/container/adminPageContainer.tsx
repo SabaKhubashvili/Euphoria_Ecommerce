@@ -11,7 +11,7 @@ import { CouponModal } from "../modals/CouponModal";
 import 'swiper/css'
 import { CategoriesModal } from "../modals/CategoriesModal";
 
-export const PageContainer = ({ children }: { children: React.ReactNode }) => {
+export const AdminPageContainer = ({ children }: { children: React.ReactNode }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(false);
   const isAboveSmallScreens = useMediaQuery(smallScreens);
   const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
@@ -41,7 +41,6 @@ export const PageContainer = ({ children }: { children: React.ReactNode }) => {
       className={` ${PublicSans.className} flex gap-[26px] w-full 2xl:justify-start justify-between`}
     >
       <CouponModal/>
-      {/* <AddProductModal/> */}
       <CategoriesModal/>
       {isAboveSmallScreens && (
         <motion.div

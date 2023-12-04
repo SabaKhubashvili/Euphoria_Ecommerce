@@ -33,9 +33,10 @@ router.get('/getLimited/:quantity',async(req:any,res:any)=>{
   }
 })
 
-router.get('/:id', async (req: any, res: any) => {
+router.get('/get/:id', async (req: any, res: any) => {
   const productId = req.params.id;
 
+  
   if (!mongoose.isValidObjectId(productId)) {
     return res.status(400).json({ message: 'Invalid product ID' });
   }
@@ -153,15 +154,28 @@ router.put('/toggleFavorites/:id', verifyTokenAuthorization, async (req: Request
     if (isProductInFavorites) {
       user.favorites = user.favorites.filter((fav:any) => fav === productId);
       await user.save();
-      return res.status(200).json({message:'Sucess',add:true});
+      return res.status(200).json({message:'Sucess',add:false});
     } else {
       user.favorites.push(productId);
       await user.save();
-      return res.status(200).json({message:'Sucess',add:false});
+      return res.status(200).json({message:'Sucess',add:true});
     }
   } catch (error) {
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 });
+
+router.get('/getAllFavorites',verifyTokenAuthorization, async(req:Request & {user:any},res:Response)=>{
+  const userId = req.user.id;
+
+  const user  = await UserSchema.findOne({
+    _id:userId
+  }).populate('favorites').select('favorites')
+  
+  const {favorites, ...otherData} = user;
+  
+  return res.status(200).json({favorites});
+  
+})
 
 module.exports = router;

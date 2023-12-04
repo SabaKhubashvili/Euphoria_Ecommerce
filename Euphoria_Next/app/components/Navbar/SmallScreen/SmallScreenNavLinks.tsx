@@ -26,6 +26,10 @@ export const SmallScreenNavLinks = () => {
             label='Search'
             to='/search'
         />
+        <SmallScreenNavLink
+            label='Favorites'
+            to='/favorites'
+        />
     </div>
   )
 }

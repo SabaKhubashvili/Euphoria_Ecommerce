@@ -25,7 +25,6 @@ export const SmallScreenMenu = ({ isOpen }: Props) => {
             <div className="pt-[20px]">
               <SmallScreenNavLinks/>
             </div>
-            
         </Container>
     </div>
   );
