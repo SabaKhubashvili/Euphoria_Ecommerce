@@ -7,14 +7,13 @@ import { SmallBanner } from './components/Banners/SmallBanner'
 import { ProductsByTagSlider } from './components/Product/ProductsByTagSlider'
 import { SecondarySmallBanner } from './components/Banners/SecondarySmallBanner'
 import { SmallBlogs } from './components/Blog/SmallBlogs'
-import { getProductByLimit } from './actions/getProductsByLimit'
 import RestClient from './RestClient/RequestTypes'
 import BaseUrl from './RestClient/ApiUrls'
 import { productInterface } from './constants'
 
 
 export default async function Home() {
-  const {data:FeaturedProductsData} =  await RestClient.GetRequest(BaseUrl.getLimitedProducts + 27)
+  const {data:FeaturedProductsData}:{data:productInterface[]} =  await RestClient.GetRequest(BaseUrl.getLimitedProducts + 27)
     
   return (
     <main>

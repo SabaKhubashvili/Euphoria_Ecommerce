@@ -16,9 +16,8 @@ export const Menu = () => {
   const router = useRouter()
   const handleSignout = () =>{
     if(isAuthenticated()){
-      
+      deleteCookie('userInfo')
       deleteCookie('accessToken')
-      localStorage.removeItem('userInfo')
       router.refresh()
     }
   }

@@ -6,13 +6,15 @@ interface Props{
     small?:boolean
     full?:boolean
     type?:'button' | 'submit' | 'reset'
+    styles?:any
 }
 
-export const  MainButton = ({onClick,label,small,full,type = 'button'}:Props) => {
+export const  MainButton = ({onClick,label,small,full,type = 'button',styles}:Props) => {
   return (
     <button 
     type={type}
     onClick={onClick}
+    style={styles}
     className={`w-fit  font-medium select-none
     tracking-[0.5px] uppercase bg-black
     lg:hover:bg-secondary text-white transition-colors duration-200

@@ -78,7 +78,6 @@ router.delete(
 
 router.delete('/clear', verifyTokenAuthorization, async (req:any, res:any) => {
   const userId = req.user.id;
-
   try {
     let cart = await Cart.findOne({ userId });
     if (!cart) {

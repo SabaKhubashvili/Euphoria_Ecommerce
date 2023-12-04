@@ -38,11 +38,11 @@ export const LoginForm = () => {
         const res = await RestClient.postRequest(BaseUrl.login, values).finally(()=>{setIsLoading(false)});
         const expirationDate = new Date();
         expirationDate.setDate(expirationDate.getDate() + 3);
-        const { firstname, email } = res.data;
+        const { firstname, email,favorites } = res.data;
         setCookie("accessToken", res.data.accessToken, {
           expires: expirationDate,
         }); 
-        localStorage.setItem("userInfo", JSON.stringify({ firstname, email }));
+        setCookie("userInfo", JSON.stringify({ firstname, email, favorites }));
         router.refresh();
         router.push("/");
       } catch (err:any) {

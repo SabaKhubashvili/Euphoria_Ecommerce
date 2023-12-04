@@ -42,27 +42,27 @@ router.post("/login", async (req: any, res: any) => {
   try {
     const user = await User.findOne({ email: req.body.email });
     if (!user) {
-      return res.status(401).json({ message: "Wrong credentials" }); // Return here
+      return res.status(401).json({ message: "Wrong credentials" }); 
     }
 
     const comparePass = await bcrypt.compare(req.body.password, user.password);
     if (!comparePass) {
-      return res.status(401).json({ message: "Wrong credentials" }); // Return here
+      return res.status(401).json({ message: "Wrong credentials" }); 
     }
 
     const accessToken = jwt.sign(
       {
         id: user._id,
-        isAdmin: user.isAdmin
+        isAdmin: user.isAdmin,
       },
       process.env.JWT_SECRET,
       { expiresIn: '3d' }
     );
     
-    const { password, _id, ...userData } = user._doc;
-    return res.status(200).json({ ...userData, accessToken }); // Return here
+    const { password, _id,isAdmin,createdAt,updatedAt,__v, ...userData } = user._doc;
+    return res.status(200).json({ ...userData, accessToken }); 
   } catch (error) {
-    return res.status(500).json(error); // Return here
+    return res.status(500).json(error); 
   }
 });
 

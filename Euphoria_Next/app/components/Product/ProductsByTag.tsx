@@ -3,8 +3,8 @@
 import React from 'react'
 import { ProductComponent } from './ProductComponent'
 import { GrayButton } from '../buttons/GrayButton'
-import { productInterface, products } from '@/app/constants'
-import { getProductByLimit } from '@/app/actions/getProductsByLimit'
+import { productInterface } from '@/app/constants'
+
 
 interface Props{
     title?:string

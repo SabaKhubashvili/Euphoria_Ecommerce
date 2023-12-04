@@ -133,7 +133,7 @@ router.delete(
   }
 );
 
-router.get('/toggleFavorites/:id', verifyTokenAuthorization, async (req: Request & {user:any}, res:Response) => {
+router.put('/toggleFavorites/:id', verifyTokenAuthorization, async (req: Request & {user:any}, res:Response) => {
   const productId = req.params.id;
 
   try {
@@ -152,15 +152,14 @@ router.get('/toggleFavorites/:id', verifyTokenAuthorization, async (req: Request
 
     if (isProductInFavorites) {
       user.favorites = user.favorites.filter((fav:any) => fav === productId);
+      await user.save();
+      return res.status(200).json({message:'Sucess',add:true});
     } else {
       user.favorites.push(productId);
+      await user.save();
+      return res.status(200).json({message:'Sucess',add:false});
     }
-
-    await user.save();
-
-    return res.status(200).json({ user });
   } catch (error) {
-    console.error(error);
     return res.status(500).json({ message: 'Internal Server Error' });
   }
 });
