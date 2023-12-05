@@ -44,12 +44,11 @@ export const ProductComponent = ({
   } else {
     userData = null;
   }
+console.log(userData);
 
   const [isFavorited, setIsFavorited] = useState(
     userData?.favorites?.some((favorite) => favorite === _id.toString())
-  );
-    console.log(isFavorited);
-    
+  );    
 
   const addToCart = () => {
     RestClient.putRequest(
@@ -123,14 +122,14 @@ export const ProductComponent = ({
         usingCol ? "col-span-1" : "w-full h-full"
       }`}
     >
-      <div className="relative w-full h-[425px]">
+      <div className="relative w-full ">
         <Link href={`/product/${_id}`} className="peer">
           <Image
             width={300}
             height={400}
             alt="Product"
             src={`${images[0]}`}
-            className="object-cover  w-full h-full select-none"
+            className="w-full h-full select-none"
           />
         </Link>
         {isAboveLargeScreens && (
