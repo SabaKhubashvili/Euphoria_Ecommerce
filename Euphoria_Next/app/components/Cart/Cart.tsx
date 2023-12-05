@@ -13,7 +13,6 @@ import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import { useCartStore } from "@/app/hooks/useCartData";
 
 export const Cart = ({
   setStep,

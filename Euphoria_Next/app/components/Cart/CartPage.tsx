@@ -11,7 +11,6 @@ import { CartAdressInfo } from "./CartAdressInfo";
 import { CartPay } from "./CartPay";
 import { CartDone } from "./CartDone";
 import { CartInterface } from "@/app/types";
-import { useCartStore } from "@/app/hooks/useCartData";
 
 export enum Steps {
   Cart = 0,
@@ -31,7 +30,7 @@ interface Props {
 }
 
 export const CartPage = ({ data }: Props) => {
-  const { setCartData } = useCartStore();
+
   const [step, setStep] = useState<Steps>(Steps.Cart);
   const [totalPrice, setTotalPrice] = useState(() => {
     return data.products.reduce((sum, product) => {
@@ -87,9 +86,6 @@ export const CartPage = ({ data }: Props) => {
     },
   });
   
-  React.useEffect(()=>{
-    setCartData({...data})
-  },[data])
   const handleNextButton = useCallback(() => {
     window.scrollTo({
       top: 0,

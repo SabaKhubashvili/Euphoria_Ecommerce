@@ -6,10 +6,16 @@ import { Footer } from "./components/Footer/Footer";
 import { usePathname } from "next/navigation";
 import { AdminPageContainer } from "./components/admin/container/adminPageContainer";
 import { Oswald } from "./components/assets/Fonts";
+import { CartInterface } from "./types";
+import { useCartStore } from "./hooks/useCartData";
 
-const AppLayout = ({ children }: { children: React.ReactNode }) => {
+const AppLayout = ({ children,cartData }: { children: React.ReactNode,cartData:CartInterface }) => {
   const pathname = usePathname();
-  
+  const { setCartData } = useCartStore();
+  React.useEffect(()=>{
+    setCartData({...cartData})
+  },[cartData])
+
   return (
     <React.Fragment>
       {pathname.startsWith('/admin') ? (

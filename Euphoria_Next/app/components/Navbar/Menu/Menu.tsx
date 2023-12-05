@@ -9,6 +9,7 @@ import Link from "next/link";
 import { isAuthenticated } from "@/app/Lib/IsAuthenticated";
 import { deleteCookie } from "cookies-next";
 import { useRouter } from "next/navigation";
+import { useCartStore } from "@/app/hooks/useCartData";
 
 export const Menu = () => {
   const isAboveLargeScreens = useMediaQuery("(min-width:1024px)");
@@ -20,6 +21,8 @@ export const Menu = () => {
       router.refresh();
     }
   };
+  const {cartData} = useCartStore()
+  
   return (
     <div className="flex gap-[31px] basis-auto justify-end">
       {isAboveLargeScreens && !isAuthenticated() ? (
@@ -58,7 +61,7 @@ export const Menu = () => {
               <h3
                 className={` ${Roboto.className} leading-[20px] font-bold  text-[15px] tracking-[0.12px] text-white h-fit`}
               >
-                0,00 EUR
+                {cartData.products.reduce((sum, product) => sum + product.product.price * product.quantity, 0)} EUR
               </h3>
             </div>
           )}
