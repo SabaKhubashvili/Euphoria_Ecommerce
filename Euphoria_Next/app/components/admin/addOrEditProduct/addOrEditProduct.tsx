@@ -85,8 +85,6 @@ export const AddOrEditProduct = ({ categories }: Props) => {
     },
     onSubmit: (values) => {
       if (!isSubmitting) {
-        console.log(values);
-
         setIsSubmitting(true);
         RestClient.putRequest(
           BaseUrl.addProduct,

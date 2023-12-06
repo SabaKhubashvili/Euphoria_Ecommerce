@@ -13,6 +13,8 @@ export default class BaseUrl{
   static addToFavorites = this.baseUrl + '/api/product/toggleFavorites'
   static getFavorites = this.baseUrl + '/api/product/getAllFavorites'
   
+  static addCoupon = this.baseUrl + '/api/coupon/add'
+
   static getCategories = this.baseUrl + '/api/categories/getAll/'
 
   static addToCart = this.baseUrl + '/api/cart/add'

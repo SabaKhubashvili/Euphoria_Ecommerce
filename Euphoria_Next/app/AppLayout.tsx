@@ -17,7 +17,6 @@ const AppLayout = ({ children,cartData }: { children: React.ReactNode,cartData:C
       setCartData({...cartData})
     }
   },[cartData])
-  console.log(cartData);
   
   return (
     <React.Fragment>

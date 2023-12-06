@@ -16,7 +16,6 @@ router.get("/getall", async (req: any, res: any) => {
 
     return res.status(200).json(products);
   } catch (error) {
-    console.log(error)
     return res.status(500).json({ message: "Something wrong happened" });
   }
 });
@@ -28,7 +27,6 @@ router.get('/getLimited/:quantity',async(req:any,res:any)=>{
     const products = await ProductSchema.find().limit(quantity);
     return res.status(200).json(products);
   } catch (error) {
-    console.log(error)
     return res.status(500).json({ message: "Something wrong happened" });
   }
 })

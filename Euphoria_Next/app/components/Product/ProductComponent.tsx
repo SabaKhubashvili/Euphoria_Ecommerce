@@ -44,8 +44,6 @@ export const ProductComponent = ({
   } else {
     userData = null;
   }
-console.log(userData);
-
   const [isFavorited, setIsFavorited] = useState(
     userData?.favorites?.some((favorite) => favorite === _id.toString())
   );    
