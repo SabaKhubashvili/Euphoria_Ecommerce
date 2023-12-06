@@ -57,7 +57,7 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  if(request.nextUrl.pathname.startsWith('/cart')){
+  if(request.nextUrl.pathname.startsWith('/cart') || request.nextUrl.pathname.startsWith('/favorites')){
     if (!await isAuthorized(request)) {
       return NextResponse.redirect(new URL("/login", request.url));
     }

@@ -9,13 +9,16 @@ import { Oswald } from "./components/assets/Fonts";
 import { CartInterface } from "./types";
 import { useCartStore } from "./hooks/useCartData";
 
-const AppLayout = ({ children,cartData }: { children: React.ReactNode,cartData:CartInterface }) => {
+const AppLayout = ({ children,cartData }: { children: React.ReactNode,cartData:CartInterface  | null}) => {
   const pathname = usePathname();
   const { setCartData } = useCartStore();
   React.useEffect(()=>{
-    setCartData({...cartData})
+    if(cartData){
+      setCartData({...cartData})
+    }
   },[cartData])
-
+  console.log(cartData);
+  
   return (
     <React.Fragment>
       {pathname.startsWith('/admin') ? (
