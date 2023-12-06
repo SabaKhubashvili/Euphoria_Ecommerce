@@ -11,9 +11,13 @@ import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { getCookie } from "cookies-next";
 import { toast } from "react-toastify";
+import { useQuery } from "react-query";
+import { useGetAllCoupons } from "@/app/actions/getAllCoupons";
 
 export const CouponModal = () => {
   const token = getCookie("accessToken");
+  const {data:couponData} = useGetAllCoupons(token || "");
+  
   const { isOpen: isCouponModalOpen, onClose: couponModalOnclose } =
     useCouponModal();
   const [addCouponOpen, setAddCouponOpen] = useState<boolean>(false);
@@ -21,7 +25,6 @@ export const CouponModal = () => {
     coupon: "",
     percentage: '',
   });
-  
   const addCoupon = () => {
     if(JSON.parse(newCoupon.percentage) > 100){
      return toast.error('Enter less than 100', {
@@ -38,8 +41,7 @@ export const CouponModal = () => {
     RestClient.putRequest(
       BaseUrl.addCoupon,
       { ...newCoupon, percentage: newCoupon.percentage },
-      token
-    )
+      token)
       .then((res) => {
         toast.success(res.data.message, {
           position: "top-center",
@@ -81,7 +83,7 @@ export const CouponModal = () => {
       <MainTable
         topContent={["Coupon", "Percentage"]}
         actions={couponActions}
-        bodyContent={coupon_codes}
+        bodyContent={couponData}
         type="secondary"
       />
     </div>

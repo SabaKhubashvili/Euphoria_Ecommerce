@@ -37,7 +37,6 @@ router.put('/add',verifyTokenAndAdminAuthorization, async(req:Request,res:Respon
     return res.status(400).json({message:"All fields are required"})
   }
   const oldCoupon = await Coupon.findOne({coupon});
-  console.log(oldCoupon);
   if(oldCoupon){
     return res.status(409).json({message:"Coupon already exists"})
   }
@@ -52,6 +51,23 @@ router.put('/add',verifyTokenAndAdminAuthorization, async(req:Request,res:Respon
     return res.status(201).json({message:"Sucesfully created"})
   }catch(err:any){
     return res.status(500).json({message:'Something went wrong'})
+  }
+})
+
+router.get('/getAll',verifyTokenAndAdminAuthorization,async(req:Request,res:Response)=>{
+  try{
+    const coupons = await Coupon.find();
+    const filteredCoupons = coupons.map((coupon:any) => {
+      const { _id,__v, ...rest } = coupon._doc;
+      return rest;
+    });
+
+    console.log(filteredCoupons);
+    return res.status(200).json(filteredCoupons)
+  }catch(error){
+    console.log(error);
+    
+    return res.status(500).json({message:"Something went wrong on server"})
   }
 })
 
