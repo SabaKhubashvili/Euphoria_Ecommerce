@@ -29,25 +29,17 @@ export const ProductComponent = ({
   usingCol,
   res = true,
 }: Props) => {
+
   const router = useRouter();
   const isAboveLargeScreens = useMediaQuery(largeScreens);
 
   let token = getCookie("accessToken");
-  let infoCookie = getCookie("userInfo");
-  let userData: {
-    firstname: string;
-    email: string;
-    favorites?: string[];
-  } | null = null;
-  if (infoCookie) {
-    userData = JSON.parse(infoCookie);
-  } else {
-    userData = null;
-  }
-  const [isFavorited, setIsFavorited] = useState(
-    userData?.favorites?.some((favorite) => favorite === _id.toString())
-  );    
+const favorites = localStorage.getItem('favorites');
+const parsedFavorites = JSON.parse(favorites || "") || []; 
 
+const [isFavorited, setIsFavorited] = useState(
+  parsedFavorites.some((favorite:any) => favorite === _id.toString())
+);
   const addToCart = () => {
     RestClient.putRequest(
       BaseUrl.addToCart,
@@ -79,24 +71,19 @@ export const ProductComponent = ({
   const addToFavorites = () => {
     RestClient.putRequest(BaseUrl.addToFavorites + `/${_id}`, {}, token)
       .then((res) => {
-        if (userData && userData.favorites) {
+        if (parsedFavorites) {
           if (res.data.add) {
-            userData.favorites.push(_id.toString());
+            parsedFavorites.push(_id.toString());
             setIsFavorited(true)
           } else {
-            const indexToRemove = userData.favorites.indexOf(_id.toString());
+            const indexToRemove = parsedFavorites.indexOf(_id.toString());
             if (indexToRemove !== -1) {
-              userData.favorites.splice(indexToRemove, 1);
+              parsedFavorites.splice(indexToRemove, 1);
             }
             setIsFavorited(false)
           }
         }
-        setCookie(
-          "userInfo",
-          JSON.stringify({
-            ...userData,
-          })
-        );
+        localStorage.setItem('favorites',JSON.stringify(parsedFavorites))
       })
       .catch((err) => {
         if ((err.status = 403)) {

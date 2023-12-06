@@ -42,7 +42,8 @@ export const LoginForm = () => {
         setCookie("accessToken", res.data.accessToken, {
           expires: expirationDate,
         }); 
-        setCookie("userInfo", JSON.stringify({ firstname, email, favorites }));
+        setCookie("userInfo", JSON.stringify({ firstname, email }));
+        localStorage.setItem('favorites',JSON.stringify(favorites))
         router.refresh();
         router.push("/");
       } catch (err:any) {
