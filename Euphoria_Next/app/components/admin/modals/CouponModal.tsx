@@ -16,18 +16,22 @@ import { useGetAllCoupons } from "@/app/actions/getAllCoupons";
 
 export const CouponModal = () => {
   const token = getCookie("accessToken");
-  const {data:couponData} = useGetAllCoupons(token || "");
-  
+  const [isLoading, setIsLoading] = useState(false);
+  const { data: couponData,refetch } = useGetAllCoupons(token || "");
   const { isOpen: isCouponModalOpen, onClose: couponModalOnclose } =
     useCouponModal();
   const [addCouponOpen, setAddCouponOpen] = useState<boolean>(false);
   const [newCoupon, setNewCoupon] = useState({
     coupon: "",
-    percentage: '',
+    percentage: "",
   });
+
   const addCoupon = () => {
-    if(JSON.parse(newCoupon.percentage) > 100){
-     return toast.error('Enter less than 100', {
+    if(!isLoading){
+      setIsLoading(true)
+    
+    if (JSON.parse(newCoupon.percentage) > 100) {
+      return toast.error("Enter less than 100", {
         position: "top-center",
         autoClose: 2500,
         hideProgressBar: false,
@@ -36,12 +40,13 @@ export const CouponModal = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        }); 
+      });
     }
     RestClient.putRequest(
       BaseUrl.addCoupon,
       { ...newCoupon, percentage: newCoupon.percentage },
-      token)
+      token
+    )
       .then((res) => {
         toast.success(res.data.message, {
           position: "top-center",
@@ -52,11 +57,11 @@ export const CouponModal = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          }); 
-          setNewCoupon({
-            coupon:'',
-            percentage:''
-          })
+        });
+        setNewCoupon({
+          coupon: "",
+          percentage: "",
+        });
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
@@ -68,21 +73,65 @@ export const CouponModal = () => {
           draggable: true,
           progress: undefined,
           theme: "light",
-          }); 
+        });
+      }).finally(()=>{
+        setIsLoading(false);
+        refetch()
       });
+    }
   };
 
-  const couponActions = (
-    <div className="flex gap-[10px]">
-      <Icon svg={WebsiteIcons["delete"]} />
-      <Icon svg={WebsiteIcons["edit"]} />
-    </div>
-  );
+  const deleteCoupon = (id: string) => {
+    if (!isLoading) {
+      setIsLoading(true);
+      RestClient.deleteRequest(BaseUrl.deleteCoupon + `/${id}`, token)
+        .then((res) => {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        })
+        .finally(() => {
+          setIsLoading(false);
+          refetch()
+        });
+    }
+  };
+
+  const couponActions = (id?: string) => {
+    return (
+      <div className="cursor-pointer select-none  propagat" onClick={(e) =>{
+        e.stopPropagation()
+        id && deleteCoupon(id)}
+        }>
+        <Icon svg={WebsiteIcons["delete"]} />
+      </div>
+    );
+  };
+
   const couponModalBody = (
     <div className="md:h-[400px] h-full">
       <MainTable
         topContent={["Coupon", "Percentage"]}
-        actions={couponActions}
+        actions={(id?: string) => couponActions(id)}
         bodyContent={couponData}
         type="secondary"
       />

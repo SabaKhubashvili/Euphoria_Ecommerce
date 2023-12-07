@@ -83,14 +83,14 @@ export const OrderManagmentVariations = () => {
     } else {
       return orders.length;
     }
-  }, [ activeVariation]);
+  }, [activeVariation]);
 
   const searchForOrder = (e: React.FormEvent) => {
     e.preventDefault();
     setActiveVariation(Variations.All);
     const filtered = orders.filter((order) => order.id.toString() === orderId);
-    if(filtered.length <= 0){
-      toast.error('No order was found', {
+    if (filtered.length <= 0) {
+      toast.error("No order was found", {
         position: "top-center",
         autoClose: 2500,
         hideProgressBar: false,
@@ -99,27 +99,29 @@ export const OrderManagmentVariations = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
-    }else{
+      });
+    } else {
       setFilteredOrders(filtered);
     }
   };
 
-  const actions = (
-    <div
-      style={{
-        flexBasis: 100 / (Object.keys(ordersOnPage[0]).length + 1) + "%",
-      }}
-      className="flex justify-end"
-    >
-      <Dropdown_Down />
-    </div>
-  );
+  const actions = () => {
+    return (
+      <div
+        style={{
+          flexBasis: 100 / (Object.keys(ordersOnPage[0]).length + 1) + "%",
+        }}
+        className="flex justify-end"
+      >
+        <Dropdown_Down />
+      </div>
+    );
+  };
 
-  const changeCustomersOnPage = (number: 10 | 20 | 30 | 40 | 50) =>{
-    (number)
-    manualPage(0)
-  }
+  const changeCustomersOnPage = (number: 10 | 20 | 30 | 40 | 50) => {
+    number;
+    manualPage(0);
+  };
 
   return (
     <React.Fragment>

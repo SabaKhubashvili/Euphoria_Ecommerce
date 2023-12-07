@@ -1,16 +1,16 @@
 "use client";
 
 import { Dropdown_Down } from "@/public/Svg/Icons";
-import React from "react";
+import React, { useState } from "react";
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 
 interface Props {
   type: "primary" | "secondary";
-  topContent: any;
+  topContent: string[];
   bodyContent: any;
   notFoundMessage?: string;
-  actions?: React.ReactNode
+  actions?: (id?: string) => React.ReactNode;
 }
 
 export const MainTable = ({
@@ -18,16 +18,23 @@ export const MainTable = ({
   topContent,
   bodyContent,
   notFoundMessage,
-  actions
+  actions,
 }: Props) => {
+  const [tableData, setTableData] = useState(
+    bodyContent.map((cont: any) => {
+      const { _id, ...rest } = cont;
+      return rest;
+    })
+  );
+  
   const HeaderCell = ({ text }: { text: string }) => (
     <h1
       className={`text-secondaryGray uppercase font-medium md:text-[16px] text-[13px] 
     `}
       style={{
         flexBasis: actions
-          ? 100 / (Object.keys(bodyContent[0]).length + 1) + "%"
-          : 100 / Object.keys(bodyContent[0]).length + "%",
+          ? 100 / (Object.keys(tableData[0]).length + 1) + "%"
+          : 100 / Object.keys(tableData[0]).length + "%",
       }}
     >
       {text}
@@ -40,8 +47,8 @@ export const MainTable = ({
     `}
       style={{
         flexBasis: actions
-          ? 100 / (Object.keys(bodyContent[0]).length + 1) + "%"
-          : 100 / Object.keys(bodyContent[0]).length + "%",
+          ? 100 / (Object.keys(tableData[0]).length + 1) + "%"
+          : 100 / Object.keys(tableData[0]).length + "%",
       }}
     >
       {text}
@@ -75,8 +82,8 @@ export const MainTable = ({
       }`}
       style={{
         flexBasis: actions
-          ? 100 / (Object.keys(bodyContent[0]).length + 1) + "%"
-          : 100 / Object.keys(bodyContent[0]).length + "%",
+          ? 100 / (Object.keys(tableData[0]).length + 1) + "%"
+          : 100 / Object.keys(tableData[0]).length + "%",
       }}
     >
       {text}
@@ -109,17 +116,22 @@ export const MainTable = ({
                 cont[key].toString().length > 0 ? (
                   key === "status" ? (
                     <StatusRowCell key={key} text={cont[key]} />
+                  ) : !topContent.includes("Id" || "id" || "ID" || "iD") &&
+                    key !== "_id" ? (
+                    <RowCell
+                      key={key}
+                      text={
+                        key.toLowerCase() === "id" ? "#" + cont[key] : cont[key]
+                      }
+                    />
                   ) : (
-                    <RowCell key={key} text={key.toLowerCase() === 'id' ? '#' + cont[key] :cont[key]} />
+                    ""
                   )
                 ) : (
                   ""
                 )
               )}
-              {actions && 
-
-                actions
-              }
+              {actions && actions(cont._id)}
             </div>
           ))
         ) : (

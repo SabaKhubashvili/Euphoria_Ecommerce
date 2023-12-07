@@ -100,6 +100,7 @@ const [isFavorited, setIsFavorited] = useState(
         }
       });
   };
+  
 
   return (
     <div

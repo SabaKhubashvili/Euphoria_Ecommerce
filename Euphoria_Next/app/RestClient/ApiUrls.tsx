@@ -15,6 +15,8 @@ export default class BaseUrl{
   
   static addCoupon = this.baseUrl + '/api/coupon/add'
   static getCoupons = this.baseUrl + '/api/coupon/getAll'
+  static updateCoupon = this.baseUrl + '/api/coupon/update'
+  static deleteCoupon = this.baseUrl + '/api/coupon/delete'
 
   static getCategories = this.baseUrl + '/api/categories/getAll/'
 

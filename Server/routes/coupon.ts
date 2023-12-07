@@ -58,15 +58,40 @@ router.get('/getAll',verifyTokenAndAdminAuthorization,async(req:Request,res:Resp
   try{
     const coupons = await Coupon.find();
     const filteredCoupons = coupons.map((coupon:any) => {
-      const { _id,__v, ...rest } = coupon._doc;
+      const { __v, ...rest } = coupon._doc;
       return rest;
     });
 
-    console.log(filteredCoupons);
     return res.status(200).json(filteredCoupons)
   }catch(error){
     console.log(error);
     
+    return res.status(500).json({message:"Something went wrong on server"})
+  }
+});
+
+router.put('/update',verifyTokenAndAdminAuthorization,async(req:Request,res:Response)=>{
+  const {percentage:newPercentage,id} = req.body;
+  if(!newPercentage || !id){
+    return res.status(400).json({message:"All fields are required"})
+  }
+  try{
+      await Coupon.updateOne({_id:id},{percentage:newPercentage});
+    return res.status(201).json({message:"Sucesfully updated"})
+  }catch(error:any){
+    return res.status(500).json({message:"Something went wrong on server"})
+  }
+})
+
+router.delete('/delete/:id',verifyTokenAndAdminAuthorization,async(req:Request,res:Response)=>{
+  const {id} = req.params;
+  if(!id){
+    return res.status(400).json({message:"All fields are required"})
+  }
+  try{
+      await Coupon.deleteOne({_id:id});
+    return res.status(200).json({message:"Sucesfully Deleted"})
+  }catch(error:any){
     return res.status(500).json({message:"Something went wrong on server"})
   }
 })

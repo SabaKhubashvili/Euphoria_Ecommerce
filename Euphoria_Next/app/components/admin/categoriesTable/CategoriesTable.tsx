@@ -26,17 +26,18 @@ export const CategoriesTable = () => {
     return returningCustomers;
   }, [currentPage, categoriesPerPage]);
 
-  const actions = (
-    <div
-      style={{
-        flexBasis: 100 / (Object.keys(categoryData[0]).length + 1) + "%",
-      }}
-      className="flex justify-start text-blue-600 uppercase tracking-[0.01px] font-bold cursor-pointer"
-    >
-      See products
-    </div>
-  );
-
+  const actions = () => {
+    return (
+      <div
+        style={{
+          flexBasis: 100 / (Object.keys(categoryData[0]).length + 1) + "%",
+        }}
+        className="flex justify-start text-blue-600 uppercase tracking-[0.01px] font-bold cursor-pointer"
+      >
+        See products
+      </div>
+    );
+  };
 
   const changeCategoriesPerPage = (number: 10 | 20 | 30 | 40 | 50) => {
     setCategoriesPerPage(number);
@@ -64,7 +65,12 @@ export const CategoriesTable = () => {
         <div className="h-[650px] ">
           <MainTable
             bodyContent={categoriesOnPage}
-            topContent={["Category", "Products in this category", "Overal sales", "Profit"]}
+            topContent={[
+              "Category",
+              "Products in this category",
+              "Overal sales",
+              "Profit",
+            ]}
             type="primary"
             notFoundMessage="No customer was found"
             actions={actions}
