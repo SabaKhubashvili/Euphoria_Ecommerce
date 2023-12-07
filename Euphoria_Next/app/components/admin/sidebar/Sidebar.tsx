@@ -181,14 +181,12 @@ export const Sidebar = ({
             } `}
           >
             <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
-              <Categories isActive={pathname.startsWith("/admin/categories")} />
+              <Categories isActive={false} />
             </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
                 className={` ${
-                  pathname.startsWith("/admin/categories")
-                    ? "text-black"
-                    : " text-[#8B909A]"
+                    " text-[#8B909A]"
                 }
               xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >

@@ -32,7 +32,8 @@ export const CustomersTable = () => {
     return returningCustomers;
   }, [currentPage, customersPerPage]);
 
-  const actions = (
+  const actions = ()=>{
+    return(   
     <div
       style={{
         flexBasis: 100 / (Object.keys(customers[0]).length + 1) + "%",
@@ -42,8 +43,8 @@ export const CustomersTable = () => {
       <Icon svg={WebsiteIcons["edit"]} />
       <Icon svg={WebsiteIcons["delete"]} />
       <span className=" cursor-pointer select-none pl-[10px] text-purple">Make admin</span>
-    </div>
-  );
+    </div>)
+  };
 
   const searchForCustomer = (e: React.FormEvent) => {
     e.preventDefault();    

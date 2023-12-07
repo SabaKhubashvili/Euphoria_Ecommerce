@@ -10,11 +10,13 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { MainTable } from "../../tables/MainTable";
 
 
-const manageAdminActions = (
+const manageAdminActions = () =>{
+  return(
     <div>
 
     </div>
-)
+  )
+}
 
 const Product = ({ name, description, image }: any) => {
   return (
