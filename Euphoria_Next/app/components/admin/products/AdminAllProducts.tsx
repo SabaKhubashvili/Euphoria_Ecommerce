@@ -4,16 +4,16 @@ import React, { useMemo, useState } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import { categoryData, productInterface, products } from "@/app/constants";
+import { categoryData, productInterface } from "@/app/constants";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 
-const Product = ({ name, description, image }: productInterface) => {
+const Product = ({ title, description, images }: productInterface) => {
   return (
     <div className="px-2 py-1 flex flex-col gap-[10px] 2xl:w-1/6 xl:w-1/5 md:w-1/4 sm:w-1/3 xs:w-1/2 w-full">
       <div className="relative w-full h-full ">
         <Image
-          src={"/Images/Product/Black_Placeholder.webp"}
+          src={images[0]}
           alt="Image_Of_Product"
           width={200}
           height={400}
@@ -35,14 +35,14 @@ const Product = ({ name, description, image }: productInterface) => {
         </div>
       </div>
       <div className="">
-        <h3 className="font-semibold text-[16px]">{name}</h3>
+        <h3 className="font-semibold text-[16px]">{title}</h3>
         <p className="text-secondaryGray">{description}</p>
       </div>
     </div>
   );
 };
 
-export const AdminAllProducts = () => {
+export const AdminAllProducts = ({products}:{products:productInterface[]}) => {
   const [choosedCategory, setChoosedCategory] = useState<undefined | number>();
   const [filterByName, setFilterByName] = useState<string>("");
 
@@ -50,15 +50,15 @@ export const AdminAllProducts = () => {
     if (choosedCategory && filterByName.length > 0) {
       return products.filter(
         (product) =>
-          product.category === choosedCategory &&
-          product.name.includes(filterByName)
+          product.category._id === JSON.stringify(choosedCategory) &&
+          product.title.includes(filterByName)
       );
     } else if (filterByName.length > 0) {
       return products.filter((product) =>
-        product.name.toLowerCase().includes(filterByName.toLowerCase())
+        product.title.toLowerCase().includes(filterByName.toLowerCase())
       );
     } else if (choosedCategory) {
-      return products.filter((product) => product.category === choosedCategory);
+      return products.filter((product) =>   product.category._id === JSON.stringify(choosedCategory));
     } else {
       return products;
     }

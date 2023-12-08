@@ -32,7 +32,7 @@ export const Sidebar = ({
   const pathname = usePathname();
   const isAboveLargeScreens = useMediaQuery(extraLargeScreens);
   const { onOpen } = useCouponModal();
-  const { onOpen:categoriesModalOnOpen } = useCategoriesModal();
+  const { onOpen: categoriesModalOnOpen } = useCategoriesModal();
   // const { onOpen: addProductModalOnOpen } = UseAddProductModal();
 
   const bgRef = useRef<HTMLDivElement>(null);
@@ -185,9 +185,7 @@ export const Sidebar = ({
             </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
               <p
-                className={` ${
-                    " text-[#8B909A]"
-                }
+                className={` ${" text-[#8B909A]"}
               xl:text-[13px] 2xl:text-[15px] text-[14px] select-none`}
               >
                 Categories
@@ -229,14 +227,28 @@ export const Sidebar = ({
         )}
         <div className="px-[14px] flex flex-col gap-[8px]">
           <Link
-            href={'/admin/addProduct'}
-            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] `}
+            href={"/admin/addProduct"}
+            className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] 
+            ${
+              pathname.startsWith("/admin/addProduct") &&
+              "SidebarActiveComponent"
+            }
+            `}
           >
             <div className="xl:w-[23px] xl:h-[23px] w-[20px] h-[20px]">
-              <CirclePlus isActive={false} />
+              <CirclePlus isActive={pathname.startsWith("/admin/addProduct")} />
             </div>
             {(isAboveLargeScreens || isSidebarOpen) && (
-              <p className={"text-[#8B909A] select-none"}>Add Products</p>
+              <p
+                className={`
+              ${
+                pathname.startsWith("/admin/addProduct")
+                  ? "text-black"
+                  : " text-[#8B909A]"
+              } select-none `}
+              >
+                Add Products
+              </p>
             )}
           </Link>
           <Link
@@ -293,7 +305,7 @@ export const Sidebar = ({
             )}
           </div> */}
           <Link
-            href={'/admin/admins'}
+            href={"/admin/admins"}
             className={` flex gap-[8px] px-[16px] py-[8px] cursor-pointer relative items-center z-[2] ${
               pathname.startsWith("/admin/admins") && "SidebarActiveComponent"
             } `}
