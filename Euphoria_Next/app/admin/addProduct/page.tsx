@@ -16,8 +16,14 @@ const page = async({
   let product;
   const {data:categories} = await RestClient.GetRequest(BaseUrl.getCategories)  as { data: CategoryInterface[] };
   if(searchParams.productId){
-    const {data} = await RestClient.GetRequest(BaseUrl.getProductById + `/${searchParams.productId}`);
-    product = data
+    try{
+
+      const {data} = await RestClient.GetRequest(BaseUrl.getProductById + `/${searchParams.productId}`);
+      product = data
+    }catch(error){
+      console.log(error);
+      
+    }
   }
   
   
