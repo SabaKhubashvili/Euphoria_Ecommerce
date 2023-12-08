@@ -68,7 +68,7 @@ router.put(
         category,
         brand
       } = req.body;
-      
+
       if (
         !title ||
         !aboutProduct ||

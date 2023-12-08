@@ -91,12 +91,12 @@ export const AddOrEditProduct = ({ categories, product }: Props) => {
       if (!isSubmitting) {
         setIsSubmitting(true);
         RestClient.putRequest(
-          product ? BaseUrl.updateProduct  : BaseUrl.addProduct,
+          product ? BaseUrl.updateProduct : BaseUrl.addProduct,
           {
             ...values,
             availableSizes: JSON.stringify(values.availableSizes),
             category: values.category._id,
-            _id: product ? product._id : null
+            _id: product ? product._id : null,
           },
           getCookie("accessToken")
         )
@@ -111,7 +111,7 @@ export const AddOrEditProduct = ({ categories, product }: Props) => {
               progress: undefined,
               theme: "light",
             });
-            if(!product){
+            if (!product) {
               formik.resetForm();
             }
           })
@@ -239,7 +239,7 @@ export const AddOrEditProduct = ({ categories, product }: Props) => {
               categoryOnChange={(val: { id: string; name: string }) =>
                 formik.setFieldValue("category", { ...val, _id: val.id })
               }
-              mainButtonLabel={product ? 'Update product' :"Place product"}
+              mainButtonLabel={product ? "Update product" : "Place product"}
               formik={formik}
             />
           </div>
