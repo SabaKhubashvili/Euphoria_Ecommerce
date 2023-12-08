@@ -22,12 +22,14 @@ import RestClient from "@/app/RestClient/RequestTypes";
 import { getCookie } from "cookies-next";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { toast } from "react-toastify";
+import { productInterface } from "@/app/constants";
 
 interface Props {
   categories?: CategoryInterface[];
+  product: productInterface | null;
 }
 
-export const AddOrEditProduct = ({ categories }: Props) => {
+export const AddOrEditProduct = ({ categories, product }: Props) => {
   const [activeImage, setActiveImage] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,22 +37,24 @@ export const AddOrEditProduct = ({ categories }: Props) => {
   const formik = useFormik({
     validateOnChange: false,
     initialValues: {
-      title: "",
-      aboutProduct: "",
-      description: "",
-      price: 0,
-      availableSizes: {
-        xs: false,
-        sm: false,
-        md: false,
-        lg: false,
-        xl: false,
-        xxl: false,
-      },
-      images: [],
-      category: { id: "", name: "" },
-      advantages: "",
-      brand: "",
+      title: product?.title || "",
+      aboutProduct: product?.aboutProduct || "",
+      description: product?.description || "",
+      price: product?.price || 0,
+      availableSizes: product?.availableSizes
+        ? JSON.parse(product.availableSizes)
+        : {
+            xs: false,
+            sm: false,
+            md: false,
+            lg: false,
+            xl: false,
+            xxl: false,
+          },
+      images: product?.images || [],
+      category: product?.category || { _id: "", name: "" },
+      advantages: product?.advantages || "",
+      brand: product?.brand || "",
     },
     validate: (values) => {
       let errors: any = {};
@@ -60,7 +64,7 @@ export const AddOrEditProduct = ({ categories }: Props) => {
       if (!values.price) {
         errors.price = "Price  is required";
       }
-      if (!values.category.id) {
+      if (!values.category._id) {
         errors.category = "Category is required";
       }
       if (!values.brand) {
@@ -87,11 +91,12 @@ export const AddOrEditProduct = ({ categories }: Props) => {
       if (!isSubmitting) {
         setIsSubmitting(true);
         RestClient.putRequest(
-          BaseUrl.addProduct,
+          product ? BaseUrl.updateProduct  : BaseUrl.addProduct,
           {
             ...values,
             availableSizes: JSON.stringify(values.availableSizes),
-            category: values.category.id,
+            category: values.category._id,
+            _id: product ? product._id : null
           },
           getCookie("accessToken")
         )
@@ -106,7 +111,9 @@ export const AddOrEditProduct = ({ categories }: Props) => {
               progress: undefined,
               theme: "light",
             });
-            formik.resetForm();
+            if(!product){
+              formik.resetForm();
+            }
           })
           .catch((err: any) => {
             toast.error(err.response.data.message, {
@@ -136,7 +143,7 @@ export const AddOrEditProduct = ({ categories }: Props) => {
   };
   return (
     <div>
-      <PageTop pageTitle="Add a product" />
+      <PageTop pageTitle={product ? "Modify product" : "Add a product"} />
       <div
         className={`w-full my-[40px] ${Oswald.className} ${
           isSubmitting && "opacity-75"
@@ -223,16 +230,16 @@ export const AddOrEditProduct = ({ categories }: Props) => {
               description={formik.values.description}
               availableSizes={JSON.stringify(formik.values.availableSizes)}
               category={{
-                _id: formik.values.category.id,
+                _id: formik.values.category._id,
                 name: formik.values.category.name,
               }}
               brand={formik.values.brand}
               availableSizesOnChange={availableSizesOnChange}
               categories={categories}
               categoryOnChange={(val: { id: string; name: string }) =>
-                formik.setFieldValue("category", val)
+                formik.setFieldValue("category", { ...val, _id: val.id })
               }
-              mainButtonLabel="Place product"
+              mainButtonLabel={product ? 'Update product' :"Place product"}
               formik={formik}
             />
           </div>

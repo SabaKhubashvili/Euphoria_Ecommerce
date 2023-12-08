@@ -7,10 +7,11 @@ import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { categoryData, productInterface } from "@/app/constants";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Link from "next/link";
 
-const Product = ({ title, description, images }: productInterface) => {
+const Product = ({  _id, title, description, images }: productInterface) => {
   return (
-    <div className="px-2 py-1 flex flex-col gap-[10px] 2xl:w-1/6 xl:w-1/5 md:w-1/4 sm:w-1/3 xs:w-1/2 w-full">
+    <Link href={{pathname:'/admin/addProduct',query:{productId:_id}}} className="px-2 py-1 flex flex-col gap-[10px] 2xl:w-1/6 xl:w-1/5 md:w-1/4 sm:w-1/3 xs:w-1/2 w-full">
       <div className="relative w-full h-full ">
         <Image
           src={images[0]}
@@ -38,7 +39,7 @@ const Product = ({ title, description, images }: productInterface) => {
         <h3 className="font-semibold text-[16px]">{title}</h3>
         <p className="text-secondaryGray">{description}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 

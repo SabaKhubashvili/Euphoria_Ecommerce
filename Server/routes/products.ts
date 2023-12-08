@@ -56,7 +56,7 @@ router.put(
   "/addProduct",
   verifyTokenAndAdminAuthorization,
   async (req: any, res: any) => {
-    // try {
+    try {
       const {
         title,
         aboutProduct,
@@ -99,14 +99,63 @@ router.put(
       return res
         .status(200)
         .json({ message: "Product sucesfully placed", success: true });
-    // } catch (error) {
+    } catch (error) {
       return res.status(500).json({
         message: "Something went wrong adding product",
         success: false,
       });
-    // }
+    }
   }
-);          
+);         
+
+router.put('/update', verifyTokenAndAdminAuthorization, async (req: Request, res: Response) => {
+  const {
+    _id,
+    title,
+    aboutProduct,
+    advantages,
+    description,
+    images,
+    availableSizes,
+    price,
+    category,
+    brand
+  } = req.body;
+
+  try {
+    const updatedProduct = await ProductSchema.findOneAndUpdate({ _id: _id }, {
+      title,
+      aboutProduct,
+      description,
+      images,
+      advantages,
+      availableSizes,
+      price,
+      category,
+      brand
+    });
+
+    console.log(updatedProduct);
+    
+
+    if (updatedProduct) {
+      res.status(201).json({ message:"Sucesfully updated" });
+    } else {
+      res.status(404).json({
+        message: "Product not found or not updated",
+        success: false,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+
+    return res.status(500).json({
+      message: "Something went wrong",
+      success: false,
+    });
+  }
+});
+
 
 router.delete(
   "/:id",
@@ -169,11 +218,9 @@ router.get('/getAllFavorites',verifyTokenAuthorization, async(req:Request & {use
   const user  = await UserSchema.findOne({
     _id:userId
   }).populate('favorites').select('favorites')
-  
   const {favorites, ...otherData} = user;
-  
   return res.status(200).json({favorites});
-  
 })
+
 
 module.exports = router;
