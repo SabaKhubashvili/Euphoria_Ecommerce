@@ -12,11 +12,13 @@ router.post(
     if (!code) {
       return res.status(400).json({ message: "Coupon code is required" });
     }
+    
     try {
       let coupon = await Coupon.findOne({
-        code,
+        coupon:code,
       });
-
+      console.log(code);
+      
       if (coupon !== null) {
         const {percentage,code,...others} = coupon
         return res.status(200).json({ success: true, coupon:{percentage,code}});
