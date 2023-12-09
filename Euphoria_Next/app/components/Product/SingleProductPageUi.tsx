@@ -261,20 +261,30 @@ export const SingleProductInformation = ({
                 flex gap-[10px]
               `}
               >
+
+                {discount ? (
+                      <p className="flex gap-[10px]">
+                      <span className=" text-secondary">
+                        {Math.floor(quantity * (price * discount) / 100)} GEL
+                      </span>
+                      <span
+                        className="relative after:absolute after:w-full after:top-0 after:bottom-[-10px] after:left-0 after:h-[2px] after:bg-gray text-gray after:my-auto leading-[28px]
+                    text-[14px] uppercase flex items-end
+                    "
+                      >
+                        {quantity * price} GEL
+                      </span>
+                    </p>
+                ):
                 <span
-                  className={`${
-                    discount &&
-                    "after:w-[110%] after:absolute after:bg-red-500 after:h-[3px] after:rounded-lg after:-left-1 after:top-5 after:rotate-12 after:z-10 relative"
-                  }`}
+                className={`${
+                  discount &&
+                  "after:w-[110%] after:absolute after:bg-red-500 after:h-[3px] after:rounded-lg after:-left-1 after:top-5 after:rotate-12 after:z-10 relative"
+                }`}
                 >
                   {quantity * price} GEL
                 </span>
-
-                {discount && (
-                  <span>
-                    {quantity * Math.floor((price * discount) / 100)} GEL
-                  </span>
-                )}
+                }
               </h2>
             </React.Fragment>
           )}

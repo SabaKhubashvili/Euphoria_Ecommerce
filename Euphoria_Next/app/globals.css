@@ -29,7 +29,7 @@
 }
 
 
-.mySwiper .swiper-pagination {
+.homeBanner .swiper-pagination {
     position: absolute;
     z-index: 5;
     width: fit-content;
@@ -42,14 +42,14 @@
 }
 
 
-.mySwiper .swiper-pagination-bullet {
+.homeBanner .swiper-pagination-bullet {
     border: 2px solid #828282;
     width: 20px;
     height: 20px;
     display: block;
     cursor: pointer;
   }
-.mySwiper .swiper-pagination-bullet-active{
+.homeBanner .swiper-pagination-bullet-active{
     border: none;
     background-color: black;
     width: 30px;
@@ -58,7 +58,7 @@
 }
 
 @media screen and (max-width:1024px) {
-    .mySwiper .swiper-pagination {
+    .homeBanner .swiper-pagination {
         left:0;
         justify-content: center !important;
         width: 100% !important;

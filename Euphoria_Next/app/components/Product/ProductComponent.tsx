@@ -103,12 +103,12 @@ export const ProductComponent = ({
 
   return (
     <div
-      className={`flex flex-col gap-[14px]  ${
+      className={`flex flex-col h-full gap-[14px]  ${
         usingCol ? "col-span-1" : "w-full h-full"
       }`}
     >
-      <div className="relative w-full ">
-        <Link href={`/product/${_id}`} className="peer relative">
+      <div className="relative w-full h-full">
+        <Link href={`/product/${_id}`} className="peer relative w-full h-full">
           { (discount && discount !== null) ?
             <div className="top-4 left-0 bg-black text-[16px] text-white w-fit px-2 py-1 absolute">
               - <span>{discount}</span>%
@@ -116,13 +116,17 @@ export const ProductComponent = ({
           :
           null
           }
+          <div className="relative w-full h-full">
+            
           <Image
-            width={300}
-            height={400}
+            // width={300}
+            // height={400}
             alt="Product"
             src={`${images[0]}`}
-            className="w-full select-none h-[450px] object-cover"
-          />
+            className="w-full select-none  object-cover"
+            fill
+            />
+            </div>
         </Link>
         {isAboveLargeScreens && (
           <div
@@ -166,7 +170,11 @@ export const ProductComponent = ({
                 : "sm:text-[18px] text-[14px]"
             } font-light`}
           >
-            {aboutProduct.slice(0, 70)}...
+            {aboutProduct.slice(0, 20)}
+            {
+              aboutProduct.length > 20 &&
+              '...'
+            }
           </h1>
         </div>
         <h3

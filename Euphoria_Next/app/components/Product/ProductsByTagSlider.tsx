@@ -1,18 +1,12 @@
-"use client";
-
+'use client'
 import React from "react";
 import { FreeMode, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ProductComponent } from "./ProductComponent";
 import "swiper/css";
 import "swiper/css/navigation";
-import { SliderController } from "../Slides/SliderController";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
-import { largeScreens } from "@/app/Screens/Screens";
-import { productInterface, products } from "@/app/constants";
-import "swiper/css";
-import "swiper/css/navigation";
-import { NextIconGray, PrevIconGray } from "@/public/Svg/Icons";
+import { productInterface } from "@/app/constants";
 
 interface Props {
   title?: string;
@@ -23,27 +17,24 @@ interface Props {
 export const ProductsByTagSlider = ({ title, sliderName, data }: Props) => {
   return (
     <section className="flex flex-col gap-[34px] pt-[30px] relative">
-      {title && <h1 className="text-[24px] leading-[68px]">{title}</h1>}
-      <div className="absolute top-10 right-0 z-[3] lg:w-fit w-full p-4 md:inline hidden ">
-        <div className="flex gap-[3px] lg:justify-end justify-between w-full">
-          <div className={`${sliderName}_Prev cursor-pointer`}>
-            <PrevIconGray />
-          </div>
-          <div className={`${sliderName}_Next cursor-pointer`}>
-            <NextIconGray />
-          </div>
+      {title && <h1 className="text-[24px] w-fit">{title}</h1>}
+      {/* <div className="absolute top-10 right-0 z-[3] w-fit">
+        <div className="flex w-fit gap-[3px] justify-end">
+          <div className="slider_Prev">Prev</div>
+          <div className="slider_Next">Next</div>
         </div>
-      </div>
+      </div> */}
       <Swiper
-        modules={[Navigation, FreeMode]}
-        navigation={{
-          nextEl: `.${sliderName}_Next`,
-          prevEl: `.${sliderName}_Prev`,
-        }}
-        freeMode
-        className="!h-full !w-full flex gap-[20px]"
-        slidesPerView={"auto"}
+        // navigation={{
+        //   nextEl: ".slider_Next",
+        //   prevEl: ".slider_Prev",
+        // }}
+        modules={[FreeMode]}
+        className="swiper-container"
+        style={{width:'100%'}}
+        slidesPerView={'auto'}
         spaceBetween={20}
+        freeMode
       >
         {data.slice(0, 15).map((product, index) => (
           <SwiperSlide
@@ -57,3 +48,5 @@ export const ProductsByTagSlider = ({ title, sliderName, data }: Props) => {
     </section>
   );
 };
+
+
