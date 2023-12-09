@@ -55,6 +55,7 @@ export const AddOrEditProduct = ({ categories, product }: Props) => {
       category: product?.category || { _id: "", name: "" },
       advantages: product?.advantages || "",
       brand: product?.brand || "",
+      discount: product?.discount || null,
     },
     validate: (values) => {
       let errors: any = {};
@@ -84,6 +85,9 @@ export const AddOrEditProduct = ({ categories, product }: Props) => {
       }
       if (values.images.length === 0) {
         errors.images = " ";
+      }
+      if(values.discount && values.discount > 100){
+        errors.discount = 'Discount must be less than 100'
       }
       return errors;
     },
@@ -224,23 +228,24 @@ export const AddOrEditProduct = ({ categories, product }: Props) => {
           <div className="col-span-1 select-none">
             <SingleProductInformation
               _id={1}
-              isEditable
               title={formik.values.title}
-              price={formik.values.price}
-              description={formik.values.description}
-              availableSizes={JSON.stringify(formik.values.availableSizes)}
               category={{
                 _id: formik.values.category._id,
                 name: formik.values.category.name,
               }}
               brand={formik.values.brand}
-              availableSizesOnChange={availableSizesOnChange}
+              description={formik.values.description}
+              price={formik.values.price}
+              discount={formik.values.discount}
+              availableSizes={JSON.stringify(formik.values.availableSizes)}
               categories={categories}
+              availableSizesOnChange={availableSizesOnChange}
               categoryOnChange={(val: { id: string; name: string }) =>
-                formik.setFieldValue("category", { ...val, _id: val.id })
+              formik.setFieldValue("category", { ...val, _id: val.id })
               }
               mainButtonLabel={product ? "Update product" : "Place product"}
               formik={formik}
+              isEditable
             />
           </div>
         </div>

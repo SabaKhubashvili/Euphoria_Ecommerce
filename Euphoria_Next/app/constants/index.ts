@@ -157,7 +157,8 @@ export interface productInterface{
       name: string;
       _id: string;
     };
-    brand:string
+    brand:string,
+    discount:number | null;
 }
 export const products: productInterface[] = [
   {

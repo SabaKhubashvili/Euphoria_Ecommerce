@@ -57,6 +57,7 @@ const page = async ({ params }: { params: params }) => {
                   price={product.price}
                   category={product.category}
                   description={product.description}
+                  discount={product.discount}
                 />
               </div>
             </div>

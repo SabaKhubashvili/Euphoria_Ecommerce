@@ -14,6 +14,7 @@ const ProductSchema = new mongoose.Schema({
     ref: 'Category',
     required: true,
   },
+  discount: {type:Number,required:false},
 });
 
 module.exports = mongoose.model('Product', ProductSchema);

@@ -47,7 +47,6 @@ router.get('/get/:id', async (req: any, res: any) => {
 
     return res.status(200).json(product);
   } catch (err) {
-    console.error(err); // Log the error for debugging purposes
     return res.status(500).json({ message: 'Internal server error' });
   }
 });
@@ -66,7 +65,8 @@ router.put(
         availableSizes,
         price,
         category,
-        brand
+        brand,
+        discount
       } = req.body;
 
       if (
@@ -91,7 +91,8 @@ router.put(
         availableSizes,
         price,
         category,
-        brand
+        brand,
+        discount,
       });
 
       await newProduct.save();
@@ -119,7 +120,8 @@ router.put('/update', verifyTokenAndAdminAuthorization, async (req: Request, res
     availableSizes,
     price,
     category,
-    brand
+    brand,
+    discount
   } = req.body;
 
   try {
@@ -132,11 +134,10 @@ router.put('/update', verifyTokenAndAdminAuthorization, async (req: Request, res
       availableSizes,
       price,
       category,
-      brand
+      brand,
+      discount
     });
 
-    console.log(updatedProduct);
-    
 
     if (updatedProduct) {
       res.status(201).json({ message:"Sucesfully updated" });

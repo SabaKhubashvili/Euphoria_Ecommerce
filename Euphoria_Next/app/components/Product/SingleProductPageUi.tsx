@@ -37,6 +37,7 @@ interface Props {
   categoryOnChange?: (val: { id: string; name: string }) => void;
   categories?: CategoryInterface[];
   mainButtonLabel?: string;
+  discount: number | null;
   formik?: FormikProps<any>;
 }
 
@@ -45,13 +46,14 @@ export const SingleProductInformation = ({
   title,
   price,
   availableSizes,
-  availableSizesOnChange,
   category,
   description,
   isEditable,
   brand,
-  categoryOnChange,
   categories,
+  discount,
+  availableSizesOnChange,
+  categoryOnChange,
   mainButtonLabel,
   formik,
 }: Props) => {
@@ -216,24 +218,65 @@ export const SingleProductInformation = ({
           />
         </div>
         <div className={isEditable ? "flex flex-col justify-between" : ""}>
-          <h3 className="uppercase text-[14px] font-medium select-none">
-            Price total
-          </h3>
           {isEditable ? (
-            <AddProductInput
-              id={"price"}
-              name="price"
-              onChange={formik?.handleChange}
-              value={price.toString()}
-              placeholder="Price"
-              fontSize="26px"
-              type={"number"}
-              feedback={formik?.errors.price}
-            />
+            <div className="flex">
+              <div>
+                <h3 className="uppercase text-[14px] font-medium select-none">
+                  Price total
+                </h3>
+                <AddProductInput
+                  id={"price"}
+                  name="price"
+                  onChange={formik?.handleChange}
+                  value={price.toString()}
+                  placeholder="Price"
+                  fontSize="26px"
+                  type={"number"}
+                  feedback={formik?.errors.price}
+                />
+              </div>
+              <div>
+                <h3 className="uppercase text-[14px] font-medium select-none">
+                  Discount (Percentage)
+                </h3>
+                <AddProductInput
+                  id={"discount"}
+                  name="discount"
+                  onChange={formik?.handleChange}
+                  value={discount?.toString() || ""}
+                  placeholder="Discount"
+                  fontSize="26px"
+                  type={"number"}
+                  feedback={formik?.errors.discount}
+                />
+              </div>
+            </div>
           ) : (
-            <h2 className="text-[26px] font-bold uppercase select-none">
-              {quantity * price} GEL
-            </h2>
+            <React.Fragment>
+              <h3 className="uppercase text-[14px] font-medium select-none">
+                Price total
+              </h3>
+              <h2
+                className={`text-[26px] font-bold uppercase select-none 
+                flex gap-[10px]
+              `}
+              >
+                <span
+                  className={`${
+                    discount &&
+                    "after:w-[110%] after:absolute after:bg-red-500 after:h-[3px] after:rounded-lg after:-left-1 after:top-5 after:rotate-12 after:z-10 relative"
+                  }`}
+                >
+                  {quantity * price} GEL
+                </span>
+
+                {discount && (
+                  <span>
+                    {quantity * Math.floor((price * discount) / 100)} GEL
+                  </span>
+                )}
+              </h2>
+            </React.Fragment>
           )}
         </div>
       </div>
