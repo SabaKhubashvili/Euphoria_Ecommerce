@@ -38,7 +38,7 @@ export const ProductsByTagSlider = ({ title, sliderName, data }: Props) => {
       >
         {data.slice(0, 15).map((product, index) => (
           <SwiperSlide
-            className="sm:max-w-[300px] max-w-[200px] h-fit"
+            className="sm:!max-w-[300px] sm:!h-[500px] !h-[400px] max-w-[200px] "
             key={index}
           >
             <ProductComponent res={false} {...product} />

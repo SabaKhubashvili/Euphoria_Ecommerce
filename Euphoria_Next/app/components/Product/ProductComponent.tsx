@@ -123,7 +123,7 @@ export const ProductComponent = ({
             // height={400}
             alt="Product"
             src={`${images[0]}`}
-            className="w-full select-none  object-cover"
+            className="w-full select-none object-cover"
             fill
             />
             </div>
