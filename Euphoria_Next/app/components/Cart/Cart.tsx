@@ -20,7 +20,7 @@ export const Cart = ({
   setTotalPrice,
   coupon,
   setCoupon,
-  data
+  data,
 }: {
   setStep: (value: Steps) => void;
   totalPrice: number;
@@ -32,9 +32,8 @@ export const Cart = ({
     success: boolean;
   };
   setCoupon: (prev: any) => void;
-  data:CartInterface
+  data: CartInterface;
 }) => {
-
   const [cartData, setCartData] = useState<CartInterface>(data);
   const [isSending, setIsSending] = useState(false);
 
@@ -102,7 +101,7 @@ export const Cart = ({
           ...prev,
           products: [],
         }));
-        setTotalPrice(0)
+        setTotalPrice(0);
       })
       .catch((err) => {
         toast.error("Something went wrong", {
@@ -167,12 +166,11 @@ export const Cart = ({
             )}
           </div>
         </div>
-        {data.products.length > 0 &&
-
+        {data.products.length > 0 && (
           <div className="flex justify-end items-center">
-          <GrayButton onClick={clearCart} label="Clear cart" small />
-        </div>
-        }
+            <GrayButton onClick={clearCart} label="Clear cart" small />
+          </div>
+        )}
       </div>
       <div className="xl:col-span-1 col-span-3 flex flex-col gap-[24px]">
         <div className="w-full border-[2px] border-solid border-divider bg-lightBlue pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">
@@ -192,16 +190,16 @@ export const Cart = ({
                       code: e.target.value,
                     }))
                   }
+                  rightButton={
+                    <button
+                      className="outline-none whitespace-nowrap pr-[15px]"
+                      onClick={checkCoupon}
+                      disabled={isSending || coupon.success}
+                    >
+                      Apply Discount
+                    </button>
+                  }
                 />
-                <div className="sm:w-1/3 w-full">
-                  <GrayButton
-                    onClick={checkCoupon}
-                    label="Apply Discount"
-                    small
-                    full
-                    disabled={coupon.isDisabled}
-                  />
-                </div>
               </div>
               {coupon.success && (
                 <div className="text-green pt-[10px]">

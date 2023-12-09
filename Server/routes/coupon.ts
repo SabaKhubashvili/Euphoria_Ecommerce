@@ -9,15 +9,14 @@ router.post(
   async (req: Request, res: Response) => {
     const code = req.body.code;
     
-    if (!code) {
-      return res.status(400).json({ message: "Coupon code is required" });
+    if (!code || code.length <= 0) {
+      return res.status(404).json({ message: "Coupon not found or incorrect" });
     }
     
     try {
       let coupon = await Coupon.findOne({
         coupon:code,
       });
-      console.log(code);
       
       if (coupon !== null) {
         const {percentage,code,...others} = coupon
