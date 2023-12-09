@@ -304,12 +304,16 @@ export const Cart = ({
               <p>Subtotal</p>
               <p>{totalPrice} GEL</p>
             </div>
-            <div className="flex justify-between font-medium xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] text-gray">
+            {/* <div className="flex justify-between font-medium xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] text-gray">
               <p>Coupon</p>
               <p>
                 {coupon.success ? (totalPrice * coupon.percentage) / 100 : 0}{" "}
                 GEL
               </p>
+            </div> */}
+            <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] text-gray ">
+              <p>Shipping</p>
+              <p>10.00 GEL</p>
             </div>
             <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] pt-[10px]">
               <p>Order total</p>

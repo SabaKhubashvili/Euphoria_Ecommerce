@@ -73,7 +73,7 @@ const validateForm = (values: FormikValues) => {
 
 export const CartPage = ({ data }: Props) => {
   const [step, setStep] = useState<Steps>(Steps.Cart);
-  const [totalPrice, setTotalPrice] = useState(() => calculateTotalPrice(data));
+  const [totalPrice, setTotalPrice] = useState(() => calculateTotalPrice(data) + 10.00);
 
   const [coupon, setCoupon] = useState({
     code: "",

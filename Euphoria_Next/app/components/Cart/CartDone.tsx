@@ -9,7 +9,7 @@ export const CartDone = () => {
     const router = useRouter()
   return (
     <div className="flex flex-col  justify-center items-center pt-[86px]">
-      <Icon svg={WebsiteIcons["AnimatedCheckmark"]} />
+      <Icon svg={WebsiteIcons["AnimatedCheckmark"]} className='flex justify-center' />
       <h1 className="text-[25px] text-center">Your order was succesfully placed</h1>
       <p className="pt-[10px] text-secondaryBlack text-center">
         You will recieve message on mail
