@@ -34,9 +34,21 @@ export const CartPage = ({ data }: Props) => {
   const [step, setStep] = useState<Steps>(Steps.Cart);
   const [totalPrice, setTotalPrice] = useState(() => {
     return data.products.reduce((sum, product) => {
-      return sum + product.quantity * product?.product.price;
+      const productPrice = product?.product.price;
+      const productDiscount = product?.product.discount;
+      if (productPrice != null) {
+        if (productDiscount != null) {
+          const discountedPrice = productPrice - (productPrice * productDiscount / 100);
+          return sum + product.quantity * discountedPrice;
+        } else {
+          return sum + product.quantity * productPrice;
+        }
+      } else {
+        return sum;
+      }
     }, 0);
   });
+  
   const [coupon, setCoupon] = useState({
     code: "",
     percentage: 0,

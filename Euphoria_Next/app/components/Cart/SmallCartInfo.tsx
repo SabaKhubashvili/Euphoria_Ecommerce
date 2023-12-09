@@ -17,14 +17,14 @@ export const SmallCartInfo = ({ data }: { data: CartRowInterface[] }) => {
           1 Item in Cart
         </h4>
         <div className="pt-[19px] flex flex-col gap-[14px] h-[400px] overflow-y-auto overflox-x-auto">
-          {data.map((product) => (
+          {data.map((row) => (
             <div
               className="flex justify-between min-w-[500px]"
-              key={product._id}
+              key={row._id}
             >
               <div className="flex gap-[16px] basis-2/3">
                 <Image
-                  src={product.product.images[0]}
+                  src={row.product.images[0]}
                   width={100}
                   height={100}
                   alt="CartImage"
@@ -32,22 +32,26 @@ export const SmallCartInfo = ({ data }: { data: CartRowInterface[] }) => {
                 />
                 <div>
                   <h4 className="xl:text-[18px] text-[16px] font-medium">
-                    {product.product.title}
+                    {row.product.title}
                   </h4>
                   <p className="text-secondaryBlack pt-[10px]">
-                    <span className=" text-gray">Qty:</span> {product.quantity}
+                    <span className=" text-gray">Qty:</span> {row.quantity}
                   </p>
                   <Link
-                    href={`/product/${product.product._id}`}
-                    className=" text-secondaryBlack uppercase text-[14px] flex items-center gap-[10px] cursor-pointer"
-                  >
+                    href={`/product/${row.product._id}`}
+                    className=" text-secondaryBlack uppercase text-[14px] flex items-center gap-[10px] cursor-pointer">
                     VIEW DETAILS <Dropdown_Down />
                   </Link>
                 </div>
               </div>
               <div className="basis-1/3 text-end">
                 <p className="text-secondaryBlack">
-                  {product.product.price} EUR
+                  {row.product.discount
+                    ? Math.floor(
+                        (row.product.price * row.product.discount) / 100
+                      )
+                    : row.product.price}
+                  GEL
                 </p>
               </div>
             </div>

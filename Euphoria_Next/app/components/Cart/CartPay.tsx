@@ -23,7 +23,7 @@ interface Props {
 export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
   const jwt:any = jwtDecode(getCookie('accessToken') || '');
   const { cartData: { products } } = useCartStore();
-
+  
   const paypalCreateOrder = async () => {
     try {
       let response = await axios.post("/api/paypal/createOrder", {
