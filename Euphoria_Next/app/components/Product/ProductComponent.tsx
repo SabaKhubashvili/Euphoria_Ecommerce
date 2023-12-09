@@ -28,18 +28,18 @@ export const ProductComponent = ({
   price,
   usingCol,
   res = true,
+  discount,
 }: Props) => {
-
   const router = useRouter();
   const isAboveLargeScreens = useMediaQuery(largeScreens);
 
   let token = getCookie("accessToken");
-const favorites = localStorage.getItem('favorites');
-const parsedFavorites = JSON.parse(favorites || "") || []; 
+  const favorites = localStorage.getItem("favorites");
+  const parsedFavorites = JSON.parse(favorites || "") || [];
 
-const [isFavorited, setIsFavorited] = useState(
-  parsedFavorites.some((favorite:any) => favorite === _id.toString())
-);
+  const [isFavorited, setIsFavorited] = useState(
+    parsedFavorites.some((favorite: any) => favorite === _id.toString())
+  );
   const addToCart = () => {
     RestClient.putRequest(
       BaseUrl.addToCart,
@@ -74,16 +74,16 @@ const [isFavorited, setIsFavorited] = useState(
         if (parsedFavorites) {
           if (res.data.add) {
             parsedFavorites.push(_id.toString());
-            setIsFavorited(true)
+            setIsFavorited(true);
           } else {
             const indexToRemove = parsedFavorites.indexOf(_id.toString());
             if (indexToRemove !== -1) {
               parsedFavorites.splice(indexToRemove, 1);
             }
-            setIsFavorited(false)
+            setIsFavorited(false);
           }
         }
-        localStorage.setItem('favorites',JSON.stringify(parsedFavorites))
+        localStorage.setItem("favorites", JSON.stringify(parsedFavorites));
       })
       .catch((err) => {
         if ((err.status = 403)) {
@@ -100,7 +100,6 @@ const [isFavorited, setIsFavorited] = useState(
         }
       });
   };
-  
 
   return (
     <div
@@ -109,13 +108,20 @@ const [isFavorited, setIsFavorited] = useState(
       }`}
     >
       <div className="relative w-full ">
-        <Link href={`/product/${_id}`} className="peer">
+        <Link href={`/product/${_id}`} className="peer relative">
+          { (discount && discount !== null) ?
+            <div className="top-4 left-0 bg-black text-[16px] text-white w-fit px-2 py-1 absolute">
+              - <span>{discount}</span>%
+          </div>  
+          :
+          null
+          }
           <Image
             width={300}
             height={400}
             alt="Product"
             src={`${images[0]}`}
-            className="w-full h-full select-none"
+            className="w-full select-none h-[450px] object-cover"
           />
         </Link>
         {isAboveLargeScreens && (
@@ -135,7 +141,7 @@ const [isFavorited, setIsFavorited] = useState(
             <GrayButton
               full
               small
-              label={isFavorited ? 'Unsave' : 'Save'}
+              label={isFavorited ? "Unsave" : "Save"}
               styles={{ fontSize: "12px", height: "40px" }}
               onClick={addToFavorites}
             />
@@ -170,7 +176,22 @@ const [isFavorited, setIsFavorited] = useState(
               : "sm:text-[22px] text-[18px]"
           } font-medium`}
         >
-          {price} GEL
+          {discount ? (
+            <p className="flex gap-[10px]">
+              <span className=" text-secondary">
+                {Math.floor((price * discount) / 100)} GEL
+              </span>
+              <span
+                className="relative after:absolute after:w-full after:top-0 after:bottom-[-7px] after:left-0 after:h-[2px] after:bg-gray text-gray after:my-auto leading-[28px]
+            text-[14px] uppercase flex items-end
+            "
+              >
+                {price} GEL
+              </span>
+            </p>
+          ) : (
+            <span>{price} GEL</span>
+          )}
         </h3>
       </div>
     </div>

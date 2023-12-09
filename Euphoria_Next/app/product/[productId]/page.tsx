@@ -21,7 +21,6 @@ interface params {
 }
 
 const page = async ({ params }: { params: params }) => {
-
   try {
     const { data: product }: { data: productInterface } =
       await RestClient.GetRequest(

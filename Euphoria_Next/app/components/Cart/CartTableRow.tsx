@@ -49,6 +49,15 @@ export const CartTableRow = ({
           progress: undefined,
           theme: "light",
         });
+        totalPriceOnChange((prev: number) => {
+          if (product.discount) {
+            return (
+              prev - productPrice * quantity
+            );
+          } else {
+            return prev - product.price * quantity;
+          }
+        });
       })
       .catch((err) => {
         toast.error(err.response.data.message, {
@@ -66,7 +75,7 @@ export const CartTableRow = ({
 
   const changeQuantity = () => {
     RestClient.postRequest(
-      "http://localhost:3500/api/cart/updateQuantity",
+      BaseUrl.updateQuantity,
       {
         cartRowId: _id,
         updatedQuantity: innerQuantity,
@@ -110,8 +119,6 @@ export const CartTableRow = ({
           height={110}
           className="object-cover w-[83px] h-[103px] select-none"
         />
-
-        {/* Adjusted gap value */}
         <h2 className="md:text-[18px] text-[15px] font-medium tracking-[0.5px] uppercase">
           {product.title}
         </h2>
