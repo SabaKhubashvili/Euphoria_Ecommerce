@@ -1,12 +1,14 @@
 "use client";
 import { Dropdown_Down } from "@/public/Svg/Icons";
 import Image from "next/image";
-import React from "react";
-import { Roboto } from "../assets/Fonts";
+import React, { useState } from "react";
 import { CartRowInterface } from "@/app/types";
 import Link from "next/link";
 
-export const SmallCartInfo = ({ data }: { data: CartRowInterface[] }) => {
+export const SmallCartInfo = ({ data,totalPrice }: { data: CartRowInterface[],totalPrice:number }) => {
+  const [isOpen,setIsOpen] = useState(true)
+
+
   return (
     <div className="py-[40px]  px-[30px] border-divider border-[2px] bg-lightBlue h-fit lg:basis-2/5">
       <h1 className="text-[24px] border-b-[1px] border-divider pb-[19px]">
@@ -15,7 +17,7 @@ export const SmallCartInfo = ({ data }: { data: CartRowInterface[] }) => {
       <div className="pt-[19px] flex flex-col gap-[13px] border-b-[1px] border-divider pb-[25px]">
         <div className="flex w-full justify-between text-[18px] font-medium text-gray">
           <h1>Cart Subtotal</h1>
-          <h1>56.20₾</h1>
+          <h1>{totalPrice - 10}₾</h1>
         </div>
 
         <div className="flex w-full justify-between text-[18px] font-medium text-gray">
@@ -26,17 +28,24 @@ export const SmallCartInfo = ({ data }: { data: CartRowInterface[] }) => {
       <div className="flex flex-col gap-[19px] pb-[13px] border-b-[1px] border-divider">
         <div className="pt-[23px] w-full flex justify-between font-medium text-[18px]">
           <h1>Order total</h1>
-          <h1>120.00 GEL</h1>
+          <h1>{totalPrice} GEL</h1>
         </div>
-        <h1 className="font-normal text-[16px]">
-          {data.reduce((sum, product) => sum + product.quantity, 0)} Item in
-          Cart
-        </h1>
+        <div className={`flex justify-between w-full items-center cursor-pointer select-none  `} onClick={()=>setIsOpen(prev=>!prev)}>
+          <h1 className="font-normal text-[16px]">
+            {data.reduce((sum, product) => sum + product.quantity, 0)} Items in
+            Cart
+          </h1>
+          <div className={`flex items-center transition-all duration-200 cursor-pointer ${!isOpen && 'rotate-180'}`}>
+            <Dropdown_Down/>
+          </div>
+        </div>
       </div>
-      <div className="pt-[22px]">
-        <div className="pt-[19px] flex flex-col gap-[14px] h-[400px] overflow-y-auto overflox-x-auto">
+
+      {
+        isOpen &&
+        <div className="pt-[39px] flex flex-col gap-[14px] h-[400px] overflow-y-auto overflox-x-auto select-none">
           {data.map((row) => (
-            <div className="flex justify-between min-w-[500px]" key={row._id}>
+            <div className="flex justify-between " key={row._id}>
               <div className="flex gap-[16px] basis-2/3">
                 <Image
                   src={row.product.images[0]}
@@ -75,7 +84,7 @@ export const SmallCartInfo = ({ data }: { data: CartRowInterface[] }) => {
             </div>
           ))}
         </div>
-      </div>
+      }
     </div>
   );
 };

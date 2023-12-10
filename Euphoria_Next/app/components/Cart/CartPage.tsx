@@ -73,7 +73,9 @@ const validateForm = (values: FormikValues) => {
 
 export const CartPage = ({ data }: Props) => {
   const [step, setStep] = useState<Steps>(Steps.Cart);
-  const [totalPrice, setTotalPrice] = useState(() => calculateTotalPrice(data) + 10.00);
+  const [totalPrice, setTotalPrice] = useState(
+    () => calculateTotalPrice(data) + 10.00
+  );
 
   const [coupon, setCoupon] = useState({
     code: "",
@@ -129,8 +131,8 @@ export const CartPage = ({ data }: Props) => {
                     step === Steps.Payment
                       ? "50%"
                       : step === Steps.Done
-                        ? "100%"
-                        : "0%",
+                      ? "100%"
+                      : "0%",
                 }}
                 exit={{ opacity: 0, width: "0%" }}
                 transition={{ duration: 0.3 }}
@@ -188,13 +190,9 @@ export const CartPage = ({ data }: Props) => {
       <div
         className={`flex justify-between w-full items-center lg:w-3/5  pt-[20px]`}
       >
-        <MainButton
-          label="Next"
-          onClick={handleNextButton}
-          type="submit"
-        />
+        <MainButton label="Next" onClick={handleNextButton} type="submit" />
         <h3
-          className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium cursor-pointer"
+          className="text-gray text-[14px] tracking-[0.5px] uppercase font-medium cursor-pointer select-none"
           onClick={() => {
             setStep((prev) => prev - 1);
           }}
@@ -202,8 +200,8 @@ export const CartPage = ({ data }: Props) => {
           Back
         </h3>
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="max-w-[1400px] mx-auto mb-[150px]">
@@ -232,7 +230,7 @@ export const CartPage = ({ data }: Props) => {
             />
           </div>
         </div>
-      ) :  (
+      ) : (
         <motion.div
           initial={{ opacity: 0, x: "100%" }}
           animate={{ opacity: 1, x: 0 }}
@@ -248,6 +246,7 @@ export const CartPage = ({ data }: Props) => {
               setFieldValue={(field: string, value: string) =>
                 formik.setFieldValue(field, value)
               }
+              totalPrice={totalPrice}
             />
           ) : step === Steps.Payment ? (
             <CartPay
@@ -274,7 +273,7 @@ export const CartPage = ({ data }: Props) => {
             ""
           )}
           {step !== Steps.Payment && step !== Steps.Done ? (
-            <RenderFooterContent/>
+            <RenderFooterContent />
           ) : (
             ""
           )}

@@ -11,6 +11,7 @@ interface Props {
   handleChange: (e: any) => void;
   values: any;
   setFieldValue: (field: string, value: string) => void;
+  totalPrice:number
 }
 
 export const CartAdressInfo = ({
@@ -18,6 +19,7 @@ export const CartAdressInfo = ({
   handleChange,
   values,
   setFieldValue,
+  totalPrice
 }: Props) => {
   const { cartData: { products } } = useCartStore();
 
@@ -119,7 +121,7 @@ export const CartAdressInfo = ({
           </div>
         </div>
       </div>
-          <SmallCartInfo data={products}/>
+          <SmallCartInfo data={products} totalPrice={totalPrice}/>
     </div>
   );
 };

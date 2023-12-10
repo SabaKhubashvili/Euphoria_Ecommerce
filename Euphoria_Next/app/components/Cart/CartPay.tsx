@@ -132,7 +132,7 @@ export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
             </div>
           </PayPalScriptProvider>
         </div>
-        <SmallCartInfo data={products} />
+        <SmallCartInfo totalPrice={paymentAmount} data={products} />
       </div>
     </div>
   );
