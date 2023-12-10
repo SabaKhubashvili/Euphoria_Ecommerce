@@ -46,6 +46,7 @@ export const ProductComponent = ({
       {
         productId: _id,
         quantity: 1,
+        size: 'MD'
       },
       token
     )

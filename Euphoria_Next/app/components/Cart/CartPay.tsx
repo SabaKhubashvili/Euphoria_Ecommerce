@@ -1,16 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import axios from "axios";
-import Image from "next/image";
-import { Dropdown_Down } from "@/public/Svg/Icons";
-import { Roboto } from "../assets/Fonts";
-import { MainButton } from "../buttons/MainButton";
 import { SmallCartInfo } from "./SmallCartInfo";
 import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
 import { getCookie } from "cookies-next";
-import { CartRowInterface } from "@/app/types";
 import { useCartStore } from "@/app/hooks/useCartData";
 
 interface Props {
@@ -24,6 +19,7 @@ export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
   const jwt:any = jwtDecode(getCookie('accessToken') || '');
   const { cartData: { products } } = useCartStore();
 
+  
     
   const paypalCreateOrder = async () => {
     try {
@@ -33,6 +29,7 @@ export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
         products:products.map((product:any) => ({
           id: product.product._id,    
           quantity: product.quantity, 
+          size: product.size
         })),
         adressInfo
       });

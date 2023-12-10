@@ -45,7 +45,7 @@ export const SmallCartInfo = ({ data,totalPrice }: { data: CartRowInterface[],to
         isOpen &&
         <div className="pt-[39px] flex flex-col gap-[14px] h-[400px] overflow-y-auto overflox-x-auto select-none">
           {data.map((row) => (
-            <div className="flex justify-between " key={row._id}>
+            <div className="flex justify-between" key={row._id}>
               <div className="flex gap-[16px] basis-2/3">
                 <Image
                   src={row.product.images[0]}

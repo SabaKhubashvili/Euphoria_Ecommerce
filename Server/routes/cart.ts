@@ -24,8 +24,8 @@ router.put("/add", verifyTokenAuthorization, async (req: any, res: any) => {
   const userId = req.user.id;
   const { productId, quantity, size } = req.body;
 
-  if (!productId) {
-    return res.status(400).json({ message: "ProductId is required" });
+  if (!productId || !size) {
+    return res.status(400).json({ message: "product and size is required" });
   }
   try {
     let cart = await Cart.findOne({ userId: req.user.id });
@@ -40,13 +40,16 @@ router.put("/add", verifyTokenAuthorization, async (req: any, res: any) => {
     cart.products.push({
       product: productId,
       quantity: quantity || 1,
-      size,
-    });
+      size:size,
+    }); 
+    
 
     await cart.save();
 
-    return res.status(200).json(cart);
+    return res.status(200).json({message:"Sucess"});
   } catch (error) {
+      console.log(error);
+      
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
