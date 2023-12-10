@@ -179,7 +179,7 @@ export const Cart = ({
               Apply Discount Code
             </h1>
             <div>
-              <div className="flex sm:flex-row flex-col">
+              <div className="border-[1px] border-solid border-divider">
                 <SearchInput
                   placeholder="Enter discount code"
                   value={coupon.code}
@@ -300,7 +300,7 @@ export const Cart = ({
           <div className=" flex flex-col gap-[10px] pt-[36px] pb-[21px] lg:px-[32px] sm:px-[25px] px-[10px] ">
             <div className="flex justify-between xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] ">
               <p>Subtotal</p>
-              <p>{totalPrice} GEL</p>
+              <p>{totalPrice - 10} GEL</p>
             </div>
             {/* <div className="flex justify-between font-medium xl:text-[24px] lg:text-[19px] md:text-[17px] text-[15px] text-gray">
               <p>Coupon</p>

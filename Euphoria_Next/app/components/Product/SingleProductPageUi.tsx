@@ -265,7 +265,7 @@ export const SingleProductInformation = ({
                 {discount ? (
                       <p className="flex gap-[10px]">
                       <span className=" text-secondary">
-                        {Math.floor(quantity * (price * discount) / 100)} GEL
+                        {Math.floor(quantity * (price-(price * discount) / 100))} GEL
                       </span>
                       <span
                         className="relative after:absolute after:w-full after:top-0 after:bottom-[-10px] after:left-0 after:h-[2px] after:bg-gray text-gray after:my-auto leading-[28px]

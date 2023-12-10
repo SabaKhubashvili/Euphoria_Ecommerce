@@ -28,7 +28,7 @@ export const CartTableRow = ({
   const [innerQuantity, setInnerQuantity] = useState<number>(quantity);
   const [productPrice,setProductPrice] = useState(
     product.discount ?
-    Math.floor((product.price * product.discount) / 100)
+    Math.floor(product.price - (product.price * product.discount) / 100)
     :
     product.price
   )
@@ -124,13 +124,7 @@ export const CartTableRow = ({
         </h2>
       </div>
       <h1 className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] basis-1/6 ">
-        {product.discount ? (
-          <span>
-            {productPrice} GEL
-          </span>
-        ) : (
-          <span>{product.price} GEL</span>
-        )}
+        {productPrice} GEL
       </h1>
       <h1 className="uppercase text-black text-[14px]   items-center  text-center xl:min-w-[0px] basis-1/6 ">
         {size}

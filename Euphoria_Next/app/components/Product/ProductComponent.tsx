@@ -109,7 +109,7 @@ export const ProductComponent = ({
     >
       <div className="relative w-full h-full">
         <Link href={`/product/${_id}`} className="peer relative w-full h-full">
-          { (discount && discount !== null) ?
+          { (discount) ?
             <div className="top-4 left-0 bg-black text-[16px] text-white w-fit px-2 py-1 absolute">
               - <span>{discount}</span>%
           </div>  
@@ -187,7 +187,7 @@ export const ProductComponent = ({
           {discount ? (
             <p className="flex gap-[10px]">
               <span className=" text-secondary">
-                {Math.floor((price * discount) / 100)} GEL
+                {Math.floor(price - (price * discount) / 100)} GEL
               </span>
               <span
                 className="relative after:absolute after:w-full after:top-0 after:bottom-[-7px] after:left-0 after:h-[2px] after:bg-gray text-gray after:my-auto leading-[28px]

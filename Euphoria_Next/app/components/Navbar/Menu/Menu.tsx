@@ -50,7 +50,7 @@ export const Menu = () => {
               className="absolute text-[11px] text-center -top-3 lg:-left-3 lg:right-auto -right-3 rounded-md
                  text-white bg-secondary py-[1px] px-[5px] font-medium leading-[14px] tracking-[0.2px] "
             >
-              3
+              {cartData.products.length}
             </div>
           </div>
           {isAboveLargeScreens && (
