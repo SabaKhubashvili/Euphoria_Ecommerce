@@ -22,12 +22,21 @@ export interface CategoryInterface{
 }
 
 export interface ordersInterface{
-    id: number;
-  created_at: string;
-  customer: string;
-  total_price: number;
-  profit: number;
-  status: 'Confirmed' | 'Delivered' | 'Pending';
+   _id:string,
+   userId:string,
+   products:{
+    id:string,
+    quantity:number,
+    size:string
+   }[],
+   adressInfo:{
+    email:string,
+    city:string,
+    phone:string,
+    streetAdress:string,
+    fistname:string
+   },
+   status: 'Paid' | 'Pending' | 'Delivered'
 }
 export interface Customer {
     name: string;

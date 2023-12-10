@@ -22,7 +22,7 @@ export const MainTable = ({
 }: Props) => {
   const [tableData, setTableData] = useState(
     bodyContent.map((cont: any) => {
-      const { _id, ...rest } = cont;
+      const { ...rest } = cont;
       return rest;
     })
   );
@@ -116,16 +116,13 @@ export const MainTable = ({
                 cont[key].toString().length > 0 ? (
                   key === "status" ? (
                     <StatusRowCell key={key} text={cont[key]} />
-                  ) : !topContent.includes("Id" || "id" || "ID" || "iD") &&
-                    key !== "_id" ? (
+                  ) :  ( 
                     <RowCell
                       key={key}
                       text={
-                        key.toLowerCase() === "id" ? "#" + cont[key] : cont[key]
+                        key.toLowerCase().includes('_id' || 'id') ? "#" + cont[key].slice(0,15)+'...' : cont[key]
                       }
                     />
-                  ) : (
-                    ""
                   )
                 ) : (
                   ""

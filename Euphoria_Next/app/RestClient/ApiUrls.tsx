@@ -13,11 +13,6 @@ export default class BaseUrl{
   static getLimitedProducts = this.baseUrl + '/api/product/getLimited/'
   static addToFavorites = this.baseUrl + '/api/product/toggleFavorites'
   static getFavorites = this.baseUrl + '/api/product/getAllFavorites'
-  
-  static addCoupon = this.baseUrl + '/api/coupon/add'
-  static getCoupons = this.baseUrl + '/api/coupon/getAll'
-  static updateCoupon = this.baseUrl + '/api/coupon/update'
-  static deleteCoupon = this.baseUrl + '/api/coupon/delete'
 
   static getCategories = this.baseUrl + '/api/categories/getAll/'
 
@@ -28,4 +23,14 @@ export default class BaseUrl{
   static clearCart = this.baseUrl + '/api/cart/clear'
 
   static checkCoupon = this.baseUrl + '/api/coupon/check'
+
+
+  //* Admin 
+
+  static getOrders = this.baseUrl + '/api/order/getAll'
+
+  static addCoupon = this.baseUrl + '/api/coupon/add'
+  static getCoupons = this.baseUrl + '/api/coupon/getAll'
+  static updateCoupon = this.baseUrl + '/api/coupon/update'
+  static deleteCoupon = this.baseUrl + '/api/coupon/delete'
 }

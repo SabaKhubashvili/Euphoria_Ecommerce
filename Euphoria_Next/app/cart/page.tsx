@@ -19,7 +19,7 @@ const Page = async () => {
       BaseUrl.getCart,
       cookies().get("accessToken")?.value
     );
-
+      
     return (
       <main className=" pt-[129px]">
         <Container>

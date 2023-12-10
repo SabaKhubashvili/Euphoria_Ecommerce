@@ -44,7 +44,7 @@ export async function POST(req: Request) {
     const carts = db.collection("carts");
 
     const order = {
-      _id: response.result.id,
+      paypall_id: response.result.id,
       userId: user_id,
       products: products,
       adressInfo,

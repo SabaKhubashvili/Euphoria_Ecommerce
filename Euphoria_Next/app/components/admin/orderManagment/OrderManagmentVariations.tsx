@@ -6,7 +6,6 @@ import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { MainDropdown } from "../../Dropdown/MainDropdown";
 import { MainTable } from "../../tables/MainTable";
-import { orders } from "@/app/constants";
 import { Pagination } from "../../Pagination";
 import { useAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
 import { ordersInterface } from "@/app/types";
@@ -16,11 +15,11 @@ import { toast } from "react-toastify";
 enum Variations {
   All = 0,
   Pending = 1,
-  Confirmed = 2,
-  Delivered = 3,
+  Delivered = 2,
 }
 
-export const OrderManagmentVariations = () => {
+export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) => {
+  
   const [activeVariation, setActiveVariation] = useState<Variations>(
     Variations.All
   );
@@ -52,16 +51,22 @@ export const OrderManagmentVariations = () => {
     return () => document.removeEventListener("resize", updateActiveELement);
   }, [activeVariation]);
 
-  const ordersOnPage: ordersInterface[] = useMemo(() => {
+  const ordersOnPage: any = useMemo(() => {
     const startIndex = (currentPage - 1) * ordersPerPage;
     const endIndex = currentPage * ordersPerPage;
-    let returningOrders = orders.slice(startIndex, endIndex);
-
-    if (activeVariation === Variations.Confirmed) {
-      returningOrders = returningOrders.filter(
-        (order) => order.status === "Confirmed"
-      );
-    } else if (activeVariation === Variations.Delivered) {
+    let returningOrders = orders.map(order => {
+      const { adressInfo, products, ...returning } = order;
+      return {
+        _id: returning._id,
+        user_id:returning.userId,
+        phone:adressInfo.phone,
+        email:adressInfo.email,
+        status:returning.status,
+      }
+  }).slice(startIndex, endIndex);
+    console.log(returningOrders);
+    
+   if (activeVariation === Variations.Delivered) {
       returningOrders = returningOrders.filter(
         (order) => order.status === "Delivered"
       );
@@ -74,9 +79,7 @@ export const OrderManagmentVariations = () => {
   }, [currentPage, ordersPerPage, activeVariation]);
 
   const ordersLength = useMemo(() => {
-    if (activeVariation === Variations.Confirmed) {
-      return orders.filter((order) => order.status === "Confirmed").length;
-    } else if (activeVariation === Variations.Delivered) {
+ if (activeVariation === Variations.Delivered) {
       return orders.filter((order) => order.status === "Delivered").length;
     } else if (activeVariation === Variations.Pending) {
       return orders.filter((order) => order.status === "Pending").length;
@@ -88,7 +91,7 @@ export const OrderManagmentVariations = () => {
   const searchForOrder = (e: React.FormEvent) => {
     e.preventDefault();
     setActiveVariation(Variations.All);
-    const filtered = orders.filter((order) => order.id.toString() === orderId);
+    const filtered = orders.filter((order) => order._id.toString() === orderId);
     if (filtered.length <= 0) {
       toast.error("No order was found", {
         position: "top-center",
@@ -118,10 +121,6 @@ export const OrderManagmentVariations = () => {
     );
   };
 
-  const changeCustomersOnPage = (number: 10 | 20 | 30 | 40 | 50) => {
-    number;
-    manualPage(0);
-  };
 
   return (
     <React.Fragment>
@@ -161,21 +160,7 @@ export const OrderManagmentVariations = () => {
         >
           Pending
         </div>
-        <div
-          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-            activeVariation === Variations.Confirmed
-              ? "text-purple activeTableVariationOrders"
-              : "text-secondaryGray"
-          }`}
-          onClick={() => {
-            setFilteredOrders(undefined);
-            setOrderId("");
-            manualPage(1);
-            setActiveVariation(Variations.Confirmed);
-          }}
-        >
-          Confirmed
-        </div>
+
         <div
           className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
             activeVariation === Variations.Delivered
@@ -228,13 +213,11 @@ export const OrderManagmentVariations = () => {
           <MainTable
             bodyContent={filteredOrders || ordersOnPage}
             topContent={[
-              "Order id",
-              "created",
-              "customer",
-              "total",
-              "profit",
-              "status",
-              " ",
+              'ID',
+              'User id',
+              "Phone",
+              "Email",
+              "Status",
             ]}
             type="primary"
             notFoundMessage="No order was found"

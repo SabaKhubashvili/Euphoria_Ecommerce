@@ -1,5 +1,8 @@
+const mongoose = require('mongoose')
+
 const OrderSchema = new mongoose.Schema({
-    userId: {  type: mongoose.Schema.Types.ObjectId, required: true,  ref: 'user', },
+    paypall_id:{type:String,required:true},
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true,  ref: 'user', },
     products: [
         {
             ProductId:{
@@ -10,7 +13,8 @@ const OrderSchema = new mongoose.Schema({
             quantity:{
                 type:Number,
                 default:1
-            }
+            },
+            size:{type:String,required:true}
         }
     ],
     adressInfo:{
@@ -21,7 +25,7 @@ const OrderSchema = new mongoose.Schema({
         firstname:{type:String,required:true},
         lastname:{type:String},
     },
-    status:{type: "Pending" || "Paid" || "Delivered" ,required:true,default:"pending"}
+    status:{type: String ,required:true,default:"pending"}
   });
   
   module.exports = mongoose.model('Order',OrderSchema)
