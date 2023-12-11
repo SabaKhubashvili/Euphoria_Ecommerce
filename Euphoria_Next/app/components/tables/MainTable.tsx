@@ -17,16 +17,16 @@ interface Props {
   customDropdownBody?: (products: productInterface[]) => React.ReactNode;
 }
 
-const dropdownBodyOptions = {
-  closed: {
-    height: "0%",
-    display: "none",
-  },
-  open: {
-    height: "fit-content",
-    display: "flex",
-  },
-};
+// const dropdownBodyOptions = {
+//   closed: {
+//     height: "0%",
+//     display: "none",
+//   },
+//   open: {
+//     height: "fit-content",
+//     display: "flex",
+//   },
+// };
 
 export const MainTable = ({
   type,
@@ -67,6 +67,7 @@ export const MainTable = ({
               setIsOpen((prev) => !prev);
               controls.start(isOpen ? "closed" : "open");
             };
+            
             return (
               //! Cells
               <div className={` ${ type === "primary" && "border-b-[1px] border-solid border-[#E9E7FD]"}`} key={index}>
@@ -77,17 +78,17 @@ export const MainTable = ({
                   {actions && actions(cont._id, { onClick: () => toggleSidebar() })}
                 </div>
                 {/* //! Dropdown Body */}
-                {customDropdownBody && cont.products && (
-                  <motion.div
+                {customDropdownBody && cont.products && isOpen &&(
+                  <div
                     key="dropdownBody"
-                    initial={{ display: "none" }}
-                    animate={controls}
-                    variants={dropdownBodyOptions}
-                    transition={{ duration: 0.1 }}
+                    // initial={{ display: "none" }}
+                    // animate={controls}
+                    // variants={dropdownBodyOptions}
+                    // transition={{ duration: 0.1 }}
                     className="inline"
                   >
                     {customDropdownBody(cont.products)}
-                  </motion.div>
+                  </div>
                 )}
               </div>
             );

@@ -11,7 +11,8 @@ const page = async() => {
 
   const {data:orders}:{data: ordersInterface[]} = await RestClient.GetRequest(BaseUrl.getOrders,cookies().get("accessToken")?.value)
 
-  
+
+    
   return (
     <main className={PublicSans.className}>
       <PageTop pageTitle='Order managment'/>
