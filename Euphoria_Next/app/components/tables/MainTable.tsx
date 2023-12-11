@@ -4,14 +4,29 @@ import { Dropdown_Down } from "@/public/Svg/Icons";
 import React, { useState } from "react";
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
+import { AnimatePresence, motion, useAnimation } from "framer-motion";
+import MainTableRows from "./Rows";
+import { productInterface } from "@/app/types";
 
 interface Props {
   type: "primary" | "secondary";
   topContent: string[];
   bodyContent: any;
   notFoundMessage?: string;
-  actions?: (id?: string) => React.ReactNode;
+  actions?: (id?: string, actions?: any) => React.ReactNode;
+  customDropdownBody?: (products: productInterface[]) => React.ReactNode;
 }
+
+const dropdownBodyOptions = {
+  closed: {
+    height: "0%",
+    display: "none",
+  },
+  open: {
+    height: "fit-content",
+    display: "flex",
+  },
+};
 
 export const MainTable = ({
   type,
@@ -19,77 +34,18 @@ export const MainTable = ({
   bodyContent,
   notFoundMessage,
   actions,
+  customDropdownBody,
 }: Props) => {
-  const [tableData, setTableData] = useState(
-    bodyContent.map((cont: any) => {
-      const { ...rest } = cont;
-      return rest;
-    })
-  );
-  
-  const HeaderCell = ({ text }: { text: string }) => (
-    <h1
-      className={`text-secondaryGray uppercase font-medium md:text-[16px] text-[13px] 
-    `}
-      style={{
-        flexBasis: actions
-          ? 100 / (Object.keys(tableData[0]).length + 1) + "%"
-          : 100 / Object.keys(tableData[0]).length + "%",
-      }}
-    >
-      {text}
-    </h1>
-  );
+  const [tableData] = useState(bodyContent);
+  const controls = useAnimation();
 
-  const RowCell = ({ text }: { text: string }) => (
-    <h1
-      className={`text-black  font-medium xl:text-[16px] text-[13px] py-[18px]
-    `}
-      style={{
-        flexBasis: actions
-          ? 100 / (Object.keys(tableData[0]).length + 1) + "%"
-          : 100 / Object.keys(tableData[0]).length + "%",
-      }}
-    >
-      {text}
-    </h1>
-  );
-  const StatusRowCell = ({
-    text,
-  }: {
-    text: "Pending" | "Delivered" | "Confirmed";
-  }) => (
-    <h1
-      className={`  font-medium xl:text-[16px] text-[13px]  cursor-pointer flex items-center justify-between ${
-        type === "primary" && "px-[10px] py-[5px] rounded-[4px]"
-      }
-      ${
-        text === "Pending"
-          ? `${
-              type === "primary"
-                ? "bg-[#ffc60029] text-[#FFC600]"
-                : " text-yellow-500 "
-            }`
-          : text === "Confirmed"
-          ? ` ${
-              type === "primary"
-                ? "text-[#28C76F] bg-[#28c76f29]"
-                : "text-green"
-            }`
-          : type === "primary"
-          ? "text-[#33189D] bg-[#33189d29]"
-          : "text-[#33189D]"
-      }`}
-      style={{
-        flexBasis: actions
-          ? 100 / (Object.keys(tableData[0]).length + 1) + "%"
-          : 100 / Object.keys(tableData[0]).length + "%",
-      }}
-    >
-      {text}
-      {type === "primary" && <Dropdown_Down />}
-    </h1>
-  );
+  const renderCells = (cont: any) => {
+    return Object.keys(cont).map((key) =>
+      cont[key] && typeof cont[key] == "object" ? null : cont[key].toString().length > 0 ? (
+        key === "status" ? (<MainTableRows.StatusRowCell key={key} text={cont[key]} tableData={tableData} type={type} />) : 
+        (<MainTableRows.RowCell key={key} text={ key.toLowerCase().includes("_id" || "id") ? "#" + cont[key].slice(0, 15) + "..." : cont[key]} tableData={tableData}/>)) : null
+    );
+  };
 
   return (
     <div className="flex flex-col w-full xl:p-[24px] p-[12px] overflow-x-auto h-full bg-white rounded-[16px]">
@@ -99,39 +55,45 @@ export const MainTable = ({
         }`}
       >
         {topContent.map((cont: string, index: number) => (
-          <HeaderCell text={cont} key={index} />
+          <MainTableRows.HeaderCell text={cont} key={index} tableData={tableData} />
         ))}
       </div>
       <div className={`flex flex-col h-full overflow-y-auto w-full`}>
         {bodyContent.length > 0 ? (
-          bodyContent.map((cont: any, index: number) => (
-            <div
-              key={index}
-              className={`flex items-center py-[8px] px-[20px]     ${
-                type === "primary" &&
-                "border-b-[1px] border-solid border-[#E9E7FD]"
-              }`}
-            >
-              {Object.keys(cont).map((key) =>
-                cont[key].toString().length > 0 ? (
-                  key === "status" ? (
-                    <StatusRowCell key={key} text={cont[key]} />
-                  ) :  ( 
-                    <RowCell
-                      key={key}
-                      text={
-                        key.toLowerCase().includes('_id' || 'id') ? "#" + cont[key].slice(0,15)+'...' : cont[key]
-                      }
-                    />
-                  )
-                ) : (
-                  ""
-                )
-              )}
-              {actions && actions(cont._id)}
-            </div>
-          ))
+          bodyContent.map((cont: any, index: number) => {
+            //! Full body mapping
+            const [isOpen, setIsOpen] = useState(false);
+            const toggleSidebar = () => {
+              setIsOpen((prev) => !prev);
+              controls.start(isOpen ? "closed" : "open");
+            };
+            return (
+              //! Cells
+              <div className={` ${ type === "primary" && "border-b-[1px] border-solid border-[#E9E7FD]"}`} key={index}>
+                <div
+                  key={index}
+                  className={`flex items-center py-[8px] px-[20px]`}>
+                  {renderCells(cont)}
+                  {actions && actions(cont._id, { onClick: () => toggleSidebar() })}
+                </div>
+                {/* //! Dropdown Body */}
+                {customDropdownBody && cont.products && (
+                  <motion.div
+                    key="dropdownBody"
+                    initial={{ display: "none" }}
+                    animate={controls}
+                    variants={dropdownBodyOptions}
+                    transition={{ duration: 0.1 }}
+                    className="inline"
+                  >
+                    {customDropdownBody(cont.products)}
+                  </motion.div>
+                )}
+              </div>
+            );
+          })
         ) : (
+          //! Not Found
           <div className="flex flex-col gap-[5px] items-center justify-center text-[18px] font-bold w-full h-full ">
             <div className="w-[30px] h-[30px]">
               <Icon svg={WebsiteIcons["notFound"]} />

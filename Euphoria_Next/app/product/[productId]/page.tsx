@@ -13,7 +13,7 @@ import {
 import { ProductsByTagSlider } from "@/app/components/Product/ProductsByTagSlider";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
-import { productInterface } from "@/app/constants";
+import { productInterface } from "@/app/types";
 import { redirect } from "next/navigation";
 
 interface params {

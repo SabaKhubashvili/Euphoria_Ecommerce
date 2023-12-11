@@ -26,8 +26,8 @@ export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
       let response = await axios.post("/api/paypal/createOrder", {
         user_id: jwt.id,
         order_price: paymentAmount,
-        products:products.map((product:any) => ({
-          id: product.product._id,    
+        products: products.map((product:any) => ({  
+          product: product.product._id,    
           quantity: product.quantity, 
           size: product.size
         })),

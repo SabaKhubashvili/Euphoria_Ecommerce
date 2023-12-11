@@ -1,5 +1,3 @@
-import { productInterface } from "../constants";
-
 export interface footerComponentsType{
     title: string;
     content: SingleFooterComponentRowType[];
@@ -55,4 +53,20 @@ export interface CartRowInterface{
     quantity:number;
     size?:string
     _id:string
+}
+export interface productInterface{
+    _id:number
+    title:string;
+    price:number;
+    description:string,
+    aboutProduct:string,
+    advantages:string,
+    images:string[],
+    availableSizes:string
+    category: {
+      name: string;
+      _id: string;
+    };
+    brand:string,
+    discount:number | null;
 }

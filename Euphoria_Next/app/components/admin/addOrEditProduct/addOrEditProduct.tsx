@@ -22,7 +22,7 @@ import RestClient from "@/app/RestClient/RequestTypes";
 import { getCookie } from "cookies-next";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { toast } from "react-toastify";
-import { productInterface } from "@/app/constants";
+import { productInterface } from "@/app/types";
 
 interface Props {
   categories?: CategoryInterface[];

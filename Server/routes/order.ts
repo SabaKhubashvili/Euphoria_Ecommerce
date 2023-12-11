@@ -8,8 +8,8 @@ router.get(
   verifyTokenAndAdminAuthorization,
  async(req: Request, res: Response) => {
     try {
-      const orders = await orderSchema.find()
-      console.log(orders);
+      const orders = await orderSchema.find().populate('products.product');
+      console.log(orders.products);
       
       return res.status(200).json(orders);
     } catch (err) {

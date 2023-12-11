@@ -6,7 +6,7 @@ import { ProductComponent } from "./ProductComponent";
 import "swiper/css";
 import "swiper/css/navigation";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
-import { productInterface } from "@/app/constants";
+import { productInterface } from "@/app/types";
 
 interface Props {
   title?: string;

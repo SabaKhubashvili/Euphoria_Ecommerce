@@ -8,9 +8,10 @@ import { MainDropdown } from "../../Dropdown/MainDropdown";
 import { MainTable } from "../../tables/MainTable";
 import { Pagination } from "../../Pagination";
 import { useAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
-import { ordersInterface } from "@/app/types";
+import { ordersInterface, productInterface } from "@/app/types";
 import { Dropdown_Down } from "@/public/Svg/Icons";
 import { toast } from "react-toastify";
+import { ProductComponent } from "../../Product/ProductComponent";
 
 enum Variations {
   All = 0,
@@ -62,6 +63,7 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
         phone:adressInfo.phone,
         email:adressInfo.email,
         status:returning.status,
+        products:products
       }
   }).slice(startIndex, endIndex);
     console.log(returningOrders);
@@ -108,19 +110,26 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     }
   };
 
-  const actions = () => {
+  const rowActions = (actions?:any) => {    
     return (
       <div
         style={{
           flexBasis: 100 / (Object.keys(ordersOnPage[0]).length + 1) + "%",
         }}
-        className="flex justify-end"
+        className="flex justify-end select-none cursor-pointer"
+        onClick={()=>actions.onClick()}
       >
         <Dropdown_Down />
       </div>
     );
   };
-
+  const customDropdownBody = (products:productInterface[]) => {
+    return(
+      <div className="w-full py-[20px] bg-[#eeeeeea6]">
+        <ProductComponent {...products[0]}/>
+      </div>
+    )
+  }
 
   return (
     <React.Fragment>
@@ -218,10 +227,12 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
               "Phone",
               "Email",
               "Status",
+              ""
             ]}
             type="primary"
             notFoundMessage="No order was found"
-            actions={actions}
+            actions={(id?:string,actions?:any)=> rowActions(actions)}
+            customDropdownBody={customDropdownBody}
           />
         </div>
         <div className="w-full flex justify-between items-center px-[24px]">

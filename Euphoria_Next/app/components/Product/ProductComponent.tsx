@@ -4,7 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { MainButton } from "../buttons/MainButton";
 import { GrayButton } from "../buttons/GrayButton";
-import { productInterface } from "@/app/constants";
+import { productInterface } from "@/app/types";
 import Link from "next/link";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { largeScreens } from "@/app/Screens/Screens";

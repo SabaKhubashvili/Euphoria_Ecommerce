@@ -4,7 +4,7 @@ import Counter from "../buttons/Counter";
 import { MainButton } from "../buttons/MainButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
 import { CheckedIcon, GrayHeartIcon } from "@/public/Svg/Icons";
-import { productInterface } from "@/app/constants";
+import { productInterface } from "@/app/types";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { getCookies } from "cookies-next";

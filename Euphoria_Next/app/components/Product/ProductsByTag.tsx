@@ -3,7 +3,7 @@
 import React from "react";
 import { ProductComponent } from "./ProductComponent";
 import { GrayButton } from "../buttons/GrayButton";
-import { productInterface } from "@/app/constants";
+import { productInterface } from "@/app/types";
 
 interface Props {
   title?: string;
