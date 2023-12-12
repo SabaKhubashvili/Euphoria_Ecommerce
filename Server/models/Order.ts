@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const OrderSchema = new mongoose.Schema({
-    paypall_id:{type:String,required:true},
+    paypall_id:{type:String,required:true, unique:true},
     userId: { type: mongoose.Schema.Types.ObjectId, required: true,  ref: 'user', },
     products: [
         {

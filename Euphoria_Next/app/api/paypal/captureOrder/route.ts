@@ -31,12 +31,12 @@ export async function POST(req:Request) {
   const db = mongoClient.db("test");
   const orders = db.collection("orders");
   
-   const updatedOrder = await orders.findOneAndUpdate(
-    { _id: orderID },
-    { $set: { status: "Paid" } }
+  const updatedOrder = await orders.findOneAndUpdate(
+    { paypall_id: orderID },
+    { $set: { status: "Paid" } },
   );
 
-  
+    
   const currentDate = new Date();
   const futureDate = new Date();
   futureDate.setDate(currentDate.getDate() + 3);

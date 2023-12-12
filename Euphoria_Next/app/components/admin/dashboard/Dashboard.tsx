@@ -5,7 +5,7 @@ import { Icon } from "@/app/components/Icon";
 import { SimpleAreaChartComponent } from "@/app/components/admin/ChartComponents/SimpleAreaChartComponent";
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
 import { MainTable } from "@/app/components/tables/MainTable";
-import { MostSaledProducts, SessionsData, orders } from "@/app/constants";
+import { SessionsData, orders } from "@/app/constants";
 import { Dropdown_Down } from "@/public/Svg/Icons";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import React from "react";
@@ -161,12 +161,12 @@ export const Dashboard = () => {
                   <Icon svg={WebsiteIcons["Verticaldots"]} />
                 </div>
                 <div className="flex flex-col gap-[18px] mt-[20px] h-[566px] overflow-y-auto">
-                  { MostSaledProducts.map((product,index)=>(
+                  {/* { MostSaledProducts.map((product,index)=>(
                     <div className="flex  items-center justify-between" key={index}>
                     <div className="flex gap-[16px]">
-                      <div className="w-[46px] h-[46px]">
+                      <div className="w-[46px] h-[46px]"> */}
                         {/* Here must be image */} img
-                      </div>
+                      {/* </div>
                       <div>
                         <h3 className="text-[15px] font-bold">
                           {product.name}
@@ -179,7 +179,7 @@ export const Dashboard = () => {
                     <div className="text-[15px] font-medium">${product.price}</div>
                   </div>
                   ))
-                  }
+                  } */}
                   </div>
               </div>
             </div>

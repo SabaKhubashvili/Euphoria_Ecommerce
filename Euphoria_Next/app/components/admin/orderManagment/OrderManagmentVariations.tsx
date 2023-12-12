@@ -122,18 +122,16 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     );
   };
   const customDropdownBody = (order: any) => {
-      console.log(order);
-      
     return(
-      <div className="w-full py-[20px] bg-[#eeeeeea6] grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-        {
-          order.map((ord:any)=>(
-            <div className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25 vw]" key={ord._id}>
-              <ProductComponent {...ord.product}/>
-            </div>
-          ))
-        }
-      </div>
+          <div className="w-full py-[20px] bg-[#FFF] grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
+            {
+              order.map((ord:any)=>(
+                <div className="h-[128vw] xs:h-[70vw] md:h-[35vw] lg:h-[30vw] 2xl:h-[25vw]" key={ord._id}>
+                  <ProductComponent {...ord.product}/>
+                </div>
+              ))
+            }
+          </div>
     )
   }
 
