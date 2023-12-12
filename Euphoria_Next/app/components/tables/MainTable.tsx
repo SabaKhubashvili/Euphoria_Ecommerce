@@ -15,6 +15,7 @@ interface Props {
   notFoundMessage?: string;
   actions?: (id?: string, actions?: any) => React.ReactNode;
   customDropdownBody?: (products: productInterface[]) => React.ReactNode;
+  updateStatus?: (id:string)=>void
 }
 
 // const dropdownBodyOptions = {
@@ -35,6 +36,7 @@ export const MainTable = ({
   notFoundMessage,
   actions,
   customDropdownBody,
+  updateStatus
 }: Props) => {
   const [isOpenArr, setIsOpenArr] = useState<boolean[]>(bodyContent.map(() => false));
   // useEffect(()=>{
@@ -44,7 +46,7 @@ export const MainTable = ({
   const renderCells = (cont: any) => {
     return Object.keys(cont).map((key) =>
       cont[key] && typeof cont[key] == "object" ? null : cont[key].toString().length > 0 ? (
-        key === "status" ? (<MainTableRows.StatusRowCell key={key} text={cont[key]} tableData={bodyContent} type={type} />) : 
+        key === "status" ? (<MainTableRows.StatusRowCell onClick={()=>updateStatus && updateStatus(cont._id)} key={key} text={cont[key]} tableData={bodyContent} type={type} />) : 
         (<MainTableRows.RowCell key={key} text={ key.toLowerCase().includes("_id" || "id") ? "#" + cont[key].slice(0, 15) + "..." : cont[key]} tableData={bodyContent}/>)) : null
     );
   };

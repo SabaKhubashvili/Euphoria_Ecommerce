@@ -133,6 +133,11 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
       setFilteredOrders(filtered);
     }
   };
+
+  const updateStatus = (id:string)=>{
+    console.log(id);
+    
+  }
   
   //* ----------------------------------------------------> JSX.ELements <----------------------------------------------------------------
       const Filter = () => {
@@ -213,10 +218,10 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
         style={{
           flexBasis: 100 / (Object.keys(ordersOnPage[0]).length + 1) + "%",
         }}
-        className="flex justify-end select-none cursor-pointer"
+        className="select-none cursor-pointer"
         onClick={()=>actions.onClick()}
       >
-        <Dropdown_Down />
+        <Icon svg={WebsiteIcons['adminTableArrow_down']} className="flex justify-end items-center"/>
       </div>
     );
   };
@@ -244,7 +249,7 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
             <SecondaryInput
               placeholder="Search by order id"
               type="secondary"
-              rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
+              rightSvg={<Icon svg={WebsiteIcons["Search"]} className="flex items-center" />}
               onChange={(e) => setOrderId(e.target.value)}
               value={orderId}
               onSubmit={searchForOrder}
@@ -285,6 +290,7 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
             notFoundMessage="No order was found"
             actions={(id?:string,actions?:any)=> rowActions(actions)}
             customDropdownBody={customDropdownBody}
+            updateStatus={updateStatus}
           />
         </div>
         <div className="w-full flex justify-between items-center px-[24px]">
