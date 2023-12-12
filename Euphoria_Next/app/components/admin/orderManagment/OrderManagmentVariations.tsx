@@ -15,16 +15,35 @@ import { ProductComponent } from "../../Product/ProductComponent";
 
 enum Variations {
   All = 0,
-  Pending = 1,
-  Delivered = 2,
+  Paid = 1,
+  Pending = 2,
+  Delivered = 3,
 }
 
+
 export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) => {
-  
+
+    //* ----------------------------------------------------> Variables <----------------------------------------------------------------
+
+    // ----------------------------------------------------> States <----------------------------------------------------------------
   const [activeVariation, setActiveVariation] = useState<Variations>(
     Variations.All
   );
+  const [orderId, setOrderId] = useState<string>("");
   const underlineRef = useRef<HTMLDivElement>(null);
+  const [filteredOrders, setFilteredOrders] = useState<any>();
+  const [ordersForTable] =  useState(orders.map(order => {
+    const { adressInfo, products, ...returning } = order;
+    return {
+      _id: returning._id,
+      user_id:returning.userId,
+      phone:adressInfo.phone,
+      email:adressInfo.email,
+      status:returning.status,
+      products:products
+    }
+}))
+    // ----------------------------------------------------> Hooks <----------------------------------------------------------------
   const {
     nextPage,
     prevPage,
@@ -33,39 +52,34 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     ordersPerPage,
     setOrdersPerPage,
   } = useAdminOrdersPagination();
-  const [orderId, setOrderId] = useState<string>("");
-  const [filteredOrders, setFilteredOrders] = useState<ordersInterface[]>();
+
+
+  //* ----------------------------------------------------> UseEffects <----------------------------------------------------------------
 
   useEffect(() => {
-    const updateActiveELement = () => {
-      if (underlineRef.current) {
-        const activeElement = document.querySelector(
-          ".activeTableVariationOrders"
-        ) as HTMLDivElement;
-
+    const updateActiveElement = () => {
+      const activeElement = document.querySelector(".activeTableVariationOrders") as HTMLDivElement;
+      if (activeElement && underlineRef.current) {
         underlineRef.current.style.left = activeElement.offsetLeft + "px";
         underlineRef.current.style.width = activeElement.offsetWidth + "px";
       }
     };
-    updateActiveELement();
-    document.addEventListener("resize", updateActiveELement);
-    return () => document.removeEventListener("resize", updateActiveELement);
+    updateActiveElement();
+
+    window.addEventListener("resize", updateActiveElement);
+    return () => {
+      window.removeEventListener("resize", updateActiveElement);
+    };
   }, [activeVariation]);
+
+
+  //* ----------------------------------------------------> Data <----------------------------------------------------------------
 
   const ordersOnPage: any = useMemo(() => {
     const startIndex = (currentPage - 1) * ordersPerPage;
     const endIndex = currentPage * ordersPerPage;
-    let returningOrders = orders.map(order => {
-      const { adressInfo, products, ...returning } = order;
-      return {
-        _id: returning._id,
-        user_id:returning.userId,
-        phone:adressInfo.phone,
-        email:adressInfo.email,
-        status:returning.status,
-        products:products
-      }
-  }).slice(startIndex, endIndex);    
+    let returningOrders = ordersForTable
+  .slice(startIndex, endIndex);    
    if (activeVariation === Variations.Delivered) {
       returningOrders = returningOrders.filter(
         (order) => order.status === "Delivered"
@@ -73,6 +87,10 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     } else if (activeVariation === Variations.Pending) {
       returningOrders = returningOrders.filter(
         (order) => order.status === "Pending"
+      );
+    }else if(activeVariation === Variations.Paid){
+      returningOrders = returningOrders.filter(
+        (order) => order.status === "Paid"
       );
     }
     return returningOrders;
@@ -83,15 +101,23 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
       return orders.filter((order) => order.status === "Delivered").length;
     } else if (activeVariation === Variations.Pending) {
       return orders.filter((order) => order.status === "Pending").length;
+    } 
+     else if (activeVariation === Variations.Paid) {
+      return orders.filter((order) => order.status === "Paid").length;
     } else {
       return orders.length;
     }
   }, [activeVariation]);
 
+  console.log(ordersOnPage);
+  
+  //* ----------------------------------------------------> Functions <----------------------------------------------------------------
+
   const searchForOrder = (e: React.FormEvent) => {
     e.preventDefault();
     setActiveVariation(Variations.All);
-    const filtered = orders.filter((order) => order._id.toString() === orderId);
+    const filtered = ordersForTable.filter((order) => order._id.toString().includes(orderId));
+    
     if (filtered.length <= 0) {
       toast.error("No order was found", {
         position: "top-center",
@@ -107,6 +133,79 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
       setFilteredOrders(filtered);
     }
   };
+  
+  //* ----------------------------------------------------> JSX.ELements <----------------------------------------------------------------
+      const Filter = () => {
+        return(
+          <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative select-none">
+              <div
+                className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200"
+                ref={underlineRef}
+              />
+              {/* Underline */}
+              <div
+                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+                  activeVariation === Variations.All
+                    ? "text-purple activeTableVariationOrders"
+                    : "text-secondaryGray"
+                }`}
+                onClick={() => {
+                  setFilteredOrders(undefined);
+                  // setOrderId("");
+                  manualPage(1);
+                  setActiveVariation(Variations.All);
+                }}
+              >
+                All
+              </div>
+              <div
+                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+                  activeVariation === Variations.Paid
+                    ? "text-purple activeTableVariationOrders"
+                    : "text-secondaryGray"
+                }`}
+                onClick={() => {
+                  setFilteredOrders(undefined);
+                  // setOrderId("");
+                  manualPage(1);
+                  setActiveVariation(Variations.Paid);
+                }}
+              >
+                Paid
+              </div>
+              <div
+                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+                  activeVariation === Variations.Pending
+                    ? "text-purple activeTableVariationOrders"
+                    : "text-secondaryGray"
+                }`}
+                onClick={() => {
+                  setFilteredOrders(undefined);
+                  // setOrderId("");
+                  manualPage(1);
+                  setActiveVariation(Variations.Pending);
+                }}
+              >
+                Pending
+              </div>
+              <div
+                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+                  activeVariation === Variations.Delivered
+                    ? "text-purple activeTableVariationOrders"
+                    : "text-secondaryGray"
+                }`}
+                onClick={() => {
+                  setFilteredOrders(undefined);
+                  // setOrderId("");
+                  manualPage(1);
+                  setActiveVariation(Variations.Delivered);
+                }}
+              >
+                Delivered
+              </div>
+            </div>
+        )
+      }
 
   const rowActions = (actions?:any) => {    
     return (
@@ -135,61 +234,10 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     )
   }
 
+
   return (
     <React.Fragment>
-      <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative ">
-        <div
-          className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200"
-          ref={underlineRef}
-        />
-        {/* Underline */}
-        <div
-          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-            activeVariation === Variations.All
-              ? "text-purple activeTableVariationOrders"
-              : "text-secondaryGray"
-          }`}
-          onClick={() => {
-            setFilteredOrders(undefined);
-            setOrderId("");
-            manualPage(1);
-            setActiveVariation(Variations.All);
-          }}
-        >
-          All
-        </div>
-        <div
-          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-            activeVariation === Variations.Pending
-              ? "text-purple activeTableVariationOrders"
-              : "text-secondaryGray"
-          }`}
-          onClick={() => {
-            setFilteredOrders(undefined);
-            setOrderId("");
-            manualPage(1);
-            setActiveVariation(Variations.Pending);
-          }}
-        >
-          Pending
-        </div>
-
-        <div
-          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-            activeVariation === Variations.Delivered
-              ? "text-purple activeTableVariationOrders"
-              : "text-secondaryGray"
-          }`}
-          onClick={() => {
-            setFilteredOrders(undefined);
-            setOrderId("");
-            manualPage(1);
-            setActiveVariation(Variations.Delivered);
-          }}
-        >
-          Delivered
-        </div>
-      </div>
+      <Filter />
       <div className=" pt-[24px] flex justify-between items-center">
         <div className="flex gap-[10px] items-center">
           <div className="w-[204px]">
@@ -224,7 +272,7 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
       <div className="bg-white">
         <div className="h-[600px] mt-[16px]">
           <MainTable
-            bodyContent={filteredOrders || ordersOnPage}
+            bodyContent={filteredOrders || ordersOnPage || []}
             topContent={[
               'ID',
               'User id',
