@@ -11,11 +11,12 @@ import { useCartStore } from "@/app/hooks/useCartData";
 interface Props {
   setStep: () => void;
   paymentAmount: number;
-  adressInfo:any
+  adressInfo:any,
+  couponDiscount:number
 }
 
 
-export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
+export const CartPay = ({ setStep,  paymentAmount,adressInfo,couponDiscount }: Props) => {
   const jwt:any = jwtDecode(getCookie('accessToken') || '');
   const { cartData: { products } } = useCartStore();
 
@@ -31,7 +32,8 @@ export const CartPay = ({ setStep,  paymentAmount,adressInfo }: Props) => {
           quantity: product.quantity, 
           size: product.size
         })),
-        adressInfo
+        adressInfo,
+        couponDiscount:couponDiscount
       });
       return response.data.data.order.id;
     } catch (error:any) {

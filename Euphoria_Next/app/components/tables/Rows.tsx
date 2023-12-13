@@ -20,14 +20,14 @@ const Dropdown = ({ type }: { type: string }) =>
 class MainTableRows {
   static HeaderCell = ({
     text,
-    tableData,
+    length,
   }: {
     text: string;
-    tableData: any[];
+    length: number;
   }) => (
     <h1
       className={`text-secondaryGray uppercase font-medium md:text-[16px] text-[13px]`}
-      style={{ flexBasis: 100 / (Object.keys(tableData[0]).length + 1) + "%" }}
+      style={{ flexBasis: 100 / ((length)) + "%" }}
     >
       {text}
     </h1>
@@ -36,18 +36,18 @@ class MainTableRows {
   static StatusRowCell = ({
     text,
     type,
-    tableData,
+    length,
     onClick,
   }: {
     text: "Pending" | "Delivered" | "Confirmed";
     type: string;
-    tableData: any[];
+    length: number;
     onClick: () => void;
   }) => {
     const [isOpen,setIsOpen] = useState(false)
     return (
       <div className="relative select-none"
-      style={{ flexBasis: 100 / Object.keys(tableData[0]).length + "%" }}>
+      style={{ flexBasis: 100 / length + "%" }}>
         <h1
           onClick={()=>setIsOpen(prev=>!prev)}
           className={`font-medium xl:text-[16px] text-[13px] cursor-pointer flex items-center justify-between rounded-[5px]  !py-[5px] !px-[10px] w-full ${getCellClasses(
@@ -72,10 +72,10 @@ class MainTableRows {
     );
   };
 
-  static RowCell = ({ text, tableData }: { text: string; tableData: any }) => (
+  static RowCell = ({ text, length }: { text: string; length: number }) => (
     <h1
       className={`text-black font-medium xl:text-[16px] text-[13px] py-[18px]`}
-      style={{ flexBasis: 100 / Object.keys(tableData[0]).length + "%" }}
+      style={{ flexBasis: 100 / length + "%" }}
     >
       {text}
     </h1>

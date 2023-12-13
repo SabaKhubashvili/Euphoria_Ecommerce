@@ -48,14 +48,14 @@ export const MainTable = ({
       return customBodyRow(cont);
     } else {
       return Object.keys(cont).map((key) =>
-        cont[key] && typeof cont[key] == "object" ? null : cont[key].toString()
+       typeof cont[key] == "object" ? null : cont[key].toString()
             .length > 0 ? (
           key === "status" ? (
             <MainTableRows.StatusRowCell
               onClick={() => updateStatus && updateStatus(cont._id)}
               key={key}
               text={cont[key]}
-              tableData={bodyContent}
+              length={topContent.length}
               type={type}
             />
           ) : (
@@ -64,9 +64,9 @@ export const MainTable = ({
               text={
                 key.toLowerCase().includes("_id" || "id")
                   ? "#" + cont[key].slice(0, 15) + "..."
-                  : cont[key]
+                  :  key.toLowerCase().includes("email" || "gmail") ? "@" + cont[key].slice(0, 15) + "..." : cont[key]
               }
-              tableData={bodyContent}
+              length={topContent.length}
             />
           )
         ) : null
@@ -85,7 +85,7 @@ export const MainTable = ({
           <MainTableRows.HeaderCell
             text={cont}
             key={index}
-            tableData={topContent}
+            length={topContent.length}
           />
         ))}
       </div>

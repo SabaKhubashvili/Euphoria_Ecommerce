@@ -37,6 +37,7 @@ export const OrderManagmentVariations = ({
   const [ordersForTable] = useState(
     orders.map((order) => {
       const { adressInfo, products, ...returning } = order;
+      
       return {
         _id: returning._id,
         user_id: returning.userId,
@@ -44,6 +45,10 @@ export const OrderManagmentVariations = ({
         email: adressInfo.email,
         status: returning.status,
         products: products,
+        pricing:{
+          totalPrice:returning.price,
+          couponDiscount:returning.couponDiscount
+        }
       };
     })
   );
@@ -229,7 +234,14 @@ export const OrderManagmentVariations = ({
       </div>
     );
   };
-  const customDropdownBody = (order: ordersInterface) => {    
+  const customDropdownBody = (order: ordersInterface & {
+    pricing:{
+      totalPrice:number,
+      couponDiscount:number
+    }
+  }) => {
+    console.log();
+    
     const forTable = order.products.map((ord: any) => {      
       const {
         aboutProduct,
@@ -299,14 +311,14 @@ export const OrderManagmentVariations = ({
           style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
           className=""
           >
-            ₾{JSON.parse(givenProduct.discount) > 0 ? ((JSON.parse(givenProduct.price) / 100 )  * JSON.parse(givenProduct.discount) ): givenProduct.price}
+            ₾{JSON.parse(givenProduct.discount) > 0 ? (((JSON.parse(givenProduct.price) / 100 )  * JSON.parse(givenProduct.discount)) * givenProduct.quantity) : JSON.parse(givenProduct.price) * givenProduct.quantity}
           </div>
         </div>
       )
     }
     return (
       <div className="w-full ">
-        <div className="h-[128vw] xs:h-[70vw] md:h-[35vw] lg:h-[30vw] 2xl:h-[25vw]">
+        <div className="flex flex-col gap-[20px]">
           <MainTable
             bodyContent={forTable}
             topContent={["ID", "Title","QTY", "Price", "Disc.","Total"]}
@@ -314,6 +326,27 @@ export const OrderManagmentVariations = ({
             notFoundMessage="No order was found"
             customBodyRow={bodyRow}
           />
+          <div className="flex justify-end xl:p-[24px] p-[12px] pr-[20px]">
+              <div className="flex flex-col gap-[16px] w-[500px] ">
+                <div className="flex justify-between w-full">
+                  <h1 className="text-secondaryGray">Subtotal</h1>
+                  <h1 className="text-[15px] text-blackBlue">₾{order.pricing.totalPrice + order.pricing.couponDiscount - 10}</h1>
+                </div>
+                <div className="flex justify-between w-full">
+                  <h1 className="text-secondaryGray">Shipping</h1>
+                  <h1 className="text-[15px] text-blackBlue">₾10</h1>
+                </div>
+                <div className="flex justify-between w-full">
+                  <h1 className="text-secondaryGray">Discount</h1>
+                  <h1 className="text-[15px] text-[#EA5455]"  
+                  >₾{order.pricing.couponDiscount}</h1>
+                </div>
+                <div className="flex justify-between w-full">
+                  <h1 className="text-secondaryGray">Total</h1>
+                  <h1 className="text-[15px] text-blackBlue">₾{order.pricing.totalPrice}</h1>
+                </div>
+              </div>
+          </div>
         </div>
       </div>
     );
@@ -362,11 +395,16 @@ export const OrderManagmentVariations = ({
         <div className="h-[600px] mt-[16px]">
           <MainTable
             bodyContent={filteredOrders || ordersOnPage || []}
-            topContent={["ID", "User id", "Phone", "Email", "Status", ""]}
+            topContent={["ID", "User id", "Phone", "Email", "Status",""]}
             type="primary"
             notFoundMessage="No order was found"
             actions={(id?: string, actions?: any) => rowActions(actions)}
-            customDropdownBody={(bodyContent)=>customDropdownBody(bodyContent as unknown as ordersInterface)}
+            customDropdownBody={(bodyContent)=>customDropdownBody(bodyContent as unknown as ordersInterface & {
+              pricing:{
+                totalPrice:number,
+                couponDiscount:number
+              }
+            })}
             updateStatus={updateStatus}
           />
         </div>

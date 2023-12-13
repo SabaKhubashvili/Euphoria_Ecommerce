@@ -5,7 +5,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(req: Request) {
   try {
-    const { order_price, user_id, products, adressInfo } = await req.json();
+    const { order_price, user_id, products, adressInfo,couponDiscount } = await req.json();
 
     if (!order_price || !user_id || !products) {
       return NextResponse.json(
@@ -49,6 +49,8 @@ export async function POST(req: Request) {
       products: products,
       adressInfo,
       status: "Pending",
+      price:  JSON.parse(order_price),
+      couponDiscount
     };
 
     const newOrder = await orders.insertOne(order);

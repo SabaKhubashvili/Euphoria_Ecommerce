@@ -258,6 +258,7 @@ export const CartPage = ({ data }: Props) => {
                   ? totalPrice - (totalPrice * coupon.percentage) / 100
                   : totalPrice
               }
+              couponDiscount={coupon.success ? (totalPrice * coupon.percentage) / 100 : 0}
               adressInfo={{
                 email: formik.values.email,
                 city: formik.values.city,

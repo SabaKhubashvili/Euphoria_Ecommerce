@@ -18,7 +18,7 @@ module.exports = {
         'link':'#0F6DB1',
 
         'secondaryGray':`#8B909A`,
-        'blackBlue':'23272E',
+        'blackBlue':'#23272E',
         'purple':'#0F60FF',
         'green':'#1EB564',
         'skyblue':'#0FB7FF'

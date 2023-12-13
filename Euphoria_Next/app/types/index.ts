@@ -39,7 +39,9 @@ export interface ordersInterface{
     streetAdress:string,
     fistname:string
    },
-   status: 'Paid' | 'Pending' | 'Delivered'
+   status: 'Paid' | 'Pending' | 'Delivered',
+   price: number,
+   couponDiscount: number,
 }
 export interface Customer {
     name: string;
