@@ -9,6 +9,7 @@ router.get(
  async(req: Request, res: Response) => {
     try {
       const orders = await orderSchema.find().populate('products.product');      
+      
       return res.status(200).json(orders);
     } catch (err) {
         console.log(err);

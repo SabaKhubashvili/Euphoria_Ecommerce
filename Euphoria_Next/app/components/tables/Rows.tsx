@@ -60,10 +60,7 @@ class MainTableRows {
         { isOpen &&
 
             <div className="absolute font-medium xl:text-[16px] text-[13px] top-[35px] flex flex-col gap-[5px] w-full z-[10]">
-                 <div className="bg-[#b6a9eb] text-[#33189D] w-full rounded-[5px]  !py-[5px] !px-[10px]">
-                        Delivered 
-                 </div>
-                 <div className="bg-[#b6a9eb] text-[#33189D] w-full rounded-[5px]  !py-[5px] !px-[10px]">
+                 <div className="bg-[#b6a9eb] text-[#33189D] w-full rounded-[5px]  !py-[5px] !px-[10px] cursor-pointer">
                         Delivered 
                  </div>
             </div>

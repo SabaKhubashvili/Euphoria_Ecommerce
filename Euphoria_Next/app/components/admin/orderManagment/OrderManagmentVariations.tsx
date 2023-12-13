@@ -48,7 +48,8 @@ export const OrderManagmentVariations = ({
         pricing:{
           totalPrice:returning.price,
           couponDiscount:returning.couponDiscount
-        }
+        },
+        adressInfo,
       };
     })
   );
@@ -239,9 +240,7 @@ export const OrderManagmentVariations = ({
       totalPrice:number,
       couponDiscount:number
     }
-  }) => {
-    console.log();
-    
+  }) => {    
     const forTable = order.products.map((ord: any) => {      
       const {
         aboutProduct,
@@ -311,11 +310,15 @@ export const OrderManagmentVariations = ({
           style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
           className=""
           >
-            ₾{JSON.parse(givenProduct.discount) > 0 ? (((JSON.parse(givenProduct.price) / 100 )  * JSON.parse(givenProduct.discount)) * givenProduct.quantity) : JSON.parse(givenProduct.price) * givenProduct.quantity}
+            ₾{JSON.parse(givenProduct.discount) > 0 ?
+                 Math.floor(givenProduct.quantity * (JSON.parse(givenProduct.price) - (JSON.parse(givenProduct.price) * JSON.parse(givenProduct.discount)) / 100))
+            :
+             JSON.parse(givenProduct.price) * givenProduct.quantity}
           </div>
         </div>
       )
     }
+    
     return (
       <div className="w-full ">
         <div className="flex flex-col gap-[20px]">
@@ -326,7 +329,36 @@ export const OrderManagmentVariations = ({
             notFoundMessage="No order was found"
             customBodyRow={bodyRow}
           />
-          <div className="flex justify-end xl:p-[24px] p-[12px] pr-[20px]">
+          <div className="flex justify-between xl:p-[24px] p-[12px] pr-[20px] xl:flex-row flex-col gap-y-10">
+            <div className="flex flex-col gap-[16px] xl:w-[50%] w-full">
+              <h1 className="uppercase text-[13px] font-medium text-secondaryGray">Personal Information</h1>
+              <div className="flex flex-col gap-[10px]">
+                <div className="flex xl:jsutify-normal justify-start gap-[15px]">
+                  <h3 className="xl:basis-1/3 text-start">Fistname: </h3>
+                  <h3 className="font-semibold xl:basis-1/2">{order.adressInfo.firstname}</h3>
+                </div>
+                <div className="flex xl:jsutify-normal justify-start gap-[15px]">
+                  <h3 className="xl:basis-1/3 text-start">Lastname: </h3>
+                  <h3 className="font-semibold xl:basis-1/2">{order.adressInfo.lastname}</h3>
+                </div>
+                <div className="flex xl:jsutify-normal justify-start gap-[15px]">
+                  <h3 className="xl:basis-1/3 text-start">Contact Number: </h3>
+                  <h3 className="font-semibold xl:basis-1/2">{order.adressInfo.phone}</h3>
+                </div>
+                <div className="flex xl:jsutify-normal justify-start gap-[15px]">
+                  <h3 className="xl:basis-1/3 text-start">Email: </h3>
+                  <h3 className="font-semibold xl:basis-1/2">{order.adressInfo.email}</h3>
+                </div>
+                <div className="flex xl:jsutify-normal justify-start gap-[15px]">
+                  <h3 className="xl:basis-1/3 text-start">City: </h3>
+                  <h3 className="font-semibold xl:basis-1/2">{order.adressInfo.city}</h3>
+                </div>
+                <div className="flex xl:jsutify-normal justify-start gap-[15px]">
+                  <h3 className="xl:basis-1/3 text-start">Adress: </h3>
+                  <h3 className="font-semibold xl:basis-1/2">{order.adressInfo.streetAdress}</h3>
+                </div>
+              </div>
+            </div>
               <div className="flex flex-col gap-[16px] w-[500px] ">
                 <div className="flex justify-between w-full">
                   <h1 className="text-secondaryGray">Subtotal</h1>

@@ -37,7 +37,8 @@ export interface ordersInterface{
     city:string,
     phone:string,
     streetAdress:string,
-    fistname:string
+    firstname:string
+    lastname:string
    },
    status: 'Paid' | 'Pending' | 'Delivered',
    price: number,

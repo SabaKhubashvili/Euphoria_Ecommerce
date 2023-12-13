@@ -18,16 +18,6 @@ interface Props {
   customBodyRow?: (bodyContent: any) => React.ReactNode;
 }
 
-// const dropdownBodyOptions = {
-//   closed: {
-//     height: "0%",
-//     display: "none",
-//   },
-//   open: {
-//     height: "fit-content",
-//     display: "flex",
-//   },
-// };
 
 export const MainTable = ({
   type,

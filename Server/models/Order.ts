@@ -18,7 +18,7 @@ const OrderSchema = new mongoose.Schema({
         }
     ],
     adressInfo:{
-        streetAdress:{type:Number,required:true},
+        streetAdress:{type:String,required:true},
         city:{type:String,required:true},
         phone:{type:String,required:true},
         email:{type:String,required:true},
