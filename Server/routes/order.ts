@@ -8,15 +8,20 @@ router.get(
   verifyTokenAndAdminAuthorization,
   async (req: Request, res: Response) => {
     try {
-      const orders = await orderSchema.find().populate("products.product");
+      const orders = await orderSchema
+        .find()
+        .populate("products.product")
+        .sort({ $natural: -1 })
+
       return res.status(200).json(orders);
     } catch (err) {
       return res
         .status(500)
-        .json({ message: "Something went wrong on server" });
+        .json({ message: "Something went wrong on the server" });
     }
   }
 );
+
 
 router.post(
   "/updateStatus",

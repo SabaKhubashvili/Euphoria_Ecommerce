@@ -10,7 +10,7 @@ import { FormikValues, useFormik } from "formik";
 import { CartAdressInfo } from "./CartAdressInfo";
 import { CartPay } from "./CartPay";
 import { CartDone } from "./CartDone";
-import { CartInterface, CartRowInterface } from "@/app/types";
+import { CartInterface } from "@/app/types";
 
 export enum Steps {
   Cart = 0,
@@ -83,7 +83,8 @@ export const CartPage = ({ data }: Props) => {
     isDisabled: false,
     success: false,
   });
-
+  console.log(data.products);
+  
   const formik = useFormik({
     validateOnChange: false,
     initialValues: {
@@ -267,6 +268,7 @@ export const CartPage = ({ data }: Props) => {
                 firstname: formik.values.firstName,
                 lastname: formik.values.lastName,
               }}
+              data={data.products}
             />
           ) : step === Steps.Done ? (
             <CartDone />

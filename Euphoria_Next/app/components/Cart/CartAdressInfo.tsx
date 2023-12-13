@@ -3,7 +3,6 @@ import { AuthInput } from "../Inputs/AuthInput";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { Roboto } from "../assets/Fonts";
 import { SmallCartInfo } from "./SmallCartInfo";
-import { CartRowInterface } from "@/app/types";
 import { useCartStore } from "@/app/hooks/useCartData";
 
 interface Props {

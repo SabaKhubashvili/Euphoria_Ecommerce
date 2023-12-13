@@ -20,6 +20,7 @@ import { ToolTip } from "../Tooltip";
 import { Icon } from "../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { Formik, FormikProps } from "formik";
+import { useCartStore } from "@/app/hooks/useCartData";
 
 interface Props {
   _id: number;
@@ -64,6 +65,7 @@ export const SingleProductInformation = ({
   const router = useRouter();
   const cookies = getCookies();
   const [isLoading, setIsLoading] = useState(false);
+  const {cartData,setCartData} = useCartStore()
   const addToCart = async () => {
     if (isLoading) return null;
     setIsLoading(true);
@@ -88,6 +90,7 @@ export const SingleProductInformation = ({
           progress: undefined,
           theme: "light",
         });
+        router.refresh()
         router.push("/cart");
       })
       .catch((err) => {

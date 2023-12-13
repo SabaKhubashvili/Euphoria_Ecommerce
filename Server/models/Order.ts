@@ -28,6 +28,6 @@ const OrderSchema = new mongoose.Schema({
     status:{type: String ,required:true,default:"pending"},
     price:{type:Number,required:true},
     couponDiscount:{type:Number,default:0},
-  });
+  },{timestamps:true});
   
   module.exports = mongoose.model('Order',OrderSchema)

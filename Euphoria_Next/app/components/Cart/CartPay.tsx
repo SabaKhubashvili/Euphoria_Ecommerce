@@ -7,18 +7,19 @@ import { toast } from "react-toastify";
 import jwtDecode from "jwt-decode";
 import { getCookie } from "cookies-next";
 import { useCartStore } from "@/app/hooks/useCartData";
+import { CartRowInterface, } from "@/app/types";
 
 interface Props {
   setStep: () => void;
   paymentAmount: number;
   adressInfo:any,
-  couponDiscount:number
+  couponDiscount:number,
+  data: CartRowInterface[]
 }
 
 
-export const CartPay = ({ setStep,  paymentAmount,adressInfo,couponDiscount }: Props) => {
+export const CartPay = ({ setStep,  paymentAmount,adressInfo,couponDiscount, data }: Props) => {
   const jwt:any = jwtDecode(getCookie('accessToken') || '');
-  const { cartData: { products } } = useCartStore();
 
   
     
@@ -27,10 +28,10 @@ export const CartPay = ({ setStep,  paymentAmount,adressInfo,couponDiscount }: P
       let response = await axios.post("/api/paypal/createOrder", {
         user_id: jwt.id,
         order_price: paymentAmount,
-        products: products.map((product:any) => ({  
-          product: product.product._id,    
-          quantity: product.quantity, 
-          size: product.size
+        products: data.map((row:any) => ({  
+          product: row.product._id,    
+          quantity: row.quantity, 
+          size: row.size
         })),
         adressInfo,
         couponDiscount:couponDiscount
@@ -131,7 +132,7 @@ export const CartPay = ({ setStep,  paymentAmount,adressInfo,couponDiscount }: P
             </div>
           </PayPalScriptProvider>
         </div>
-        <SmallCartInfo totalPrice={paymentAmount} data={products} />
+        <SmallCartInfo totalPrice={paymentAmount} data={data} />
       </div>
     </div>
   );

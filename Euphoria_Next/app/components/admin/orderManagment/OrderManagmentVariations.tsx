@@ -1,21 +1,24 @@
 "use client";
 
+//* ----------------------------> React
 import React, { useEffect, useRef, useState, useMemo } from "react";
+import { toast } from "react-toastify";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
+
+//* ----------------------------> Components
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
-import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import { MainDropdown } from "../../Dropdown/MainDropdown";
 import { MainTable } from "../../tables/MainTable";
 import { Pagination } from "../../Pagination";
+
+//* ----------------------------> Functions && Hooks
 import { useAdminOrdersPagination } from "@/app/hooks/UseAdminOrdersPagination";
-import { ordersInterface, productInterface } from "@/app/types";
-import { Dropdown_Down } from "@/public/Svg/Icons";
-import { toast } from "react-toastify";
-import { ProductComponent } from "../../Product/ProductComponent";
+import { ordersInterface } from "@/app/types";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
-import { getCookie } from "cookies-next";
-import { useRouter } from "next/navigation";
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
 
 enum Variations {
   All = 0,
@@ -32,9 +35,7 @@ export const OrderManagmentVariations = ({
   //* ----------------------------------------------------> Variables <----------------------------------------------------------------
 
   // ----------------------------------------------------> States <----------------------------------------------------------------
-  const [activeVariation, setActiveVariation] = useState<Variations>(
-    Variations.All
-  );
+  const [activeVariation, setActiveVariation] = useState<Variations>(Variations.All );
   const [orderId, setOrderId] = useState<string>("");
   const underlineRef = useRef<HTMLDivElement>(null);
   const [filteredOrders, setFilteredOrders] = useState<any>();
