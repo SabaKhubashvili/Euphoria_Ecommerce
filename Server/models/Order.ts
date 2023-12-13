@@ -25,7 +25,7 @@ const OrderSchema = new mongoose.Schema({
         firstname:{type:String,required:true},
         lastname:{type:String},
     },
-    status:{type: String ,required:true,default:"pending"}
+    status:{type: String ,required:true,default:"pending"},
   });
   
   module.exports = mongoose.model('Order',OrderSchema)

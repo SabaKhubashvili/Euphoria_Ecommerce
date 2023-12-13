@@ -20,30 +20,34 @@ enum Variations {
   Delivered = 3,
 }
 
+export const OrderManagmentVariations = ({
+  orders,
+}: {
+  orders: ordersInterface[];
+}) => {
+  //* ----------------------------------------------------> Variables <----------------------------------------------------------------
 
-export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) => {
-
-    //* ----------------------------------------------------> Variables <----------------------------------------------------------------
-
-    // ----------------------------------------------------> States <----------------------------------------------------------------
+  // ----------------------------------------------------> States <----------------------------------------------------------------
   const [activeVariation, setActiveVariation] = useState<Variations>(
     Variations.All
   );
   const [orderId, setOrderId] = useState<string>("");
   const underlineRef = useRef<HTMLDivElement>(null);
   const [filteredOrders, setFilteredOrders] = useState<any>();
-  const [ordersForTable] =  useState(orders.map(order => {
-    const { adressInfo, products, ...returning } = order;
-    return {
-      _id: returning._id,
-      user_id:returning.userId,
-      phone:adressInfo.phone,
-      email:adressInfo.email,
-      status:returning.status,
-      products:products
-    }
-}))
-    // ----------------------------------------------------> Hooks <----------------------------------------------------------------
+  const [ordersForTable] = useState(
+    orders.map((order) => {
+      const { adressInfo, products, ...returning } = order;
+      return {
+        _id: returning._id,
+        user_id: returning.userId,
+        phone: adressInfo.phone,
+        email: adressInfo.email,
+        status: returning.status,
+        products: products,
+      };
+    })
+  );
+  // ----------------------------------------------------> Hooks <----------------------------------------------------------------
   const {
     nextPage,
     prevPage,
@@ -53,12 +57,13 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     setOrdersPerPage,
   } = useAdminOrdersPagination();
 
-
   //* ----------------------------------------------------> UseEffects <----------------------------------------------------------------
 
   useEffect(() => {
     const updateActiveElement = () => {
-      const activeElement = document.querySelector(".activeTableVariationOrders") as HTMLDivElement;
+      const activeElement = document.querySelector(
+        ".activeTableVariationOrders"
+      ) as HTMLDivElement;
       if (activeElement && underlineRef.current) {
         underlineRef.current.style.left = activeElement.offsetLeft + "px";
         underlineRef.current.style.width = activeElement.offsetWidth + "px";
@@ -72,15 +77,13 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     };
   }, [activeVariation]);
 
-
   //* ----------------------------------------------------> Data <----------------------------------------------------------------
 
   const ordersOnPage: any = useMemo(() => {
     const startIndex = (currentPage - 1) * ordersPerPage;
     const endIndex = currentPage * ordersPerPage;
-    let returningOrders = ordersForTable
-  .slice(startIndex, endIndex);    
-   if (activeVariation === Variations.Delivered) {
+    let returningOrders = ordersForTable.slice(startIndex, endIndex);
+    if (activeVariation === Variations.Delivered) {
       returningOrders = returningOrders.filter(
         (order) => order.status === "Delivered"
       );
@@ -88,7 +91,7 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
       returningOrders = returningOrders.filter(
         (order) => order.status === "Pending"
       );
-    }else if(activeVariation === Variations.Paid){
+    } else if (activeVariation === Variations.Paid) {
       returningOrders = returningOrders.filter(
         (order) => order.status === "Paid"
       );
@@ -97,27 +100,26 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
   }, [currentPage, ordersPerPage, activeVariation]);
 
   const ordersLength = useMemo(() => {
- if (activeVariation === Variations.Delivered) {
+    if (activeVariation === Variations.Delivered) {
       return orders.filter((order) => order.status === "Delivered").length;
     } else if (activeVariation === Variations.Pending) {
       return orders.filter((order) => order.status === "Pending").length;
-    } 
-     else if (activeVariation === Variations.Paid) {
+    } else if (activeVariation === Variations.Paid) {
       return orders.filter((order) => order.status === "Paid").length;
     } else {
       return orders.length;
     }
   }, [activeVariation]);
 
-  console.log(ordersOnPage);
-  
   //* ----------------------------------------------------> Functions <----------------------------------------------------------------
 
   const searchForOrder = (e: React.FormEvent) => {
     e.preventDefault();
     setActiveVariation(Variations.All);
-    const filtered = ordersForTable.filter((order) => order._id.toString().includes(orderId));
-    
+    const filtered = ordersForTable.filter((order) =>
+      order._id.toString().includes(orderId)
+    );
+
     if (filtered.length <= 0) {
       toast.error("No order was found", {
         position: "top-center",
@@ -134,111 +136,188 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
     }
   };
 
-  const updateStatus = (id:string)=>{
+  const updateStatus = (id: string) => {
     console.log(id);
-    
-  }
-  
-  //* ----------------------------------------------------> JSX.ELements <----------------------------------------------------------------
-      const Filter = () => {
-        return(
-          <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative select-none">
-              <div
-                className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200"
-                ref={underlineRef}
-              />
-              {/* Underline */}
-              <div
-                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-                  activeVariation === Variations.All
-                    ? "text-purple activeTableVariationOrders"
-                    : "text-secondaryGray"
-                }`}
-                onClick={() => {
-                  setFilteredOrders(undefined);
-                  // setOrderId("");
-                  manualPage(1);
-                  setActiveVariation(Variations.All);
-                }}
-              >
-                All
-              </div>
-              <div
-                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-                  activeVariation === Variations.Paid
-                    ? "text-purple activeTableVariationOrders"
-                    : "text-secondaryGray"
-                }`}
-                onClick={() => {
-                  setFilteredOrders(undefined);
-                  // setOrderId("");
-                  manualPage(1);
-                  setActiveVariation(Variations.Paid);
-                }}
-              >
-                Paid
-              </div>
-              <div
-                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-                  activeVariation === Variations.Pending
-                    ? "text-purple activeTableVariationOrders"
-                    : "text-secondaryGray"
-                }`}
-                onClick={() => {
-                  setFilteredOrders(undefined);
-                  // setOrderId("");
-                  manualPage(1);
-                  setActiveVariation(Variations.Pending);
-                }}
-              >
-                Pending
-              </div>
-              <div
-                className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
-                  activeVariation === Variations.Delivered
-                    ? "text-purple activeTableVariationOrders"
-                    : "text-secondaryGray"
-                }`}
-                onClick={() => {
-                  setFilteredOrders(undefined);
-                  // setOrderId("");
-                  manualPage(1);
-                  setActiveVariation(Variations.Delivered);
-                }}
-              >
-                Delivered
-              </div>
-            </div>
-        )
-      }
+  };
 
-  const rowActions = (actions?:any) => {    
+  //* ----------------------------------------------------> JSX.ELements <----------------------------------------------------------------
+  const Filter = () => {
+    return (
+      <div className="flex items-center border-b-[1px] border-b-[#DBDADE] relative select-none">
+        <div
+          className="h-[2px] bg-purple absolute bottom-0 transition-all duration-200"
+          ref={underlineRef}
+        />
+        {/* Underline */}
+        <div
+          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+            activeVariation === Variations.All
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
+          onClick={() => {
+            setFilteredOrders(undefined);
+            // setOrderId("");
+            manualPage(1);
+            setActiveVariation(Variations.All);
+          }}
+        >
+          All
+        </div>
+        <div
+          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+            activeVariation === Variations.Paid
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
+          onClick={() => {
+            setFilteredOrders(undefined);
+            // setOrderId("");
+            manualPage(1);
+            setActiveVariation(Variations.Paid);
+          }}
+        >
+          Paid
+        </div>
+        <div
+          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+            activeVariation === Variations.Pending
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
+          onClick={() => {
+            setFilteredOrders(undefined);
+            // setOrderId("");
+            manualPage(1);
+            setActiveVariation(Variations.Pending);
+          }}
+        >
+          Pending
+        </div>
+        <div
+          className={`py-[8px] px-[20px] text-[15px] leading-[22px] cursor-pointer ${
+            activeVariation === Variations.Delivered
+              ? "text-purple activeTableVariationOrders"
+              : "text-secondaryGray"
+          }`}
+          onClick={() => {
+            setFilteredOrders(undefined);
+            // setOrderId("");
+            manualPage(1);
+            setActiveVariation(Variations.Delivered);
+          }}
+        >
+          Delivered
+        </div>
+      </div>
+    );
+  };
+
+  const rowActions = (actions?: any) => {
     return (
       <div
         style={{
           flexBasis: 100 / (Object.keys(ordersOnPage[0]).length + 1) + "%",
         }}
         className="select-none cursor-pointer"
-        onClick={()=>actions.onClick()}
+        onClick={() => actions.onClick()}
       >
-        <Icon svg={WebsiteIcons['adminTableArrow_down']} className="flex justify-end items-center"/>
+        <Icon
+          svg={WebsiteIcons["adminTableArrow_down"]}
+          className="flex justify-end items-center"
+        />
       </div>
     );
   };
-  const customDropdownBody = (order: any) => {
-    return(
-          <div className="w-full py-[20px] bg-[#FFF] grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-            {
-              order.map((ord:any)=>(
-                <div className="h-[128vw] xs:h-[70vw] md:h-[35vw] lg:h-[30vw] 2xl:h-[25vw]" key={ord._id}>
-                  <ProductComponent {...ord.product}/>
-                </div>
-              ))
-            }
-          </div>
-    )
-  }
+  const customDropdownBody = (order: ordersInterface) => {    
+    const forTable = order.products.map((ord: any) => {      
+      const {
+        aboutProduct,
+        advantages,
+        brand,
+        category,
+        description,
+        images,
+        availableSizes,
+        __v,
+        ...productForTable
+      } = ord.product;
+      const{
+        quantity,
+        ...rest
+      } = ord;
+      const returnable = {
+        ...productForTable,
+        quantity
+      }
+      return {
+        ...returnable,
+        discount:
+          productForTable.discount === null ? 0 :  productForTable.discount,
+      };
+    });
 
+    
+    const bodyRow  = (givenProduct:{
+      _id:string,
+      title:string,
+      quantity:number,
+      price:string,
+      discount:string,
+    }) =>{        
+
+      return(
+        <div className="flex items-center py-[10px]">
+          <div
+          style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
+          >
+            #{givenProduct._id.slice(0,15)}...
+          </div>
+          <div
+          className="font-bold"
+          style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
+          >
+            {givenProduct.title}
+          </div>
+          <div
+          style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
+          >
+            X{givenProduct.quantity}
+          </div>
+          <div
+          style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
+          >
+            ₾{givenProduct.price}
+          </div>
+          <div
+          style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
+          className="text-[#EA5455]"
+          >
+            {givenProduct.discount}%
+          </div>
+          <div
+          style={{ flexBasis: 100 / Object.keys(givenProduct).length + "%" }}
+          className=""
+          >
+            ₾{JSON.parse(givenProduct.discount) > 0 ? ((JSON.parse(givenProduct.price) / 100 )  * JSON.parse(givenProduct.discount) ): givenProduct.price}
+          </div>
+        </div>
+      )
+    }
+    return (
+      <div className="w-full ">
+        <div className="h-[128vw] xs:h-[70vw] md:h-[35vw] lg:h-[30vw] 2xl:h-[25vw]">
+          <MainTable
+            bodyContent={forTable}
+            topContent={["ID", "Title","QTY", "Price", "Disc.","Total"]}
+            type="secondary"
+            notFoundMessage="No order was found"
+            customBodyRow={bodyRow}
+          />
+        </div>
+      </div>
+    );
+  };
 
   return (
     <React.Fragment>
@@ -249,7 +328,12 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
             <SecondaryInput
               placeholder="Search by order id"
               type="secondary"
-              rightSvg={<Icon svg={WebsiteIcons["Search"]} className="flex items-center" />}
+              rightSvg={
+                <Icon
+                  svg={WebsiteIcons["Search"]}
+                  className="flex items-center"
+                />
+              }
               onChange={(e) => setOrderId(e.target.value)}
               value={orderId}
               onSubmit={searchForOrder}
@@ -278,18 +362,11 @@ export const OrderManagmentVariations = ({orders}:{orders:ordersInterface[]}) =>
         <div className="h-[600px] mt-[16px]">
           <MainTable
             bodyContent={filteredOrders || ordersOnPage || []}
-            topContent={[
-              'ID',
-              'User id',
-              "Phone",
-              "Email",
-              "Status",
-              ""
-            ]}
+            topContent={["ID", "User id", "Phone", "Email", "Status", ""]}
             type="primary"
             notFoundMessage="No order was found"
-            actions={(id?:string,actions?:any)=> rowActions(actions)}
-            customDropdownBody={customDropdownBody}
+            actions={(id?: string, actions?: any) => rowActions(actions)}
+            customDropdownBody={(bodyContent)=>customDropdownBody(bodyContent as unknown as ordersInterface)}
             updateStatus={updateStatus}
           />
         </div>

@@ -1,3 +1,5 @@
+//*----------------------------------------------> STATIC
+
 export interface footerComponentsType{
     title: string;
     content: SingleFooterComponentRowType[];
@@ -18,6 +20,9 @@ export interface CategoryInterface{
     _id:string,
     name:string
 }
+
+
+//*----------------------------------------------> Dynamic
 
 export interface ordersInterface{
    _id:string,
