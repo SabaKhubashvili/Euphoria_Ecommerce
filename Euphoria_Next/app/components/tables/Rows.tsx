@@ -1,6 +1,8 @@
-import { Dropdown_Down } from "@/public/Svg/Icons";
+"use client"
+
+import { useEffect, useRef, useState } from "react";
 import classNames from "classnames";
-import { useState } from "react";
+import { Dropdown_Down } from "@/public/Svg/Icons";
 
 const getCellClasses = (text: string, type: string) => {
     return classNames({
@@ -8,7 +10,7 @@ const getCellClasses = (text: string, type: string) => {
       "text-yellow-500": text === "Pending" && type !== "primary",
       "text-[#28C76F] bg-[#28c76f29]": text === "Confirmed" && type === "primary",
       "text-green": text === "Confirmed" && type !== "primary",
-      "text-green bg-[#90ee90]": type === "primary" && text !== "Pending",
+      "text-green bg-[#90ee90]" : type === 'primary' && text === 'Paid',
       "text-[#33189D]": type !== "primary" && text !== "Pending",
       "bg-[#b6a9eb] text-[#33189D]": type === "primary" && text === "Delivered",
     });
@@ -39,12 +41,28 @@ class MainTableRows {
     length,
     onClick,
   }: {
-    text: "Pending" | "Delivered" | "Confirmed";
+    text: "Pending" | "Delivered" | "Paid" ;
     type: string;
     length: number;
-    onClick: () => void;
+    onClick: (status:"Pending" | "Delivered" | "Paid") => void;
   }) => {
+    const ref = useRef<HTMLHeadingElement>(null)
     const [isOpen,setIsOpen] = useState(false)
+
+    useEffect(()=>{
+      if(isOpen){
+
+        const handleOutsideClick = (e:MouseEvent) =>{
+          if(ref && ref.current && !ref.current.contains(e.target as Node)){
+            setIsOpen(false)
+          }
+        }
+        
+        window.addEventListener('click',handleOutsideClick)
+        return () => window.removeEventListener('click',handleOutsideClick)
+      }
+    },[isOpen])
+    
     return (
       <div className="relative select-none"
       style={{ flexBasis: 100 / length + "%" }}>
@@ -53,16 +71,25 @@ class MainTableRows {
           className={`font-medium xl:text-[16px] text-[13px] cursor-pointer flex items-center justify-between rounded-[5px]  !py-[5px] !px-[10px] w-full ${getCellClasses(
             text,
             type
-          )}`}>
+          )}`}
+          ref={ref}
+          >
           {text}
           {type === "primary" && <Dropdown type={type} />}
         </h1>
         { isOpen &&
 
             <div className="absolute font-medium xl:text-[16px] text-[13px] top-[35px] flex flex-col gap-[5px] w-full z-[10]">
-                 <div className="bg-[#b6a9eb] text-[#33189D] w-full rounded-[5px]  !py-[5px] !px-[10px] cursor-pointer">
-                        Delivered 
+              {
+                text === 'Paid' ? 
+                 <div className="bg-[#b6a9eb] text-[#33189D] w-full rounded-[5px]  !py-[5px] !px-[10px] cursor-pointer" onClick={()=>onClick('Delivered')}>
+                        Delivered
                  </div>
+                 :
+                 <div className="text-green bg-[#90ee90] w-full rounded-[5px]  !py-[5px] !px-[10px] cursor-pointer" onClick={()=>onClick('Paid')}>
+                  Paid
+                </div>
+                }
             </div>
         }
       </div>

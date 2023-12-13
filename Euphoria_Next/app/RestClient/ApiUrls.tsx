@@ -28,7 +28,8 @@ export default class BaseUrl{
   //* Admin 
 
   static getOrders = this.baseUrl + '/api/order/getAll'
-
+  static updateOrderStatus = this.baseUrl + '/api/order/updateStatus'
+  
   static addCoupon = this.baseUrl + '/api/coupon/add'
   static getCoupons = this.baseUrl + '/api/coupon/getAll'
   static updateCoupon = this.baseUrl + '/api/coupon/update'

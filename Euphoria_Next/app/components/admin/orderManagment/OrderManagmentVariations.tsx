@@ -12,6 +12,10 @@ import { ordersInterface, productInterface } from "@/app/types";
 import { Dropdown_Down } from "@/public/Svg/Icons";
 import { toast } from "react-toastify";
 import { ProductComponent } from "../../Product/ProductComponent";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { getCookie } from "cookies-next";
+import { useRouter } from "next/navigation";
 
 enum Variations {
   All = 0,
@@ -34,7 +38,8 @@ export const OrderManagmentVariations = ({
   const [orderId, setOrderId] = useState<string>("");
   const underlineRef = useRef<HTMLDivElement>(null);
   const [filteredOrders, setFilteredOrders] = useState<any>();
-  const [ordersForTable] = useState(
+  const [isLoading,setIsLoading] = useState(false)
+  const [ordersForTable,setOrdersForTable] = useState(
     orders.map((order) => {
       const { adressInfo, products, ...returning } = order;
       
@@ -62,7 +67,7 @@ export const OrderManagmentVariations = ({
     ordersPerPage,
     setOrdersPerPage,
   } = useAdminOrdersPagination();
-
+  const router = useRouter()
   //* ----------------------------------------------------> UseEffects <----------------------------------------------------------------
 
   useEffect(() => {
@@ -103,7 +108,7 @@ export const OrderManagmentVariations = ({
       );
     }
     return returningOrders;
-  }, [currentPage, ordersPerPage, activeVariation]);
+  }, [currentPage, ordersPerPage, activeVariation,ordersForTable]);
 
   const ordersLength = useMemo(() => {
     if (activeVariation === Variations.Delivered) {
@@ -142,8 +147,25 @@ export const OrderManagmentVariations = ({
     }
   };
 
-  const updateStatus = (id: string) => {
-    console.log(id);
+  const updateStatus = (id: string,status:"Pending" | "Delivered" | "Paid") => {
+    if(!isLoading){
+      setIsLoading(true)
+      RestClient.postRequest(BaseUrl.updateOrderStatus,{id,status},getCookie('accessToken'))
+      .then(res=>{
+        setOrdersForTable(prevOrders => {
+          return prevOrders.map(order => {
+            if (order._id === id) {
+              return { ...order, status: status };
+            }
+            return order;
+          });
+        });
+      }).catch(err=>{
+        console.log(err);
+      }).finally(()=>{
+        setIsLoading(false)
+      })
+    }
   };
 
   //* ----------------------------------------------------> JSX.ELements <----------------------------------------------------------------

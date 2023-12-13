@@ -14,7 +14,7 @@ interface Props {
   notFoundMessage?: string;
   actions?: (id?: string, actions?: any) => React.ReactNode;
   customDropdownBody?: (products: productInterface[]) => React.ReactNode;
-  updateStatus?: (id: string) => void;
+  updateStatus?: (id: string,status:"Pending" | "Delivered" | "Paid") => void;
   customBodyRow?: (bodyContent: any) => React.ReactNode;
 }
 
@@ -42,7 +42,7 @@ export const MainTable = ({
             .length > 0 ? (
           key === "status" ? (
             <MainTableRows.StatusRowCell
-              onClick={() => updateStatus && updateStatus(cont._id)}
+              onClick={(status:"Pending" | "Delivered" | "Paid") => updateStatus && updateStatus(cont._id,status)}
               key={key}
               text={cont[key]}
               length={topContent.length}
