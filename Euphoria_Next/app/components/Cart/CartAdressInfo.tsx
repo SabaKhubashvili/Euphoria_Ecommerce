@@ -4,6 +4,7 @@ import { MainDropdown } from "../Dropdown/MainDropdown";
 import { Roboto } from "../assets/Fonts";
 import { SmallCartInfo } from "./SmallCartInfo";
 import { useCartStore } from "@/app/hooks/useCartData";
+import { Textarea } from "../Inputs/Textarea";
 
 interface Props {
   errors: any;
@@ -116,6 +117,15 @@ export const CartAdressInfo = ({
                   <div className="text-rose-700 pt-[4px]">{errors.city}</div>
                 )}
               </div>
+            </div>
+            <div className="flex flex-col gap-[10px] pt-[20px]">
+                <h1 className="text-secondaryBlack font-medium text-[16px]">Additional Information</h1>
+                  <Textarea
+                    id="additionalInformation"
+                    name="additionalInformation"
+                    onChange={handleChange}
+                    value={values.additionalInformation}
+                  />
             </div>
           </div>
         </div>

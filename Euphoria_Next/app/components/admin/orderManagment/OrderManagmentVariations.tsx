@@ -68,7 +68,6 @@ export const OrderManagmentVariations = ({
     ordersPerPage,
     setOrdersPerPage,
   } = useAdminOrdersPagination();
-  const router = useRouter()
   //* ----------------------------------------------------> UseEffects <----------------------------------------------------------------
 
   useEffect(() => {
@@ -379,6 +378,10 @@ export const OrderManagmentVariations = ({
                 <div className="flex xl:jsutify-normal justify-start gap-[15px]">
                   <h3 className="xl:basis-1/3 text-start">Adress: </h3>
                   <h3 className="font-semibold xl:basis-1/2">{order.adressInfo.streetAdress}</h3>
+                </div>
+                <div className="flex xl:jsutify-normal flex-col justify-start gap-[8px] pt-[25px]">
+                  <h3 className="xl:basis-1/3 text-start">Additional information: </h3>
+                  <h3 className="font-medium  xl:basis-1/2">{order.adressInfo.additionalInformation ||  ""}</h3>
                 </div>
               </div>
             </div>

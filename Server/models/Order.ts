@@ -24,10 +24,16 @@ const OrderSchema = new mongoose.Schema({
         email:{type:String,required:true},
         firstname:{type:String,required:true},
         lastname:{type:String},
+        additionalInformation:{
+            type:String
+        }
     },
     status:{type: String ,required:true,default:"pending"},
     price:{type:Number,required:true},
     couponDiscount:{type:Number,default:0},
-  },{timestamps:true});
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+  });
+  
   
   module.exports = mongoose.model('Order',OrderSchema)

@@ -52,7 +52,7 @@ export const Dashboard = () => {
 
 
 
-  const actions = () =>{
+  const actions = () => {
     return(
       <div
       style={{
@@ -158,7 +158,9 @@ export const Dashboard = () => {
                       Total 10,4k visitors
                     </p>
                   </div>
-                  <Icon svg={WebsiteIcons["Verticaldots"]} />
+                  <div>
+                    <Icon svg={WebsiteIcons["Verticaldots"]} />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-[18px] mt-[20px] h-[566px] overflow-y-auto">
                   {/* { MostSaledProducts.map((product,index)=>(
@@ -183,10 +185,12 @@ export const Dashboard = () => {
                   </div>
               </div>
             </div>
-            <div className="flex flex-col gap-[24px] bg-white rounded-[16px] p-[24px]">
+            {/* <div className="flex flex-col gap-[24px] bg-white rounded-[16px] p-[24px]">
                   <div className="flex items-center justify-between">
                       <h1 className="text-[20px] font-medium text-blackBlue">Recent Orders</h1>
-                      <Icon svg={WebsiteIcons['Verticaldots']}/>
+                      <div>
+                        <Icon svg={WebsiteIcons['Verticaldots']}/>
+                      </div>
                   </div>        
                   <MainTable
                     type="secondary"
@@ -194,7 +198,7 @@ export const Dashboard = () => {
                     bodyContent={orders.slice(0,10)}
                     actions={actions}
                   />
-            </div>
+            </div> */}
           </div>
   );
 };

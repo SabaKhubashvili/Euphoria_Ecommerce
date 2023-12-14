@@ -94,6 +94,7 @@ export const CartPage = ({ data }: Props) => {
       streetAdress: "",
       city: "",
       phone: "",
+      additionalInformation:""
     },
     validate: validateForm,
     onSubmit: (values) => {
@@ -267,6 +268,7 @@ export const CartPage = ({ data }: Props) => {
                 streetAdress: formik.values.streetAdress,
                 firstname: formik.values.firstName,
                 lastname: formik.values.lastName,
+                additionalInformation: formik.values.additionalInformation
               }}
               data={data.products}
             />
