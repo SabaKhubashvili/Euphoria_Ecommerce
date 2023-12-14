@@ -11,6 +11,7 @@ const productRouter = require('./routes/products')
 const cartRouter = require('./routes/cart')
 const couponRouter = require('./routes/coupon')
 const orderRouter = require('./routes/order')
+const userRouter = require('./routes/users')
 const cors = require("cors");
 
 dotenv.config();
@@ -27,6 +28,8 @@ app.use('/api/cart',cartRouter)
 app.use('/api/categories',categoryRouter)
 app.use('/api/coupon',couponRouter)
 app.use('/api/order',orderRouter);
+app.use('/api/user',userRouter);
+
 app.listen(process.env.PORT || 5000,()=>{
   console.log('beckend is running');
 })

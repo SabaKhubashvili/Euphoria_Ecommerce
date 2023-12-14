@@ -6,6 +6,7 @@ const {
 } = require("./verifyToken");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
+import {Request,Response} from 'express'
 
 // Update user
 router.put("/:id", verifyTokenAuthorization, async (req: any, res: any) => {
@@ -52,11 +53,11 @@ router.get("/find/:id", verifyTokenAuthorization, async (req: any, res: any) => 
 
 // Get all user
 router.get(
-  "/users",
+  "/getAll",
   verifyTokenAndAdminAuthorization,
   async (req: any, res: any) => {
     try {
-      const users = await User.find();
+      const users = await User.find().select('-password');
       return res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ message: "Something wrong happened" });

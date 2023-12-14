@@ -45,7 +45,7 @@ export interface ordersInterface{
    price: number,
    couponDiscount: number,
 }
-export interface Customer {
+export interface customerInterface {
     name: string;
     email: string;
     phone: string;

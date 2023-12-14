@@ -1,20 +1,40 @@
 "use client";
 
+//* ------------------------> React
 import React, { useMemo, useState } from "react";
-import { MainTable } from "../../tables/MainTable";
-import { customers } from "@/app/constants";
-import { Icon } from "../../Icon";
-import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import { SecondaryInput } from "../../Inputs/SecondaryInput";
-import { MainDropdown } from "../../Dropdown/MainDropdown";
-import { Pagination } from "../../Pagination";
-import { useAllCustomersPagination } from "@/app/hooks/UseAllCustomersPagination";
 import { toast } from "react-toastify";
 
-export const CustomersTable = () => {
+//* -----------------------------> Hooks
+import { useAllCustomersPagination } from "@/app/hooks/UseAllCustomersPagination";
+
+//* ---------------------------------> Components
+import { MainTable } from "@/app/components/tables/MainTable";
+import { Icon } from "@/app/components/Icon";
+import { SecondaryInput } from "@/app/components/Inputs/SecondaryInput";
+import { MainDropdown } from "@/app/components/Dropdown/MainDropdown";
+import { Pagination } from "@/app/components/Pagination";
+
+//* ------------------------------> TS
+import { customerInterface } from "@/app/types";
+
+//* ------------------------------> Assets 
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
+
+interface Props{
+  data:customerInterface[]
+}
+
+export const CustomersTable = ({data}:Props) => {
   const [findUserName, setFindUserName] = useState<string>("");
-  const [filteredCustomers, setFilteredCustomers] = useState<
-    typeof customers | undefined
+  const [dataForTable,setDataForTable] = useState<any[]>(
+    data.map(customer=>({
+      id:customer._id,
+      firstname:customer.firstname,
+      email:customer.email
+    }))
+  )
+  const [filtereddataForTable, setFiltereddataForTable] = useState<
+    typeof dataForTable | undefined
   >(undefined);
   const {
     nextPage,
@@ -25,18 +45,18 @@ export const CustomersTable = () => {
     setCustomersPerPage,
   } = useAllCustomersPagination();
 
-  const CustomersOnPage: typeof customers = useMemo(() => {
+  const dataForTableOnPage: typeof dataForTable = useMemo(() => {
     const startIndex = (currentPage - 1) * customersPerPage;
     const endIndex = currentPage * customersPerPage;
-    let returningCustomers = customers.slice(startIndex, endIndex);
-    return returningCustomers;
+    let returningdataForTable = dataForTable.slice(startIndex, endIndex);
+    return returningdataForTable;
   }, [currentPage, customersPerPage]);
 
   const actions = ()=>{
     return(   
     <div
       style={{
-        flexBasis: 100 / (Object.keys(customers[0]).length + 1) + "%",
+        flexBasis: 100 / (Object.keys(dataForTable[0]).length + 1) + "%",
       }}
       className="flex justify-start"
     >
@@ -48,7 +68,7 @@ export const CustomersTable = () => {
 
   const searchForCustomer = (e: React.FormEvent) => {
     e.preventDefault();    
-    const filtered = customers.filter(
+    const filtered = dataForTable.filter(
       (customer) => customer.name.toLowerCase().includes(findUserName.toLowerCase())
     );
     if(filtered.length <= 0){
@@ -63,11 +83,11 @@ export const CustomersTable = () => {
         theme: "light",
         });
     }else{
-      setFilteredCustomers(filtered);
+      setFiltereddataForTable(filtered);
     }
   };
 
-  const changeCustomersOnPage = (number: 10 | 20 | 30 | 40 | 50) => {
+  const changedataForTableOnPage = (number: 10 | 20 | 30 | 40 | 50) => {
     setCustomersPerPage(number);
   };
 
@@ -86,7 +106,7 @@ export const CustomersTable = () => {
         </div>
         <div
           className="cursor-pointer bg-purple text-white px-[10px] py-[8px] rounded-[6px]"
-          onClick={() => setFilteredCustomers(undefined)}
+          onClick={() => setFiltereddataForTable(undefined)}
         >
           Reset
         </div>
@@ -94,7 +114,7 @@ export const CustomersTable = () => {
       <div className="mt-[25.5px] bg-white">
         <div className="h-[650px] ">
           <MainTable
-            bodyContent={filteredCustomers && filteredCustomers.length > 0 ? filteredCustomers :  CustomersOnPage}
+            bodyContent={filtereddataForTable && filtereddataForTable.length > 0 ? filtereddataForTable :  dataForTableOnPage}
             topContent={["Name", "Email", "Phone Number", "Created", "Action"]}
             type="primary"
             notFoundMessage="No customer was found"
@@ -109,11 +129,11 @@ export const CustomersTable = () => {
               size="xs"
               label={`${customersPerPage}`}
               content={[
-                { label: "10", onClick: () => changeCustomersOnPage(10) },
-                { label: "20", onClick: () => changeCustomersOnPage(20) },
-                { label: "30", onClick: () => changeCustomersOnPage(30) },
-                { label: "40", onClick: () => changeCustomersOnPage(40) },
-                { label: "50", onClick: () => changeCustomersOnPage(50) },
+                { label: "10", onClick: () => changedataForTableOnPage(10) },
+                { label: "20", onClick: () => changedataForTableOnPage(20) },
+                { label: "30", onClick: () => changedataForTableOnPage(30) },
+                { label: "40", onClick: () => changedataForTableOnPage(40) },
+                { label: "50", onClick: () => changedataForTableOnPage(50) },
               ]}
             />
             <span>of 50</span>
@@ -125,7 +145,7 @@ export const CustomersTable = () => {
               productPerPage={customersPerPage}
               manualPage={manualPage}
               previousPage={prevPage}
-              productsLength={filteredCustomers?.length || customers.length}
+              productsLength={filtereddataForTable?.length || dataForTable.length}
               type="secondary"
             />
           </div>
