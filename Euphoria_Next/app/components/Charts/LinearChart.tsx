@@ -5,26 +5,29 @@ import {
   XAxis,
   YAxis,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
 export default function LinearChart({
   data,
   valueKey,
-  XAxisKey
+  XAxisKey,
+  yAxis=true
 }: {
   data: any;
   valueKey: string;
   XAxisKey: string;
+  yAxis?:boolean
 }) {
 
 
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={data} className="w-full h-full">
-        <XAxis dataKey={XAxisKey} />
-        <YAxis width={45}/> 
+          <XAxis dataKey={XAxisKey} />
+        {yAxis &&
+        <YAxis width={1} /> 
+        }
         <Tooltip />
         <Line type="linear" dataKey={valueKey} stroke="#0F60FF" />
       </LineChart>

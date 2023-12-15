@@ -36,4 +36,6 @@ export default class BaseUrl{
   static deleteCoupon = this.baseUrl + '/api/coupon/delete'
 
   static getCustomers = this.baseUrl + '/api/user/getAll'
+
+  static toggleAdmin = this.baseUrl + '/api/user/admin/toggle'
 }

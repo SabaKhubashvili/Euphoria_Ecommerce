@@ -46,9 +46,10 @@ export interface ordersInterface{
    couponDiscount: number,
 }
 export interface customerInterface {
-    name: string;
+    _id:string,
+    firstname: string;
+    lastname: string;
     email: string;
-    phone: string;
     createdAt: string;
   }
 

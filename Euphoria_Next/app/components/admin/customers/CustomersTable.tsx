@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 
 //* -----------------------------> Hooks
 import { useAllCustomersPagination } from "@/app/hooks/UseAllCustomersPagination";
+import { useManageUserModal } from "@/app/hooks/useManageUserModal";
 
 //* ---------------------------------> Components
 import { MainTable } from "@/app/components/tables/MainTable";
@@ -25,17 +26,8 @@ interface Props{
 }
 
 export const CustomersTable = ({data}:Props) => {
-  const [findUserName, setFindUserName] = useState<string>("");
-  const [dataForTable,setDataForTable] = useState<any[]>(
-    data.map(customer=>({
-      id:customer._id,
-      firstname:customer.firstname,
-      email:customer.email
-    }))
-  )
-  const [filtereddataForTable, setFiltereddataForTable] = useState<
-    typeof dataForTable | undefined
-  >(undefined);
+  //* -----------------------------> Hooks
+  const {onOpen:userModalOnOpen} = useManageUserModal()
   const {
     nextPage,
     prevPage,
@@ -45,26 +37,27 @@ export const CustomersTable = ({data}:Props) => {
     setCustomersPerPage,
   } = useAllCustomersPagination();
 
+//* -----------------------------> States
+  const [findUserName, setFindUserName] = useState<string>("");
+  const [dataForTable,setDataForTable] = useState<any[]>(
+    data.map(customer=>({
+      _id:customer._id,
+      firstname:customer.firstname,
+      lastname:customer.lastname,
+      email:customer.email,
+    }))
+  )
+  const [filtereddataForTable, setFiltereddataForTable] = useState<
+    typeof dataForTable | undefined
+  >(undefined);
+    
+  //* -----------------------------> Functions
   const dataForTableOnPage: typeof dataForTable = useMemo(() => {
     const startIndex = (currentPage - 1) * customersPerPage;
     const endIndex = currentPage * customersPerPage;
     let returningdataForTable = dataForTable.slice(startIndex, endIndex);
     return returningdataForTable;
   }, [currentPage, customersPerPage]);
-
-  const actions = ()=>{
-    return(   
-    <div
-      style={{
-        flexBasis: 100 / (Object.keys(dataForTable[0]).length + 1) + "%",
-      }}
-      className="flex justify-start"
-    >
-      <Icon svg={WebsiteIcons["edit"]} />
-      <Icon svg={WebsiteIcons["delete"]} />
-      <span className=" cursor-pointer select-none pl-[10px] text-purple">Make admin</span>
-    </div>)
-  };
 
   const searchForCustomer = (e: React.FormEvent) => {
     e.preventDefault();    
@@ -91,6 +84,23 @@ export const CustomersTable = ({data}:Props) => {
     setCustomersPerPage(number);
   };
 
+  //* -----------------------------> JSX
+  const actions = ()=>{
+    return(   
+    <div
+      style={{
+        flexBasis: 100 / (Object.keys(dataForTable[0]).length + 1) + "%",
+      }}
+      className="flex justify-start"
+    >
+      <Icon svg={WebsiteIcons["edit"]} className="!w-fit h-fit cursor-pointer" onClick={userModalOnOpen} />
+      <Icon svg={WebsiteIcons["delete"]} className="!w-fit h-fit" />
+      {/* <span className=" cursor-pointer select-none pl-[10px] text-purple">Make admin</span> */}
+    </div>)
+  };
+
+
+
   return (
     <div className="pt-[44px]">
       <div className="flex gap-[10px]">
@@ -115,7 +125,7 @@ export const CustomersTable = ({data}:Props) => {
         <div className="h-[650px] ">
           <MainTable
             bodyContent={filtereddataForTable && filtereddataForTable.length > 0 ? filtereddataForTable :  dataForTableOnPage}
-            topContent={["Name", "Email", "Phone Number", "Created", "Action"]}
+            topContent={["Id", "Firstname", "Lastname", "email", "Action"]}
             type="primary"
             notFoundMessage="No customer was found"
             actions={actions}

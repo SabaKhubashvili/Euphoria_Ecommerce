@@ -8,6 +8,12 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 import {Request,Response} from 'express'
 
+
+function isValidObjectId(id:string) {
+  const ObjectId = require('mongoose').Types.ObjectId;
+  return ObjectId.isValid(id) && new ObjectId(id).toString() === id;
+}
+
 // Update user
 router.put("/:id", verifyTokenAuthorization, async (req: any, res: any) => {
   if (req.body.password) {
@@ -65,30 +71,57 @@ router.get(
   }
 );
 
-// Get user stats
-router.get("/stats", verifyTokenAndAdminAuthorization, async (req: any, res: any) => {
-  const date = new Date();
-  const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+//* Get user stats
+// router.get("/stats", verifyTokenAndAdminAuthorization, async (req: any, res: any) => {
+//   const date = new Date();
+//   const lastYear = new Date(date.setFullYear(date.getFullYear() - 1));
+//   try {
+//     const data = await User.aggregate([
+//       { $match: { createdAt: { $gte: lastYear } } },
+//       {
+//         $project: {
+//           month: { $month: "$createdAt" },
+//         },
+//       },
+//       {
+//         $group: {
+//           _id: "$month",
+//           total: { $sum: 1 },
+//         },
+//       },
+//     ]);
+//     return res.status(200).json(data);
+//   } catch (error) {
+//     res.status(500).json({ message: "Something wrong happened" });
+//   }
+// });
+
+// Make or remove admin
+
+
+router.post('/admin/toggle', verifyTokenAndAdminAuthorization, async (req:Request, res:Response) => {
   try {
-    const data = await User.aggregate([
-      { $match: { createdAt: { $gte: lastYear } } },
-      {
-        $project: {
-          month: { $month: "$createdAt" },
-        },
-      },
-      {
-        $group: {
-          _id: "$month",
-          total: { $sum: 1 },
-        },
-      },
-    ]);
-    return res.status(200).json(data);
+    const { id } = req.body;
+
+    if (!id || !isValidObjectId(id)) {
+      return res.status(400).json({ message: "User ID is required" });
+    }
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+
+    user.isAdmin = !user.isAdmin;
+
+    const {_id,...updatedUser} = await user.save();
+
+    return res.json({ message: "User updated successfully", userId: _id });
   } catch (error) {
-    res.status(500).json({ message: "Something wrong happened" });
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 });
-
-
 module.exports = router;
