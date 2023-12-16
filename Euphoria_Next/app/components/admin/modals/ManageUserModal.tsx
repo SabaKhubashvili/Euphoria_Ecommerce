@@ -97,7 +97,7 @@ export const ManageUserModal = () => {
       </div>
       <div className="flex flex-col mt-[20px]">
         <div className="flex justify-between items-center">
-          <h1 className="font-medium text-[18px]">User's orders</h1>
+          <h1 className="font-medium text-[18px]">User&#39;s orders</h1>
           <p>
             Total Orders: <span className=" text-secondary">150</span>
           </p>

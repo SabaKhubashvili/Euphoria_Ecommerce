@@ -3,7 +3,7 @@ import axios from "axios";
 
 class RestClient {
   static GetRequest = (getUrl: string, accessToken?: string) => {
-    return axios.get(getUrl, {
+    return axios.get(getUrl,{
       headers: {
         "token": accessToken,
       },

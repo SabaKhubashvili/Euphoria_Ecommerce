@@ -18,9 +18,9 @@ const page =  async() => {
           {
             data.favorites.length > 0 ?
             <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-            {data.favorites.map((product, key) => (
-              <div className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25vw]">
-                <ProductComponent key={product._id} {...product} />
+            {data.favorites.map((product) => (
+              <div className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25vw]" key={product._id}>
+                <ProductComponent  {...product} />
               </div>
             ))}
           </div>

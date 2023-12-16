@@ -99,7 +99,7 @@ export const AdminAllProducts = ({ products }: { products: productInterface[] })
     } else {
       return products;
     }
-  }, [choosedCategory, filterByName]);
+  }, [choosedCategory, filterByName,products]);
 
   return (
     <section className="pt-[44px]">
@@ -113,11 +113,6 @@ export const AdminAllProducts = ({ products }: { products: productInterface[] })
             value={filterByName}
           />
         </div>
-        {/* <div
-          className="cursor-pointer bg-purple text-white px-[10px] py-[8px] rounded-[6px]"
-        >
-          Reset
-        </div> */}
       </div>
       <Swiper
         slidesPerView={"auto"}

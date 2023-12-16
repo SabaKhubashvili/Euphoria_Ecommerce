@@ -203,7 +203,7 @@ export const Cart = ({
               </div>
               {coupon.success && (
                 <div className="text-green pt-[10px]">
-                  Coupon applied successfully! You've saved {coupon.percentage}%
+                  Coupon applied successfully! You&lsquo;ve saved {coupon.percentage}%
                   on your purchase.
                 </div>
               )}

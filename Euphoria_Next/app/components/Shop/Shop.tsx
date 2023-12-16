@@ -106,9 +106,9 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
       <div className="flex flex-col gap-[44px]">
         {isAboveLargeScreens && (
           <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4">
-            {currentProducts?.slice(0, 5).map((product, key) => (
-              <div className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25vw]">
-                <ProductComponent key={product._id} {...product} />
+            {currentProducts?.slice(0, 5).map((product) => (
+              <div className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25vw]"  key={product._id}>
+                <ProductComponent {...product} />
               </div>
             ))}
           </div>
@@ -130,8 +130,8 @@ export const Shop = ({ currentProducts, productsLength }: Props) => {
           {currentProducts
             ?.slice(isAboveLargeScreens ? 6 : 0)
             .map((product) => (
-              <div className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25vw]">
-                <ProductComponent key={product._id}  {...product} />
+              <div className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25vw]" key={product._id}>
+                <ProductComponent   {...product} />
               </div>
             ))}
         </div>

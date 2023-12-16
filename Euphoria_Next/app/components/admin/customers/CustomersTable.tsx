@@ -54,7 +54,6 @@ export const CustomersTable = ({data}:Props) => {
   //* -----------------------------> Functions
   const openUserModal = (id?:string) =>{
     const user = data.find(user=>user._id === id);
-
     if(user){
       setUser(user)
       userModalOnOpen()
@@ -66,7 +65,7 @@ export const CustomersTable = ({data}:Props) => {
     const endIndex = currentPage * customersPerPage;
     let returningdataForTable = dataForTable.slice(startIndex, endIndex);
     return returningdataForTable;
-  }, [currentPage, customersPerPage]);
+  }, [currentPage, customersPerPage,dataForTable]);
 
   const searchForCustomer = (e: React.FormEvent) => {
     e.preventDefault();    

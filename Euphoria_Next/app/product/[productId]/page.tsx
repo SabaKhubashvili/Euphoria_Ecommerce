@@ -14,7 +14,7 @@ import { ProductsByTagSlider } from "@/app/components/Product/ProductsByTagSlide
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { productInterface } from "@/app/types";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 interface params {
   productId: string;
@@ -26,6 +26,16 @@ const page = async ({ params }: { params: params }) => {
       await RestClient.GetRequest(
         BaseUrl.getProductById + "/" + params.productId
       );
+      if(!product){
+        return notFound()
+      }
+    const { data: similarProducts }: { data: productInterface[] } =
+      await RestClient.postRequest(
+        BaseUrl.getRecommendedProducts,
+        {category: product.category._id, productId:params.productId}
+      );
+      console.log(similarProducts);
+      
 
     return (
       <main className="lg:pt-[200px] pt-[150px]">
@@ -69,7 +79,7 @@ const page = async ({ params }: { params: params }) => {
             <ProductsByTagSlider
               title="You might also like"
               sliderName="Recomendations"
-              data={[]}
+              data={similarProducts}
             />
           </div>
         </Container>

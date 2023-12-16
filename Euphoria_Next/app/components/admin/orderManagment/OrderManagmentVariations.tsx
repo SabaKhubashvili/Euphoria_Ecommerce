@@ -119,7 +119,7 @@ export const OrderManagmentVariations = ({
     } else {
       return orders.length;
     }
-  }, [activeVariation]);
+  }, [activeVariation,orders]);
 
   //* ----------------------------------------------------> Functions <----------------------------------------------------------------
 

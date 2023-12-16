@@ -14,17 +14,17 @@ export const SmallScreenNavLinks = () => {
             label='Shop'
             to='/shop'
         />
-        <SmallScreenNavLink
+        {/* <SmallScreenNavLink
             label='Sale'
             to='/sale'
         />
         <SmallScreenNavLink
             label='Contact us'
             to='/contact'
-        />
+        /> */}
         <SmallScreenNavLink
             label='Search'
-            to='/search'
+            to='/shop'
         />
         <SmallScreenNavLink
             label='Favorites'
