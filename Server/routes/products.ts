@@ -158,30 +158,33 @@ router.put('/update', verifyTokenAndAdminAuthorization, async (req: Request, res
 });
 
 
+
 router.delete(
   "/:id",
   verifyTokenAndAdminAuthorization,
   async (req: any, res: any) => {
     const { id } = req.params;
+    const ObjectId = mongoose.Types.ObjectId;
+
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ message: "Invalid ID format", success: false });
+    }
 
     try {
-      const product = ProductSchema.findOne(id);
-      if(!product){
-        res.status(400).json({ message: "Product not found", success: false });
+      const result = await ProductSchema.deleteOne({ _id: id });
+
+
+      if (result.deletedCount === 0) {
+        return res.status(404).json({ message: "Product not found", success: false });
       }
 
-      await product.delete();
-      return res
-        .status(200)
-        .json({ message: "Sucesfully deleted", success: true });
+      return res.status(200).json({ message: "Successfully deleted", success: true });
     } catch (error) {
-      return res
-        .status(500)
-        .json({ message: "Something went wrong", success: false });
+      console.log(error);
+      return res.status(500).json({ message: "Something went wrong", success: false });
     }
   }
 );
-
 router.put('/toggleFavorites/:id', verifyTokenAuthorization, async (req: Request & {user:any}, res:Response) => {
   const productId = req.params.id;
 

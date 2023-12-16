@@ -4,12 +4,10 @@ import React, { useMemo } from "react";
 import { Filter } from "./Filter";
 import { Shop } from "./Shop";
 import { Roboto } from "../assets/Fonts";
-import { productInterface, products } from "@/app/constants";
 import { usePagination } from "@/app/hooks/UsePagination";
 import { Pagination } from "../Pagination";
 import { useFilter } from "@/app/hooks/UseFilter";
-import { useGetAllProducts } from "@/app/actions/getAllProducts";
-import { CategoryInterface } from "@/app/types";
+import { CategoryInterface, productInterface } from "@/app/types";
 
 interface Props {
   products: productInterface[];

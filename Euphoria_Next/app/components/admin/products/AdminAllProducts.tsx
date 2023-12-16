@@ -4,48 +4,82 @@ import React, { useMemo, useState } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import { categoryData, productInterface } from "@/app/constants";
+import { categoryData } from "@/app/constants";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Link from "next/link";
+import { productInterface } from "@/app/types";
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
+import { getCookie } from "cookies-next";
 
-const Product = ({  _id, title, description, images }: productInterface) => {
+const Product = ({ _id, title, description, images }: productInterface) => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleProductDelete = () => {
+    setIsLoading(true);
+    RestClient.deleteRequest(
+      `${BaseUrl.deleteProduct}/${_id}`,
+      getCookie("accessToken")
+    )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
   return (
-    <Link href={{pathname:'/admin/addProduct',query:{productId:_id}}} className="px-2 py-1 flex flex-col gap-[10px] 2xl:w-1/6 xl:w-1/5 md:w-1/4 sm:w-1/3 xs:w-1/2 w-full">
-      <div className="relative w-full h-full ">
-        <Image
-          src={images[0]}
-          alt="Image_Of_Product"
-          width={200}
-          height={400}
-          className="w-full h-full"
-        />
-        <div className="absolute top-2 right-2 flex gap-[5px]">
-          <div className="p-1 bg-white rounded-full">
-            <Icon
-              className="fill-red-400 cursor-pointer"
-              svg={WebsiteIcons["redDelete"]}
+    <div className="relative w-full h-full">
+      <Link
+        href={{ pathname: "/admin/addProduct", query: { productId: _id } }}
+        className="flex flex-col gap-[10px] w-full h-full col-span-1"
+      >
+        <div className="relative w-full h-full">
+          {isLoading ? (
+            <div className="w-full h-full flex items-center justify-center">
+              Loading...
+            </div>
+          ) : (
+            <Image
+              alt="Product"
+              src={`${images[0]}`}
+              className="w-full select-none object-cover"
+              fill
             />
-          </div>
-          <div className="p-1 bg-white rounded-full">
-            <Icon
-              className="fill-red-400 cursor-pointer"
-              svg={WebsiteIcons["edit"]}
-            />
-          </div>
+          )}
+        </div>
+      </Link>
+      <div className="absolute top-2 right-2 flex gap-[5px]">
+        <div className="p-1 bg-white rounded-full" onClick={handleProductDelete}>
+          <Icon
+            className={`fill-${isLoading ? "gray" : "red-400"} cursor-pointer`}
+            svg={WebsiteIcons["redDelete"]}
+          />
+        </div>
+        <div className="p-1 bg-white rounded-full">
+          <Icon
+            className={`fill-${isLoading ? "gray" : "red-400"} cursor-pointer`}
+            svg={WebsiteIcons["edit"]}
+          />
         </div>
       </div>
       <div className="">
         <h3 className="font-semibold text-[16px]">{title}</h3>
-        <p className="text-secondaryGray">{description}</p>
+        {/* <p className="text-secondaryGray">{description}</p> */}
       </div>
-    </Link>
+    </div>
   );
 };
 
-export const AdminAllProducts = ({products}:{products:productInterface[]}) => {
+export const AdminAllProducts = ({ products }: { products: productInterface[] }) => {
   const [choosedCategory, setChoosedCategory] = useState<undefined | number>();
   const [filterByName, setFilterByName] = useState<string>("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const displayableProducts = useMemo(() => {
     if (choosedCategory && filterByName.length > 0) {
@@ -59,7 +93,9 @@ export const AdminAllProducts = ({products}:{products:productInterface[]}) => {
         product.title.toLowerCase().includes(filterByName.toLowerCase())
       );
     } else if (choosedCategory) {
-      return products.filter((product) =>   product.category._id === JSON.stringify(choosedCategory));
+      return products.filter(
+        (product) => product.category._id === JSON.stringify(choosedCategory)
+      );
     } else {
       return products;
     }
@@ -75,15 +111,13 @@ export const AdminAllProducts = ({products}:{products:productInterface[]}) => {
             rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
             onChange={(e) => setFilterByName(e.target.value)}
             value={filterByName}
-            // onSubmit={searchForTransactions}
           />
         </div>
-        <div
+        {/* <div
           className="cursor-pointer bg-purple text-white px-[10px] py-[8px] rounded-[6px]"
-          // onClick={() => setFilteredCustomers(undefined)}
         >
           Reset
-        </div>
+        </div> */}
       </div>
       <Swiper
         slidesPerView={"auto"}
@@ -101,7 +135,7 @@ export const AdminAllProducts = ({products}:{products:productInterface[]}) => {
             }`}
             onClick={() => {
               choosedCategory === category.id
-              ? setChoosedCategory(undefined)
+                ? setChoosedCategory(undefined)
                 : setChoosedCategory(category.id);
             }}
           >
@@ -109,10 +143,12 @@ export const AdminAllProducts = ({products}:{products:productInterface[]}) => {
           </SwiperSlide>
         ))}
       </Swiper>
-      {/* All prodcuts goes here */}
-      <div className="mt-[25.5px] flex flex-wrap items-start justify-start  ">
+      {/* All products go here */}
+      <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5 gap-4 mt-[25px]">
         {displayableProducts.map((product) => (
-          <Product key={product._id} {...product} />
+          <div key={product._id} className="h-[140vw] xs:h-[70vw] md:h-[50vw] lg:h-[35vw] 2xl:h-[25vw]">
+            <Product {...product} />
+          </div>
         ))}
       </div>
     </section>

@@ -3,7 +3,6 @@
 import React, { useCallback } from "react";
 import { ProductComponent } from "../Product/ProductComponent";
 import { SmallBanner } from "../Banners/SmallBanner";
-import { products } from "@/app/constants";
 import { NextIconGray, PrevIconGray } from "@/public/Svg/Icons";
 import { MainDropdown } from "../Dropdown/MainDropdown";
 import { usePagination } from "@/app/hooks/UsePagination";
@@ -11,9 +10,10 @@ import { useFilter } from "@/app/hooks/UseFilter";
 import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { largeScreens } from "@/app/Screens/Screens";
 import { AuthInput } from "../Inputs/AuthInput";
+import { productInterface } from "@/app/types";
 
 interface Props {
-  currentProducts: typeof products | null;
+  currentProducts: productInterface[]  | null;
   productsLength: number;
 }
 export const Shop = ({ currentProducts, productsLength }: Props) => {
