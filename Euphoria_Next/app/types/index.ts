@@ -74,7 +74,7 @@ export interface productInterface{
     advantages:string,
     images:string[],
     availableSizes:string
-    category: {
+    category?: {
       name: string;
       _id: string;
     };

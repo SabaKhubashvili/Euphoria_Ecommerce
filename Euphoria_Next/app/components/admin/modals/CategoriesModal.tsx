@@ -13,29 +13,78 @@ import { useCategoriesModal } from "@/app/hooks/useCategoriesModal";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
+import { toast } from "react-toastify";
 
 export const CategoriesModal = () => {
   //* ----------------------------------> Hooks
-  const { data: categoryData } = useGetAllCategories(
+  const { data: categoryData,refetch } = useGetAllCategories(
     getCookie("accessToken") || ""
   );
   const { isOpen, onClose } = useCategoriesModal();
 
   //* ----------------------------------> States
   const [addCategoryOpen, setAddCategorieOpen] = useState<boolean>(false);
+  const [newCategoryValue,setNewCategoryValue] = useState('')
 
   //* ----------------------------------> Functions
   const deleteCategory = (id?: string) => {
-    
     if (id) {
       RestClient.deleteRequest(`${BaseUrl.deleteCategory}/${id}`,getCookie('accessToken'))
         .then((res) => {
-          console.log(res);
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+            refetch()
         })
         .catch((err) => {
-          console.log(err);
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
         });
     }
+  };
+  const addCategory = () => {
+      RestClient.putRequest(`${BaseUrl.addCategory}`,{name:newCategoryValue},getCookie('accessToken'))
+        .then((res) => {
+          toast.success(res.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+            refetch()
+            setNewCategoryValue('')
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+        });
   };
 
   //* ----------------------------------> React.ReactNode
@@ -43,7 +92,7 @@ export const CategoriesModal = () => {
     return (
       <div className="flex justify-end w-full gap-[10px]">
         <Icon svg={WebsiteIcons["delete"]} className="cursor-pointer" onClick={() => deleteCategory(id)} />
-        <Icon svg={WebsiteIcons["edit"]} />
+        <Icon svg={WebsiteIcons["edit"]} className="cursor-pointer" />
       </div>
     );
   };
@@ -63,12 +112,12 @@ export const CategoriesModal = () => {
       {addCategoryOpen && (
         <div className={`flex gap-[15px] items-center`}>
           <div className="flex items-center gap-[10px] w-full">
-            <SecondaryInput placeholder="name" type="third" />
+            <SecondaryInput placeholder="name" type="third" onChange={(e)=>setNewCategoryValue(e.target.value)} value={newCategoryValue} />
           </div>
           <div
+          onClick={addCategory}
             className="bg-black  h-full text-white  w-full
-                   border-[1px] text-center text-[14px] font-medium py-[10px] cursor-pointer select-none rounded-[4px]"
-          >
+                   border-[1px] text-center text-[14px] font-medium py-[10px] cursor-pointer select-none rounded-[4px]">
             Add
           </div>
         </div>

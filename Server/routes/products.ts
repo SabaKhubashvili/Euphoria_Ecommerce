@@ -252,12 +252,12 @@ router.post('/getRecommended', async (req: Request, res: Response) => {
   try {
     const { category, productId } = req.body;
 
-    if (!category || !mongoose.isValidObjectId(category) || !productId || !mongoose.isValidObjectId(productId)) {
+    if ((category && !mongoose.isValidObjectId(category) )|| !productId || !mongoose.isValidObjectId(productId)) {
       return res.status(400).json({ error: 'Invalid category or productId' });
     }
 
     const recommendedProducts = await ProductSchema.find({
-      category,
+      category:category || null,
     });
 
     let additionalProducts = [];

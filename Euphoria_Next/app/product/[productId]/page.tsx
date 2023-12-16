@@ -26,15 +26,14 @@ const page = async ({ params }: { params: params }) => {
       await RestClient.GetRequest(
         BaseUrl.getProductById + "/" + params.productId
       );
-      if(!product){
-        return notFound()
-      }
-    const { data: similarProducts }: { data: productInterface[] } =
-      await RestClient.postRequest(
-        BaseUrl.getRecommendedProducts,
-        {category: product.category._id, productId:params.productId}
-      );
-      
+    if (!product) {
+      return notFound();
+    }
+      const { data: similarProducts }: { data: productInterface[] } =
+        await RestClient.postRequest(BaseUrl.getRecommendedProducts, {
+          category: product.category?._id,
+          productId: params.productId,
+        });
 
     return (
       <main className="lg:pt-[200px] pt-[150px]">
@@ -63,7 +62,7 @@ const page = async ({ params }: { params: params }) => {
                   title={product.title}
                   availableSizes={product.availableSizes}
                   price={product.price}
-                  category={product.category}
+                  category={product.category || { _id: "ID", name: "Product" }}
                   description={product.description}
                   discount={product.discount}
                 />
