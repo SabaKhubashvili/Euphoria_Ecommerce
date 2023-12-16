@@ -33,9 +33,7 @@ export const ManageUserModal = () => {
     if(user && !isLoading){
       setIsLoading(true)
       RestClient.postRequest(BaseUrl.addAdmin ,{id:user._id},getCookie('accessToken'))
-      .then(res=>{
-        console.log(res);
-        
+      .then(res=>{        
         setUser({...user,isAdmin:true})
       }).catch(err=>{
         toast.error(err.response.data.message, {
