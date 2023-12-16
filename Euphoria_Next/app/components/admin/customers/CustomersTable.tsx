@@ -53,7 +53,7 @@ export const CustomersTable = ({data}:Props) => {
     
   //* -----------------------------> Functions
   const openUserModal = (id?:string) =>{
-    const user = dataForTable.find(user=>user._id === id);
+    const user = data.find(user=>user._id === id);
 
     if(user){
       setUser(user)

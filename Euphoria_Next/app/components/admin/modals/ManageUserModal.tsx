@@ -9,9 +9,10 @@ import { MainDropdown } from "../../Dropdown/MainDropdown";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
 import { getCookie } from "cookies-next";
+import { toast } from "react-toastify";
 
 export const ManageUserModal = () => {
-  const { isOpen, onClose, user } = useManageUserModal();
+  const { isOpen, onClose, user,setUser } = useManageUserModal();
   const [isLoading, setIsLoading] = useState(false);
 
   const handleClose = useCallback(() => {
@@ -28,30 +29,67 @@ export const ManageUserModal = () => {
     { day: "12/19", orders: 1 },
   ];
   
-  const toggleAdmin = () =>{
-    if(user){
-      RestClient.postRequest(BaseUrl.toggleAdmin,{id:user._id},getCookie('accessToken'))
+  const addAdmin = () =>{
+    if(user && !isLoading){
+      setIsLoading(true)
+      RestClient.postRequest(BaseUrl.addAdmin ,{id:user._id},getCookie('accessToken'))
       .then(res=>{
         console.log(res);
+        
+        setUser({...user,isAdmin:true})
       }).catch(err=>{
-        console.log(err);
+        toast.error(err.response.data.message, {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }).finally(()=>{
+        setIsLoading(false)
       })
     }
   }
+  const removeAdmin = () =>{
+    if(user && !isLoading){
+      setIsLoading(true)
+      RestClient.postRequest(BaseUrl.removeAdmin ,{id:user._id},getCookie('accessToken'))
+      .then(res=>{        
+        setUser({...user,isAdmin:false})
+      }).catch(err=>{
+        toast.error(err.response.data.message, {
+          position: "top-center",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          });
+      }).finally(()=>{
+        setIsLoading(false)
+      })
+    }
+  }
+  
 
   const body = (
     <div className="">
       <div className="w-full">
         <MainDropdown
-          label="Role"
+          label={user?.isAdmin ? 'Admin' : 'Customer'}
           content={[
             {
               label: "Admin",
-              onClick: toggleAdmin,
+              onClick: addAdmin,
             },
             {
               label: "Customer",
-              onClick: toggleAdmin,
+              onClick: removeAdmin,
             },
           ]}
           type="primary"

@@ -63,7 +63,7 @@ router.get(
   verifyTokenAndAdminAuthorization,
   async (req: any, res: any) => {
     try {
-      const users = await User.find().select('-password');
+      const users = await User.find().select('-password');      
       return res.status(200).json(users);
     } catch (error) {
       res.status(500).json({ message: "Something wrong happened" });
@@ -99,12 +99,12 @@ router.get(
 // Make or remove admin
 
 
-router.post('/admin/toggle', verifyTokenAndAdminAuthorization, async (req:Request, res:Response) => {
+router.post('/admin/add', verifyTokenAndAdminAuthorization, async (req:Request, res:Response) => {
   try {
     const { id } = req.body;
 
     if (!id || !isValidObjectId(id)) {
-      return res.status(400).json({ message: "User ID is required" });
+      return res.status(400).json({ message: "all fields are required" });
     }
 
     const user = await User.findById(id);
@@ -113,8 +113,39 @@ router.post('/admin/toggle', verifyTokenAndAdminAuthorization, async (req:Reques
       return res.status(404).json({ message: "User not found" });
     }
 
+    if(user.isAdmin === true){
+      return res.status(400).json({message:"User already is admin"})
+    } 
+    user.isAdmin = true;
 
-    user.isAdmin = !user.isAdmin;
+    const {_id,...updatedUser} = await user.save();
+
+    return res.json({ message: "User updated successfully", userId: _id});
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal Server Error" });
+  }
+});
+
+router.post('/admin/remove', verifyTokenAndAdminAuthorization, async (req:Request, res:Response) => {
+  try {
+    const { id } = req.body;
+
+    if (!id || !isValidObjectId(id)) {
+      return res.status(400).json({ message: "all fields are required" });
+    }
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    if(user.isAdmin === false){
+      return res.status(400).json({message:"User isn't admin"})
+    } 
+
+
+    user.isAdmin = false;
 
     const {_id,...updatedUser} = await user.save();
 

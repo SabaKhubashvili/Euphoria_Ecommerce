@@ -37,5 +37,6 @@ export default class BaseUrl{
 
   static getCustomers = this.baseUrl + '/api/user/getAll'
 
-  static toggleAdmin = this.baseUrl + '/api/user/admin/toggle'
+  static addAdmin = this.baseUrl + '/api/user/admin/add'
+  static removeAdmin = this.baseUrl + '/api/user/admin/remove'
 }

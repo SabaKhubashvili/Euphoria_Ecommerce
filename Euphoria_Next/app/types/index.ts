@@ -51,6 +51,7 @@ export interface customerInterface {
     lastname: string;
     email: string;
     createdAt?: string;
+    isAdmin?:boolean
   }
 
 export interface CartInterface{
