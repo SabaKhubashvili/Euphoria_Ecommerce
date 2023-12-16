@@ -50,7 +50,7 @@ export interface customerInterface {
     firstname: string;
     lastname: string;
     email: string;
-    createdAt: string;
+    createdAt?: string;
   }
 
 export interface CartInterface{

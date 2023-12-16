@@ -6,7 +6,7 @@ interface useManageUserModalStorage {
   onOpen: () => void;
   onClose: () => void;
   user: customerInterface | null;
-  setUser: (user: customerInterface) => void;
+  setUser: (user: customerInterface | null) => void;
 }
 
 export const useManageUserModal = create<useManageUserModalStorage>((set) => ({

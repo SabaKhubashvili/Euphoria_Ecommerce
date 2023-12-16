@@ -27,7 +27,7 @@ interface Props{
 
 export const CustomersTable = ({data}:Props) => {
   //* -----------------------------> Hooks
-  const {onOpen:userModalOnOpen} = useManageUserModal()
+  const {onOpen:userModalOnOpen,setUser} = useManageUserModal()
   const {
     nextPage,
     prevPage,
@@ -39,7 +39,7 @@ export const CustomersTable = ({data}:Props) => {
 
 //* -----------------------------> States
   const [findUserName, setFindUserName] = useState<string>("");
-  const [dataForTable,setDataForTable] = useState<any[]>(
+  const [dataForTable,setDataForTable] = useState<customerInterface[]>(
     data.map(customer=>({
       _id:customer._id,
       firstname:customer.firstname,
@@ -52,6 +52,15 @@ export const CustomersTable = ({data}:Props) => {
   >(undefined);
     
   //* -----------------------------> Functions
+  const openUserModal = (id?:string) =>{
+    const user = dataForTable.find(user=>user._id === id);
+
+    if(user){
+      setUser(user)
+      userModalOnOpen()
+    }
+  } 
+
   const dataForTableOnPage: typeof dataForTable = useMemo(() => {
     const startIndex = (currentPage - 1) * customersPerPage;
     const endIndex = currentPage * customersPerPage;
@@ -62,7 +71,7 @@ export const CustomersTable = ({data}:Props) => {
   const searchForCustomer = (e: React.FormEvent) => {
     e.preventDefault();    
     const filtered = dataForTable.filter(
-      (customer) => customer.name.toLowerCase().includes(findUserName.toLowerCase())
+      (customer) => customer.firstname.toLowerCase().includes(findUserName.toLowerCase())
     );
     if(filtered.length <= 0){
       toast.error('No customer was found', {
@@ -85,7 +94,7 @@ export const CustomersTable = ({data}:Props) => {
   };
 
   //* -----------------------------> JSX
-  const actions = ()=>{
+  const actions = (id?:string)=>{
     return(   
     <div
       style={{
@@ -93,7 +102,7 @@ export const CustomersTable = ({data}:Props) => {
       }}
       className="flex justify-start"
     >
-      <Icon svg={WebsiteIcons["edit"]} className="!w-fit h-fit cursor-pointer" onClick={userModalOnOpen} />
+      <Icon svg={WebsiteIcons["edit"]} className="!w-fit h-fit cursor-pointer" onClick={()=>openUserModal(id)} />
       <Icon svg={WebsiteIcons["delete"]} className="!w-fit h-fit" />
       {/* <span className=" cursor-pointer select-none pl-[10px] text-purple">Make admin</span> */}
     </div>)
@@ -128,7 +137,7 @@ export const CustomersTable = ({data}:Props) => {
             topContent={["Id", "Firstname", "Lastname", "email", "Action"]}
             type="primary"
             notFoundMessage="No customer was found"
-            actions={actions}
+            actions={(id?:string)=>actions(id)}
           />
         </div>
         <div className="w-full flex justify-between items-center px-[24px]">

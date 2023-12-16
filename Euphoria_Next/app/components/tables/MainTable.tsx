@@ -16,6 +16,7 @@ interface Props {
   customDropdownBody?: (products: productInterface[]) => React.ReactNode;
   updateStatus?: (id: string,status:"Pending" | "Delivered" | "Paid") => void;
   customBodyRow?: (bodyContent: any) => React.ReactNode;
+  styles?:any
 }
 
 
@@ -28,6 +29,7 @@ export const MainTable = ({
   customDropdownBody,
   updateStatus,
   customBodyRow,
+  styles
 }: Props) => {
   const [isOpenArr, setIsOpenArr] = useState<boolean[]>(
     bodyContent.map(() => false)
@@ -65,7 +67,9 @@ export const MainTable = ({
   };
 
   return (
-    <div className="flex flex-col w-full xl:p-[24px] p-[12px] overflow-x-auto h-full bg-white rounded-[16px]">
+    <div className="flex flex-col w-full xl:p-[24px] p-[12px] overflow-x-auto h-full bg-white rounded-[16px]"
+    style={styles}
+    >
       <div
         className={`flex items-center w-full py-[8px] px-[20px] border-b-[1px] border-[#DBDADE] border-solid ${
           type === "primary" ? "" : type === "secondary" ? "bg-[#F8F9FA]" : ""
