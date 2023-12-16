@@ -34,7 +34,6 @@ const page = async ({ params }: { params: params }) => {
         BaseUrl.getRecommendedProducts,
         {category: product.category._id, productId:params.productId}
       );
-      console.log(similarProducts);
       
 
     return (

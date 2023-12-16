@@ -10,6 +10,7 @@ import { productInterface } from "@/app/types";
 interface Props {
   type: "primary" | "secondary";
   topContent: string[];
+  hasId?:boolean,
   bodyContent: any;
   notFoundMessage?: string;
   actions?: (id?: string, actions?: any) => React.ReactNode;
@@ -29,7 +30,8 @@ export const MainTable = ({
   customDropdownBody,
   updateStatus,
   customBodyRow,
-  styles
+  styles,
+  hasId=true
 }: Props) => {
   const [isOpenArr, setIsOpenArr] = useState<boolean[]>(
     bodyContent.map(() => false)
@@ -50,12 +52,12 @@ export const MainTable = ({
               length={topContent.length}
               type={type}
             />
-          ) : (
+          ) : (key.toLowerCase().includes("_id" || "id") && !hasId) ? null  : (
             <MainTableRows.RowCell
               key={key}
               text={
                 key.toLowerCase().includes("_id" || "id")
-                  ? "#" + cont[key].slice(0, 15) + "..."
+                  ?  "#" + cont[key].slice(0, 15) + "..." 
                   :  key.toLowerCase().includes("email" || "gmail") ? "@" + cont[key].slice(0, 15) + "..." : cont[key]
               }
               length={topContent.length}

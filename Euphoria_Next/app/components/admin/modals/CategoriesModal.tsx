@@ -1,20 +1,48 @@
 import React, { useState } from "react";
+import { getCookie } from "cookies-next";
+
+//* ----------------------------------> JSX
 import { Modal } from "../../modals/Modal";
+import { MainTable } from "../../tables/MainTable";
+import { SecondaryInput } from "../../Inputs/SecondaryInput";
+import { useGetAllCategories } from "@/app/actions/getAllCategories";
+
+//* ----------------------------------> Assets
+import { Icon } from "../../Icon";
 import { useCategoriesModal } from "@/app/hooks/useCategoriesModal";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import { MainTable } from "../../tables/MainTable";
-import { Icon } from "../../Icon";
-import { SecondaryInput } from "../../Inputs/SecondaryInput";
-
-const body = <div></div>;
+import RestClient from "@/app/RestClient/RequestTypes";
+import BaseUrl from "@/app/RestClient/ApiUrls";
 
 export const CategoriesModal = () => {
+  //* ----------------------------------> Hooks
+  const { data: categoryData } = useGetAllCategories(
+    getCookie("accessToken") || ""
+  );
   const { isOpen, onClose } = useCategoriesModal();
+
+  //* ----------------------------------> States
   const [addCategoryOpen, setAddCategorieOpen] = useState<boolean>(false);
+
+  //* ----------------------------------> Functions
+  const deleteCategory = (id?: string) => {
+    
+    if (id) {
+      RestClient.deleteRequest(`${BaseUrl.deleteCategory}/${id}`,getCookie('accessToken'))
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+  //* ----------------------------------> React.ReactNode
   const categoriesActions = (id?: string) => {
     return (
       <div className="flex justify-end w-full gap-[10px]">
-        <Icon svg={WebsiteIcons["delete"]} />
+        <Icon svg={WebsiteIcons["delete"]} className="cursor-pointer" onClick={() => deleteCategory(id)} />
         <Icon svg={WebsiteIcons["edit"]} />
       </div>
     );
@@ -23,23 +51,10 @@ export const CategoriesModal = () => {
     <div className="md:h-[400px] h-full">
       <MainTable
         topContent={["Category"]}
-        actions={categoriesActions}
-        bodyContent={[
-          { name: "Clothing" },
-          { name: "Dress" },
-          { name: "Another" },
-          { name: "Dress" },
-          { name: "Another" },
-          { name: "Dress" },
-          { name: "Another" },
-          { name: "Dress" },
-          { name: "Another" },
-          { name: "Dress" },
-          { name: "Another" },
-          { name: "Dress" },
-          { name: "Another" },
-        ]}
+        actions={(id?: string) => categoriesActions(id)}
+        bodyContent={categoryData}
         type="secondary"
+        hasId={false}
       />
     </div>
   );
@@ -68,6 +83,7 @@ export const CategoriesModal = () => {
       </div>
     </div>
   );
+
   return (
     <Modal
       title={"Categories"}

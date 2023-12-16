@@ -10,10 +10,9 @@ import useMediaQuery from "@/app/hooks/UseMediaQuery";
 import { largeScreens } from "@/app/Screens/Screens";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
-import { getCookie, setCookie } from "cookies-next";
-import { redirect, useRouter } from "next/navigation";
+import { getCookie } from "cookies-next";
+import {  useRouter } from "next/navigation";
 import { toast } from "react-toastify";
-import jwtDecode from "jwt-decode";
 
 interface Props extends productInterface {
   usingCol?: boolean;

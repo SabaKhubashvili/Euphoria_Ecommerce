@@ -59,7 +59,7 @@ router.get('/getAll',verifyTokenAndAdminAuthorization,async(req:Request,res:Resp
   try{
     const coupons = await Coupon.find();
     const filteredCoupons = coupons.map((coupon:any) => {
-      const { __v, ...rest } = coupon._doc;
+      const { __v,_id, ...rest } = coupon._doc;
       return rest;
     });
 

@@ -5,21 +5,22 @@ const {
 } = require("./verifyToken");
 const categorySchema = require("../models/Category");
 const mongoose = require("mongoose");
+import { Request, Response } from "express";
 
-router.get(
-  "/getAll",
-  async (req: any, res: any) => {
-    try {
-      const allCategories = await categorySchema.find();
-
-      return res.status(200).json(allCategories);
-    } catch (err) {
-      return res
-        .status(500)
-        .json({ message: "Something went wrong getting categories" });
-    }
+router.get("/getAll", async (req: any, res: any) => {
+  try {
+    const allCategories = await categorySchema.find();
+    const filteredCategories = allCategories.map((coupon:any) => {
+      const { __v, ...rest } = coupon._doc;
+      return rest;
+    });
+    return res.status(200).json(filteredCategories);
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ message: "Something went wrong getting categories" });
   }
-);
+});
 
 router.put(
   "/add",
@@ -36,16 +37,42 @@ router.put(
         name: name,
       });
       await newCategory.save();
-      return res
-        .status(200)
-        .json({ message: "Category sucesfully placed"});
+      return res.status(200).json({ message: "Category sucesfully placed" });
     } catch (err) {
-        return res.status(500).json({
-            message: "Something went wrong adding product",
-          });
+      return res.status(500).json({
+        message: "Something went wrong adding product",
+      });
+    }
+  }
+);
+router.delete(
+  "/:id",
+  verifyTokenAndAdminAuthorization,
+  async (req: Request, res: Response) => {
+    try {
+      const { id } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ message: "Invalid ID" });
+      }
+      
+      const result = await categorySchema.deleteOne({ _id: id });
+
+      if (result.deletedCount === 0) {
+        return res
+          .status(404)
+          .json({ message: "Category not found", success: false });
+      }
+
+      return res.status(200).json({ message: "Category successfully deleted" });
+    } catch (err) {
+      console.error(err);
+      
+      return res.status(500).json({
+        message: "Something went wrong",
+      });
     }
   }
 );
 
-
-module.exports = router
+module.exports = router;

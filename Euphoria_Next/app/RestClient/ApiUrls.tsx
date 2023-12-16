@@ -12,7 +12,6 @@ export default class BaseUrl{
   static getFavorites = this.baseUrl + '/api/product/getAllFavorites'
   static getRecommendedProducts = this.baseUrl + '/api/product/getRecommended'
   
-  static getCategories = this.baseUrl + '/api/categories/getAll/'
   
   static addToCart = this.baseUrl + '/api/cart/add'
   static getCart = this.baseUrl + '/api/cart/getAll'
@@ -28,17 +27,21 @@ export default class BaseUrl{
     static addProduct = this.baseUrl + '/api/product/addProduct'
     static updateProduct = this.baseUrl + '/api/product/update'
     static deleteProduct = this.baseUrl + '/api/product'
+    
+    static getOrders = this.baseUrl + '/api/order/getAll'
+    static updateOrderStatus = this.baseUrl + '/api/order/updateStatus'
   
-  static getOrders = this.baseUrl + '/api/order/getAll'
-  static updateOrderStatus = this.baseUrl + '/api/order/updateStatus'
-  
-  static addCoupon = this.baseUrl + '/api/coupon/add'
-  static getCoupons = this.baseUrl + '/api/coupon/getAll'
-  static updateCoupon = this.baseUrl + '/api/coupon/update'
-  static deleteCoupon = this.baseUrl + '/api/coupon/delete'
+    static getCategories = this.baseUrl + '/api/categories/getAll/'
+    static addCategory = this.baseUrl + '/api/categories/add'
+    static deleteCategory = this.baseUrl + '/api/categories'
 
-  static getCustomers = this.baseUrl + '/api/user/getAll'
+    static addCoupon = this.baseUrl + '/api/coupon/add'
+    static getCoupons = this.baseUrl + '/api/coupon/getAll'
+    static updateCoupon = this.baseUrl + '/api/coupon/update'
+    static deleteCoupon = this.baseUrl + '/api/coupon/delete'
 
-  static addAdmin = this.baseUrl + '/api/user/admin/add'
-  static removeAdmin = this.baseUrl + '/api/user/admin/remove'
+    static getCustomers = this.baseUrl + '/api/user/getAll'
+
+    static addAdmin = this.baseUrl + '/api/user/admin/add'
+    static removeAdmin = this.baseUrl + '/api/user/admin/remove'
 }
