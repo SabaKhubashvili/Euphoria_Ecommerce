@@ -85,7 +85,7 @@ export const AdminAllProducts = ({ products }: { products: productInterface[] })
     if (choosedCategory && filterByName.length > 0) {
       return products.filter(
         (product) =>
-          product.category._id === JSON.stringify(choosedCategory) &&
+          product.category?._id === JSON.stringify(choosedCategory) &&
           product.title.includes(filterByName)
       );
     } else if (filterByName.length > 0) {
@@ -94,7 +94,7 @@ export const AdminAllProducts = ({ products }: { products: productInterface[] })
       );
     } else if (choosedCategory) {
       return products.filter(
-        (product) => product.category._id === JSON.stringify(choosedCategory)
+        (product) => product.category?._id === JSON.stringify(choosedCategory)
       );
     } else {
       return products;
@@ -108,7 +108,7 @@ export const AdminAllProducts = ({ products }: { products: productInterface[] })
           <SecondaryInput
             placeholder="Search by product name"
             type="secondary"
-            rightSvg={<Icon svg={WebsiteIcons["Search"]} />}
+            rightSvg={<Icon svg={WebsiteIcons["Search"]} className='flex justify-center' />}
             onChange={(e) => setFilterByName(e.target.value)}
             value={filterByName}
           />
