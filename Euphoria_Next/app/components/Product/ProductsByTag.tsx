@@ -4,6 +4,7 @@ import React from "react";
 import { ProductComponent } from "./ProductComponent";
 import { GrayButton } from "../buttons/GrayButton";
 import { productInterface } from "@/app/types";
+import Link from "next/link";
 
 interface Props {
   title?: string;
@@ -22,9 +23,9 @@ export const ProductsByTag = ({ title, data }: Props) => {
         ))}
       </div>
 
-      <div className="w-full flex justify-center">
+      <Link href={'/shop'} className="w-full flex justify-center">
         <GrayButton label="Shop more" onClick={() => {}} />
-      </div>
+      </Link>
     </section>
   );
 };

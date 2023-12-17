@@ -39,13 +39,42 @@ export const HomeBanner = () => {
           className="homeBanner h-full"
         >
           <SwiperSlide className="!w-full !h-full">
-            <HomeBannerSlide />
+            <HomeBannerSlide
+              title={
+                <React.Fragment>
+                  SUMMER SALE GEt
+                  <span className="transparent-text"> 30% OFF </span>
+                  On all dress.
+                </React.Fragment>
+              }
+              buttonLabel="Shop now"
+              image="HomeBannerComp.webp"
+            />
           </SwiperSlide>
           <SwiperSlide className="!w-full !h-full">
-            <HomeBannerSlide />
+            <HomeBannerSlide
+              title={
+                <React.Fragment>
+                  Super Fast
+                  <span className="transparent-text"> Delivery </span>
+                </React.Fragment>
+              }
+              buttonLabel="Shop now"
+              image="HomeBannerComp2.webp"
+            />
           </SwiperSlide>
           <SwiperSlide className="!w-full !h-full">
-            <HomeBannerSlide />
+            <HomeBannerSlide
+              title={
+                <React.Fragment>
+                  In our shop
+                  <span className="transparent-text"> Quality </span>
+                  is higher than prices
+                </React.Fragment>
+              }
+              buttonLabel="Shop now"
+              image="HomeBannerComp1.webp"
+            />
           </SwiperSlide>
         </Swiper>
       </section>
