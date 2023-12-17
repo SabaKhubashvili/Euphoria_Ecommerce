@@ -1,26 +1,26 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
+import { getCookie, getCookies } from "cookies-next";
+import {  FormikProps } from "formik";
+
 import Counter from "../buttons/Counter";
 import { MainButton } from "../buttons/MainButton";
 import { SecondaryButton } from "../buttons/SecondaryButton";
-import { CheckedIcon, GrayHeartIcon } from "@/public/Svg/Icons";
-import { productInterface } from "@/app/types";
+
+import { CategoryInterface } from "@/app/types";
 import RestClient from "@/app/RestClient/RequestTypes";
 import BaseUrl from "@/app/RestClient/ApiUrls";
-import { getCookies } from "cookies-next";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
-import { SecondaryInput } from "../Inputs/SecondaryInput";
-import { AuthInput } from "../Inputs/AuthInput";
+
+import { CheckedIcon, GrayHeartIcon } from "@/public/Svg/Icons";
+import { WebsiteIcons } from "@/public/Svg/IconsObject";
+
 import { Textarea } from "../Inputs/Textarea";
 import { AddProductInput } from "../Inputs/AddProductInput";
 import { MainDropdown } from "../Dropdown/MainDropdown";
-import { CategoryInterface } from "@/app/types";
 import { ToolTip } from "../Tooltip";
 import { Icon } from "../Icon";
-import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import { Formik, FormikProps } from "formik";
-import { useCartStore } from "@/app/hooks/useCartData";
 
 interface Props {
   _id: number;
@@ -59,13 +59,21 @@ export const SingleProductInformation = ({
   formik,
 }: Props) => {
   const [quantity, setQuantity] = useState<number>(1);
+  const [isLoading, setIsLoading] = useState(false);
   const [clothingVariant, setClothingVariant] = useState({
     size: "",
   });
+
   const router = useRouter();
   const cookies = getCookies();
-  const [isLoading, setIsLoading] = useState(false);
-  const {cartData,setCartData} = useCartStore()
+
+  const favorites = localStorage.getItem("favorites");
+  const parsedFavorites = JSON.parse(favorites || "") || [];
+
+  const [isFavorited, setIsFavorited] = useState(
+    parsedFavorites.some((favorite: any) => favorite === _id.toString())
+  );
+
   const addToCart = async () => {
     if (isLoading) return null;
     setIsLoading(true);
@@ -101,6 +109,40 @@ export const SingleProductInformation = ({
       });
   };
 
+  
+  const addToFavorites = () => {
+    RestClient.putRequest(BaseUrl.addToFavorites + `/${_id}`, {}, getCookie('accessToken'))
+      .then((res) => {
+        if (parsedFavorites) {
+          if (res.data.add) {
+            parsedFavorites.push(_id.toString());
+            setIsFavorited(true);
+          } else {
+            const indexToRemove = parsedFavorites.indexOf(_id.toString());
+            if (indexToRemove !== -1) {
+              parsedFavorites.splice(indexToRemove, 1);
+            }
+            setIsFavorited(false);
+          }
+        }
+        localStorage.setItem("favorites", JSON.stringify(parsedFavorites));
+      })
+      .catch((err) => {
+        if ((err.status = 403)) {
+          toast.error(err?.response?.data?.message, {
+            position: "top-center",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        }
+      });
+  };
+
   return (
     <React.Fragment>
       <div className=" text-gray text-[14px] leading-[48px] flex items-center">
@@ -123,13 +165,12 @@ export const SingleProductInformation = ({
                 : null
             }
             bodyFontSize="15px"
-            paddings="0px 4px"
             fontSize="10px"
-            gap="11px"
             bodyHeight="fit-content"
             maxHeight="200px"
             bodyWidth="200px"
             top="28px"
+            styles={{pdding:'0px 4px',gap:'11px'}}
             errors={!!(formik && formik.errors.category && !category.name)}
           />
         ) : (
@@ -307,8 +348,8 @@ export const SingleProductInformation = ({
         {!isEditable && (
           <div className="w-full max-w-[221px] h-[50px]">
             <SecondaryButton
-              label="Save"
-              onClick={() => {}}
+              label={isFavorited ? 'Unsave' :"Save"}
+              onClick={addToFavorites}
               small
               full
               leftSvg={<GrayHeartIcon />}

@@ -110,7 +110,7 @@ export const ProductComponent = ({
       <div className="relative w-full h-full">
         <Link href={`/product/${_id}`} className="peer relative w-full h-full">
           { (discount) ?
-            <div className="top-4 left-0 bg-black text-[16px] text-white w-fit px-2 py-1 absolute">
+            <div className="top-4 left-0 bg-black text-[16px]  w-fit px-2 py-1 absolute z-10 text-white">
               - <span>{discount}</span>%
           </div>  
           :

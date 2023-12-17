@@ -9,7 +9,7 @@ import { SecondarySmallBanner } from './components/Banners/SecondarySmallBanner'
 import { SmallBlogs } from './components/Blog/SmallBlogs'
 import RestClient from './RestClient/RequestTypes'
 import BaseUrl from './RestClient/ApiUrls'
-import { productInterface } from './constants'
+import { productInterface } from './types'
 
 
 export default async function Home() {
@@ -21,7 +21,7 @@ export default async function Home() {
           <Container>
             <Brands/>
             <BannersGroup/>
-            <ProductsByTag title='Shop some Wear:' data={FeaturedProductsData.slice(15)} />
+            <ProductsByTag title='Shop some Wear:' data={FeaturedProductsData.slice(8)} />
             <div className='mt-[62px]'>
               <SmallBanner
                 title='shoping without limits.'
@@ -34,8 +34,8 @@ export default async function Home() {
             <ProductsByTagSlider 
               title='Featured Items' 
               sliderName='featured' 
-              data={FeaturedProductsData.slice(0,15)}/>
-            <ProductsByTagSlider title='Most Popular' sliderName='trending' data={[]}/>
+              data={FeaturedProductsData.slice(0,8)}/>
+            {/* <ProductsByTagSlider title='Most Popular' sliderName='trending' data={[]}/> */}
             <SecondarySmallBanner/>
           </Container>
           <SmallBlogs/>

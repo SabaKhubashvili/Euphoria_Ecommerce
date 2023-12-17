@@ -24,7 +24,9 @@ export const SecondaryButton = ({label,onClick,small,full,color,leftSvg,active}:
       active && color !== 'dark' &&
       'bg-black text-white'
     }
-  `}>
+  `}
+    onClick={onClick}
+  >
     {
       leftSvg && 
       leftSvg

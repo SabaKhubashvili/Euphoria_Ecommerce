@@ -65,14 +65,14 @@ export const BannersGroup = () => {
 
         <div className='col-span-1 row-span-1
          bg-gradient-to-r from-[#F7E0D5] to-[#F3DCD2] 
-         flex justify-between items-center
+         flex justify-between items-center relative
         '>
-            <div className='flex flex-col xl:gap-[51px] md:gap-[20px] gap-[10px] flex-grow h-full justify-center xl:pl-[10%] pl-[20px]'>
+            <div className='flex flex-col xl:gap-[51px] md:gap-[20px] gap-[10px] z-10 flex-grow h-full justify-center xl:pl-[10%] pl-[20px]'>
                 <div>
-                    <h1 className='uppercase md:leading-[62px] leading-[20px] font-semibold xl:text-[48px] lg:text-[35px] text-[16px]'>
+                    <h1 className='uppercase md:leading-[62px] leading-[20px] font-semibold 2xl:text-[48px] xl:text-[35px] lg:text-[25px] text-[16px]'>
                     brand new style
                     </h1>
-                    <p className={`${Roboto.className} lg:text-[22px] text-[10px] leading-[37px] tracking-[0.22px] font-light`}>
+                    <p className={`${Roboto.className} lg:text-[22px] text-[10px] leading-[37px] tracking-[0.22px] font-light `}>
                      See our clothing collections
                     </p>
                 </div>
@@ -84,7 +84,7 @@ export const BannersGroup = () => {
                 alt='Smallbanner'
                 width={300}
                 height={300}
-                className='h-fit self-end xl:max-w-none lg:max-h-none max-w-[137px] xs:w-fit w-[50%] '
+                className='self-end xl:max-w-none lg:max-h-none xs:w-fit w-[50%] absolute right-0 top-0 h-full'
             />
         </div>
     </section>

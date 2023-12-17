@@ -258,7 +258,7 @@ router.post('/getRecommended', async (req: Request, res: Response) => {
 
     const recommendedProducts = await ProductSchema.find({
       category:category || null,
-    });
+    }).limit(7).exec();
 
     let additionalProducts = [];
 
