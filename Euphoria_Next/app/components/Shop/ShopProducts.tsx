@@ -28,10 +28,11 @@ export const ShopProducts = ({ products,categories }: Props) => {
       }
       if(filter.category.length > 0){
         
-        currentProducts = currentProducts.filter(product => (
-          
-          filter.category.includes(product.category.name)
-        ))
+        currentProducts = currentProducts.filter(product => {
+          if(product.category){
+           return filter.category.includes(product.category.name)
+          }
+      })
       }
       if (filter.price[0]) {
         currentProducts = currentProducts.filter(

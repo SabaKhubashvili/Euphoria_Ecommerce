@@ -3,7 +3,7 @@ import {
 } from 'react-query'
 import RestClient from '../RestClient/RequestTypes'
 import BaseUrl from '../RestClient/ApiUrls'
-import { productInterface } from '../constants'
+import { productInterface } from '../types'
 
 export const useGetAllProducts = () =>{
     return useQuery('allProducts',async()=>{

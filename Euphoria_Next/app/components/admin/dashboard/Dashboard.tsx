@@ -5,7 +5,7 @@ import { Icon } from "@/app/components/Icon";
 import { SimpleAreaChartComponent } from "@/app/components/admin/ChartComponents/SimpleAreaChartComponent";
 import { SimpleLineChartComponent } from "@/app/components/admin/ChartComponents/SimpleLineChartComponent";
 import { MainTable } from "@/app/components/tables/MainTable";
-import { SessionsData, orders } from "@/app/constants";
+import { SessionsData } from "@/app/constants";
 import { Dropdown_Down } from "@/public/Svg/Icons";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
 import React from "react";
@@ -52,18 +52,18 @@ export const Dashboard = () => {
 
 
 
-  const actions = () => {
-    return(
-      <div
-      style={{
-        flexBasis: 100 / (Object.keys(orders[0]).length + 1) + "%",
-      }}
-      className="flex justify-end cursor-pointer"
-    >
-      <Dropdown_Down />
-    </div>
-    )
-  };
+  // const actions = () => {
+  //   return(
+  //     <div
+  //     style={{
+  //       flexBasis: 100 / (Object.keys(orders[0]).length + 1) + "%",
+  //     }}
+  //     className="flex justify-end cursor-pointer"
+  //   >
+  //     <Dropdown_Down />
+  //   </div>
+  //   )
+  // };
 
 
   return (

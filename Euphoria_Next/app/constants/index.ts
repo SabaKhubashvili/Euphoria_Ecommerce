@@ -1,6 +1,5 @@
 
-import { Customer, SingleFooterComponentRowType, ordersInterface, } from "../types"
-import { FacebookIcon,InstagramIcon,LinkedinIcon } from "@/public/Svg/Social"
+import { customerInterface, SingleFooterComponentRowType } from "../types"
 
 export const FooterFeatures = [
 
@@ -88,16 +87,16 @@ export const FooterContact = [
         title:'MON - SUN / 9:00AM - 8:00PM',
     },
 ]
-export const orders:ordersInterface[] = [
-  {
-    _id:'1',
-    created_at:"2022-12-02",
-    customer:"Saba",
-    total_price:250,
-    profit:152,
-    status:'Delivered'
-  } 
-]
+// export const orders:ordersInterface[] = [
+//   {
+//     _id:'1',
+//     // created_at:"2022-12-02",
+//     // customer:"Saba",
+//     // total_price:250,
+//     // profit:152,
+//     status:'Delivered'
+//   } 
+// ]
 export const FooterSocial: SingleFooterComponentRowType[] = [
     {
       title: 'Facebook',
@@ -341,6 +340,14 @@ export const TransactionsData: Array<{ id: number, customer: string, date: strin
   },
 ];
 
+export const customers:customerInterface[] = [
+    {
+        firstname:'Sba',
+        lastname:'khubashvili',
+        _id:'something',
+        email:'khubaas@gmail.com'
+    }
+]
 
 export const categoryData: { id: number; category: string; products: number; sales: number; profit: string }[] = [
   { id: 1, category: "Electronics", products: 100, sales: 5000, profit: "$2000" },

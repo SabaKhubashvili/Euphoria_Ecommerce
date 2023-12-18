@@ -4,10 +4,9 @@ import React, { useState } from "react";
 import { SecondaryInput } from "../../Inputs/SecondaryInput";
 import { Icon } from "../../Icon";
 import { WebsiteIcons } from "@/public/Svg/IconsObject";
-import { categoryData, customers, productInterface, products } from "@/app/constants";
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { MainTable } from "../../tables/MainTable";
+import { customers } from "@/app/constants";
 
 
 const manageAdminActions = () =>{
