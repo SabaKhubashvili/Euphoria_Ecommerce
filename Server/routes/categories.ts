@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const {
-  verifyTokenAuthorization,
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
 const categorySchema = require("../models/Category");

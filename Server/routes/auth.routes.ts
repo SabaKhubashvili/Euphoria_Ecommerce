@@ -1,17 +1,18 @@
 const router = require("express").Router();
-const User = require("../models/User");
-const Confirmations = require("../models/UserConfirmations");
+const User = require("../models/User.ts");
+const Confirmations = require("../models/UserConfirmations.ts");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { Request, Response } = require("express");
 
 router.post("/register", async (req: any, res: any) => {
   try {
+    const { firstname, lastname, email, password, confirmationCode } = req.body;
     if (
-      !req.body.firstname ||
-      !req.body.lastname ||
-      !req.body.email ||
-      !req.body.password ||
-      !req.body.confirmationCode
+      !firstname ||
+      !lastname ||
+      !email ||
+      !confirmationCode || !password
     ) {
       return res.status(400).json({ message: "All fields are required" });
     }
