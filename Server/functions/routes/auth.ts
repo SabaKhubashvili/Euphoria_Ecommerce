@@ -29,7 +29,7 @@ router.post("/register", async (req: any, res: any) => {
       return res.status(401).json({ message: "Incorrect verification code" });
     }
 
-    const hashedPassword = await bcrypt.hash(req.body.password.toString(), 15);
+    const hashedPassword = await bcryptjs.hash(req.body.password.toString(), 15);
 
     const newUser = new User({
       firstname: req.body.firstname,
@@ -52,7 +52,7 @@ router.post("/login", async (req: any, res: any) => {
       return res.status(401).json({ message: "Wrong credentials" });
     }
 
-    const comparePass = await bcrypt.compare(req.body.password, user.password);
+    const comparePass = await bcryptjs.compare(req.body.password, user.password);
     if (!comparePass) {
       return res.status(401).json({ message: "Wrong credentials" });
     }

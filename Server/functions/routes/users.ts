@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const {
   verifyTokenAuthorization,
-  verifyToken,
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
 const bcrypt = require("bcryptjs");
@@ -17,7 +16,7 @@ function isValidObjectId(id:string) {
 // Update user
 router.put("/:id", verifyTokenAuthorization, async (req: any, res: any) => {
   if (req.body.password) {
-    req.body.password = bcrypt.hash(req.body.password);
+    req.body.password = bcryptjs.hash(req.body.password);
   }
 
   try {
