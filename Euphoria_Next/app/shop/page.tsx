@@ -4,12 +4,11 @@ import { ShopProducts } from '../components/Shop/ShopProducts'
 import { Container } from '../components/Container'
 import RestClient from '../RestClient/RequestTypes'
 import BaseUrl from '../RestClient/ApiUrls'
+import { Metadata } from 'next'
 
-
-export const metadata = {
+export const metadata:Metadata = {
     title:'Discover Your Perfect Style - Shop the Latest Trends in Fashion at CRISP',
-    description:'Discover stylish clothing, footwear, and accessories that elevate your wardrobe. Explore our curated collection for quality fashion at CRISP.',
-    // metadataBase: new URL("https://next-dashboard.pinkjelly.org/"),
+    description:'Discover stylish clothing, footwear, and accessories that elevate your wardrobe. Explore our curated collection for quality fashion at  | CRISP | .',
 }
 
 const ShopPage = async() => {

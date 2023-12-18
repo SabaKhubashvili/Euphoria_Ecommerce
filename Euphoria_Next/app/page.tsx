@@ -10,10 +10,15 @@ import { SmallBlogs } from './components/Blog/SmallBlogs'
 import RestClient from './RestClient/RequestTypes'
 import BaseUrl from './RestClient/ApiUrls'
 import { productInterface } from './types'
+import { Metadata } from 'next'
 
+export const metadata:Metadata = {
+  title: "CRISP | ECOMMERCE SHOP",
+  description: "High quality clothing shop, where you can buy unique and fashionable clothes",
+};
 
 export default async function Home() {
-  const {data:FeaturedProductsData}:{data:productInterface[]} =  await RestClient.GetRequest(BaseUrl.getLimitedProducts + 27)
+  const {data:FeaturedProductsData}:{data:productInterface[]} =  await RestClient.GetRequest(BaseUrl.getLimitedProducts + 27);
     
   return (
     <main className='pt-[130px] '>
