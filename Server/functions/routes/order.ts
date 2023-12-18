@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+const { Request, Response } = require("express");
 const router = require("express").Router();
 const { verifyTokenAndAdminAuthorization } = require("./verifyToken");
 const orderSchema = require("../models/Order");

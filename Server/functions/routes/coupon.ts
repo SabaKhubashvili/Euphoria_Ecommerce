@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+const { Request, Response } = require("express");
 const router = require("express").Router();
 const { verifyTokenAuthorization,verifyTokenAndAdminAuthorization } = require("../routes/verifyToken");
 const Coupon = require("../models/Coupon");

@@ -6,7 +6,7 @@ const {
 const ProductSchema = require("../models/Product");
 const UserSchema = require("../models/User");
 const mongoose = require("mongoose");
-import { Request, Response } from "express";
+const { Request, Response } = require("express");
 
 // getAllProducts
 router.get("/getall", async (req: any, res: any) => {

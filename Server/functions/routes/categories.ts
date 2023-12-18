@@ -4,7 +4,7 @@ const {
 } = require("./verifyToken");
 const categorySchema = require("../models/Category");
 const mongoose = require("mongoose");
-import { Request, Response } from "express";
+const { Request, Response } = require("express");
 
 router.get("/getAll", async (req: any, res: any) => {
   try {

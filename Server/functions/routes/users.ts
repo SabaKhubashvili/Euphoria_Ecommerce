@@ -4,7 +4,7 @@ const {
   verifyToken,
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 import {Request,Response} from 'express'
 
