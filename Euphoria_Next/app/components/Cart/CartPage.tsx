@@ -83,8 +83,7 @@ export const CartPage = ({ data }: Props) => {
     isDisabled: false,
     success: false,
   });
-  console.log(data.products);
-  
+ 
   const formik = useFormik({
     validateOnChange: false,
     initialValues: {

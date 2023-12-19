@@ -14,7 +14,7 @@ const AppLayout = ({ children,cartData }: { children: React.ReactNode,cartData:C
   const { setCartData } = useCartStore();
   React.useEffect(()=>{
     if(cartData){
-      setCartData({...cartData})
+      setCartData({...cartData})      
     }
   },[cartData,setCartData])
   

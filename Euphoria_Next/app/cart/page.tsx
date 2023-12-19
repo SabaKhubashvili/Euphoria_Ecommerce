@@ -5,7 +5,6 @@ import RestClient from "../RestClient/RequestTypes";
 import BaseUrl from "../RestClient/ApiUrls";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import { useCartStore } from "../hooks/useCartData";
 import { CartInterface } from "../types";
 
 export const metadata = {

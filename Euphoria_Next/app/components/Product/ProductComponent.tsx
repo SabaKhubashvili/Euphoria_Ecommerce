@@ -13,6 +13,7 @@ import BaseUrl from "@/app/RestClient/ApiUrls";
 import { getCookie } from "cookies-next";
 import {  useRouter } from "next/navigation";
 import { toast } from "react-toastify";
+import router from 'next/navigation'
 
 interface Props extends productInterface {
   usingCol?: boolean;
@@ -56,7 +57,8 @@ export const ProductComponent = ({
       token
     )
       .then((res) => {
-        router.push("/cart");
+        // router.push("/cart");
+        router.replace('/cart')
       })
       .catch((err) => {
         if ((err.status = 403)) {

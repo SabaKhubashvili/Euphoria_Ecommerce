@@ -98,8 +98,8 @@ export const SingleProductInformation = ({
           progress: undefined,
           theme: "light",
         });
-        router.refresh()
-        router.push("/cart");
+        // router.refresh()
+        router.replace("/cart");
       })
       .catch((err) => {
         router.push("/login");
