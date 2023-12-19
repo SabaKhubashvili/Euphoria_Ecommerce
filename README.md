@@ -14,8 +14,17 @@ Welcome to CRISP, an open-source e-commerce website designed to provide a clean,
 - ✅ **Order Management:** Track and manage orders efficiently, providing users with order history and status updates.
 - ✅ **Admin Dashboard:** Update products, add products, manage users and track sales
 
+## **User-friendly Interface:** 
+![Homepage](./screenshots/screenshot1.png)
 
-![Homepage](screenshots/homepage.png)
+## **Single product page:** 
+![Homepage](./screenshots/screenshot3.png)
+
+## **Admin dashboard:** 
+![Homepage](./screenshots/screenshot2.png)
+
+
+
 ## Getting Started
 
 Follow these steps to get the CRISP e-commerce website up and running on your local machine.
