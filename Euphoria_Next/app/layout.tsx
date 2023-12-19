@@ -5,17 +5,26 @@ import { CartInterface } from "./types";
 import RestClient from "./RestClient/RequestTypes";
 import BaseUrl from "./RestClient/ApiUrls";
 import { cookies } from "next/headers";
-import jwt_decode from 'jwt-decode';
+import jwt from 'jsonwebtoken';
+import jwt_decode from 'jwt-decode'
+
+interface JwtPayload {
+  exp: number;
+}
 
 const serverSideIsAuthenticated = () => {
-  const token = cookies().get('accessToken')?.value;
+  const token = cookies().get('accessToken')?.value; // using lodash get for safe property access
+
   if (!token) {
     return false;
   }
 
   try {
-    const decoded = jwt_decode(token) as any;
-    if (decoded.exp < Date.now() / 1000) {
+    const secret = process.env.JWT_SECRET; // fetch JWT secret from environment variables
+    const verify = jwt.verify(token, secret || '') as JwtPayload;
+    // const decoded: JwtPayload = jwt_decode(token) as JwtPayload;
+    
+    if (verify.exp  < Date.now() / 1000) {
       return false;
     }
 
@@ -24,17 +33,14 @@ const serverSideIsAuthenticated = () => {
     return false;
   }
 };
-
-
 export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  cookies().set('accessToken','');
   let cartData: CartInterface | null;
   
-  if (false) {
+  if (serverSideIsAuthenticated()) {
     const { data }: { data: CartInterface } = await RestClient.GetRequest(
       BaseUrl.getCart,
       cookies().get("accessToken")?.value
