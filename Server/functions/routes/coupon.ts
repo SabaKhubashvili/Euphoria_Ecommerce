@@ -64,8 +64,6 @@ router.get('/getAll',verifyTokenAndAdminAuthorization,async(req: any, res: any)=
 
     return res.status(200).json(filteredCoupons)
   }catch(error){
-    console.log(error);
-    
     return res.status(500).json({message:"Something went wrong on server"})
   }
 });

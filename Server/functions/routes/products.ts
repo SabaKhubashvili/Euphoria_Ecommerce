@@ -154,8 +154,6 @@ router.put(
         });
       }
     } catch (error) {
-      console.log(error);
-
       return res.status(500).json({
         message: "Something went wrong",
         success: false,
@@ -190,7 +188,6 @@ router.delete(
         .status(200)
         .json({ message: "Successfully deleted", success: true });
     } catch (error) {
-      console.log(error);
       return res
         .status(500)
         .json({ message: "Something went wrong", success: false });

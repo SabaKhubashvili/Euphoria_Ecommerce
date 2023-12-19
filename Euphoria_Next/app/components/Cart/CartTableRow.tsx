@@ -24,6 +24,7 @@ export const CartTableRow = ({
   totalPriceOnChange,
   filterCart,
 }: Props) => {
+  const [isLoading,setIsLoading] = useState(false);
   const [productQuantity, setProductQuantity] = useState(quantity);
   const [innerQuantity, setInnerQuantity] = useState<number>(quantity);
   const [productPrice,setProductPrice] = useState(
@@ -33,10 +34,12 @@ export const CartTableRow = ({
     product.price
   )
   const onDelete = async () => {
-    RestClient.deleteRequest(
-      BaseUrl.deleteCartRow + _id,
-      getCookie("accessToken")
-    )
+    if(!isLoading){
+      setIsLoading(true)
+      RestClient.deleteRequest(
+        BaseUrl.deleteCartRow + _id,
+        getCookie("accessToken")
+        )
       .then((res) => {
         filterCart(_id);
         toast.success("Succesfully deleted", {
@@ -70,11 +73,14 @@ export const CartTableRow = ({
           progress: undefined,
           theme: "light",
         });
+      }).finally(()=>{
+        setIsLoading(false)
       });
-  };
-
-  const changeQuantity = () => {
-    RestClient.postRequest(
+    }
+    };
+    
+    const changeQuantity = () => {
+      RestClient.postRequest(
       BaseUrl.updateQuantity,
       {
         cartRowId: _id,

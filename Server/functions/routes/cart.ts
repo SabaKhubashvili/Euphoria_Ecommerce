@@ -48,8 +48,6 @@ router.put("/add", verifyTokenAuthorization, async (req: any, res: any) => {
 
     return res.status(200).json({message:"Sucess"});
   } catch (error) {
-      console.log(error);
-      
     return res.status(500).json({ error: "Internal Server Error" });
   }
 });
