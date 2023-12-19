@@ -31,7 +31,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  cookies.
+  cookies().set('accessToken','');
   let cartData: CartInterface | null;
   
   if (false) {
