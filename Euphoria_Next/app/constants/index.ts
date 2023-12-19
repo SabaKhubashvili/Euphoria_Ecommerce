@@ -371,3 +371,11 @@ export const categoryData: { id: number; category: string; products: number; sal
   { id: 19, category: "Fitness Equipment", products: 55, sales: 2750, profit: "$1100" },
   { id: 20, category: "Baby Products", products: 70, sales: 3500, profit: "$1400" },
 ];
+
+
+export const MostSaledProducts = [
+    { name: 'Gym T-shirt', price: 50.99 },
+    { name: 'Woman Dress', price: 89.99 },
+    { name: 'Woman Dress (blue)', price: 89.99 },
+    { name: 'MEN TECHWEAR HIP HOP HOODIE TOP', price: 60.00 },
+  ];
