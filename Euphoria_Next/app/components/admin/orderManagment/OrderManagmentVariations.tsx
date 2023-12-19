@@ -160,7 +160,8 @@ export const OrderManagmentVariations = ({
           });
         });
       }).catch(err=>{
-        console.log(err);
+        // console.log('Something went wrong');
+        return null;
       }).finally(()=>{
         setIsLoading(false)
       })

@@ -22,7 +22,7 @@ const page = async ({
       );
       product = data;
     } catch (error) {
-      console.log(error);
+      return null
     }
   }
 

@@ -1,8 +1,6 @@
 "use client";
 
-export default function Error(req:any) {
-  console.log(req);
-  
+export default function Error(req:any) {  
   return (
     <div className="grid h-screen px-4 bg-white place-content-center">
       <div className="text-center">
