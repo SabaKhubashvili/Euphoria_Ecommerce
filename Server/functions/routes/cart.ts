@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { verifyTokenAuthorization } = require("./verifyToken");
+import { verifyTokenAuthorization } from "./verifyToken"
 const Cart = require("../models/Cart");
 const Product = require("../models/Product");
 

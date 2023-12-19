@@ -3,10 +3,9 @@ const {
   verifyTokenAuthorization,
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
-const bcrypt = require("bcryptjs");
 const User = require("../models/User");
 import {Request,Response} from 'express'
-
+import bcryptjs from 'bcryptjs'
 
 function isValidObjectId(id:string) {
   const ObjectId = require('mongoose').Types.ObjectId;
@@ -16,7 +15,7 @@ function isValidObjectId(id:string) {
 // Update user
 router.put("/:id", verifyTokenAuthorization, async (req: any, res: any) => {
   if (req.body.password) {
-    req.body.password = bcryptjs.hash(req.body.password);
+    req.body.password = await bcryptjs.hash(req.body.password , 8);
   }
 
   try {

@@ -1,10 +1,9 @@
+import mongoose from 'mongoose'
 const router = require("express").Router();
 const {
   verifyTokenAndAdminAuthorization,
 } = require("./verifyToken");
 const categorySchema = require("../models/Category");
-const mongoose = require("mongoose");
-const { Request, Response } = require("express");
 
 router.get("/getAll", async (req: any, res: any) => {
   try {
@@ -47,7 +46,7 @@ router.put(
 router.delete(
   "/:id",
   verifyTokenAndAdminAuthorization,
-  async (req: Request, res: Response) => {
+  async (req: any, res: any) => {
     try {
       const { id } = req.params;
 

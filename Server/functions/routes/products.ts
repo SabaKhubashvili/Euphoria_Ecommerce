@@ -1,3 +1,4 @@
+import mongoose from 'mongoose'
 const router = require("express").Router();
 const {
   verifyTokenAuthorization,
@@ -5,8 +6,7 @@ const {
 } = require("./verifyToken");
 const ProductSchema = require("../models/Product");
 const UserSchema = require("../models/User");
-const mongoose = require("mongoose");
-const { Request, Response } = require("express");
+
 
 // getAllProducts
 router.get("/getall", async (req: any, res: any) => {
@@ -113,7 +113,7 @@ router.put(
 router.put(
   "/update",
   verifyTokenAndAdminAuthorization,
-  async (req: Request, res: Response) => {
+  async (req: any, res: any) => {
     const {
       _id,
       title,
@@ -200,7 +200,7 @@ router.delete(
 router.put(
   "/toggleFavorites/:id",
   verifyTokenAuthorization,
-  async (req: Request & { user: any }, res: Response) => {
+  async (req: any & { user: any }, res: any) => {
     const productId = req.params.id;
 
     try {
@@ -235,7 +235,7 @@ router.put(
 router.get(
   "/getAllFavorites",
   verifyTokenAuthorization,
-  async (req: Request & { user: any }, res: Response) => {
+  async (req: any & { user: any }, res: any) => {
     const userId = req.user.id;
 
     const user = await UserSchema.findOne({
@@ -248,7 +248,7 @@ router.get(
   }
 );
 
-router.post('/getRecommended', async (req: Request, res: Response) => {
+router.post('/getRecommended', async (req: any, res: any) => {
   try {
     const { category, productId } = req.body;
 

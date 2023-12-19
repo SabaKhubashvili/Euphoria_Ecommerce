@@ -1,13 +1,13 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./functions/api.ts",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
     "build": "netlify deploy --prod",
-    "start": "nodemon server.ts",
+    "start": "nodemon functions/api.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -29,7 +29,10 @@
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/mongoose": "^5.11.97",
     "@types/node": "^20.10.5"
   },
   "description": ""

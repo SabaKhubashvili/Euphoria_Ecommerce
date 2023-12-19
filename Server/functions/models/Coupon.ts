@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose'
 
 const CouponSchema = new mongoose.Schema({
     coupon: {type:String,required:true, unique:true},

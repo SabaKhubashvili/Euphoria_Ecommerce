@@ -1,12 +1,11 @@
-const { Request, Response } = require("express");
 const router = require("express").Router();
-const { verifyTokenAuthorization,verifyTokenAndAdminAuthorization } = require("../routes/verifyToken");
+import { verifyTokenAuthorization,verifyTokenAndAdminAuthorization } from "../routes/verifyToken"
 const Coupon = require("../models/Coupon");
 
 router.post(
   "/check",
   verifyTokenAuthorization,
-  async (req: Request, res: Response) => {
+  async (req: any, res: any) => {
     const code = req.body.code;
     
     if (!code || code.length <= 0) {
@@ -31,7 +30,7 @@ router.post(
   }
 );
 
-router.put('/add',verifyTokenAndAdminAuthorization, async(req:Request,res:Response)=>{
+router.put('/add',verifyTokenAndAdminAuthorization, async(req: any, res: any)=>{
   const {coupon,percentage} = req.body;
 
   if(!coupon || !percentage){
@@ -55,7 +54,7 @@ router.put('/add',verifyTokenAndAdminAuthorization, async(req:Request,res:Respon
   }
 })
 
-router.get('/getAll',verifyTokenAndAdminAuthorization,async(req:Request,res:Response)=>{
+router.get('/getAll',verifyTokenAndAdminAuthorization,async(req: any, res: any)=>{
   try{
     const coupons = await Coupon.find();
     const filteredCoupons = coupons.map((coupon:any) => {
@@ -71,7 +70,7 @@ router.get('/getAll',verifyTokenAndAdminAuthorization,async(req:Request,res:Resp
   }
 });
 
-router.put('/update',verifyTokenAndAdminAuthorization,async(req:Request,res:Response)=>{
+router.put('/update',verifyTokenAndAdminAuthorization,async(req: any, res: any)=>{
   const {percentage:newPercentage,id} = req.body;
   if(!newPercentage || !id){
     return res.status(400).json({message:"All fields are required"})
@@ -84,7 +83,7 @@ router.put('/update',verifyTokenAndAdminAuthorization,async(req:Request,res:Resp
   }
 })
 
-router.delete('/delete/:id',verifyTokenAndAdminAuthorization,async(req:Request,res:Response)=>{
+router.delete('/delete/:id',verifyTokenAndAdminAuthorization,async(req: any, res: any)=>{
   const {id} = req.params;
   if(!id){
     return res.status(400).json({message:"All fields are required"})

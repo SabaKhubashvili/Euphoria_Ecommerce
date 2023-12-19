@@ -1,9 +1,8 @@
 const router = require("express").Router();
 const User = require("../models/User.ts");
 const Confirmations = require("../models/UserConfirmations.ts");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { Request, Response } = require("express");
+const bcryptjs = require("bcryptjs");
+import jwt from 'jsonwebtoken'
 
 router.post("/register", async (req: any, res: any) => {
   try {
@@ -62,7 +61,7 @@ router.post("/login", async (req: any, res: any) => {
         id: user._id,
         isAdmin: user.isAdmin,
       },
-      process.env.JWT_SECRET,
+      process.env.JWT_SECRET || '',
       { expiresIn: "3d" }
     );
 

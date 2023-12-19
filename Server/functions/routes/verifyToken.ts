@@ -14,7 +14,7 @@ const verifyToken = (req:any,res:any,next:any)=>{
         return res.status(401).json({message:"You are not authenticated!"})
     }
 }
-const verifyTokenAuthorization = (req:any,res:any,next:any)=>{
+export const verifyTokenAuthorization = (req:any,res:any,next:any)=>{
     
     verifyToken(req,res,()=>{        
         if(req.user.id === req.params.id || req.user.isAdmin){            
@@ -25,7 +25,7 @@ const verifyTokenAuthorization = (req:any,res:any,next:any)=>{
     })
 }
 
-const verifyTokenAndAdminAuthorization = (req:any,res:any,next:any)=>{
+export const verifyTokenAndAdminAuthorization = (req:any,res:any,next:any)=>{
     verifyToken(req,res,()=>{
         if(req.user.isAdmin){
             next()

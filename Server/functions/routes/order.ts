@@ -1,4 +1,4 @@
-const { Request, Response } = require("express");
+
 const router = require("express").Router();
 const { verifyTokenAndAdminAuthorization } = require("./verifyToken");
 const orderSchema = require("../models/Order");
@@ -6,7 +6,7 @@ const orderSchema = require("../models/Order");
 router.get(
   "/getAll",
   verifyTokenAndAdminAuthorization,
-  async (req: Request, res: Response) => {
+  async (req: any, res: any) => {
     try {
       const orders = await orderSchema
         .find()
@@ -26,7 +26,7 @@ router.get(
 router.post(
   "/updateStatus",
   verifyTokenAndAdminAuthorization,
-  async (req: Request, res: Response) => {
+  async (req: any, res: any) => {
     try {
       const { id, status } = req.body;
 

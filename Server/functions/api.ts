@@ -1,7 +1,7 @@
+import mongoose from 'mongoose'
 const express = require("express");
 const app = express();
-// const dotenv = require("dotenv");
-const mongoose = require('mongoose');
+const dotenv = require("dotenv");
 const serverless =  require('serverless-http');
 
 const authRouter = require('./routes/auth.ts');
@@ -11,11 +11,11 @@ const cartRouter = require('./routes/cart.ts');
 const couponRouter = require('./routes/coupon.ts');
 const orderRouter = require('./routes/order.ts');
 const userRouter = require('./routes/users.ts');
-// const cors = require("cors");;
+const cors = require("cors");;
 
-// dotenv.config();
+dotenv.config();
 
-mongoose.connect(process.env.DATABASE_URL)
+mongoose.connect(process.env.DATABASE_URL || '')
    .then(() => console.log('Successfully connected'))
    .catch((err:any) => {
       console.error('Connection error', err);
@@ -23,7 +23,7 @@ mongoose.connect(process.env.DATABASE_URL)
    });
 
 
-// app.use(cors());
+app.use(cors());
 app.use(express.json());
 
 app.use('/.netlify/functions/api/auth',authRouter)
