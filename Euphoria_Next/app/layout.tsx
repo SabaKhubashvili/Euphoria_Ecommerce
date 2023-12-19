@@ -13,16 +13,15 @@ interface JwtPayload {
 }
 
 const serverSideIsAuthenticated = () => {
-  const token = cookies().get('accessToken')?.value; // using lodash get for safe property access
+  const token = cookies().get('accessToken')?.value;
 
   if (!token) {
     return false;
   }
 
   try {
-    const secret = process.env.JWT_SECRET; // fetch JWT secret from environment variables
+    const secret = process.env.JWT_SECRET;
     const verify = jwt.verify(token, secret || '') as JwtPayload;
-    // const decoded: JwtPayload = jwt_decode(token) as JwtPayload;
     
     if (verify.exp  < Date.now() / 1000) {
       return false;
@@ -33,6 +32,8 @@ const serverSideIsAuthenticated = () => {
     return false;
   }
 };
+
+
 export default async function RootLayout({
   children,
 }: {

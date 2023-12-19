@@ -71,7 +71,7 @@ export const SingleProductInformation = ({
   const parsedFavorites = JSON.parse(favorites || "") || [];
 
   const [isFavorited, setIsFavorited] = useState(
-    parsedFavorites.some((favorite: any) => favorite === _id.toString())
+    parsedFavorites?.some((favorite: any) => favorite === _id.toString())
   );
 
   const addToCart = async () => {

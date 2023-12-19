@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { MainButton } from "../buttons/MainButton";
 import { GrayButton } from "../buttons/GrayButton";
 import { productInterface } from "@/app/types";
@@ -34,11 +34,17 @@ export const ProductComponent = ({
 
   let token = getCookie("accessToken");
   const favorites = localStorage.getItem("favorites");
-  const parsedFavorites = JSON.parse(favorites || "") || [];
+  const [isFavorited, setIsFavorited] = useState<boolean>();
+  let parsedFavorites:string[] = []
+  useEffect(()=>{
 
-  const [isFavorited, setIsFavorited] = useState(
-    parsedFavorites.some((favorite: any) => favorite === _id.toString())
-  );
+    if(favorites){
+      const parsFv = JSON.parse(favorites || "") || [];
+      parsedFavorites = parsFv;
+      setIsFavorited(parsFv.some((favorite: any) => favorite === _id.toString()))
+    }
+  },[])
+
   const addToCart = () => {
     RestClient.putRequest(
       BaseUrl.addToCart,
